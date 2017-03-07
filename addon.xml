@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.module.nakamori" name="Nakamori scripts" version="1.0.1" provider-name="BigRetroMike">
+<addon id="script.module.nakamori" name="Nakamori (scripts)" version="1.0.2" provider-name="BigRetroMike">
     <requires>
     </requires>
+    <extension point="xbmc.python.pluginsource">
+        <provides>executable</provides>
+    </extension>
     <extension point="xbmc.python.module" library="lib" />
     <extension point="xbmc.addon.metadata">
         <platform>all</platform>
@@ -10,8 +13,8 @@
         <website>https://shokunin.monogatari.pl/</website>
         <source>http://github.com/bigretromike/nakamori.script</source>
         <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
-        <news>v1.0.0 (2017-02-10)
-            - Initial version
+        <news>v1.0.2 (2017-03-07)
+            - addon.xml edit
         </news>
     </extension>
     <assets>

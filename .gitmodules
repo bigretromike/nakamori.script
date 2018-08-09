@@ -1,3 +1,0 @@
-[submodule "lib/TagBlacklist"]
-	path = lib/TagBlacklist
-	url = https://github.com/bigretromike/nakamori.tags.git

@@ -8,7 +8,9 @@ import time
 import xbmc
 import xbmcgui
 import xbmcaddon
+# noinspection PyUnresolvedReferences
 import pyxbmct
+# noinspection PyUnresolvedReferences
 import nakamoritools as nt
 
 img = os.path.join(xbmcaddon.Addon('resource.images.nakamori').getAddonInfo('path'), 'resources', 'media')
@@ -38,6 +40,7 @@ class Context(pyxbmct.AddonDialogWindow):
         self.label_id = pyxbmct.Label(label=serie_id, textColor='0xFFFFFFFF')
         self.draw()
 
+    # noinspection PyMethodMayBeStatic,PyPep8Naming
     def setAnimation(self, control):
         control.setAnimations([('WindowOpen', 'effect=fade start=0 end=100 time=200'),
                                ('WindowClose', 'effect=fade start=100 end=0 time=200')])
@@ -105,6 +108,7 @@ class Calendar(pyxbmct.BlankDialogWindow):
         if len(self.items) > 0:
             self.setFocus(self.items[0])
 
+    # noinspection PyMethodMayBeStatic,PyPep8Naming
     def setAnimation(self, control):
         control.setAnimations([('WindowOpen', 'effect=fade start=0 end=100 time=200'),
                                ('WindowClose', 'effect=fade start=100 end=0 time=200')])
@@ -150,7 +154,8 @@ class Calendar(pyxbmct.BlankDialogWindow):
                         image01 = pyxbmct.Image(os.path.join(img, 'calendar', day_images[day_count]), aspectRatio=0)
                         self.controls.append(image01)
                         row_idx += 1
-                        self.placeControl(image01, row_idx, col_idx, rowspan=1, columnspan=image_col_span, pad_x=0, pad_y=0)
+                        self.placeControl(image01, row_idx, col_idx, rowspan=1, columnspan=image_col_span,
+                                          pad_x=0, pad_y=0)
                         row_idx += 1
                     pass
                 else:
@@ -186,13 +191,13 @@ class Calendar(pyxbmct.BlankDialogWindow):
                     fanart = sers["art"]["thumb"][0]["url"]
                     if fanart is not None and ":" not in fanart:
                         fanart = nt.server + fanart
-                imageclick = pyxbmct.Button(label=sers["titles"][0]["Title"],
-                                            focusTexture=fanart, noFocusTexture=fanart,
-                                            focusedColor='0xFF000000', font='font10', alignment=pyxbmct.ALIGN_CENTER)
-                self.controls.append(imageclick)
-                self.items.append(imageclick)
+                image_click = pyxbmct.Button(label=sers["titles"][0]["Title"],
+                                             focusTexture=fanart, noFocusTexture=fanart,
+                                             focusedColor='0xFF000000', font='font10', alignment=pyxbmct.ALIGN_CENTER)
+                self.controls.append(image_click)
+                self.items.append(image_click)
                 self.items_cord.append(str(row_idx) + ";" + str(col_idx))
-                self.placeControl(imageclick, row_idx, col_idx, rowspan=image_row_span, columnspan=image_col_span)
+                self.placeControl(image_click, row_idx, col_idx, rowspan=image_row_span, columnspan=image_col_span)
                 row_idx += image_row_span
                 # endregion
 
@@ -209,8 +214,8 @@ class Calendar(pyxbmct.BlankDialogWindow):
                 u = nt.set_parameter(u, 'mode', 6)
                 u = nt.set_parameter(u, 'fake', 1)
                 u = nt.set_parameter(u, 'movie', sers.get('ismovie', '0'))
-                self.connect(imageclick, lambda: self.serie())
-                imageclick.setAnimations([('focus', 'effect=zoom center=auto start=100 end=110 time=100 delay=10',)])
+                self.connect(image_click, lambda: self.serie())
+                image_click.setAnimations([('focus', 'effect=zoom center=auto start=100 end=110 time=100 delay=10',)])
                 self.urls.append(str(u))
                 self.serie_index.append(str(key_id))
                 # endregion
@@ -271,6 +276,7 @@ class Calendar(pyxbmct.BlankDialogWindow):
                 new_r = int(cords[0])
                 new_c = int(cords[1])
                 if int(max_cords[1]) > max_col_count - image_col_span:
+                    # noinspection PyTypeChecker
                     max_cords[1] = max_col_count - image_col_span
 
                 if new_c >= int(max_cords[1]):
@@ -289,6 +295,7 @@ class Calendar(pyxbmct.BlankDialogWindow):
 
                     while new_r > 0:
                         try:
+                            # noinspection PyUnusedLocal
                             item_idx = self.items_cord.index(str(new_r) + ';' + str(new_c))
                             break
                         except:
@@ -322,6 +329,7 @@ class Calendar(pyxbmct.BlankDialogWindow):
                 else:
                     while new_r > 0:
                         try:
+                            # noinspection PyUnusedLocal
                             item_idx = self.items_cord.index(str(new_r) + ';' + str(new_c))
                             break
                         except:
@@ -332,6 +340,7 @@ class Calendar(pyxbmct.BlankDialogWindow):
             pass
 
     def set_navigation(self):
+        # noinspection PyPep8Naming
         ACTION_BACKSPACE = 92
         """Set up keyboard/remote navigation between controls."""
         self.connect(pyxbmct.ACTION_NAV_BACK, lambda: self._cancel())
@@ -340,7 +349,7 @@ class Calendar(pyxbmct.BlankDialogWindow):
         self.connect(xbmcgui.ACTION_MOUSE_RIGHT_CLICK, lambda: self._run_context())
         self.connect(xbmcgui.ACTION_CONTEXT_MENU, lambda: self._run_context())
 
-    #def onAction(self, action):
+    # def onAction(self, action):
     #    ACTION_PREVIOUS_MENU = 10
     #    ACTION_BACKSPACE = 92
     #    if action == ACTION_PREVIOUS_MENU:
@@ -353,7 +362,7 @@ class Calendar(pyxbmct.BlankDialogWindow):
             url = self.items.index(self.getFocus())
             xbmc.log('---------- oooo -----> url {0}'.format(self.urls[url]), xbmc.LOGWARNING)
             handle = xbmcgui.getCurrentWindowId()
-            win = xbmcgui.Window(xbmcgui.getCurrentWindowId())
+            # win = xbmcgui.Window(xbmcgui.getCurrentWindowId())
             self.close()  # crash kodi without
             xbmc.executebuiltin('ActivateWindow({1},"{0}")'.format(self.urls[url], handle))
             xbmc.sleep(2000)
@@ -369,10 +378,14 @@ class Wizard(pyxbmct.AddonDialogWindow):
         self.setWindowTitle(title=title)
         self.setup_ok = False
         # buttons
-        self.button_test_net = pyxbmct.Button(label=nt.addon.getLocalizedString(30072), textColor='0xFFFFFFFF', focusedColor='0xFF00FFFF')
-        self.button_test_pass = pyxbmct.Button(label=nt.addon.getLocalizedString(30072), textColor='0xFFFFFFFF', focusedColor='0xFF00FFFF')
-        self.button_close = pyxbmct.Button(label=nt.addon.getLocalizedString(30078), textColor='0xFFFFFFFF', focusedColor='0xFF00FFFF')
-        self.button_save = pyxbmct.Button(label=nt.addon.getLocalizedString(30073), textColor='0xFFFFFFFF', focusedColor='0xFF00FFFF')
+        self.button_test_net = pyxbmct.Button(label=nt.addon.getLocalizedString(30072),
+                                              textColor='0xFFFFFFFF', focusedColor='0xFF00FFFF')
+        self.button_test_pass = pyxbmct.Button(label=nt.addon.getLocalizedString(30072),
+                                               textColor='0xFFFFFFFF', focusedColor='0xFF00FFFF')
+        self.button_close = pyxbmct.Button(label=nt.addon.getLocalizedString(30078),
+                                           textColor='0xFFFFFFFF', focusedColor='0xFF00FFFF')
+        self.button_save = pyxbmct.Button(label=nt.addon.getLocalizedString(30073),
+                                          textColor='0xFFFFFFFF', focusedColor='0xFF00FFFF')
         # labels
         self.label_ip = pyxbmct.Label(label=nt.addon.getLocalizedString(30074), textColor='0xFFFFFFFF')
         self.label_port = pyxbmct.Label(label=nt.addon.getLocalizedString(30075), textColor='0xFFFFFFFF')
@@ -386,6 +399,7 @@ class Wizard(pyxbmct.AddonDialogWindow):
         # draw
         self.draw()
 
+    # noinspection PyMethodMayBeStatic,PyPep8Naming
     def setAnimation(self, control):
         control.setAnimations([('WindowOpen', 'effect=fade start=0 end=100 time=200'),
                                ('WindowClose', 'effect=fade start=100 end=0 time=200')])

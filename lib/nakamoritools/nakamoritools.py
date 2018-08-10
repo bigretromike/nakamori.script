@@ -10,10 +10,10 @@ import sys
 import traceback
 import os
 import json
+# noinspection PyUnresolvedReferences,PyPep8Naming
 import Cache as cache
 import time
 import gzip
-import xml
 import collections
 import re
 
@@ -27,9 +27,13 @@ if sys.version_info < (3, 0):
     from StringIO import StringIO
 else:
     # For Python 3.0 and later
+    # noinspection PyUnresolvedReferences
     from urllib.request import urlopen
+    # noinspection PyUnresolvedReferences
     from urllib.parse import quote, quote_plus, unquote, unquote_plus, urlencode
+    # noinspection PyUnresolvedReferences
     from urllib.request import Request
+    # noinspection PyUnresolvedReferences
     from urllib.error import HTTPError, URLError
     from io import StringIO, BytesIO
 
@@ -45,14 +49,21 @@ global server
 global home
 global python_two
 
-
+# noinspection PyRedeclaration
 addon = xbmcaddon.Addon('plugin.video.nakamori')
+# noinspection PyRedeclaration
 addonversion = addon.getAddonInfo('version')
+# noinspection PyRedeclaration
 addonid = addon.getAddonInfo('id')
+# noinspection PyRedeclaration
 addonname = addon.getAddonInfo('name')
+# noinspection PyRedeclaration
 icon = addon.getAddonInfo('icon')
+# noinspection PyRedeclaration
 localize = addon.getLocalizedString
+# noinspection PyRedeclaration
 server = "http://" + addon.getSetting("ipaddress") + ":" + addon.getSetting("port")
+# noinspection PyRedeclaration
 python_two = sys.version_info < (3, 0)
 
 __shoko_version__ = LooseVersion('0.1')
@@ -66,18 +77,18 @@ except:
 pDialog = ''
 
 
-def searchBox():
+def search_box():
     """
     Shows a keyboard, and returns the text entered
     :return: the text that was entered
     """
     keyb = xbmc.Keyboard('', 'Enter search text')
     keyb.doModal()
-    searchText = ''
+    search_text = ''
 
     if keyb.isConfirmed():
-        searchText = keyb.getText()
-    return searchText
+        search_text = keyb.getText()
+    return search_text
 
 
 def get_kodi_setting_bool(setting):
@@ -153,10 +164,12 @@ def remove_anidb_links(data=""):
     p = re.compile('http://anidb.net/[a-z]{1,3}[0-9]{1,7}[ ]')
     data2 = p.sub('', data)
     # remove '[' and ']' that included link to anidb.net
-    p = re.compile('(\[|\])')
+    # was ('(\[|\])')
+    p = re.compile('[\[\]]')
     return p.sub('', data2)
 
-def safeInt(object_body):
+
+def safe_int(object_body):
     """
     safe convert type to int to avoid NoneType
     :param object_body:
@@ -186,8 +199,8 @@ def trakt_scrobble(ep_id, status, progress, movie, notification):
         note_text = 'Stopping Scrobble'
 
     if notification:
-       xbmc.executebuiltin("XBMC.Notification(%s, %s %s, 7500, %s)" % ('Trakt.tv', note_text, '',
-                                                                       addon.getAddonInfo('icon')))
+        xbmc.executebuiltin("XBMC.Notification(%s, %s %s, 7500, %s)" % ('Trakt.tv', note_text, '',
+                                                                        addon.getAddonInfo('icon')))
 
     get_json(server + "/api/ep/scrobble?id=" + str(ep_id) + "&ismovie=" + str(movie) +
              "&status=" + str(status) + "&progress=" + str(progress))
@@ -396,27 +409,9 @@ def parse_possible_error(data, data_type):
                 error(error_msg, error_type='Network Error: ' + code)
                 if stream.get('Details', '') != '':
                     xbmc.log(encode(stream.get('Details')), xbmc.LOGERROR)
-    elif data_type == 'xml':
-        stream = xml(data)
-        if stream.get('Code', '') != '':
-            code = stream.get('Code')
-            if code != '200':
-                error_msg = code
-                if code == '500':
-                    error_msg = 'Server Error'
-                elif code == '404':
-                    error_msg = 'Invalid URL: Endpoint not Found in Server'
-                elif code == '503':
-                    error_msg = 'Service Unavailable: Check netsh http'
-                elif code == '401' or code == '403':
-                    error_msg = 'The was refused as unauthorized'
-                error(error_msg, error_type='Network Error: ' + code)
-                if stream.get('Message', '') != '':
-                    xbmc.log(encode(stream.get('Message')), xbmc.LOGERROR)
 
 
 def get_json(url_in, direct=False):
-    body = ""
     if direct:
         body = get_data(url_in, None, "json")
     else:
@@ -429,9 +424,7 @@ def get_json(url_in, direct=False):
                 if expire_second > int(addon.getSetting("expireCache")):
                     # expire, get new date
                     body = get_data(url_in, None, "json")
-                    params = {}
-                    params['extras'] = 'single-delete'
-                    params['name'] = url_in
+                    params = {'extras': 'single-delete', 'name': url_in}
                     cache.remove_cache(params)
                     cache.add_cache(url_in, json.dumps(body))
                 else:
@@ -538,6 +531,7 @@ def encode(i=''):
             return ''
 
 
+# noinspection PyRedeclaration
 def get_kodi_setting_int(setting):
     try:
         parent_setting = xbmc.executeJSONRPC(
@@ -625,7 +619,6 @@ def dump_dictionary(details, name):
             xbmc.log("---- " + name + ' ----', xbmc.LOGWARNING)
 
             for i in details:
-                temp_log = ""
                 if isinstance(details, dict):
                     a = details.get(decode(i))
                     if a is None:
@@ -641,7 +634,9 @@ def dump_dictionary(details, name):
                     xbmc.log("-" + temp_log, xbmc.LOGWARNING)
 
 
-def post(url, data, headers={}):
+def post(url, data, headers=None):
+    if headers is None:
+        headers = {}
     postdata = urlencode(data)
     req = Request(url, postdata, headers)
     req.add_header('User-Agent', UA)
@@ -649,6 +644,10 @@ def post(url, data, headers={}):
     data = response.read()
     response.close()
     return data
+
+
+def get_shoko_status():
+    return get_server_status(ip=addon.getSetting('ipaddress'), port=addon.getSetting('port'))
 
 
 def get_server_status(ip, port):
@@ -697,35 +696,7 @@ def get_version(ip, port):
     return legacy
 
 
-# old
-def debug(text):
-    xbmc.log(str([text]), xbmc.LOGDEBUG)
-
-
-def request(url, headers={}):
-    debug('request: %s' % url)
-    req = Request(url, headers=headers)
-    req.add_header('User-Agent', UA)
-    response = urlopen(req)
-    data = response.read()
-    response.close()
-    debug('len(data) %s' % len(data))
-    return data
-
-
-def makeLink(params, baseUrl):
-    """
-    Build a link with the specified base URL and parameters
-
-    Parameters:
-    params: the params to be added to the URL
-    BaseURL: the base URL, sys.argv[0] by default
-    """
-    return baseUrl + '?' + urlencode(
-        dict([encode(k), encode(decode(v))] for k, v in params.items()))
-
-
-def parseParameters(input_string):
+def parse_parameters(input_string):
     """Parses a parameter string starting at the first ? found in inputString
 
     Argument:
@@ -747,34 +718,13 @@ def parseParameters(input_string):
     return parameters
 
 
-def getURL(url, header):
-    try:
-        req = Request(url, headers=header)
-        response = urlopen(req)
-        if response and response.getcode() == 200:
-            if response.info().get('Content-Encoding') == 'gzip':
-                buf = StringIO(response.read())
-                gzip_f = gzip.GzipFile(fileobj=buf)
-                content = gzip_f.read()
-            else:
-                content = response.read()
-            content = decode(content)
-            return content
-        return False
-    except:
-        xbmc.log('Error Loading URL (Error: ' + str(response.getcode()) +
-                 ' Encoding:' + response.info().get('Content-Encoding') + '): ' + url, xbmc.LOGERROR)
-        xbmc.log('Content: ' + response.read(), xbmc.LOGERROR)
-        return False
-
-
 def post_dict(url, body):
-    json = ''
+    json_body = ''
     try:
-        json = json.dumps(body)
+        json_body = json.dumps(body)
     except:
         error('Failed to send data')
-    post_data(url, json)
+    post_data(url, json_body)
 
 
 def head(url_in):
@@ -845,33 +795,3 @@ def kodi_jsonrpc(request):
         return result
     except Exception as exc:
         error("jsonrpc_error: " + str(exc))
-
-
-import xml.etree.ElementTree as Tree
-
-
-def xml(xml_string):
-    """
-    return an xml tree from string with error catching
-    Args:
-        xml_string: the string containing the xml data
-
-    Returns: ElementTree equivalentof Tree.XML()
-
-    """
-    e = Tree.XML(xml_string)
-    if e.get('ErrorString', '') != '':
-        error(e.get('ErrorString'), 'JMM Error')
-    return e
-
-
-def safeName(name):
-    return re.sub(r'[^a-zA-Z0-9 ]', '', name.lower()).replace(" ", "_")
-
-
-def stripInvalid(name):
-    return re.sub(r'[^a-zA-Z0-9 ]', ' ', name.lower())
-
-
-def urlSafe(name):
-    return re.sub(r'[^a-zA-Z0-9 ]', '', name.lower())

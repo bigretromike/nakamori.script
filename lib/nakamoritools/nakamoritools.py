@@ -6,6 +6,7 @@ from __future__ import absolute_import
 import xbmc
 import xbmcaddon
 import xbmcgui
+import xbmcplugin
 import sys
 import traceback
 import os
@@ -774,6 +775,35 @@ def set_parameter(url, parameter, value):
             array3[1] = value
         url += array3[0] + '=' + array3[1] + '&'
     return url[:-1]
+
+
+def add_dir(name, url, mode, iconimage='DefaultTVShows.png', plot="", poster="DefaultVideo.png", filename="none",
+           offset=''):
+    # u=sys.argv[0]+"?url="+url+"&mode="+str(mode)+"&name="+quote_plus(name)+"&poster_file="+quote_plus(poster)+"&filename="+quote_plus(filename)
+    u = sys.argv[0]
+    if mode is not '':
+        u = set_parameter(u, 'mode', str(mode))
+    if name is not '':
+        u = set_parameter(u, 'name', quote_plus(name))
+    u = set_parameter(u, 'poster_file', quote_plus(poster))
+    u = set_parameter(u, 'filename', quote_plus(filename))
+    if offset is not '':
+        u = set_parameter(u, 'offset', offset)
+    if url is not '':
+        u = set_parameter(u, 'url', url)
+    ok = True
+    liz = xbmcgui.ListItem(name, iconImage="DefaultVideo.png", thumbnailImage=iconimage)
+    liz.setInfo(type="Video", infoLabels={"Title": name, "Plot": plot})
+    liz.setProperty("Poster_Image", iconimage)
+    if mode is not '':
+        if mode == 7:
+            ok = xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]), url=u, listitem=liz, isFolder=False)
+        else:
+            ok = xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]), url=u, listitem=liz, isFolder=True)
+    else:
+        # should this even possible ? as failsafe I leave it.
+        ok = xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]), url=u, listitem=liz, isFolder=True)
+    return ok
 
 
 # not sure if needed

@@ -413,6 +413,12 @@ def parse_possible_error(data, data_type):
 
 
 def get_json(url_in, direct=False):
+    """
+    use 'get' to return json body as string
+    :param url_in:
+    :param direct: force to bypass cache
+    :return:
+    """
     if direct:
         body = get_data(url_in, None, "json")
     else:
@@ -439,6 +445,12 @@ def get_json(url_in, direct=False):
 
 
 def post_json(url_in, body):
+    """
+    Push data to server using 'POST' method
+    :param url_in:
+    :param body:
+    :return:
+    """
     if len(body) > 3:
         proper_body = '{' + body + '}'
         return post_data(url_in, proper_body)

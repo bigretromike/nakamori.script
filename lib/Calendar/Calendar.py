@@ -427,7 +427,7 @@ class Wizard(pyxbmct.AddonDialogWindow):
             xbmcgui.Dialog().ok(nt.addon.getLocalizedString(30079), nt.addon.getLocalizedString(30080))
 
     def _test_net(self):
-        if nt.get_server_status(ip=str(self.edit_ip.getText()), port=str(self.edit_port.getText())):
+        if nt.get_server_status(ip=str(self.edit_ip.getText()), port=str(self.edit_port.getText()), force=True):
             ip = str(self.edit_ip.getText())
             port = str(self.edit_port.getText())
             nt.addon.setSetting(id="ipaddress", value=ip)

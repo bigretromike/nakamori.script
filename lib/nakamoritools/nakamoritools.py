@@ -67,8 +67,6 @@ server = "http://" + addon.getSetting("ipaddress") + ":" + addon.getSetting("por
 # noinspection PyRedeclaration
 python_two = sys.version_info < (3, 0)
 
-__shoko_version__ = LooseVersion('0.1')
-
 try:
     # kodi 17+
     UA = xbmc.getUserAgent()
@@ -605,11 +603,11 @@ def valid_user():
         xbmc.log('-- apikey empty --')
         try:
             if addon.getSetting("login") != "" and addon.getSetting("device") != "":
-                server = "http://" + addon.getSetting("ipaddress") + ":" + addon.getSetting("port")
+                _server = "http://" + addon.getSetting("ipaddress") + ":" + addon.getSetting("port")
                 body = '{"user":"' + addon.getSetting("login") + '",' + \
                        '"device":"' + addon.getSetting("device") + '",' + \
                        '"pass":"' + addon.getSetting("password") + '"}'
-                post_body = post_data(server + "/api/auth", body)
+                post_body = post_data(_server + "/api/auth", body)
                 auth = json.loads(post_body)
                 if "apikey" in auth:
                     xbmc.log('-- save apikey and reset user credentials --')
@@ -660,17 +658,17 @@ def post(url, data, headers=None):
     return data
 
 
-def get_shoko_status():
-    return get_server_status(ip=addon.getSetting('ipaddress'), port=addon.getSetting('port'))
+def get_shoko_status(force=False):
+    return get_server_status(ip=addon.getSetting('ipaddress'), port=addon.getSetting('port'), force=force)
 
 
-def get_server_status(ip, port):
+def get_server_status(ip, port, force=False):
     """
     Try to query server for version, if kodi get version respond then shoko server is running
     :return: bool
     """
     try:
-        if get_version(ip, port) != LooseVersion('0.0'):
+        if get_version(ip, port, force) != LooseVersion('0.0'):
             return True
         else:
             return False
@@ -678,13 +676,15 @@ def get_server_status(ip, port):
         return False
 
 
-def get_version(ip, port):
+def get_version(ip, port, force=False):
     legacy = ''
     version = ''
     try:
-        global __shoko_version__
-        if __shoko_version__ != LooseVersion('0.1'):
-            return __shoko_version__
+        _shoko_version = addon.getSetting('good_version')
+        _good_ip = addon.getSetting('good_ip')
+        if not force:
+            if _shoko_version != LooseVersion('0.1') and _good_ip == ip:
+                return _shoko_version
         legacy = LooseVersion('0.0')
         json_file = get_json("http://" + str(ip) + ":" + str(port) + "/api/version", direct=True)
         if json_file is None:
@@ -699,12 +699,15 @@ def get_version(ip, port):
                 version = module["version"]
                 break
 
+        addon.setSetting(id='good_ip', value=ip)
+
         if version != '':
             try:
-                __shoko_version__ = LooseVersion(version)
+                _shoko_version = LooseVersion(version)
+                addon.setSetting(id='good_version', value=str(_shoko_version))
             except:
                 return legacy
-            return __shoko_version__
+            return _shoko_version
     except:
         pass
     return legacy

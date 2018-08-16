@@ -442,6 +442,8 @@ class Wizard(pyxbmct.AddonDialogWindow):
         nt.addon.setSetting(id="login", value=self.edit_login.getText())
         nt.addon.setSetting(id="password", value=self.edit_pass.getText())
         nt.addon.setSetting(id="device", value="kodi")
+        nt.addon.setSetting(id="ipaddress", value=self.edit_ip.getText())
+        nt.addon.setSetting(id="port", value=self.edit_port.getText())
 
         if nt.valid_user():
             self.button_test_pass.setLabel(label='OK', textColor='0xff7aad5c', focusedColor='0xff7aad5c')

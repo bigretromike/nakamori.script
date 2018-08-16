@@ -605,6 +605,7 @@ def valid_user():
         xbmc.log('-- apikey empty --')
         try:
             if addon.getSetting("login") != "" and addon.getSetting("device") != "":
+                server = "http://" + addon.getSetting("ipaddress") + ":" + addon.getSetting("port")
                 body = '{"user":"' + addon.getSetting("login") + '",' + \
                        '"device":"' + addon.getSetting("device") + '",' + \
                        '"pass":"' + addon.getSetting("password") + '"}'

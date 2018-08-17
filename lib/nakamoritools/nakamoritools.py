@@ -293,6 +293,42 @@ def refresh():
     xbmc.sleep(int(addon.getSetting('refresh_wait')))
 
 
+def set_sort_method(int_of_sort_method=0):
+    """
+    Ser given sort method
+    :param int_of_sort_method: int parameter of sort method
+    :return: set sort method
+    """
+    xbmc.log('-> trying to set \'%s\' sorting' % int_of_sort_method, xbmc.LOGWARNING)
+    xbmc.executebuiltin('Container.SetSortMethod(' + str(int_of_sort_method) + ')')
+
+
+def set_user_sort_method(place):
+    """
+    Set user define type of sort method.
+    For more check:
+    https://codedocs.xyz/AlwinEsch/kodi/group___list__of__sort__methods.html
+    https://github.com/xbmc/xbmc/blob/master/xbmc/utils/SortUtils.cpp#L529-L577
+    """
+    sort_method = {
+        'Server': 0,
+        'Title': 7,
+        'Episode': 23,
+        'Date': 2,
+        'Rating': 17
+    }
+
+    place_setting = {
+        'filter': addon.getSetting("default_sort_filter"),
+        'group': addon.getSetting("default_sort_group_series"),
+        'episode': addon.getSetting("default_sort_episodes")
+    }
+
+    user_sort_method = place_setting.get(place, 'Server')
+    method_for_sorting = sort_method.get(user_sort_method, 0)
+    set_sort_method(method_for_sorting)
+
+
 def vote_series(series_id):
     """
     Marks a rating for a series

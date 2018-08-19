@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="script.module.nakamori" name="nakamori-script-module" version="3.0.0" provider-name="BigRetroMike, da3dsoul">
     <requires>
-        <import addon="xbmc.python" version="2.1.0"/>
         <import addon="resource.images.nakamori" version="3.0.0"/>
-        <import addon="script.module.routing" version="0.1.0"/>
+        <!-- currently needed, but for how long we will see -->
         <import addon="script.module.kodi65" version="1.2.1"/>
+        <!-- 2.25 is needed for routing -->
+        <import addon="xbmc.python" version="2.25.0" />
+        <import addon="script.module.routing" version="0.1.0"/>
 		<!-- soon to be deprecated -->
         <import addon="script.module.pyxbmct" version="1.2.0"/>
     </requires>

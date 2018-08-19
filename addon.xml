@@ -3,10 +3,16 @@
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
         <import addon="resource.images.nakamori" version="3.0.0"/>
+        <import addon="script.module.routing" version="0.1.0"/>
+        <import addon="script.module.kodi65" version="1.2.1"/>
+		<!-- soon to be deprecated -->
         <import addon="script.module.pyxbmct" version="1.2.0"/>
     </requires>
-    <extension point="xbmc.python.pluginsource">
-        <provides></provides>
+	<extension point="xbmc.python.script" library="default.py">
+		<provides>executable</provides>
+	</extension>
+    <extension point="xbmc.python.pluginsource" library="plugin.py">
+        <provides>video</provides>
     </extension>
     <extension point="xbmc.python.module" library="lib" />
     <extension point="xbmc.addon.metadata">

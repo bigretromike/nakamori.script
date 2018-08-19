@@ -413,6 +413,10 @@ def get_data(url_in, referer, data_type):
             else:
                 data = response.read()
             response.close()
+        except URLError as url_error:
+            xbmc.log('Error in urlopen: %s' % url_error, xbmc.LOGERROR)
+            # error('Connection Failed', str(url_error))
+            data = None
         except Exception as ex:
             xbmc.log("url: " + str(url) + " error: " + ex.message, xbmc.LOGERROR)
             error('Connection Failed', str(ex))
@@ -856,6 +860,11 @@ def add_dir(name, url, mode, iconimage='DefaultTVShows.png', plot="", poster="De
         # should this even possible ? as failsafe I leave it.
         ok = xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]), url=u, listitem=liz, isFolder=True)
     return ok
+
+
+def onepunchmen():
+    from onepunchmen import my_window
+    my_window()
 
 
 # not sure if needed

@@ -297,7 +297,7 @@ def set_sort_method(int_of_sort_method=0):
     :param int_of_sort_method: int parameter of sort method
     :return: set sort method
     """
-    xbmc.log('-> trying to set \'%s\' sorting' % int_of_sort_method, xbmc.LOGWARNING)
+    # xbmc.log('-> trying to set \'%s\' sorting' % int_of_sort_method, xbmc.LOGWARNING)
     xbmc.executebuiltin('Container.SetSortMethod(' + str(int_of_sort_method) + ')')
 
 

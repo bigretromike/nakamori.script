@@ -159,6 +159,7 @@
 				<textcolor>AAFFFFFF</textcolor>
                 <textoffsetx>30</textoffsetx>
                 <textoffsety>20</textoffsety>
+				<ispassword>True</ispassword>
 			</control>
 		</control>
         <!-- bottom_button -->

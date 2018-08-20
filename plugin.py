@@ -3,15 +3,10 @@ import sys
 import xbmc
 import xbmcgui
 import xbmcplugin
-import xbmcaddon
 
 import routing
-from kodi65 import addon
 
-
-handle = int(sys.argv[1])
-
-plugin = routing.Plugin()
+plugin = routing.Plugin(base_url='plugin://script.module.nakamori')
 
 
 class Main:
@@ -37,15 +32,16 @@ class Main:
 
 @plugin.route('/')
 def root():
-    xbmcplugin.addSortMethod(handle, xbmcplugin.SORT_METHOD_LABEL)
+    xbmcplugin.addSortMethod(plugin.handle, xbmcplugin.SORT_METHOD_LABEL)
     items = [
         ("calendar", "plugin-calendar", plugin.url_for(calendar, what="now")),
         ("wizard", "plugin-wizard", plugin.url_for(wizard))
     ]
     for key, value, key in items:
         li = xbmcgui.ListItem(label=value, thumbnailImage="DefaultFolder.png")
-        xbmcplugin.addDirectoryItem(handle=plugin.handle, url=key, listitem=li, isFolder=True)
-    xbmcplugin.endOfDirectory(handle)
+        li.setProperty('IsPlayable', 'true')
+        xbmcplugin.addDirectoryItem(handle=plugin.handle, url=key, listitem=li, isFolder=False)
+    xbmcplugin.endOfDirectory(plugin.handle)
 
 
 @plugin.route('/calendar/<what>')
@@ -60,7 +56,5 @@ def wizard():
     pass
 
 
-xbmc.log('---> plugin.py started', xbmc.LOGERROR)
 if __name__ == "__main__":
     Main()
-xbmc.log('---> plugin.py stopped', xbmc.LOGERROR)

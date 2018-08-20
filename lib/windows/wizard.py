@@ -35,15 +35,24 @@ class Wizard2(xbmcgui.WindowXML):
         self.port = None
         self.login = ''
         self.password = ''
-        self.setup_ok = False
         self.apikey = ''
+        _addon.getSetting("ipaddress")
 
     def onInit(self):
-        # bind controls
+        # bind controls & set default
         _address = self.getControl(IP_ADDRESS)
         _port = self.getControl(PORT_NUMBER)
         _login = self.getControl(LOGIN)
         _password = self.getControl(PASSWORD)
+        _button_test = self.getControl(TEST_BUTTON)
+        _button_save = self.getControl(SAVE_BUTTON)
+        # navigation
+        _address.setNavigation(_password, _port, _address, _button_test)  # up, down, left, right
+        _port.setNavigation(_address, _login, _port, _button_test)
+        _login.setNavigation(_port, _password, _login, _button_test)
+        _password.setNavigation(_login, _address, _password, _button_test)
+        _button_test.setNavigation(_button_save, _button_save, _login, _button_test)
+        _button_save.setNavigation(_button_test, _button_test, _password, _button_save)
         # get current settings
         self.ip = _addon.getSetting("ipaddress")
         self.port = _addon.getSetting("port")
@@ -56,6 +65,9 @@ class Wizard2(xbmcgui.WindowXML):
         # _password.setType(xbmcgui.INPUT_TYPE_PASSWORD, '')  # k18
         _login.setText(self.login)
         _password.setText(self.password)
+        _button_save.setEnabled(False)
+        # set focus
+        self.setFocus(_address)
 
     def onAction(self, action):
         if action == ACTION_PREVIOUS_MENU or action == ACTION_NAV_BACK:
@@ -84,43 +96,54 @@ class Wizard2(xbmcgui.WindowXML):
 
     # custom functions
     def _test_connection(self):
+        # edits
         _address = self.getControl(IP_ADDRESS).getText()
         _port = self.getControl(PORT_NUMBER).getText()
         _label_address = self.getControl(LABEL_IP_ADDRESS)
         _label_port = self.getControl(LABEL_PORT_NUMBER)
+        # buttons
+        _button_save = self.getControl(SAVE_BUTTON)
+
         if nt.get_server_status(ip=str(_address), port=str(_port), force=True):
+            # save good address + port
             nt.addon.setSetting(id="ipaddress", value=str(_address))
             nt.addon.setSetting(id="port", value=str(_port))
             _label_address.setLabel(label="IP Address", textColor='0xff7aad5c', focusedColor='0xff7aad5c')
             _label_port.setLabel(label="Port", textColor='0xff7aad5c', focusedColor='0xff7aad5c')
-            # check auth
-            nt.addon.setSetting(id="apikey", value="")
             _login = self.getControl(LOGIN).getText()
             _password = self.getControl(PASSWORD).getText()
             _label_login = self.getControl(LABEL_LOGIN)
             _label_password = self.getControl(LABEL_PASSWORD)
             _test_button = self.getControl(TEST_BUTTON)
+            # populate info from edits
             nt.addon.setSetting(id="login", value=str(_login))
             nt.addon.setSetting(id="password", value=str(_password))
+            # check auth
             if nt.valid_user():
                 _test_button.setLabel(label='OK', textColor='0xff7aad5c', focusedColor='0xff7aad5c')
                 _label_login.setLabel(label="Login", textColor='0xff7aad5c', focusedColor='0xff7aad5c')
                 _label_password.setLabel(label="Password", textColor='0xff7aad5c', focusedColor='0xff7aad5c')
+                _button_save.setEnabled(True)
                 self.setup_ok = True
             else:
                 _test_button.setLabel(label='Test', textColor='0xFFDF1818', focusedColor='0xFFDF1818')
                 _label_login.setLabel(label="Login", textColor='0xFFDF1818', focusedColor='0xFFDF1818')
                 _label_password.setLabel(label="Password", textColor='0xFFDF1818', focusedColor='0xFFDF1818')
+                _button_save.setEnabled(False)
                 self.setup_ok = False
         else:
             _label_address.setLabel(label="IP Address", textColor='0xFFDF1818', focusedColor='0xFFDF1818')
             _label_port.setLabel(label="Port", textColor='0xFFDF1818', focusedColor='0xFFDF1818')
+            _button_save.setEnabled(False)
             self.setup_ok = False
+
+        if self.setup_ok:
+            _addon.setSetting(id='wizard', value="1")
+        else:
+            _addon.setSetting(id='wizard', value="0")
 
 
 def open_wizard():
     ui = Wizard2('wizard.xml', CWD, 'default', '1080i')
-    xbmc.log('---> main doModal before.....', xbmc.LOGERROR)
     ui.doModal()
-    xbmc.log('---> main doModal after.....', xbmc.LOGERROR)
     del ui

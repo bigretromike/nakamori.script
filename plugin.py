@@ -16,21 +16,17 @@ plugin = routing.Plugin()
 
 class Main:
     def __init__(self):
-        addon.set_global("nakamori_running", "true")
         self._parse_argv()
         for info in self.infos:
-            xbmc.log('---- info in infos: %s' % info, xbmc.LOGERROR)
             if info == "calendar":
                 xbmc.executebuiltin('RunScript(script.module.nakamori,?info=calendar)')
+            elif info == "wizard":
+                xbmc.executebuiltin('RunScript(script.module.nakamori,?info=wizard)')
         else:
-            xbmc.log('----plugin.run', xbmc.LOGERROR)
             plugin.run()
-        addon.clear_global("nakamori_running")
 
     def _parse_argv(self):
         args = sys.argv[2][1:]
-        for arg in sys.argv:
-            xbmc.log('-+-' + str(arg), xbmc.LOGERROR)
         self.infos = []
         self.params = {"handle": plugin.handle}
         delimiter = "&"
@@ -48,7 +44,6 @@ def root():
     ]
     for key, value, key in items:
         li = xbmcgui.ListItem(label=value, thumbnailImage="DefaultFolder.png")
-        xbmc.log('url created is %s' % key, xbmc.LOGERROR)
         xbmcplugin.addDirectoryItem(handle=plugin.handle, url=key, listitem=li, isFolder=True)
     xbmcplugin.endOfDirectory(handle)
 

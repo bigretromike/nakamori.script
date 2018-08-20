@@ -2,26 +2,21 @@ import sys
 import xbmc
 import xbmcaddon
 import lib.windows.calendar as calendar
-
-from kodi65 import addon
+import lib.windows.wizard as wizard
 
 
 class Main:
     def __init__(self):
-        addon.set_global("nakamori_running", "true")
         self._parse_argv()
 
         if not self.infos:
             xbmc.log('---> default.py infos=None', xbmc.LOGERROR)
-            #calendar.open_calendar()
         else:
             xbmc.log('---> default.py infos=calendar START', xbmc.LOGERROR)
             if 'calendar' in self.infos:
-                addon.set_global('nakamori.active', "true")
                 calendar.open_calendar()
-                addon.clear_global('nakamori.active')
-                xbmc.log('---> default.py infos=calendar END', xbmc.LOGERROR)
-        addon.clear_global("nakamori_running")
+            elif 'wizard' in self.infos:
+                wizard.open_wizard()
 
     def _parse_argv(self):
         self.infos = []

@@ -11,8 +11,6 @@ import sys
 import traceback
 import os
 import json
-# noinspection PyUnresolvedReferences,PyPep8Naming
-import Cache as cache
 import time
 import gzip
 import collections
@@ -461,6 +459,7 @@ def get_json(url_in, direct=False):
         body = get_data(url_in, None, "json")
     else:
         if (addon.getSetting("enableCache") == "true") and ("file?id" not in url_in):
+            import Cache as cache  # import only if cache is enabled
             db_row = cache.check_in_database(url_in)
             if db_row is None:
                 db_row = 0
@@ -708,6 +707,7 @@ def get_server_status(ip, port, force=False):
     :return: bool
     """
     try:
+        xbmc.log('---> get_server_status: %s %s (%s)' % (ip, port, force), xbmc.LOGINFO)
         if get_version(ip, port, force) != LooseVersion('0.0'):
             return True
         else:

@@ -33,6 +33,7 @@ class Calendar(xbmcgui.WindowXML):
         self.addItems(listitems)
         #xbmc.sleep(100)
         #self.setFocusId(self.getCurrentContainerId())
+
         xbmc.log('---> setFocus done.....', xbmc.LOGERROR)
 
     def onAction(self, action):

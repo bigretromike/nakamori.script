@@ -1,29 +1,25 @@
 import sys
-import xbmc
-import xbmcaddon
+
 import lib.windows.calendar as calendar
 import lib.windows.wizard as wizard
+import lib.nakamoritools as nt
 
+import xbmc
 
 class Main:
     def __init__(self):
-        self._parse_argv()
+        self.params = nt.parse_parameters(sys.argv[1])
 
-        if not self.infos:
+        if not self.params:
             pass
         else:
-            if 'calendar' in self.infos:
-                calendar.open_calendar()
-            elif 'wizard' in self.infos:
+            if self.params['info'] == 'calendar':
+                calendar.open_calendar(date=self.params.get('date', 0), starting_item=self.params.get('page', 0))
+            elif self.params['info'] == 'wizard':
                 wizard.open_wizard()
-
-    def _parse_argv(self):
-        self.infos = []
-        self.params = {"handle": None}
-        for arg in sys.argv:
-            if arg.startswith('?info='):
-                self.infos.append(arg[6:])
 
 
 if __name__ == "__main__":
+    xbmc.log('--- default.py : start', xbmc.LOGWARNING)
     Main()
+    xbmc.log('--- default.py : stop', xbmc.LOGWARNING)

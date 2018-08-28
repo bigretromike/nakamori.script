@@ -1,41 +1,756 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<window>
-	<views>50</views>
-	<controls>
-		<control type="list" id="50">
-			<left>500</left>
-			<top>200</top>
-			<width>1000</width>
-			<height>500</height>
-			<viewtype label="535">list</viewtype>
-			<itemlayout height="100" width="1000">
-				<control type="label">
-					<left>20</left>
-					<top>0</top>
-					<height>50</height>
-					<width>960</width>
-					<font>font13</font>
-					<label>$INFO[ListItem.Label]</label>
-				</control>
-			</itemlayout>
-			<focusedlayout height="100" width="1000">
-				<control type="image">
-					<left>0</left>
-					<top>0</top>
-					<width>1000</width>
-					<height>50</height>
-					<texture>testwindow-focus.png</texture>
-				</control>
-				<control type="label">
-					<left>20</left>
-					<top>0</top>
-					<height>50</height>
-					<width>960</width>
-					<font>font13</font>
-					<label>$INFO[ListItem.Label]</label>
-					<textcolor>orange</textcolor>
-				</control>
-			</focusedlayout>
-		</control>
-	</controls>
+<window id="9999">
+    <coordinates>
+        <posx>0</posx>
+        <posy>0</posy>
+    </coordinates>
+    <views>50</views>
+    <animation effect="fade" start="0" end="100" time="300">WindowOpen</animation>
+    <animation effect="fade" start="100" end="0" time="300">WindowClose</animation>
+    <defaultcontrol always="true">901</defaultcontrol>
+    <controls>
+        <!-- bg -->
+        <control type="image">
+            <description>Fade</description>
+            <posx>0</posx>
+            <posy>0</posy>
+            <width>1920</width>
+            <height>1080</height>
+            <texture>calendar-background.png</texture>
+        </control>
+        <!-- prev_button -->
+        <control type="button" id="1">
+            <posx>20</posx>
+            <posy>504</posy>
+            <width>50</width>
+            <height>50</height>
+            <label></label>
+            <onclick>noop</onclick>
+            <onleft>1</onleft>
+            <onright>55</onright>
+            <texturefocus>nav_back-fo.png</texturefocus>
+            <texturenofocus>nav_back-nofo.png</texturenofocus>
+        </control>
+        <!-- weekdays -->
+        <control type="group" id="900">
+            <posx>102</posx>
+            <control type="group" id="901">
+                <defaultcontrol>55</defaultcontrol>
+
+                <control type="label" id="91">
+                    <left>92</left>
+                    <top>10</top>
+                    <height>20</height>
+                    <width>250</width>
+                    <font>font20_title</font>
+                    <textcolor>white</textcolor>
+                    <label></label>
+                </control>
+                <control type="label" id="92">
+                    <left>92</left>
+                    <top>30</top>
+                    <height>20</height>
+                    <width>250</width>
+                    <font>font_Flag</font>
+                    <textcolor>white</textcolor>
+                    <label></label>
+                </control>
+                <control type="list" id="55">
+                    <onleft>1</onleft>
+                    <left>10</left>
+                    <top>50</top>
+                    <width>250</width>
+                    <height>1010</height>
+                    <visible>true</visible>
+                    <orientation>vertical</orientation>
+                    <itemlayout height="200" width="250">
+                        <control type="image">
+                            <description>serie</description>
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <width>250</width>
+                            <height>200</height>
+                            <texture>series-nofo.png</texture>
+                        </control>
+                        <control type="image">
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <left>3</left>
+                            <width>250</width>
+                            <height>50</height>
+                            <info>ListItem.Art(poster)</info>
+                            <aspectratio>keep</aspectratio>
+                        </control>
+                        <control type="image">
+                            <top>50</top>
+                            <left>20</left>
+                            <width>100</width>
+                            <height>150</height>
+                            <info>ListItem.Art(fanart)</info>
+                            <aspectratio>keep</aspectratio>
+                        </control>
+                    </itemlayout>
+                    <focusedlayout height="200" width="250">
+                         <control type="image">
+                            <description>serie</description>
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <width>250</width>
+                            <height>200</height>
+                            <texture>series-nofo.png</texture>
+                        </control>
+                        <control type="image">
+                            <description>serie-focus</description>
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <width>250</width>
+                            <height>200</height>
+                            <texture>series-fo.png</texture>
+                            <visible>Control.HasFocus(55)</visible>
+                        </control>
+                        <control type="image">
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <left>5</left>
+                            <width>250</width>
+                            <height>50</height>
+                            <info>ListItem.Art(poster)</info>
+                            <aspectratio>keep</aspectratio>
+                        </control>
+                        <control type="image">
+                            <top>50</top>
+                            <left>20</left>
+                            <width>100</width>
+                            <height>150</height>
+                            <info>ListItem.Art(fanart)</info>
+                            <aspectratio>keep</aspectratio>
+                        </control>
+                        <control type="image">
+                            <top>50</top>
+                            <left>20</left>
+                            <width>100</width>
+                            <height>150</height>
+                            <bordertexture border="-2">grey.png</bordertexture>
+                            <info>ListItem.Art(fanart)</info>
+                            <aspectratio>keep</aspectratio>
+                            <visible>Control.HasFocus(55)</visible>
+                        </control>
+                    </focusedlayout>
+                </control>
+
+                <control type="label" id="93">
+                    <left>342</left>
+                    <top>10</top>
+                    <height>20</height>
+                    <width>250</width>
+                    <font>font20_title</font>
+                    <textcolor>white</textcolor>
+                    <label></label>
+                </control>
+                <control type="label" id="94">
+                    <left>342</left>
+                    <top>30</top>
+                    <height>20</height>
+                    <width>250</width>
+                    <font>font_Flag</font>
+                    <textcolor>white</textcolor>
+                    <label></label>
+                </control>
+                <control type="list" id="56">
+                    <left>260</left>
+                    <top>50</top>
+                    <width>250</width>
+                    <height>1010</height>
+                    <visible>true</visible>
+                    <orientation>vertical</orientation>
+                    <itemlayout height="200" width="250">
+                        <control type="image">
+                            <description>serie</description>
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <width>250</width>
+                            <height>200</height>
+                            <texture>series-nofo.png</texture>
+                        </control>
+                        <control type="image">
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <left>3</left>
+                            <width>250</width>
+                            <height>50</height>
+                            <info>ListItem.Art(poster)</info>
+                            <aspectratio>keep</aspectratio>
+                        </control>
+                        <control type="image">
+                            <top>50</top>
+                            <left>20</left>
+                            <width>100</width>
+                            <height>150</height>
+                            <info>ListItem.Art(fanart)</info>
+                            <aspectratio>keep</aspectratio>
+                        </control>
+                    </itemlayout>
+                    <focusedlayout height="200" width="250">
+                         <control type="image">
+                            <description>serie</description>
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <width>250</width>
+                            <height>200</height>
+                            <texture>series-nofo.png</texture>
+                        </control>
+                        <control type="image">
+                            <description>serie-focus</description>
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <width>250</width>
+                            <height>200</height>
+                            <texture>series-fo.png</texture>
+                            <visible>Control.HasFocus(56)</visible>
+                        </control>
+                        <control type="image">
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <left>5</left>
+                            <width>250</width>
+                            <height>50</height>
+                            <info>ListItem.Art(poster)</info>
+                            <aspectratio>keep</aspectratio>
+                        </control>
+                        <control type="image">
+                            <top>50</top>
+                            <left>20</left>
+                            <width>100</width>
+                            <height>150</height>
+                            <info>ListItem.Art(fanart)</info>
+                            <aspectratio>keep</aspectratio>
+                        </control>
+                        <control type="image">
+                            <top>50</top>
+                            <left>20</left>
+                            <width>100</width>
+                            <height>150</height>
+                            <bordertexture border="-2">grey.png</bordertexture>
+                            <info>ListItem.Art(fanart)</info>
+                            <aspectratio>keep</aspectratio>
+                            <visible>Control.HasFocus(56)</visible>
+                        </control>
+                    </focusedlayout>
+                </control>
+
+                <control type="label" id="95">
+                    <left>592</left>
+                    <top>10</top>
+                    <height>20</height>
+                    <width>250</width>
+                    <font>font20_title</font>
+                    <textcolor>white</textcolor>
+                    <label></label>
+                </control>
+                <control type="label" id="96">
+                    <left>592</left>
+                    <top>30</top>
+                    <height>20</height>
+                    <width>250</width>
+                    <font>font_Flag</font>
+                    <textcolor>white</textcolor>
+                    <label></label>
+                </control>
+                <control type="list" id="57">
+                    <left>510</left>
+                    <top>50</top>
+                    <width>250</width>
+                    <height>1010</height>
+                    <visible>true</visible>
+                    <orientation>vertical</orientation>
+                     <itemlayout height="200" width="250">
+                        <control type="image">
+                            <description>serie</description>
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <width>250</width>
+                            <height>200</height>
+                            <texture>series-nofo.png</texture>
+                        </control>
+                        <control type="image">
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <left>3</left>
+                            <width>250</width>
+                            <height>50</height>
+                            <info>ListItem.Art(poster)</info>
+                            <aspectratio>keep</aspectratio>
+                        </control>
+                        <control type="image">
+                            <top>50</top>
+                            <left>20</left>
+                            <width>100</width>
+                            <height>150</height>
+                            <info>ListItem.Art(fanart)</info>
+                            <aspectratio>keep</aspectratio>
+                        </control>
+                    </itemlayout>
+                    <focusedlayout height="200" width="250">
+                         <control type="image">
+                            <description>serie</description>
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <width>250</width>
+                            <height>200</height>
+                            <texture>series-nofo.png</texture>
+                        </control>
+                        <control type="image">
+                            <description>serie-focus</description>
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <width>250</width>
+                            <height>200</height>
+                            <texture>series-fo.png</texture>
+                            <visible>Control.HasFocus(57)</visible>
+                        </control>
+                        <control type="image">
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <left>5</left>
+                            <width>250</width>
+                            <height>50</height>
+                            <info>ListItem.Art(poster)</info>
+                            <aspectratio>keep</aspectratio>
+                        </control>
+                        <control type="image">
+                            <top>50</top>
+                            <left>20</left>
+                            <width>100</width>
+                            <height>150</height>
+                            <info>ListItem.Art(fanart)</info>
+                            <aspectratio>keep</aspectratio>
+                        </control>
+                        <control type="image">
+                            <top>50</top>
+                            <left>20</left>
+                            <width>100</width>
+                            <height>150</height>
+                            <bordertexture border="-2">grey.png</bordertexture>
+                            <info>ListItem.Art(fanart)</info>
+                            <aspectratio>keep</aspectratio>
+                            <visible>Control.HasFocus(57)</visible>
+                        </control>
+                    </focusedlayout>
+                </control>
+
+                <control type="label" id="97">
+                    <left>852</left>
+                    <top>10</top>
+                    <height>20</height>
+                    <width>250</width>
+                    <font>font20_title</font>
+                    <textcolor>white</textcolor>
+                    <label></label>
+                </control>
+                <control type="label" id="98">
+                    <left>852</left>
+                    <top>30</top>
+                    <height>20</height>
+                    <width>250</width>
+                    <font>font_Flag</font>
+                    <textcolor>white</textcolor>
+                    <label></label>
+                </control>
+                <control type="list" id="58">
+                    <left>770</left>
+                    <top>50</top>
+                    <width>250</width>
+                    <height>1010</height>
+                    <visible>true</visible>
+                    <orientation>vertical</orientation>
+                    <itemlayout height="200" width="250">
+                        <control type="image">
+                            <description>serie</description>
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <width>250</width>
+                            <height>200</height>
+                            <texture>series-nofo.png</texture>
+                        </control>
+                        <control type="image">
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <left>3</left>
+                            <width>250</width>
+                            <height>50</height>
+                            <info>ListItem.Art(poster)</info>
+                            <aspectratio>keep</aspectratio>
+                        </control>
+                        <control type="image">
+                            <top>50</top>
+                            <left>20</left>
+                            <width>100</width>
+                            <height>150</height>
+                            <info>ListItem.Art(fanart)</info>
+                            <aspectratio>keep</aspectratio>
+                        </control>
+                    </itemlayout>
+                    <focusedlayout height="200" width="250">
+                         <control type="image">
+                            <description>serie</description>
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <width>250</width>
+                            <height>200</height>
+                            <texture>series-nofo.png</texture>
+                        </control>
+                        <control type="image">
+                            <description>serie-focus</description>
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <width>250</width>
+                            <height>200</height>
+                            <texture>series-fo.png</texture>
+                            <visible>Control.HasFocus(58)</visible>
+                        </control>
+                        <control type="image">
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <left>5</left>
+                            <width>250</width>
+                            <height>50</height>
+                            <info>ListItem.Art(poster)</info>
+                            <aspectratio>keep</aspectratio>
+                        </control>
+                        <control type="image">
+                            <top>50</top>
+                            <left>20</left>
+                            <width>100</width>
+                            <height>150</height>
+                            <info>ListItem.Art(fanart)</info>
+                            <aspectratio>keep</aspectratio>
+                        </control>
+                        <control type="image">
+                            <top>50</top>
+                            <left>20</left>
+                            <width>100</width>
+                            <height>150</height>
+                            <bordertexture border="-2">grey.png</bordertexture>
+                            <info>ListItem.Art(fanart)</info>
+                            <aspectratio>keep</aspectratio>
+                            <visible>Control.HasFocus(58)</visible>
+                        </control>
+                    </focusedlayout>
+                </control>
+
+                <control type="label" id="99">
+                    <left>1102</left>
+                    <top>10</top>
+                    <height>20</height>
+                    <width>250</width>
+                    <font>font20_title</font>
+                    <textcolor>white</textcolor>
+                    <label></label>
+                </control>
+                <control type="label" id="100">
+                    <left>1102</left>
+                    <top>30</top>
+                    <height>20</height>
+                    <width>250</width>
+                    <font>font_Flag</font>
+                    <textcolor>white</textcolor>
+                    <label></label>
+                </control>
+                <control type="list" id="59">
+                    <left>1020</left>
+                    <top>50</top>
+                    <width>250</width>
+                    <height>1010</height>
+                    <visible>true</visible>
+                    <orientation>vertical</orientation>
+             <itemlayout height="200" width="250">
+                        <control type="image">
+                            <description>serie</description>
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <width>250</width>
+                            <height>200</height>
+                            <texture>series-nofo.png</texture>
+                        </control>
+                        <control type="image">
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <left>3</left>
+                            <width>250</width>
+                            <height>50</height>
+                            <info>ListItem.Art(poster)</info>
+                            <aspectratio>keep</aspectratio>
+                        </control>
+                        <control type="image">
+                            <top>50</top>
+                            <left>20</left>
+                            <width>100</width>
+                            <height>150</height>
+                            <info>ListItem.Art(fanart)</info>
+                            <aspectratio>keep</aspectratio>
+                        </control>
+                    </itemlayout>
+                    <focusedlayout height="200" width="250">
+                         <control type="image">
+                            <description>serie</description>
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <width>250</width>
+                            <height>200</height>
+                            <texture>series-nofo.png</texture>
+                        </control>
+                        <control type="image">
+                            <description>serie-focus</description>
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <width>250</width>
+                            <height>200</height>
+                            <texture>series-fo.png</texture>
+                            <visible>Control.HasFocus(59)</visible>
+                        </control>
+                        <control type="image">
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <left>5</left>
+                            <width>250</width>
+                            <height>50</height>
+                            <info>ListItem.Art(poster)</info>
+                            <aspectratio>keep</aspectratio>
+                        </control>
+                        <control type="image">
+                            <top>50</top>
+                            <left>20</left>
+                            <width>100</width>
+                            <height>150</height>
+                            <info>ListItem.Art(fanart)</info>
+                            <aspectratio>keep</aspectratio>
+                        </control>
+                        <control type="image">
+                            <top>50</top>
+                            <left>20</left>
+                            <width>100</width>
+                            <height>150</height>
+                            <bordertexture border="-2">grey.png</bordertexture>
+                            <info>ListItem.Art(fanart)</info>
+                            <aspectratio>keep</aspectratio>
+                            <visible>Control.HasFocus(59)</visible>
+                        </control>
+                    </focusedlayout>
+                </control>
+
+                <control type="label" id="101">
+                    <left>1352</left>
+                    <top>10</top>
+                    <height>20</height>
+                    <width>250</width>
+                    <font>font20_title</font>
+                    <textcolor>white</textcolor>
+                    <label></label>
+                </control>
+                <control type="label" id="102">
+                    <left>1352</left>
+                    <top>30</top>
+                    <height>20</height>
+                    <width>250</width>
+                    <font>font_Flag</font>
+                    <textcolor>white</textcolor>
+                    <label></label>
+                </control>
+                <control type="list" id="60">
+                    <left>1270</left>
+                    <top>50</top>
+                    <width>250</width>
+                    <height>1010</height>
+                    <visible>true</visible>
+                    <orientation>vertical</orientation>
+                     <itemlayout height="200" width="250">
+                        <control type="image">
+                            <description>serie</description>
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <width>250</width>
+                            <height>200</height>
+                            <texture>series-nofo.png</texture>
+                        </control>
+                        <control type="image">
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <left>3</left>
+                            <width>250</width>
+                            <height>50</height>
+                            <info>ListItem.Art(poster)</info>
+                            <aspectratio>keep</aspectratio>
+                        </control>
+                        <control type="image">
+                            <top>50</top>
+                            <left>20</left>
+                            <width>100</width>
+                            <height>150</height>
+                            <info>ListItem.Art(fanart)</info>
+                            <aspectratio>keep</aspectratio>
+                        </control>
+                    </itemlayout>
+                    <focusedlayout height="200" width="250">
+                         <control type="image">
+                            <description>serie</description>
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <width>250</width>
+                            <height>200</height>
+                            <texture>series-nofo.png</texture>
+                        </control>
+                        <control type="image">
+                            <description>serie-focus</description>
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <width>250</width>
+                            <height>200</height>
+                            <texture>series-fo.png</texture>
+                            <visible>Control.HasFocus(60)</visible>
+                        </control>
+                        <control type="image">
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <left>5</left>
+                            <width>250</width>
+                            <height>50</height>
+                            <info>ListItem.Art(poster)</info>
+                            <aspectratio>keep</aspectratio>
+                        </control>
+                        <control type="image">
+                            <top>50</top>
+                            <left>20</left>
+                            <width>100</width>
+                            <height>150</height>
+                            <info>ListItem.Art(fanart)</info>
+                            <aspectratio>keep</aspectratio>
+                        </control>
+                        <control type="image">
+                            <top>50</top>
+                            <left>20</left>
+                            <width>100</width>
+                            <height>150</height>
+                            <bordertexture border="-2">grey.png</bordertexture>
+                            <info>ListItem.Art(fanart)</info>
+                            <aspectratio>keep</aspectratio>
+                            <visible>Control.HasFocus(60)</visible>
+                        </control>
+                    </focusedlayout>
+                </control>
+
+                <control type="label" id="103">
+                    <left>1602</left>
+                    <top>10</top>
+                    <height>20</height>
+                    <width>250</width>
+                    <font>font20_title</font>
+                    <textcolor>white</textcolor>
+                    <label></label>
+                </control>
+                <control type="label" id="104">
+                    <left>1602</left>
+                    <top>30</top>
+                    <height>20</height>
+                    <width>250</width>
+                    <font>font_Flag</font>
+                    <textcolor>white</textcolor>
+                    <label></label>
+                </control>
+                <control type="list" id="61">
+                    <onright>2</onright>
+                    <left>1520</left>
+                    <top>50</top>
+                    <width>250</width>
+                    <height>1010</height>
+                    <visible>true</visible>
+                    <orientation>vertical</orientation>
+                    <itemlayout height="200" width="250">
+                        <control type="image">
+                            <description>serie</description>
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <width>250</width>
+                            <height>200</height>
+                            <texture>series-nofo.png</texture>
+                        </control>
+                        <control type="image">
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <left>3</left>
+                            <width>250</width>
+                            <height>50</height>
+                            <info>ListItem.Art(poster)</info>
+                            <aspectratio>keep</aspectratio>
+                        </control>
+                        <control type="image">
+                            <top>50</top>
+                            <left>20</left>
+                            <width>100</width>
+                            <height>150</height>
+                            <info>ListItem.Art(fanart)</info>
+                            <aspectratio>keep</aspectratio>
+                        </control>
+                    </itemlayout>
+                    <focusedlayout height="200" width="250">
+                         <control type="image">
+                            <description>serie</description>
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <width>250</width>
+                            <height>200</height>
+                            <texture>series-nofo.png</texture>
+                        </control>
+                        <control type="image">
+                            <description>serie-focus</description>
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <width>250</width>
+                            <height>200</height>
+                            <texture>series-fo.png</texture>
+                            <visible>Control.HasFocus(61)</visible>
+                        </control>
+                        <control type="image">
+                            <posx>0</posx>
+                            <posy>0</posy>
+                            <left>5</left>
+                            <width>250</width>
+                            <height>50</height>
+                            <info>ListItem.Art(poster)</info>
+                            <aspectratio>keep</aspectratio>
+                        </control>
+                        <control type="image">
+                            <top>50</top>
+                            <left>20</left>
+                            <width>100</width>
+                            <height>150</height>
+                            <info>ListItem.Art(fanart)</info>
+                            <aspectratio>keep</aspectratio>
+                        </control>
+                        <control type="image">
+                            <top>50</top>
+                            <left>20</left>
+                            <width>100</width>
+                            <height>150</height>
+                            <bordertexture border="-2">grey.png</bordertexture>
+                            <info>ListItem.Art(fanart)</info>
+                            <aspectratio>keep</aspectratio>
+                            <visible>Control.HasFocus(61)</visible>
+                        </control>
+                    </focusedlayout>
+                </control>
+
+            </control>
+        </control>
+        <!-- next_button -->
+        <control type="button" id="2">
+            <posx>1800</posx>
+            <posy>504</posy>
+            <width>50</width>
+            <height>50</height>
+            <label></label>
+            <onclick>noop</onclick>
+            <texturefocus>nav_next-fo.png</texturefocus>
+            <texturenofocus>nav_next-nofo.png</texturenofocus>
+        </control>
+    </controls>
 </window>

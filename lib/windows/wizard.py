@@ -7,7 +7,7 @@ import xbmcaddon
 
 import lib.nakamoritools as nt
 
-ADDON = xbmcaddon.Addon()
+ADDON = xbmcaddon.Addon(id='script.module.nakamori')
 CWD = ADDON.getAddonInfo('path').decode('utf-8')
 
 _addon = xbmcaddon.Addon(id='plugin.video.nakamori')
@@ -39,6 +39,7 @@ class Wizard2(xbmcgui.WindowXML):
         _addon.getSetting("ipaddress")
 
     def onInit(self):
+        self.setProperty('script.module.nakamori.running', 'true')
         # bind controls & set default
         _address = self.getControl(IP_ADDRESS)
         _port = self.getControl(PORT_NUMBER)
@@ -71,6 +72,7 @@ class Wizard2(xbmcgui.WindowXML):
 
     def onAction(self, action):
         if action == ACTION_PREVIOUS_MENU or action == ACTION_NAV_BACK:
+            self.setProperty('script.module.nakamori.running', 'false')
             self.close()
 
     def onControl(self, control):
@@ -85,13 +87,15 @@ class Wizard2(xbmcgui.WindowXML):
             pass
 
         if control == SAVE_BUTTON:
-            if nt.addon.getSetting("apikey") != "":
+            if _addon.getSetting("apikey") != "":
+                self.setProperty('script.module.nakamori.running', 'false')
                 self.close()
             else:
                 if xbmcgui.Dialog().yesno(nt.addon.getLocalizedString(30079),
                                           nt.addon.getLocalizedString(30080),
                                           nt.addon.getLocalizedString(30081)):
                     self.setup_ok = False
+                    self.setProperty('script.module.nakamori.running', 'false')
                     self.close()
 
     # custom functions
@@ -106,8 +110,10 @@ class Wizard2(xbmcgui.WindowXML):
 
         if nt.get_server_status(ip=str(_address), port=str(_port), force=True):
             # save good address + port
-            nt.addon.setSetting(id="ipaddress", value=str(_address))
-            nt.addon.setSetting(id="port", value=str(_port))
+            _addon.setSetting(id='good_ip', value=str(_address))
+            _addon.setSetting(id='good_port', value=str(_port))
+            _addon.setSetting(id='ipaddress', value=str(_address))
+            _addon.setSetting(id='port', value=str(_port))
             _label_address.setLabel(label="IP Address", textColor='0xff7aad5c', focusedColor='0xff7aad5c')
             _label_port.setLabel(label="Port", textColor='0xff7aad5c', focusedColor='0xff7aad5c')
             _login = self.getControl(LOGIN).getText()
@@ -119,12 +125,16 @@ class Wizard2(xbmcgui.WindowXML):
             nt.addon.setSetting(id="login", value=str(_login))
             nt.addon.setSetting(id="password", value=str(_password))
             # check auth
-            if nt.valid_user():
+            b, a = nt.valid_user()
+            if b:
                 _test_button.setLabel(label='OK', textColor='0xff7aad5c', focusedColor='0xff7aad5c')
                 _label_login.setLabel(label="Login", textColor='0xff7aad5c', focusedColor='0xff7aad5c')
                 _label_password.setLabel(label="Password", textColor='0xff7aad5c', focusedColor='0xff7aad5c')
                 _button_save.setEnabled(True)
                 self.setup_ok = True
+                _addon.setSetting(id='login', value='')
+                _addon.setSetting(id='password', value='')
+                _addon.setSetting(id='apikey', value=a)
             else:
                 _test_button.setLabel(label='Test', textColor='0xFFDF1818', focusedColor='0xFFDF1818')
                 _label_login.setLabel(label="Login", textColor='0xFFDF1818', focusedColor='0xFFDF1818')
@@ -136,7 +146,7 @@ class Wizard2(xbmcgui.WindowXML):
             _label_port.setLabel(label="Port", textColor='0xFFDF1818', focusedColor='0xFFDF1818')
             _button_save.setEnabled(False)
             self.setup_ok = False
-
+        xbmc.log('--- wizard.py = %s' % self.setup_ok, xbmc.LOGWARNING)
         if self.setup_ok:
             _addon.setSetting(id='wizard', value="1")
         else:
@@ -144,6 +154,8 @@ class Wizard2(xbmcgui.WindowXML):
 
 
 def open_wizard():
+    # xbmc.log('--- open_wizard : start', xbmc.LOGWARNING)
     ui = Wizard2('wizard.xml', CWD, 'default', '1080i')
     ui.doModal()
     del ui
+    # xbmc.log('--- open_wizard : stop', xbmc.LOGWARNING)

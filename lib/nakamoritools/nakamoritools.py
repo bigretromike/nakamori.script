@@ -637,9 +637,9 @@ def valid_user():
     """
 
     if addon.getSetting("apikey") != "" and addon.getSetting("login") == "":
-        return True
+        return (True, addon.getSetting("apikey"))
     else:
-        xbmc.log('-- apikey empty --')
+        xbmc.log('-- apikey empty --', xbmc.LOGWARNING)
         try:
             if addon.getSetting("login") != "" and addon.getSetting("device") != "":
                 _server = "http://" + addon.getSetting("ipaddress") + ":" + addon.getSetting("port")
@@ -649,19 +649,22 @@ def valid_user():
                 post_body = post_data(_server + "/api/auth", body)
                 auth = json.loads(post_body)
                 if "apikey" in auth:
-                    xbmc.log('-- save apikey and reset user credentials --')
-                    addon.setSetting(id='apikey', value=str(auth["apikey"]))
+                    apikey_found_in_auth = str(auth['apikey'])
                     addon.setSetting(id='login', value='')
                     addon.setSetting(id='password', value='')
-                    return True
+                    # xbmcaddon.Addon('plugin.video.nakamori').setSetting(id='login', value='LOGIN')
+                    addon.setSetting(id='apikey', value=apikey_found_in_auth)
+                    xbmc.log('-- save apikey: %s' % apikey_found_in_auth, xbmc.LOGWARNING)
+                    return (True, apikey_found_in_auth)
                 else:
                     raise Exception('Error Getting apikey')
+                    return (False, '')
             else:
-                xbmc.log('-- Login and Device Empty --')
-                return False
+                xbmc.log('-- Login and Device Empty --', xbmc.LOGERROR)
+                return (False, '')
         except Exception as exc:
             error('Error in Valid_User', str(exc))
-            return False
+            return (False, '')
 
 
 def dump_dictionary(details, name):
@@ -707,7 +710,6 @@ def get_server_status(ip, port, force=False):
     :return: bool
     """
     try:
-        xbmc.log('---> get_server_status: %s %s (%s)' % (ip, port, force), xbmc.LOGINFO)
         if get_version(ip, port, force) != LooseVersion('0.0'):
             return True
         else:

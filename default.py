@@ -7,6 +7,7 @@ import lib.nakamoritools as nt
 import xbmc
 import xbmcaddon
 
+
 class Main:
     def __init__(self):
         self.params = nt.parse_parameters(sys.argv[1])

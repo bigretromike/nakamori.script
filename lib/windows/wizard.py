@@ -9,8 +9,6 @@ import lib.nakamoritools as nt
 ADDON = xbmcaddon.Addon(id='script.module.nakamori')
 CWD = ADDON.getAddonInfo('path').decode('utf-8')
 
-_addon = xbmcaddon.Addon(id='plugin.video.nakamori')
-
 TEST_BUTTON = 201
 SAVE_BUTTON = 202
 ACTION_PREVIOUS_MENU = 10
@@ -35,7 +33,7 @@ class Wizard2(xbmcgui.WindowXML):
         self.login = ''
         self.password = ''
         self.apikey = ''
-        _addon.getSetting("ipaddress")
+        nt.addon.getSetting("ipaddress")
 
     def onInit(self):
         self.setProperty('script.module.nakamori.running', 'true')
@@ -54,11 +52,11 @@ class Wizard2(xbmcgui.WindowXML):
         _button_test.setNavigation(_button_save, _button_save, _login, _button_test)
         _button_save.setNavigation(_button_test, _button_test, _password, _button_save)
         # get current settings
-        self.ip = _addon.getSetting("ipaddress")
-        self.port = _addon.getSetting("port")
-        self.login = _addon.getSetting("login")
-        self.password = _addon.getSetting("password")
-        self.apikey = _addon.getSetting("apikey")
+        self.ip = nt.addon.getSetting("ipaddress")
+        self.port = nt.addon.getSetting("port")
+        self.login = nt.addon.getSetting("login")
+        self.password = nt.addon.getSetting("password")
+        self.apikey = nt.addon.getSetting("apikey")
         # populate controls
         _address.setText(self.ip)
         _port.setText(self.port)
@@ -86,7 +84,7 @@ class Wizard2(xbmcgui.WindowXML):
             pass
 
         if control == SAVE_BUTTON:
-            if _addon.getSetting("apikey") != "":
+            if nt.addon.getSetting("apikey") != "":
                 self.setProperty('script.module.nakamori.running', 'false')
                 self.close()
             else:
@@ -109,10 +107,10 @@ class Wizard2(xbmcgui.WindowXML):
 
         if nt.get_server_status(ip=str(_address), port=str(_port), force=True):
             # save good address + port
-            _addon.setSetting(id='good_ip', value=str(_address))
-            _addon.setSetting(id='good_port', value=str(_port))
-            _addon.setSetting(id='ipaddress', value=str(_address))
-            _addon.setSetting(id='port', value=str(_port))
+            nt.addon.setSetting(id='good_ip', value=str(_address))
+            nt.addon.setSetting(id='good_port', value=str(_port))
+            nt.addon.setSetting(id='ipaddress', value=str(_address))
+            nt.addon.setSetting(id='port', value=str(_port))
             _label_address.setLabel(label="IP Address", textColor='0xff7aad5c', focusedColor='0xff7aad5c')
             _label_port.setLabel(label="Port", textColor='0xff7aad5c', focusedColor='0xff7aad5c')
             _login = self.getControl(LOGIN).getText()
@@ -131,9 +129,9 @@ class Wizard2(xbmcgui.WindowXML):
                 _label_password.setLabel(label="Password", textColor='0xff7aad5c', focusedColor='0xff7aad5c')
                 _button_save.setEnabled(True)
                 self.setup_ok = True
-                _addon.setSetting(id='login', value='')
-                _addon.setSetting(id='password', value='')
-                _addon.setSetting(id='apikey', value=a)
+                nt.addon.setSetting(id='login', value='')
+                nt.addon.setSetting(id='password', value='')
+                nt.addon.setSetting(id='apikey', value=a)
             else:
                 _test_button.setLabel(label='Test', textColor='0xFFDF1818', focusedColor='0xFFDF1818')
                 _label_login.setLabel(label="Login", textColor='0xFFDF1818', focusedColor='0xFFDF1818')
@@ -147,9 +145,9 @@ class Wizard2(xbmcgui.WindowXML):
             self.setup_ok = False
         xbmc.log('--- wizard.py = %s' % self.setup_ok, xbmc.LOGWARNING)
         if self.setup_ok:
-            _addon.setSetting(id='wizard', value="1")
+            nt.addon.setSetting(id='wizard', value="1")
         else:
-            _addon.setSetting(id='wizard', value="0")
+            nt.addon.setSetting(id='wizard', value="0")
 
 
 def open_wizard():

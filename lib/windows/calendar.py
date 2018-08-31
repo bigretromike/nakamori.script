@@ -54,6 +54,7 @@ profileDir = xbmc.translatePath(profileDir)
 
 color = ADDON.getSetting('color')
 font_ttf = ADDON.getSetting('font')
+font_size = ADDON.getSetting('size')
 
 # create profile dirs
 if not os.path.exists(profileDir):
@@ -62,6 +63,8 @@ if not os.path.exists(os.path.join(profileDir, 'titles')):
     os.makedirs(os.path.join(profileDir, 'titles'))
 if not os.path.exists(os.path.join(profileDir, 'titles', color)):
     os.makedirs(os.path.join(profileDir, 'titles', color))
+if not os.path.exists(os.path.join(profileDir, 'titles', color, font_ttf + '-' + font_size)):
+    os.makedirs(os.path.join(profileDir, 'titles', color, font_ttf + '-' + font_size))
 
 
 class Calendar2(xbmcgui.WindowXML):
@@ -195,10 +198,10 @@ class Calendar2(xbmcgui.WindowXML):
         # TODO Window with information
         # TODO on image info about episode when shoko will have it
         # make image title because Kodi refuse to work with smaller/custom font
-        new_image_url = os.path.join(profileDir, 'titles', color, str(aid) + '.png')
+        new_image_url = os.path.join(profileDir, 'titles', color, font_ttf + '-' + font_size, str(aid) + '.png')
         if not os.path.exists(new_image_url):
             this_path = os.path.join(font_path, font_ttf)
-            font = ImageFont.truetype(this_path, 15, encoding="unic")
+            font = ImageFont.truetype(this_path, int(font_size), encoding="unic")
             # text_width, text_height = font.getsize(title)  # if we need to calculate something in future
             list_of_lines = textwrap.wrap(title, width=30)
             image = Image.new('RGBA', (250, 50), (0, 0, 0, 0))

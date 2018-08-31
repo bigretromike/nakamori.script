@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 from __future__ import absolute_import
@@ -456,7 +455,11 @@ def get_json(url_in, direct=False):
     :return:
     """
     if direct:
-        body = get_data(url_in, None, "json")
+        try:
+            body = get_data(url_in, None, "json")
+        except:
+            xbmc.log('--> body = None, because error in get_json')
+            body = None
     else:
         if (addon.getSetting("enableCache") == "true") and ("file?id" not in url_in):
             import Cache as cache  # import only if cache is enabled

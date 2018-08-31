@@ -9,8 +9,6 @@
         <!-- 2.25 is needed for routing -->
         <import addon="xbmc.python" version="2.25.0" />
         <import addon="script.module.routing" version="0.1.0"/>
-		<!-- soon to be deprecated -->
-        <import addon="script.module.pyxbmct" version="1.2.0"/>
     </requires>
 	<extension point="xbmc.python.script" library="default.py">
 		<provides>executable</provides>

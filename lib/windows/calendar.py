@@ -52,7 +52,8 @@ font_path = os.path.join(xbmcaddon.Addon('script.module.nakamori').getAddonInfo(
 profileDir = ADDON.getAddonInfo('profile')
 profileDir = xbmc.translatePath(profileDir)
 
-color = '#ffffff'  # TODO settings later
+color = ADDON.getSetting('color')
+font_ttf = ADDON.getSetting('font')
 
 # create profile dirs
 if not os.path.exists(profileDir):
@@ -196,7 +197,7 @@ class Calendar2(xbmcgui.WindowXML):
         # make image title because Kodi refuse to work with smaller/custom font
         new_image_url = os.path.join(profileDir, 'titles', color, str(aid) + '.png')
         if not os.path.exists(new_image_url):
-            this_path = os.path.join(font_path, 'UbuntuMono-Bold.ttf')
+            this_path = os.path.join(font_path, font_ttf)
             font = ImageFont.truetype(this_path, 15, encoding="unic")
             # text_width, text_height = font.getsize(title)  # if we need to calculate something in future
             list_of_lines = textwrap.wrap(title, width=30)
@@ -250,3 +251,16 @@ def open_calendar(date=0, starting_item=0):
     ui = Calendar2('calendar.xml', CWD, 'default', '1080i', data=body, item_number=starting_item)
     ui.doModal()
     del ui
+
+
+def clear_cache():
+    if os.path.exists(os.path.join(profileDir, 'titles')):
+        clear = xbmcgui.Dialog().yesno('Would you like to clear cache?', 'This will remove content of titles directory')
+        if clear:
+            files_to_delete = [os.path.join(path, file)
+                               for (path, dirs, files) in os.walk(os.path.join(profileDir, 'titles'))
+                               for file in files]
+            for f in files_to_delete:
+                os.remove(f)
+                xbmc.log('clear-cache deleted: ' + str(f), xbmc.LOGINFO)
+

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+    <!-- calendar settings -->
+    <category label="30001">
+        <setting label="30004" type="text" id="font" default="UbuntuMono-Bold.ttf"/>
+        <setting label="30003" type="text" id="color" default="#ffffff"/>
+    </category>
+    <!-- maintenance -->
+    <category label="30002">
+        <setting label="30005" type="action" id="clearcache" action="RunPlugin(plugin://plugin.video.nakamori/?cmd=clear)" option="close"/>
+    </category>
+</settings>

@@ -1,0 +1,36 @@
+# Kodi Media Center language file
+# Addon Name: Nakamori
+# Addon id: script.module.nakamori
+# Addon Provider: BigRetroMike, da3dsoul
+msgid ""
+msgstr ""
+"Project-Id-Version: nakamori\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2018-08-31 14:10+0100\n"
+"Last-Translator: bigretromike\n"
+"Language-Team: da3dsoul\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgctxt "#30001"
+msgid "Calendar settings"
+msgstr ""
+
+msgctxt "#30002"
+msgid "Maintenance"
+msgstr ""
+
+msgctxt "#30003"
+msgid "Font color (#hex)"
+msgstr ""
+
+msgctxt "#30004"
+msgid "Font"
+msgstr ""
+
+msgctxt "#30005"
+msgid "Clear cache (titles)"
+msgstr ""

@@ -19,6 +19,10 @@ class Main:
                 xbmc.executebuiltin('RunScript(script.module.nakamori,?info=calendar)')
             elif self.params['info'] == "wizard":
                 xbmc.executebuiltin('RunScript(script.module.nakamori,?info=wizard)')
+            elif self.params['info'] == "clearcache":
+                xbmc.executebuiltin('RunScript(script.module.nakamori,?info=clearcache)')
+            elif self.params['info'] == "settings":
+                xbmc.executebuiltin('RunScript(script.module.nakamori,?info=settings)')
         else:
             plugin.run()
 
@@ -27,11 +31,13 @@ class Main:
 def root():
     xbmcplugin.addSortMethod(plugin.handle, xbmcplugin.SORT_METHOD_LABEL)
     items = [
-        ("calendar", "plugin-calendar", plugin.url_for(calendar, when='0', page='0')),
-        ("calendar", "plugin-calendar-14-days", plugin.url_for(calendar, when='0', page='14')),
-        ("wizard", "plugin-wizard", plugin.url_for(wizard))
+        ("calendar", "calendar", plugin.url_for(calendar, when='0', page='0')),
+        ("calendar", "calendar-add-14-days", plugin.url_for(calendar, when='0', page='14')),
+        ("wizard", "wizard", plugin.url_for(wizard)),
+        ("clear-cache", "clear-cache", plugin.url_for(clearcache)),
+        ("settings", "settings", plugin.url_for(settings))
     ]
-    for key, value, key in items:
+    for name, value, key in items:
         li = xbmcgui.ListItem(label=value, thumbnailImage="DefaultFolder.png")
         li.setProperty('IsPlayable', 'true')
         xbmcplugin.addDirectoryItem(handle=plugin.handle, url=key, listitem=li, isFolder=True)
@@ -47,6 +53,18 @@ def calendar(when, page):
 @plugin.route('/wizard')
 def wizard():
     xbmc.executebuiltin('RunScript(script.module.nakamori,?info=wizard)', True)
+    pass
+
+
+@plugin.route('/clearcache')
+def clearcache():
+    xbmc.executebuiltin('RunScript(script.module.nakamori,?info=clearcache)', True)
+    pass
+
+
+@plugin.route('/settings')
+def settings():
+    xbmc.executebuiltin('RunScript(script.module.nakamori,?info=settings)', True)
     pass
 
 

@@ -2,9 +2,7 @@
 <addon id="script.module.nakamori" name="nakamori-script-module" version="3.0.0" provider-name="BigRetroMike, da3dsoul">
     <requires>
         <import addon="resource.images.nakamori" version="3.0.0"/>
-        <!-- If I can't got around the wall, I go thru -->
         <import addon="script.module.pil"/>
-        <!-- 2.25 is needed for routing -->
         <import addon="xbmc.python" version="2.25.0" />
         <import addon="script.module.routing" version="0.1.0"/>
     </requires>

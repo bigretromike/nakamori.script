@@ -202,8 +202,21 @@ class Calendar2(xbmcgui.WindowXML):
         if not os.path.exists(new_image_url):
             this_path = os.path.join(font_path, font_ttf)
             font = ImageFont.truetype(this_path, int(font_size), encoding="unic")
-            # text_width, text_height = font.getsize(title)  # if we need to calculate something in future
-            list_of_lines = textwrap.wrap(title, width=30)
+            text_width, text_height = font.getsize(title)
+            text_lenght_till_split = 30
+            if text_width + 5 > 250:
+                char_width = text_width/float(len(title))
+                chars_width = 0
+                char_count = 0
+                while chars_width < 250:
+                    chars_width += char_width
+                    char_count += 1
+                chars_width -= char_width
+                char_count -= 1
+                text_lenght_till_split = char_count
+                xbmc.log('--> we found that text_lenght_till_split is not correct, so we calculate %s'
+                         % text_lenght_till_split, xbmc.LOGWARNING)
+            list_of_lines = textwrap.wrap(title, width=int(text_lenght_till_split))
             image = Image.new('RGBA', (250, 50), (0, 0, 0, 0))
             draw = ImageDraw.Draw(image)
             line_x = 5

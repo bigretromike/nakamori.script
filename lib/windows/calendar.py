@@ -128,18 +128,24 @@ class Calendar2(xbmcgui.WindowXML):
         if self.day_count >= len(self.date_label):
             pass
         else:
+            busy = xbmcgui.DialogProgress()
+            busy.create('Loading', 'loading ...')
             for gui in self.calendar_collection.values():
                 gui.reset()
 
             _json = json.loads(self.json_data)
             _size = _json.get('size', 0)
+            _count = 0
 
             if _size > 0:
                 for series in _json['series']:
+                    busy.update(_count/_size)
                     if self.process_series(series):
+                        _count += 1
                         pass
                     else:
                         break
+            busy.close()
             if self.serie_processed == _size:
                 self.getControl(2).setVisible(False)
             self.setFocus(self.getControl(901))

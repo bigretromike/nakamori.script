@@ -31,12 +31,12 @@
             <!-- box-title -->
 			<control type="label">
 				<description>header label</description>
-				<posx>780</posx>
+				<posx>620</posx>
 				<posy>15</posy>
 				<width>490</width>
 				<height>50</height>
 				<!-- <label>$ADDON[script.trakt 32153]</label> -->
-                <label>NAKAMORI::SETUP_WIZARD</label>
+                <label>Enter Shoko Server Credentials</label>
 				<align>right</align>
 				<aligny>center</aligny>
 				<font>font30</font>
@@ -72,8 +72,8 @@
 				<width>170</width>
 				<height>60</height>
 				<font>font12</font>
-				<label>ip address</label>
-				<textcolor>AA000000</textcolor>
+				<label>IP Address</label>
+				<textcolor>AAFFFFFF</textcolor>
 			</control>
             <!-- port -->
 			<control type="label" id="304">
@@ -81,8 +81,8 @@
 				<width>170</width>
 				<height>60</height>
 				<font>font12</font>
-				<label>port</label>
-				<textcolor>AA000000</textcolor>
+				<label>Port</label>
+				<textcolor>AAFFFFFF</textcolor>
 			</control>
             <!-- login -->
 			<control type="label" id="305">
@@ -90,8 +90,8 @@
 				<width>170</width>
 				<height>60</height>
 				<font>font12</font>
-				<label>login</label>
-				<textcolor>AA000000</textcolor>
+				<label>Username</label>
+				<textcolor>AAFFFFFF</textcolor>
 			</control>
             <!-- password -->
             <control type="label" id="306">
@@ -99,8 +99,8 @@
 				<width>170</width>
 				<height>60</height>
 				<font>font12</font>
-				<label>password</label>
-				<textcolor>AA000000</textcolor>
+				<label>Password</label>
+				<textcolor>AAFFFFFF</textcolor>
 			</control>
 		</control>
         <!-- inputs -->
@@ -120,7 +120,7 @@
 				<height>60</height>
 				<font>font12</font>
 				<label></label>
-				<textcolor>AA000000</textcolor>
+				<textcolor>AAFFFFFF</textcolor>
                 <textoffsety>10</textoffsety>
                 <textoffsetx>30</textoffsetx>
 			</control>
@@ -132,7 +132,7 @@
 				<height>60</height>
 				<font>font12</font>
 				<label></label>
-				<textcolor>AA000000</textcolor>
+				<textcolor>AAFFFFFF</textcolor>
                 <textoffsety>5</textoffsety>
                 <textoffsetx>30</textoffsetx>
 			</control>
@@ -144,7 +144,7 @@
 				<height>60</height>
 				<font>font12</font>
 				<label></label>
-				<textcolor>AA000000</textcolor>
+				<textcolor>AAFFFFFF</textcolor>
                 <textoffsetx>30</textoffsetx>
                 <textoffsety>30</textoffsety>
 			</control>
@@ -180,7 +180,7 @@
 				<aligny>center</aligny>
 				<label>Test</label>
 				<font>font12_title</font>
-				<textcolor>AA000000</textcolor>
+				<textcolor>AAFFFFFF</textcolor>
 				<texturenofocus>button-nofo.png</texturenofocus>
 				<texturefocus>button-fo.png</texturefocus>
 				<textoffsetx>10</textoffsetx>
@@ -193,7 +193,7 @@
 				<align>center</align>
 				<aligny>center</aligny>
 				<label>Save</label>
-				<textcolor>AA000000</textcolor>
+				<textcolor>AABBBBBB</textcolor>
 				<texturenofocus>button-nofo.png</texturenofocus>
 				<texturefocus>button-fo.png</texturefocus>
 				<font>font12_title</font>

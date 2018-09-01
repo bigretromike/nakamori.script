@@ -70,6 +70,8 @@ class Wizard2(xbmcgui.WindowXML):
     def onAction(self, action):
         if action == ACTION_PREVIOUS_MENU or action == ACTION_NAV_BACK:
             self.setProperty('script.module.nakamori.running', 'false')
+            if nt.addon.getSetting('apikey') != '':
+                nt.addon.setSetting('wizard', '1')
             self.close()
 
     def onControl(self, control):
@@ -127,6 +129,7 @@ class Wizard2(xbmcgui.WindowXML):
                 _test_button.setLabel(label='OK', textColor='0xff7aad5c', focusedColor='0xff7aad5c')
                 _label_login.setLabel(label="Login", textColor='0xff7aad5c', focusedColor='0xff7aad5c')
                 _label_password.setLabel(label="Password", textColor='0xff7aad5c', focusedColor='0xff7aad5c')
+                _button_save.setLabel(label='Save', textColor='0xAAFFFFFF', focusedColor='0xFFFFFFFF')
                 _button_save.setEnabled(True)
                 self.setup_ok = True
                 nt.addon.setSetting(id='login', value='')

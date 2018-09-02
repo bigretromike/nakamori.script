@@ -223,16 +223,22 @@ class Calendar2(xbmcgui.WindowXML):
                 xbmc.log('--> we found that text_lenght_till_split is not correct, so we calculate %s'
                          % text_lenght_till_split, xbmc.LOGWARNING)
             list_of_lines = textwrap.wrap(title, width=int(text_lenght_till_split))
-            image = Image.new('RGBA', (250, 50), (0, 0, 0, 0))
+            three_line_support = 1
+            for line in list_of_lines[:3]:
+                temp_text_width, temp_text_height = font.getsize(line)
+                three_line_support += temp_text_height
+            if three_line_support < 70:
+                three_line_support = 70
+            image = Image.new('RGBA', (250, three_line_support), (0, 0, 0, 0))
             draw = ImageDraw.Draw(image)
-            line_x = 5
-            line_y = 5
+            line_x = 3
             if len(list_of_lines) > 1:
-                for line in list_of_lines:
-                    draw.text((line_x, line_y), line, font=font, fill=color)
-                    line_y += 20
+                for line in reversed(list_of_lines):
+                    temp_text_width, temp_text_height = font.getsize(line)
+                    three_line_support -= temp_text_height
+                    draw.text((line_x, three_line_support), line, font=font, fill=color)
             else:
-                draw.text((line_x, line_y + 20), title, font=font, fill=color)
+                draw.text((line_x, 70 - text_height), title, font=font, fill=color)
             image.save(new_image_url, 'PNG')
 
         series_listitem = xbmcgui.ListItem(label=title)

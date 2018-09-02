@@ -26,14 +26,13 @@
             <height>50</height>
             <label></label>
             <onclick>noop</onclick>
-            <onleft>1</onleft>
             <onright>55</onright>
             <texturefocus>nav_back-fo.png</texturefocus>
             <texturenofocus>nav_back-nofo.png</texturenofocus>
         </control>
         <!-- weekdays -->
         <control type="group" id="900">
-            <posx>102</posx>
+            <posx>67</posx>
             <control type="group" id="901">
                 <defaultcontrol>55</defaultcontrol>
 
@@ -63,73 +62,68 @@
                     <height>1010</height>
                     <visible>true</visible>
                     <orientation>vertical</orientation>
-                    <itemlayout height="200" width="250">
+                    <itemlayout height="270" width="250">
                         <control type="image">
                             <description>serie</description>
-                            <posx>0</posx>
-                            <posy>0</posy>
+                            <top>0</top>
                             <width>250</width>
-                            <height>200</height>
+                            <height>270</height>
                             <texture>series-nofo.png</texture>
                         </control>
                         <control type="image">
-                            <posx>0</posx>
-                            <posy>0</posy>
+                            <top>0</top>
                             <left>3</left>
                             <width>250</width>
-                            <height>50</height>
+                            <height>70</height>
                             <info>ListItem.Art(poster)</info>
                             <aspectratio>keep</aspectratio>
                         </control>
                         <control type="image">
-                            <top>50</top>
+                            <top>70</top>
                             <left>20</left>
-                            <width>100</width>
-                            <height>150</height>
+                            <width>210</width>
+                            <height>200</height>
                             <info>ListItem.Art(fanart)</info>
-                            <aspectratio>keep</aspectratio>
+                            <aspectratio aligny="top">keep</aspectratio>
                         </control>
                     </itemlayout>
-                    <focusedlayout height="200" width="250">
+                    <focusedlayout height="270" width="250">
                          <control type="image">
                             <description>serie</description>
-                            <posx>0</posx>
-                            <posy>0</posy>
+                            <top>0</top>
                             <width>250</width>
-                            <height>200</height>
+                            <height>270</height>
                             <texture>series-nofo.png</texture>
                         </control>
                         <control type="image">
                             <description>serie-focus</description>
-                            <posx>0</posx>
-                            <posy>0</posy>
+                            <top>0</top>
                             <width>250</width>
-                            <height>200</height>
+                            <height>270</height>
                             <texture>series-fo.png</texture>
                             <visible>Control.HasFocus(55)</visible>
                         </control>
                         <control type="image">
-                            <posx>0</posx>
-                            <posy>0</posy>
+                            <top>0</top>
                             <left>5</left>
                             <width>250</width>
-                            <height>50</height>
+                            <height>70</height>
                             <info>ListItem.Art(poster)</info>
                             <aspectratio>keep</aspectratio>
                         </control>
                         <control type="image">
-                            <top>50</top>
+                            <top>70</top>
                             <left>20</left>
-                            <width>100</width>
-                            <height>150</height>
+                            <width>210</width>
+                            <height>200</height>
                             <info>ListItem.Art(fanart)</info>
                             <aspectratio>keep</aspectratio>
                         </control>
                         <control type="image">
-                            <top>50</top>
+                            <top>70</top>
                             <left>20</left>
-                            <width>100</width>
-                            <height>150</height>
+                            <width>210</width>
+                            <height>200</height>
                             <bordertexture border="-2">grey.png</bordertexture>
                             <info>ListItem.Art(fanart)</info>
                             <aspectratio>keep</aspectratio>
@@ -163,73 +157,68 @@
                     <height>1010</height>
                     <visible>true</visible>
                     <orientation>vertical</orientation>
-                    <itemlayout height="200" width="250">
+                    <itemlayout height="270" width="250">
                         <control type="image">
                             <description>serie</description>
-                            <posx>0</posx>
-                            <posy>0</posy>
+                            <top>0</top>
                             <width>250</width>
-                            <height>200</height>
+                            <height>270</height>
                             <texture>series-nofo.png</texture>
                         </control>
                         <control type="image">
-                            <posx>0</posx>
-                            <posy>0</posy>
+                            <top>0</top>
                             <left>3</left>
                             <width>250</width>
-                            <height>50</height>
+                            <height>70</height>
                             <info>ListItem.Art(poster)</info>
                             <aspectratio>keep</aspectratio>
                         </control>
                         <control type="image">
-                            <top>50</top>
+                            <top>70</top>
                             <left>20</left>
-                            <width>100</width>
-                            <height>150</height>
+                            <width>210</width>
+                            <height>200</height>
                             <info>ListItem.Art(fanart)</info>
-                            <aspectratio>keep</aspectratio>
+                            <aspectratio aligny="top">keep</aspectratio>
                         </control>
                     </itemlayout>
-                    <focusedlayout height="200" width="250">
+                    <focusedlayout height="270" width="250">
                          <control type="image">
                             <description>serie</description>
-                            <posx>0</posx>
-                            <posy>0</posy>
+                            <top>0</top>
                             <width>250</width>
-                            <height>200</height>
+                            <height>270</height>
                             <texture>series-nofo.png</texture>
                         </control>
                         <control type="image">
                             <description>serie-focus</description>
-                            <posx>0</posx>
-                            <posy>0</posy>
+                            <top>0</top>
                             <width>250</width>
-                            <height>200</height>
+                            <height>270</height>
                             <texture>series-fo.png</texture>
                             <visible>Control.HasFocus(56)</visible>
                         </control>
                         <control type="image">
-                            <posx>0</posx>
-                            <posy>0</posy>
+                            <top>0</top>
                             <left>5</left>
                             <width>250</width>
-                            <height>50</height>
+                            <height>70</height>
                             <info>ListItem.Art(poster)</info>
                             <aspectratio>keep</aspectratio>
                         </control>
                         <control type="image">
-                            <top>50</top>
+                            <top>70</top>
                             <left>20</left>
-                            <width>100</width>
-                            <height>150</height>
+                            <width>210</width>
+                            <height>200</height>
                             <info>ListItem.Art(fanart)</info>
                             <aspectratio>keep</aspectratio>
                         </control>
                         <control type="image">
-                            <top>50</top>
+                            <top>70</top>
                             <left>20</left>
-                            <width>100</width>
-                            <height>150</height>
+                            <width>210</width>
+                            <height>200</height>
                             <bordertexture border="-2">grey.png</bordertexture>
                             <info>ListItem.Art(fanart)</info>
                             <aspectratio>keep</aspectratio>
@@ -263,73 +252,68 @@
                     <height>1010</height>
                     <visible>true</visible>
                     <orientation>vertical</orientation>
-                     <itemlayout height="200" width="250">
+                    <itemlayout height="270" width="250">
                         <control type="image">
                             <description>serie</description>
-                            <posx>0</posx>
-                            <posy>0</posy>
+                            <top>0</top>
                             <width>250</width>
-                            <height>200</height>
+                            <height>270</height>
                             <texture>series-nofo.png</texture>
                         </control>
                         <control type="image">
-                            <posx>0</posx>
-                            <posy>0</posy>
+                            <top>0</top>
                             <left>3</left>
                             <width>250</width>
-                            <height>50</height>
+                            <height>70</height>
                             <info>ListItem.Art(poster)</info>
                             <aspectratio>keep</aspectratio>
                         </control>
                         <control type="image">
-                            <top>50</top>
+                            <top>70</top>
                             <left>20</left>
-                            <width>100</width>
-                            <height>150</height>
+                            <width>210</width>
+                            <height>200</height>
                             <info>ListItem.Art(fanart)</info>
-                            <aspectratio>keep</aspectratio>
+                            <aspectratio aligny="top">keep</aspectratio>
                         </control>
                     </itemlayout>
-                    <focusedlayout height="200" width="250">
+                    <focusedlayout height="270" width="250">
                          <control type="image">
                             <description>serie</description>
-                            <posx>0</posx>
-                            <posy>0</posy>
+                            <top>0</top>
                             <width>250</width>
-                            <height>200</height>
+                            <height>270</height>
                             <texture>series-nofo.png</texture>
                         </control>
                         <control type="image">
                             <description>serie-focus</description>
-                            <posx>0</posx>
-                            <posy>0</posy>
+                            <top>0</top>
                             <width>250</width>
-                            <height>200</height>
+                            <height>270</height>
                             <texture>series-fo.png</texture>
                             <visible>Control.HasFocus(57)</visible>
                         </control>
                         <control type="image">
-                            <posx>0</posx>
-                            <posy>0</posy>
+                            <top>0</top>
                             <left>5</left>
                             <width>250</width>
-                            <height>50</height>
+                            <height>70</height>
                             <info>ListItem.Art(poster)</info>
                             <aspectratio>keep</aspectratio>
                         </control>
                         <control type="image">
-                            <top>50</top>
+                            <top>70</top>
                             <left>20</left>
-                            <width>100</width>
-                            <height>150</height>
+                            <width>210</width>
+                            <height>200</height>
                             <info>ListItem.Art(fanart)</info>
                             <aspectratio>keep</aspectratio>
                         </control>
                         <control type="image">
-                            <top>50</top>
+                            <top>70</top>
                             <left>20</left>
-                            <width>100</width>
-                            <height>150</height>
+                            <width>210</width>
+                            <height>200</height>
                             <bordertexture border="-2">grey.png</bordertexture>
                             <info>ListItem.Art(fanart)</info>
                             <aspectratio>keep</aspectratio>
@@ -363,73 +347,68 @@
                     <height>1010</height>
                     <visible>true</visible>
                     <orientation>vertical</orientation>
-                    <itemlayout height="200" width="250">
+                    <itemlayout height="270" width="250">
                         <control type="image">
                             <description>serie</description>
-                            <posx>0</posx>
-                            <posy>0</posy>
+                            <top>0</top>
                             <width>250</width>
-                            <height>200</height>
+                            <height>270</height>
                             <texture>series-nofo.png</texture>
                         </control>
                         <control type="image">
-                            <posx>0</posx>
-                            <posy>0</posy>
+                            <top>0</top>
                             <left>3</left>
                             <width>250</width>
-                            <height>50</height>
+                            <height>70</height>
                             <info>ListItem.Art(poster)</info>
                             <aspectratio>keep</aspectratio>
                         </control>
                         <control type="image">
-                            <top>50</top>
+                            <top>70</top>
                             <left>20</left>
-                            <width>100</width>
-                            <height>150</height>
+                            <width>210</width>
+                            <height>200</height>
                             <info>ListItem.Art(fanart)</info>
-                            <aspectratio>keep</aspectratio>
+                            <aspectratio aligny="top">keep</aspectratio>
                         </control>
                     </itemlayout>
-                    <focusedlayout height="200" width="250">
+                    <focusedlayout height="270" width="250">
                          <control type="image">
                             <description>serie</description>
-                            <posx>0</posx>
-                            <posy>0</posy>
+                            <top>0</top>
                             <width>250</width>
-                            <height>200</height>
+                            <height>270</height>
                             <texture>series-nofo.png</texture>
                         </control>
                         <control type="image">
                             <description>serie-focus</description>
-                            <posx>0</posx>
-                            <posy>0</posy>
+                            <top>0</top>
                             <width>250</width>
-                            <height>200</height>
+                            <height>270</height>
                             <texture>series-fo.png</texture>
                             <visible>Control.HasFocus(58)</visible>
                         </control>
                         <control type="image">
-                            <posx>0</posx>
-                            <posy>0</posy>
+                            <top>0</top>
                             <left>5</left>
                             <width>250</width>
-                            <height>50</height>
+                            <height>70</height>
                             <info>ListItem.Art(poster)</info>
                             <aspectratio>keep</aspectratio>
                         </control>
                         <control type="image">
-                            <top>50</top>
+                            <top>70</top>
                             <left>20</left>
-                            <width>100</width>
-                            <height>150</height>
+                            <width>210</width>
+                            <height>200</height>
                             <info>ListItem.Art(fanart)</info>
                             <aspectratio>keep</aspectratio>
                         </control>
                         <control type="image">
-                            <top>50</top>
+                            <top>70</top>
                             <left>20</left>
-                            <width>100</width>
-                            <height>150</height>
+                            <width>210</width>
+                            <height>200</height>
                             <bordertexture border="-2">grey.png</bordertexture>
                             <info>ListItem.Art(fanart)</info>
                             <aspectratio>keep</aspectratio>
@@ -463,73 +442,68 @@
                     <height>1010</height>
                     <visible>true</visible>
                     <orientation>vertical</orientation>
-             <itemlayout height="200" width="250">
+                    <itemlayout height="270" width="250">
                         <control type="image">
                             <description>serie</description>
-                            <posx>0</posx>
-                            <posy>0</posy>
+                            <top>0</top>
                             <width>250</width>
-                            <height>200</height>
+                            <height>270</height>
                             <texture>series-nofo.png</texture>
                         </control>
                         <control type="image">
-                            <posx>0</posx>
-                            <posy>0</posy>
+                            <top>0</top>
                             <left>3</left>
                             <width>250</width>
-                            <height>50</height>
+                            <height>70</height>
                             <info>ListItem.Art(poster)</info>
                             <aspectratio>keep</aspectratio>
                         </control>
                         <control type="image">
-                            <top>50</top>
+                            <top>70</top>
                             <left>20</left>
-                            <width>100</width>
-                            <height>150</height>
+                            <width>210</width>
+                            <height>200</height>
                             <info>ListItem.Art(fanart)</info>
-                            <aspectratio>keep</aspectratio>
+                            <aspectratio aligny="top">keep</aspectratio>
                         </control>
                     </itemlayout>
-                    <focusedlayout height="200" width="250">
+                    <focusedlayout height="270" width="250">
                          <control type="image">
                             <description>serie</description>
-                            <posx>0</posx>
-                            <posy>0</posy>
+                            <top>0</top>
                             <width>250</width>
-                            <height>200</height>
+                            <height>270</height>
                             <texture>series-nofo.png</texture>
                         </control>
                         <control type="image">
                             <description>serie-focus</description>
-                            <posx>0</posx>
-                            <posy>0</posy>
+                            <top>0</top>
                             <width>250</width>
-                            <height>200</height>
+                            <height>270</height>
                             <texture>series-fo.png</texture>
                             <visible>Control.HasFocus(59)</visible>
                         </control>
                         <control type="image">
-                            <posx>0</posx>
-                            <posy>0</posy>
+                            <top>0</top>
                             <left>5</left>
                             <width>250</width>
-                            <height>50</height>
+                            <height>70</height>
                             <info>ListItem.Art(poster)</info>
                             <aspectratio>keep</aspectratio>
                         </control>
                         <control type="image">
-                            <top>50</top>
+                            <top>70</top>
                             <left>20</left>
-                            <width>100</width>
-                            <height>150</height>
+                            <width>210</width>
+                            <height>200</height>
                             <info>ListItem.Art(fanart)</info>
                             <aspectratio>keep</aspectratio>
                         </control>
                         <control type="image">
-                            <top>50</top>
+                            <top>70</top>
                             <left>20</left>
-                            <width>100</width>
-                            <height>150</height>
+                            <width>210</width>
+                            <height>200</height>
                             <bordertexture border="-2">grey.png</bordertexture>
                             <info>ListItem.Art(fanart)</info>
                             <aspectratio>keep</aspectratio>
@@ -563,73 +537,68 @@
                     <height>1010</height>
                     <visible>true</visible>
                     <orientation>vertical</orientation>
-                     <itemlayout height="200" width="250">
+                    <itemlayout height="270" width="250">
                         <control type="image">
                             <description>serie</description>
-                            <posx>0</posx>
-                            <posy>0</posy>
+                            <top>0</top>
                             <width>250</width>
-                            <height>200</height>
+                            <height>270</height>
                             <texture>series-nofo.png</texture>
                         </control>
                         <control type="image">
-                            <posx>0</posx>
-                            <posy>0</posy>
+                            <top>0</top>
                             <left>3</left>
                             <width>250</width>
-                            <height>50</height>
+                            <height>70</height>
                             <info>ListItem.Art(poster)</info>
                             <aspectratio>keep</aspectratio>
                         </control>
                         <control type="image">
-                            <top>50</top>
+                            <top>70</top>
                             <left>20</left>
-                            <width>100</width>
-                            <height>150</height>
+                            <width>210</width>
+                            <height>200</height>
                             <info>ListItem.Art(fanart)</info>
-                            <aspectratio>keep</aspectratio>
+                            <aspectratio aligny="top">keep</aspectratio>
                         </control>
                     </itemlayout>
-                    <focusedlayout height="200" width="250">
+                    <focusedlayout height="270" width="250">
                          <control type="image">
                             <description>serie</description>
-                            <posx>0</posx>
-                            <posy>0</posy>
+                            <top>0</top>
                             <width>250</width>
-                            <height>200</height>
+                            <height>270</height>
                             <texture>series-nofo.png</texture>
                         </control>
                         <control type="image">
                             <description>serie-focus</description>
-                            <posx>0</posx>
-                            <posy>0</posy>
+                            <top>0</top>
                             <width>250</width>
-                            <height>200</height>
+                            <height>270</height>
                             <texture>series-fo.png</texture>
                             <visible>Control.HasFocus(60)</visible>
                         </control>
                         <control type="image">
-                            <posx>0</posx>
-                            <posy>0</posy>
+                            <top>0</top>
                             <left>5</left>
                             <width>250</width>
-                            <height>50</height>
+                            <height>70</height>
                             <info>ListItem.Art(poster)</info>
                             <aspectratio>keep</aspectratio>
                         </control>
                         <control type="image">
-                            <top>50</top>
+                            <top>70</top>
                             <left>20</left>
-                            <width>100</width>
-                            <height>150</height>
+                            <width>210</width>
+                            <height>200</height>
                             <info>ListItem.Art(fanart)</info>
                             <aspectratio>keep</aspectratio>
                         </control>
                         <control type="image">
-                            <top>50</top>
+                            <top>70</top>
                             <left>20</left>
-                            <width>100</width>
-                            <height>150</height>
+                            <width>210</width>
+                            <height>200</height>
                             <bordertexture border="-2">grey.png</bordertexture>
                             <info>ListItem.Art(fanart)</info>
                             <aspectratio>keep</aspectratio>
@@ -664,73 +633,68 @@
                     <height>1010</height>
                     <visible>true</visible>
                     <orientation>vertical</orientation>
-                    <itemlayout height="200" width="250">
+                    <itemlayout height="270" width="250">
                         <control type="image">
                             <description>serie</description>
-                            <posx>0</posx>
-                            <posy>0</posy>
+                            <top>0</top>
                             <width>250</width>
-                            <height>200</height>
+                            <height>270</height>
                             <texture>series-nofo.png</texture>
                         </control>
                         <control type="image">
-                            <posx>0</posx>
-                            <posy>0</posy>
+                            <top>0</top>
                             <left>3</left>
                             <width>250</width>
-                            <height>50</height>
+                            <height>70</height>
                             <info>ListItem.Art(poster)</info>
                             <aspectratio>keep</aspectratio>
                         </control>
                         <control type="image">
-                            <top>50</top>
+                            <top>70</top>
                             <left>20</left>
-                            <width>100</width>
-                            <height>150</height>
+                            <width>210</width>
+                            <height>200</height>
                             <info>ListItem.Art(fanart)</info>
-                            <aspectratio>keep</aspectratio>
+                            <aspectratio aligny="top">keep</aspectratio>
                         </control>
                     </itemlayout>
-                    <focusedlayout height="200" width="250">
+                    <focusedlayout height="270" width="250">
                          <control type="image">
                             <description>serie</description>
-                            <posx>0</posx>
-                            <posy>0</posy>
+                            <top>0</top>
                             <width>250</width>
-                            <height>200</height>
+                            <height>270</height>
                             <texture>series-nofo.png</texture>
                         </control>
                         <control type="image">
                             <description>serie-focus</description>
-                            <posx>0</posx>
-                            <posy>0</posy>
+                            <top>0</top>
                             <width>250</width>
-                            <height>200</height>
+                            <height>270</height>
                             <texture>series-fo.png</texture>
                             <visible>Control.HasFocus(61)</visible>
                         </control>
                         <control type="image">
-                            <posx>0</posx>
-                            <posy>0</posy>
+                            <top>0</top>
                             <left>5</left>
                             <width>250</width>
-                            <height>50</height>
+                            <height>70</height>
                             <info>ListItem.Art(poster)</info>
                             <aspectratio>keep</aspectratio>
                         </control>
                         <control type="image">
-                            <top>50</top>
+                            <top>70</top>
                             <left>20</left>
-                            <width>100</width>
-                            <height>150</height>
+                            <width>210</width>
+                            <height>200</height>
                             <info>ListItem.Art(fanart)</info>
                             <aspectratio>keep</aspectratio>
                         </control>
                         <control type="image">
-                            <top>50</top>
+                            <top>70</top>
                             <left>20</left>
-                            <width>100</width>
-                            <height>150</height>
+                            <width>210</width>
+                            <height>200</height>
                             <bordertexture border="-2">grey.png</bordertexture>
                             <info>ListItem.Art(fanart)</info>
                             <aspectratio>keep</aspectratio>
@@ -743,12 +707,13 @@
         </control>
         <!-- next_button -->
         <control type="button" id="2">
-            <posx>1800</posx>
+            <posx>70r</posx>
             <posy>504</posy>
             <width>50</width>
             <height>50</height>
             <label></label>
             <onclick>noop</onclick>
+            <onleft>61</onleft>
             <texturefocus>nav_next-fo.png</texturefocus>
             <texturenofocus>nav_next-nofo.png</texturenofocus>
         </control>

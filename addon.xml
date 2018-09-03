@@ -20,9 +20,9 @@
         <website>https://shokunin.monogatari.pl/</website>
         <source>http://github.com/bigretromike/nakamori.script</source>
         <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
-        <news>
-			v3.0.0 (2018-08-08)
-            - modularization
+        <news>v3.0.0 (2018-09-03)
+- works independent from nakamori (calendar and wizard)
+- modularization
         </news>
     </extension>
     <assets>

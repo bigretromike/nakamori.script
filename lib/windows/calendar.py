@@ -82,7 +82,7 @@ class Calendar2(xbmcgui.WindowXML):
         self.day_of_week = {}
         self.used_dates = []
         self.day_count = 0
-        self.serie_processed = 0
+        self.serie_processed = int(item_number)
 
     def onInit(self):
         self.calendar_collection = {
@@ -146,8 +146,9 @@ class Calendar2(xbmcgui.WindowXML):
                     else:
                         break
             busy.close()
-            if self.serie_processed == _size:
+            if _count == _size:
                 self.getControl(2).setVisible(False)
+                self.getControl(2).setEnable(False)
             self.setFocus(self.getControl(901))
 
     def onAction(self, action):
@@ -160,8 +161,8 @@ class Calendar2(xbmcgui.WindowXML):
         if action == xbmcgui.ACTION_MOVE_LEFT and self.getFocus().getId() != 1:
             self.list_update_left()
         if action == xbmcgui.ACTION_MOVE_RIGHT and self.getFocus().getId() == 2:
-            xbmc.executebuiltin('RunScript(script.module.nakamori,?info=calendar&date=0&page='
-                                + str(self.serie_processed) + ')', True)
+            xbmc.executebuiltin('RunScript(script.module.nakamori,?info=calendar&date=0&page=%s)'
+                                % self.serie_processed, True)
         if action == xbmcgui.ACTION_MOVE_LEFT and self.getFocus().getId() == 1:
             xbmc.executebuiltin('Action(Back)')
 
@@ -247,6 +248,7 @@ class Calendar2(xbmcgui.WindowXML):
         series_listitem.setInfo('video', {'title': title, 'aired': air_date})
         self.calendar_collection[self.day_count].addItem(series_listitem)
         self.serie_processed += 1
+        # xbmc.log('+ %s' % title, xbmc.LOGERROR)
         return True
 
     def list_update_right(self):

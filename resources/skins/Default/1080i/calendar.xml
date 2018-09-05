@@ -36,6 +36,15 @@
             <control type="group" id="901">
                 <defaultcontrol>55</defaultcontrol>
 
+                <control type="image" id="45">
+                    <description>up-image</description>
+                    <left>10</left>
+                    <top>40</top>
+                    <width>250</width>
+                    <height>50</height>
+                    <texture>nav_up.png</texture>
+                    <visible>Container(55).HasPrevious</visible>
+                </control>
                 <control type="label" id="91">
                     <left>92</left>
                     <top>10</top>
@@ -131,7 +140,25 @@
                         </control>
                     </focusedlayout>
                 </control>
+                <control type="image" id="65">
+                    <description>down-image</description>
+                    <left>10</left>
+                    <top>40r</top>
+                    <width>250</width>
+                    <height>50</height>
+                    <texture>nav_down.png</texture>
+                    <visible>Container(55).HasNext</visible>
+                </control>
 
+                <control type="image" id="46">
+                    <description>up-image</description>
+                    <left>260</left>
+                    <top>40</top>
+                    <width>250</width>
+                    <height>50</height>
+                    <texture>nav_up.png</texture>
+                    <visible>Container(56).HasPrevious</visible>
+                </control>
                 <control type="label" id="93">
                     <left>342</left>
                     <top>10</top>
@@ -226,7 +253,25 @@
                         </control>
                     </focusedlayout>
                 </control>
+                <control type="image" id="66">
+                    <description>down-image</description>
+                    <left>260</left>
+                    <top>40r</top>
+                    <width>250</width>
+                    <height>50</height>
+                    <texture>nav_down.png</texture>
+                    <visible>Container(56).HasNext</visible>
+                </control>
 
+                <control type="image" id="47">
+                    <description>up-image</description>
+                    <left>510</left>
+                    <top>40</top>
+                    <width>250</width>
+                    <height>50</height>
+                    <texture>nav_up.png</texture>
+                    <visible>Container(57).HasPrevious</visible>
+                </control>
                 <control type="label" id="95">
                     <left>592</left>
                     <top>10</top>
@@ -321,7 +366,25 @@
                         </control>
                     </focusedlayout>
                 </control>
+                <control type="image" id="67">
+                    <description>down-image</description>
+                    <left>510</left>
+                    <top>40r</top>
+                    <width>250</width>
+                    <height>50</height>
+                    <texture>nav_down.png</texture>
+                    <visible>Container(57).HasNext</visible>
+                </control>
 
+                <control type="image" id="48">
+                    <description>up-image</description>
+                    <left>770</left>
+                    <top>40</top>
+                    <width>250</width>
+                    <height>50</height>
+                    <texture>nav_up.png</texture>
+                    <visible>Container(58).HasPrevious</visible>
+                </control>
                 <control type="label" id="97">
                     <left>852</left>
                     <top>10</top>
@@ -416,7 +479,25 @@
                         </control>
                     </focusedlayout>
                 </control>
+                <control type="image" id="68">
+                    <description>down-image</description>
+                    <left>770</left>
+                    <top>40r</top>
+                    <width>250</width>
+                    <height>50</height>
+                    <texture>nav_down.png</texture>
+                    <visible>Container(58).HasNext</visible>
+                </control>
 
+                <control type="image" id="49">
+                    <description>up-image</description>
+                    <left>1020</left>
+                    <top>40</top>
+                    <width>250</width>
+                    <height>50</height>
+                    <texture>nav_up.png</texture>
+                    <visible>Container(59).HasPrevious</visible>
+                </control>
                 <control type="label" id="99">
                     <left>1102</left>
                     <top>10</top>
@@ -511,7 +592,25 @@
                         </control>
                     </focusedlayout>
                 </control>
+                <control type="image" id="69">
+                    <description>down-image</description>
+                    <left>1020</left>
+                    <top>40r</top>
+                    <width>250</width>
+                    <height>50</height>
+                    <texture>nav_down.png</texture>
+                    <visible>Container(59).HasNext</visible>
+                </control>
 
+                <control type="image" id="50">
+                    <description>up-image</description>
+                    <left>1270</left>
+                    <top>40</top>
+                    <width>250</width>
+                    <height>50</height>
+                    <texture>nav_up.png</texture>
+                    <visible>Container(60).HasPrevious</visible>
+                </control>
                 <control type="label" id="101">
                     <left>1352</left>
                     <top>10</top>
@@ -606,7 +705,25 @@
                         </control>
                     </focusedlayout>
                 </control>
+                <control type="image" id="70">
+                    <description>down-image</description>
+                    <left>1270</left>
+                    <top>40r</top>
+                    <width>250</width>
+                    <height>50</height>
+                    <texture>nav_down.png</texture>
+                    <visible>Container(60).HasNext</visible>
+                </control>
 
+                <control type="image" id="51">
+                    <description>up-image</description>
+                    <left>1520</left>
+                    <top>40</top>
+                    <width>250</width>
+                    <height>50</height>
+                    <texture>nav_up.png</texture>
+                    <visible>Container(61).HasPrevious</visible>
+                </control>
                 <control type="label" id="103">
                     <left>1602</left>
                     <top>10</top>
@@ -701,6 +818,15 @@
                             <visible>Control.HasFocus(61)</visible>
                         </control>
                     </focusedlayout>
+                </control>
+                <control type="image" id="71">
+                    <description>down-image</description>
+                    <left>1520</left>
+                    <top>40r</top>
+                    <width>250</width>
+                    <height>50</height>
+                    <texture>nav_down.png</texture>
+                    <visible>Container(61).HasNext</visible>
                 </control>
 
             </control>

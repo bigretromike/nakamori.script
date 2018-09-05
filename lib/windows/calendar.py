@@ -252,9 +252,10 @@ class Calendar2(xbmcgui.WindowXML):
     def list_update_right(self):
         try:
             if self.getFocus().getId > -1:
-                position = self.getControl(self.getFocus().getId()).getSelectedPosition()
-                id = self.getFocus().getId()
-                move_id = id + 1
+                # position = self.getControl(self.getFocus().getId()).getSelectedPosition()  # absolute
+                _id = self.getFocus().getId()
+                position = xbmc.getInfoLabel('Container(%s).Position' % _id)
+                move_id = _id + 1
                 if move_id <= SEVENTH_DAY:
                     xbmc.executebuiltin('Control.SetFocus(' + str(move_id) + ',' + str(position) + ')')
         except (RuntimeError, SystemError):
@@ -263,9 +264,10 @@ class Calendar2(xbmcgui.WindowXML):
     def list_update_left(self):
         try:
             if self.getFocus().getId > -1:
-                position = self.getControl(self.getFocus().getId()).getSelectedPosition()
-                id = self.getFocus().getId()
-                move_id = id - 1
+                # position = self.getControl(self.getFocus().getId()).getSelectedPosition()  # absolute
+                _id = self.getFocus().getId()
+                position = xbmc.getInfoLabel('Container(%s).Position' % _id)
+                move_id = _id - 1
                 if move_id >= FIRST_DAY:
                     xbmc.executebuiltin('Control.SetFocus(' + str(move_id) + ',' + str(position) + ')')
         except (RuntimeError, SystemError):

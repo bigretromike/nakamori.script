@@ -35,7 +35,6 @@ else:
     from urllib.error import HTTPError, URLError
     from io import StringIO, BytesIO
 
-
 # __ is public, _ is protected
 global addon
 global addonversion
@@ -376,51 +375,38 @@ def get_data(url_in, referer, data_type):
 
     Returns: The response from the server in forced type (.json or .xml)
     """
-    try:
-        if data_type != "json":
-            data_type = "xml"
+    if data_type != "json":
+        data_type = "xml"
 
-        url = url_in
+    url = url_in
 
-        req = Request(encode(url))
-        req.add_header('Accept', 'application/' + data_type)
-        req.add_header('apikey', addon.getSetting("apikey"))
+    req = Request(encode(url))
+    req.add_header('Accept', 'application/' + data_type)
+    req.add_header('apikey', addon.getSetting("apikey"))
 
-        if referer is not None:
-            referer = quote(encode(referer)).replace("%3A", ":")
-            if len(referer) > 1:
-                req.add_header('Referer', referer)
-        use_gzip = addon.getSetting("use_gzip")
-        if "127.0.0.1" not in url and "localhost" not in url:
-            if use_gzip == "true":
-                req.add_header('Accept-encoding', 'gzip')
-        data = None
+    if referer is not None:
+        referer = quote(encode(referer)).replace("%3A", ":")
+        if len(referer) > 1:
+            req.add_header('Referer', referer)
+    use_gzip = addon.getSetting("use_gzip")
+    if "127.0.0.1" not in url and "localhost" not in url:
+        if use_gzip == "true":
+            req.add_header('Accept-encoding', 'gzip')
+    data = None
+    response = urlopen(req, timeout=int(addon.getSetting('timeout')))
+    if response.info().get('Content-Encoding') == 'gzip':
         try:
-            response = urlopen(req, timeout=int(addon.getSetting('timeout')))
-            if response.info().get('Content-Encoding') == 'gzip':
-                try:
-                    if python_two:
-                        buf = StringIO(response.read())
-                    else:
-                        buf = BytesIO(response.read())
-                    f = gzip.GzipFile(fileobj=buf)
-                    data = f.read()
-                except Exception as ex:
-                    error('Decompresing gzip respond failed: ' + str(ex))
+            if python_two:
+                buf = StringIO(response.read())
             else:
-                data = response.read()
-            response.close()
-        except URLError as url_error:
-            xbmc.log('Error in urlopen: %s' % url_error, xbmc.LOGERROR)
-            # error('Connection Failed', str(url_error))
-            data = None
+                buf = BytesIO(response.read())
+            f = gzip.GzipFile(fileobj=buf)
+            data = f.read()
         except Exception as ex:
-            xbmc.log("url: " + str(url) + " error: " + ex.message, xbmc.LOGERROR)
-            error('Connection Failed', str(ex))
-            data = None
-    except Exception as ex:
-        error('Get_Data Error', str(ex))
-        data = None
+            error('Decompresing gzip respond failed: ' + str(ex))
+    else:
+        data = response.read()
+    response.close()
 
     if data is not None and data != '':
         parse_possible_error(data, data_type)
@@ -454,33 +440,36 @@ def get_json(url_in, direct=False):
     :param direct: force to bypass cache
     :return:
     """
-    if direct:
-        try:
+    try:
+        if direct:
             body = get_data(url_in, None, "json")
-        except:
-            xbmc.log('--> body = None, because error in get_json')
-            body = None
-    else:
-        if (addon.getSetting("enableCache") == "true") and ("file?id" not in url_in):
-            import Cache as cache  # import only if cache is enabled
-            db_row = cache.check_in_database(url_in)
-            if db_row is None:
-                db_row = 0
-            if db_row > 0:
-                expire_second = time.time() - float(db_row)
-                if expire_second > int(addon.getSetting("expireCache")):
-                    # expire, get new date
-                    body = get_data(url_in, None, "json")
-                    params = {'extras': 'single-delete', 'name': url_in}
-                    cache.remove_cache(params)
-                    cache.add_cache(url_in, json.dumps(body))
+        else:
+            if (addon.getSetting("enableCache") == "true") and ("file?id" not in url_in):
+                import Cache as cache  # import only if cache is enabled
+                db_row = cache.check_in_database(url_in)
+                if db_row is None:
+                    db_row = 0
+                if db_row > 0:
+                    expire_second = time.time() - float(db_row)
+                    if expire_second > int(addon.getSetting("expireCache")):
+                        # expire, get new date
+                        body = get_data(url_in, None, "json")
+                        params = {'extras': 'single-delete', 'name': url_in}
+                        cache.remove_cache(params)
+                        cache.add_cache(url_in, json.dumps(body))
+                    else:
+                        body = cache.get_data_from_cache(url_in)
                 else:
-                    body = cache.get_data_from_cache(url_in)
+                    body = get_data(url_in, None, "json")
+                    cache.add_cache(url_in, json.dumps(body))
             else:
                 body = get_data(url_in, None, "json")
-                cache.add_cache(url_in, json.dumps(body))
-        else:
-            body = get_data(url_in, None, "json")
+    except HTTPError as err:
+        body = err.code
+        return body
+    except:
+        xbmc.log('--> body = None, because error in get_json')
+        body = None
     return body
 
 
@@ -633,6 +622,10 @@ def decode(i=''):
 home = decode(xbmc.translatePath(addon.getAddonInfo('path')))
 
 
+def message_box(title, text, text2=None, text3=None):
+    xbmcgui.Dialog().ok(title, text, text2, text3)
+
+
 def valid_user():
     """
     Logs into the server and stores the apikey, then checks if the userid is valid
@@ -640,7 +633,7 @@ def valid_user():
     """
 
     if addon.getSetting("apikey") != "" and addon.getSetting("login") == "":
-        return (True, addon.getSetting("apikey"))
+        return True, addon.getSetting("apikey")
     else:
         xbmc.log('-- apikey empty --', xbmc.LOGWARNING)
         try:
@@ -658,16 +651,15 @@ def valid_user():
                     # xbmcaddon.Addon('plugin.video.nakamori').setSetting(id='login', value='LOGIN')
                     addon.setSetting(id='apikey', value=apikey_found_in_auth)
                     xbmc.log('-- save apikey: %s' % apikey_found_in_auth, xbmc.LOGWARNING)
-                    return (True, apikey_found_in_auth)
+                    return True, apikey_found_in_auth
                 else:
                     raise Exception('Error Getting apikey')
-                    return (False, '')
             else:
                 xbmc.log('-- Login and Device Empty --', xbmc.LOGERROR)
-                return (False, '')
+                return False, ''
         except Exception as exc:
             error('Error in Valid_User', str(exc))
-            return (False, '')
+            return False, ''
 
 
 def dump_dictionary(details, name):
@@ -703,21 +695,83 @@ def post(url, data, headers=None):
     return data
 
 
-def get_shoko_status(force=False):
-    return get_server_status(ip=addon.getSetting('ipaddress'), port=addon.getSetting('port'), force=force)
-
-
-def get_server_status(ip, port, force=False):
+def get_server_status(ip=addon.getSetting('ipaddress'), port=addon.getSetting('port')):
     """
-    Try to query server for version, if kodi get version respond then shoko server is running
+    Try to query server for status, display messages as needed
+    don't bother with caching, this endpoint is really fast
     :return: bool
     """
     try:
-        if get_version(ip, port, force) != LooseVersion('0.0'):
-            return True
-        else:
+        url = 'http://' + ip + ':' + port + '/api/init/status'
+        response = get_json(url, True)
+        if response is None or safe_int(response) > 200:
+            message_box('Connection Error', 'There was an error connecting to Shoko Server',
+                        'If you have set up Shoko Server,', 'feel free to ask for advice on our discord')
             return False
-    except:
+        # we should have a json response now
+        # example:
+        # {"startup_state":"Complete!","server_started":false,"server_uptime":"04:00:45","first_run":false,"startup_failed":false,"startup_failed_error_message":""}
+        json_tree = json.loads(response)
+
+        server_started = json_tree.get('server_started', False)
+        startup_failed = json_tree.get('startup_failed', False)
+        startup_state = json_tree.get('startup_state', '')
+
+        # server started successfully
+        if server_started:
+            return True
+
+        # not started successfully
+        if startup_failed:
+            # server finished trying to start, but failed
+            message_box('Server Error', 'There was an error starting Shoko Server', 'Check the server\'s status.',
+                        'Feel free to ask for advice on our discord')
+            return False
+
+        busy = xbmcgui.DialogProgress()
+        busy.create('Waiting for Server Startup', startup_state)
+        busy.update(1, 'Waiting for Server Startup', startup_state)
+        # poll every second until the server gives us a response that we want
+        while not busy.iscanceled():
+            xbmc.sleep(3000)
+            response = get_json(url, True)
+
+            # this should not happen
+            if response is None or safe_int(response) > 200:
+                busy.close()
+                message_box('Connection Error', 'There was an error connecting to Shoko Server',
+                            'If you have set up Shoko Server,', 'feel free to ask for advice on our discord')
+                return False
+
+            json_tree = json.loads(response)
+            server_started = json_tree.get('server_started', False)
+            if server_started:
+                return True
+
+            startup_failed = json_tree.get('startup_failed', False)
+
+            if json_tree.get('startup_state', '') == startup_state:
+                continue
+            startup_state = json_tree.get('startup_state', '')
+
+            busy.update(1, 'Waiting for Server Startup', startup_state)
+            if startup_failed:
+                break
+
+        busy.close()
+
+        if startup_failed:
+            message_box('Server Error', 'There was an error starting Shoko Server', 'Check the server\'s status.',
+                        'Feel free to ask for advice on our discord')
+            return False
+        return True
+    except HTTPError as httperror:
+        message_box('Server Error', 'There was an error returned from Shoko Server', 'Check the server\'s status.' +
+                    ' Error: ' + str(httperror.code),
+                    'Feel free to ask for advice on our discord')
+        return False
+    except Exception as ex:
+        error(ex.message)
         return False
 
 
@@ -793,13 +847,13 @@ def head(url_in):
     try:
         urlopen(url_in)
         return True
-    except HTTPError, e:
+    except HTTPError as e:
         # error('HTTPError', e.code)
         return False
-    except URLError, e:
+    except URLError as e:
         # error('URLError', str(e.args))
         return False
-    except Exception, e:
+    except Exception as e:
         # error('Exceptions', str(e.args))
         return False
 
@@ -810,7 +864,7 @@ def set_parameter(url, parameter, value):
         if '?' not in url:
             return url
         array1 = url.split('?')
-        if (parameter+'=') not in array1[1]:
+        if (parameter + '=') not in array1[1]:
             return url
         url = array1[0] + '?'
         array2 = array1[1].split('&')
@@ -825,7 +879,7 @@ def set_parameter(url, parameter, value):
         return url + '?' + parameter + '=' + value
 
     array1 = url.split('?')
-    if (parameter+'=') not in array1[1]:
+    if (parameter + '=') not in array1[1]:
         return url + "&" + parameter + '=' + value
 
     url = array1[0] + '?'
@@ -839,7 +893,7 @@ def set_parameter(url, parameter, value):
 
 
 def add_dir(name, url, mode, iconimage='DefaultTVShows.png', plot="", poster="DefaultVideo.png", filename="none",
-           offset=''):
+            offset=''):
     # u=sys.argv[0]+"?url="+url+"&mode="+str(mode)+"&name="+quote_plus(name)+"&poster_file="+quote_plus(poster)+"&filename="+quote_plus(filename)
     u = sys.argv[0]
     if mode is not '':
@@ -865,6 +919,7 @@ def add_dir(name, url, mode, iconimage='DefaultTVShows.png', plot="", poster="De
         # should this even possible ? as failsafe I leave it.
         ok = xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]), url=u, listitem=liz, isFolder=True)
     return ok
+
 
 # not sure if needed
 

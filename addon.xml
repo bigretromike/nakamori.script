@@ -9,9 +9,10 @@
 	<extension point="xbmc.python.script" library="default.py">
 		<provides>executable</provides>
 	</extension>
-    <extension point="xbmc.python.pluginsource" library="plugin.py">
+    <!-- This is good for testing, but clutters up the addon listing -->
+    <!--<extension point="xbmc.python.pluginsource" library="plugin.py">
         <provides>video</provides>
-    </extension>
+    </extension>-->
     <extension point="xbmc.python.module" library="lib" />
     <extension point="xbmc.addon.metadata">
         <platform>all</platform>

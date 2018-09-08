@@ -4,8 +4,8 @@ import lib.windows.calendar as calendar
 import lib.windows.wizard as wizard
 import lib.nakamoritools as nt
 
-import xbmc
-import xbmcaddon
+from xbmcaddon import Addon
+from xbmcgui import Dialog
 
 
 class Main:
@@ -22,10 +22,10 @@ class Main:
                 elif self.params['info'] == 'clearcache':
                     calendar.clear_cache()
                 elif self.params['info'] == 'settings':
-                    xbmcaddon.Addon(id='script.module.nakamori').openSettings()
+                    Addon(id='script.module.nakamori').openSettings()
+        else:
+            Dialog().ok('Nakamori script', 'Baka!')
 
 
 if __name__ == "__main__":
-    xbmc.log('--- default.py : start', xbmc.LOGWARNING)
     Main()
-    xbmc.log('--- default.py : stop', xbmc.LOGWARNING)

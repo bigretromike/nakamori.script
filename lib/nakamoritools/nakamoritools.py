@@ -704,10 +704,36 @@ def get_server_status(ip=addon.getSetting('ipaddress'), port=addon.getSetting('p
     try:
         url = 'http://' + ip + ':' + port + '/api/init/status'
         response = get_json(url, True)
-        if response is None or safe_int(response) > 200:
+        if response is None or (safe_int(response) > 200 and safe_int(response) != 503):
             message_box('Connection Error', 'There was an error connecting to Shoko Server',
                         'If you have set up Shoko Server,', 'feel free to ask for advice on our discord')
             return False
+
+        if safe_int(response) == 503:
+            # 503 usually means that the server is not started,
+            # which could mean that it's starting, but not even hosting yet
+            # retry for a bit, then give up if it doesn't respond
+            busy = xbmcgui.DialogProgress()
+            busy.create('Waiting for Server Startup', 'This will retry for a short while')
+            busy.update(1, 'Waiting for Server Startup', 'This will retry for a short while')
+            # poll every second until the server gives us a response that we want
+            counter = 1
+            while not busy.iscanceled() and counter < 30:
+                xbmc.sleep(1000)
+                busy.update(counter * 5)
+                response = get_json(url, True)
+
+                if response is None or (safe_int(response) > 200 and safe_int(response) != 503):
+                    busy.close()
+                    message_box('Connection Error', 'There was an error connecting to Shoko Server',
+                                'If you have set up Shoko Server,', 'feel free to ask for advice on our discord')
+                    return False
+                if safe_int(response) != 503:
+                    break
+                counter += 1
+
+            busy.close()
+
         # we should have a json response now
         # example:
         # {"startup_state":"Complete!","server_started":false,"server_uptime":"04:00:45","first_run":false,"startup_failed":false,"startup_failed_error_message":""}
@@ -733,7 +759,7 @@ def get_server_status(ip=addon.getSetting('ipaddress'), port=addon.getSetting('p
         busy.update(1, 'Waiting for Server Startup', startup_state)
         # poll every second until the server gives us a response that we want
         while not busy.iscanceled():
-            xbmc.sleep(3000)
+            xbmc.sleep(1000)
             response = get_json(url, True)
 
             # this should not happen
@@ -746,6 +772,7 @@ def get_server_status(ip=addon.getSetting('ipaddress'), port=addon.getSetting('p
             json_tree = json.loads(response)
             server_started = json_tree.get('server_started', False)
             if server_started:
+                busy.close()
                 return True
 
             startup_failed = json_tree.get('startup_failed', False)

@@ -20,7 +20,7 @@
         <website>https://shokunin.monogatari.pl/</website>
         <source>http://github.com/bigretromike/nakamori.script</source>
         <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
-        <news>3.0.2[CR]- new server status function[CR}- new icon[CR}- metadata fix[CR]- addon.xml fix[CR]- moved script from video addons[CR]- added Dialog when executing script and not plugin</news>
+        <news>3.0.2[CR]- new server status function[CR]- new icon[CR]- metadata fix[CR]- addon.xml fix[CR]- moved script from video addons[CR]- added Dialog when executing script and not plugin</news>
         <assets>
             <icon>resources/icon.png</icon>
             <fanart>resources/fanart.jpg</fanart>

@@ -107,7 +107,7 @@ class Wizard2(xbmcgui.WindowXML):
         # buttons
         _button_save = self.getControl(SAVE_BUTTON)
 
-        if nt.get_server_status(ip=str(_address), port=str(_port), force=True):
+        if nt.get_server_status(ip=str(_address), port=str(_port)):
             # save good address + port
             nt.addon.setSetting(id='good_ip', value=str(_address))
             nt.addon.setSetting(id='good_port', value=str(_port))
@@ -154,8 +154,6 @@ class Wizard2(xbmcgui.WindowXML):
 
 
 def open_wizard():
-    # xbmc.log('--- open_wizard : start', xbmc.LOGWARNING)
     ui = Wizard2('wizard.xml', CWD, 'default', '1080i')
     ui.doModal()
     del ui
-    # xbmc.log('--- open_wizard : stop', xbmc.LOGWARNING)

@@ -803,7 +803,7 @@ def get_server_status(ip=addon.getSetting('ipaddress'), port=addon.getSetting('p
 
 
 def get_version(ip, port, force=False):
-    legacy = ''
+    legacy = LooseVersion('0.0')
     version = ''
     try:
         _shoko_version = addon.getSetting('good_version')
@@ -811,7 +811,6 @@ def get_version(ip, port, force=False):
         if not force:
             if _shoko_version != LooseVersion('0.1') and _good_ip == ip:
                 return _shoko_version
-        legacy = LooseVersion('0.0')
         json_file = get_json("http://" + str(ip) + ":" + str(port) + "/api/version", direct=True)
         if json_file is None:
             return legacy

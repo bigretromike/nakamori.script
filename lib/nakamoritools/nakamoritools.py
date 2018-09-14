@@ -704,10 +704,21 @@ def get_server_status(ip=addon.getSetting('ipaddress'), port=addon.getSetting('p
     try:
         url = 'http://' + ip + ':' + port + '/api/init/status'
         response = get_json(url, True)
-        if response is None or (safe_int(response) > 200 and safe_int(response) != 503):
+        if response is None or (safe_int(response) > 200 and safe_int(response) != 503 and safe_int(response) != 404):
             message_box('Connection Error', 'There was an error connecting to Shoko Server',
                         'If you have set up Shoko Server,', 'feel free to ask for advice on our discord')
             return False
+
+        if safe_int(response) == 404:
+            # 404 probably means that the user is a bad person who didn't update their server
+            # Another possible circumstance is the user has something other than Shoko
+            # running on port 8111 (or whatever they put)
+            version = get_version(ip, port, True)
+            if version == LooseVersion("0.0"):
+                message_box('Connection Error', 'There was an error connecting to Shoko Server',
+                            'If you have set up Shoko Server,', 'feel free to ask for advice on our discord')
+                return False
+            return True
 
         if safe_int(response) == 503:
             # 503 usually means that the server is not started,

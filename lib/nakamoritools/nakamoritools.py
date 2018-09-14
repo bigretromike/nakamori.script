@@ -802,7 +802,7 @@ def get_server_status(ip=addon.getSetting('ipaddress'), port=addon.getSetting('p
         return False
 
 
-def get_version(ip, port, force=False):
+def get_version(ip=addon.getSetting("ipaddress"), port=addon.getSetting("port"), force=False):
     legacy = LooseVersion('0.0')
     version = ''
     try:

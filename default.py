@@ -1,6 +1,7 @@
 import sys
 
 import lib.windows.calendar as calendar
+import lib.windows.information as information
 import lib.windows.wizard as wizard
 import lib.nakamoritools as nt
 
@@ -21,6 +22,8 @@ class Main:
                     wizard.open_wizard()
                 elif self.params['info'] == 'clearcache':
                     calendar.clear_cache()
+                elif self.params['info'] == 'information':
+                    information.open_information()
                 elif self.params['info'] == 'settings':
                     Addon(id='script.module.nakamori').openSettings()
         else:

@@ -21,6 +21,8 @@ class Main:
                 xbmc.executebuiltin('RunScript(script.module.nakamori,?info=wizard)')
             elif self.params['info'] == "clearcache":
                 xbmc.executebuiltin('RunScript(script.module.nakamori,?info=clearcache)')
+            elif self.params['info'] == "information":
+                xbmc.executebuiltin('RunScript(script.module.nakamori,?info=information)')
             elif self.params['info'] == "settings":
                 xbmc.executebuiltin('RunScript(script.module.nakamori,?info=settings)')
         else:
@@ -33,6 +35,7 @@ def root():
     items = [
         ("calendar", "calendar", plugin.url_for(calendar, when='0', page='0')),
         ("calendar", "calendar-add-14-days", plugin.url_for(calendar, when='0', page='14')),
+        ("information", "information", plugin.url_for(information)),
         ("wizard", "wizard", plugin.url_for(wizard)),
         ("clear-cache", "clear-cache", plugin.url_for(clearcache)),
         ("settings", "settings", plugin.url_for(settings))
@@ -62,6 +65,12 @@ def clearcache():
     pass
 
 
+@plugin.route('/information')
+def information():
+    xbmc.executebuiltin('RunScript(script.module.nakamori,?info=information)', True)
+    pass
+
+
 @plugin.route('/settings')
 def settings():
     xbmc.executebuiltin('RunScript(script.module.nakamori,?info=settings)', True)
@@ -69,6 +78,4 @@ def settings():
 
 
 if __name__ == "__main__":
-    xbmc.log('--- plugin.py : start', xbmc.LOGWARNING)
     Main()
-    xbmc.log('--- plugin.py : stop', xbmc.LOGWARNING)

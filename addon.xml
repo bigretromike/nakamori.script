@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.module.nakamori" name="nakamori script" version="3.0.4" provider-name="BigRetroMike, da3dsoul">
+<addon id="script.module.nakamori" name="nakamori script" version="3.0.5" provider-name="BigRetroMike, da3dsoul">
     <requires>
         <import addon="resource.images.nakamori" version="3.0.0"/>
         <import addon="script.module.pil"/>
@@ -20,7 +20,7 @@
         <website>https://shokunin.monogatari.pl/</website>
         <source>http://github.com/bigretromike/nakamori.script</source>
         <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
-        <news>3.0.4[CR]- many tweaks and error handling[CR]- fix for 'test' inside wizard[CR]- fix for LooseVersion error</news>
+        <news>3.0.5[CR]- Linux user fix</news>
         <assets>
             <icon>resources/icon.png</icon>
             <fanart>resources/fanart.jpg</fanart>

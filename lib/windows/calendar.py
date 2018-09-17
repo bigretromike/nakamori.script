@@ -280,7 +280,7 @@ def open_calendar(date=0, starting_item=0):
     url = "http://%s:%s/api/serie/soon?level=2&limit=0&offset=%s&d=%s" % (nt.addon.getSetting("ipaddress"),
                                                                      nt.addon.getSetting("port"), starting_item, date)
     body = nt.get_json(url)
-    ui = Calendar2('calendar.xml', CWD, 'default', '1080i', data=body, item_number=starting_item)
+    ui = Calendar2('calendar.xml', CWD, 'Default', '1080i', data=body, item_number=starting_item)
     ui.doModal()
     del ui
 

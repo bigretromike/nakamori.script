@@ -156,6 +156,6 @@ class Wizard2(xbmcgui.WindowXML):
 
 
 def open_wizard():
-    ui = Wizard2('wizard.xml', CWD, 'default', '1080i')
+    ui = Wizard2('wizard.xml', CWD, 'Default', '1080i')
     ui.doModal()
     del ui

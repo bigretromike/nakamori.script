@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.module.nakamori" name="nakamori script" version="3.0.5" provider-name="BigRetroMike, da3dsoul">
+<addon id="script.module.nakamori" name="Nakamori Script" version="3.0.5" provider-name="BigRetroMike, da3dsoul">
     <requires>
         <import addon="resource.images.nakamori" version="3.0.0"/>
         <import addon="script.module.pil"/>
@@ -9,9 +9,6 @@
 	<extension point="xbmc.python.script" library="default.py">
 		<provides>executable</provides>
 	</extension>
-    <extension point="xbmc.python.pluginsource" library="plugin.py">
-        <provides>executable</provides>
-    </extension>
     <extension point="xbmc.python.module" library="lib" />
     <extension point="xbmc.addon.metadata">
         <platform>all</platform>

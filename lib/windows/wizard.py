@@ -63,7 +63,7 @@ class Wizard2(xbmcgui.WindowXML):
         # _password.setType(xbmcgui.INPUT_TYPE_PASSWORD, '')  # k18
         _login.setText(self.login)
         _password.setText(self.password)
-        cansave = self.apikey != '' and nt.addon.getSetting("good_ip") == "true"
+        cansave = self.apikey != '' and nt.addon.getSetting('good_ip') == self.ip and nt.addon.getSetting('good_ip') != ''
         _button_save.setEnabled(cansave)
         # set focus
         self.setFocus(_address)

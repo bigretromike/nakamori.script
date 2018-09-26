@@ -8,7 +8,6 @@ import lib.nakamoritools as nt
 import xbmcgui
 from xbmcaddon import Addon
 
-
 _addon = Addon(id='script.module.nakamori')
 
 

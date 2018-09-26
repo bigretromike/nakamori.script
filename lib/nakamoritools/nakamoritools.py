@@ -47,6 +47,8 @@ global home
 global python_two
 
 # noinspection PyRedeclaration
+ADDON = xbmcaddon.Addon('script.module.nakamori')
+# noinspection PyRedeclaration
 addon = xbmcaddon.Addon('plugin.video.nakamori')
 # noinspection PyRedeclaration
 addonversion = addon.getAddonInfo('version')
@@ -57,7 +59,7 @@ addonname = addon.getAddonInfo('name')
 # noinspection PyRedeclaration
 icon = addon.getAddonInfo('icon')
 # noinspection PyRedeclaration
-localize = addon.getLocalizedString
+localize = ADDON.getLocalizedString
 # noinspection PyRedeclaration
 server = "http://" + addon.getSetting("ipaddress") + ":" + addon.getSetting("port")
 # noinspection PyRedeclaration
@@ -77,7 +79,7 @@ def search_box():
     Shows a keyboard, and returns the text entered
     :return: the text that was entered
     """
-    keyb = xbmc.Keyboard('', 'Enter search text')
+    keyb = xbmc.Keyboard('', ADDON.getLocalizedString(30026))
     keyb.doModal()
     search_text = ''
 
@@ -272,8 +274,8 @@ def mark_watch_status(params):
 
     box = addon.getSetting("watchedbox")
     if box == "true":
-        xbmc.executebuiltin("XBMC.Notification(%s, %s %s, 2000, %s)" % (addon.getLocalizedString(30187),
-                                                                        addon.getLocalizedString(30188),
+        xbmc.executebuiltin("XBMC.Notification(%s, %s %s, 2000, %s)" % (ADDON.getLocalizedString(30024),
+                                                                        ADDON.getLocalizedString(30025),
                                                                         watched_msg,
                                                                         addon.getAddonInfo('icon')))
     refresh()
@@ -333,15 +335,15 @@ def vote_series(series_id):
 
     """
     vote_list = ['Don\'t Vote', '10', '9', '8', '7', '6', '5', '4', '3', '2', '1', '0']
-    my_vote = xbmcgui.Dialog().select(addon.getLocalizedString(30184), vote_list)
+    my_vote = xbmcgui.Dialog().select(ADDON.getLocalizedString(30021), vote_list)
     if my_vote == -1:
         return
     elif my_vote != 0:
         vote_value = str(vote_list[my_vote])
         body = '?id=' + series_id + '&score=' + vote_value
         get_json(server + "/api/serie/vote" + body)
-        xbmc.executebuiltin("XBMC.Notification(%s, %s %s, 7500, %s)" % (addon.getLocalizedString(30184),
-                                                                        addon.getLocalizedString(30185),
+        xbmc.executebuiltin("XBMC.Notification(%s, %s %s, 7500, %s)" % (ADDON.getLocalizedString(30021),
+                                                                        ADDON.getLocalizedString(30022),
                                                                         vote_value, addon.getAddonInfo('icon')))
 
 
@@ -353,15 +355,15 @@ def vote_episode(ep_id):
 
     """
     vote_list = ['Don\'t Vote', '10', '9', '8', '7', '6', '5', '4', '3', '2', '1', '0']
-    my_vote = xbmcgui.Dialog().select(addon.getLocalizedString(30186), vote_list)
+    my_vote = xbmcgui.Dialog().select(ADDON.getLocalizedString(30023), vote_list)
     if my_vote == -1:
         return
     elif my_vote != 0:
         vote_value = str(vote_list[my_vote])
         body = '?id=' + ep_id + '&score=' + vote_value
         get_json(server + "/api/ep/vote" + body)
-        xbmc.executebuiltin("XBMC.Notification(%s, %s %s, 7500, %s)" % (addon.getLocalizedString(30186),
-                                                                        addon.getLocalizedString(30185),
+        xbmc.executebuiltin("XBMC.Notification(%s, %s %s, 7500, %s)" % (ADDON.getLocalizedString(30023),
+                                                                        ADDON.getLocalizedString(30022),
                                                                         vote_value, addon.getAddonInfo('icon')))
 
 

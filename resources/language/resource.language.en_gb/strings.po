@@ -1,40 +1,189 @@
-# Kodi Media Center language file
-# Addon Name: Nakamori
-# Addon id: script.module.nakamori
-# Addon Provider: BigRetroMike, da3dsoul
 msgid ""
 msgstr ""
-"Project-Id-Version: nakamori\n"
-"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2018-08-31 14:10+0100\n"
-"Last-Translator: bigretromike\n"
-"Language-Team: da3dsoul\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: Nakamori\n"
 "Language: en\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: wizard.xml
 msgctxt "#30001"
-msgid "Calendar settings"
-msgstr ""
+msgid "Enter Shoko Server Credentialss"
+msgstr "Enter Shoko Server Credentials"
 
+#: wizard.xml, wizard.py
 msgctxt "#30002"
-msgid "Maintenance"
-msgstr ""
+msgid "IP Address"
+msgstr "IP Address"
 
+#: wizard.xml, wizard.py
 msgctxt "#30003"
-msgid "Font color (#hex)"
-msgstr ""
+msgid "Port"
+msgstr "Port"
 
+#: wizard.xml, wizard.py
 msgctxt "#30004"
-msgid "Font"
-msgstr ""
+msgid "Login"
+msgstr "Login"
 
+#: wizard.xml, wizard.py
 msgctxt "#30005"
-msgid "Clear cache (titles)"
-msgstr ""
+msgid "Password"
+msgstr "Password"
 
+#: wizard.xml
 msgctxt "#30006"
-msgid "Font size"
-msgstr ""
+msgid "Test"
+msgstr "Test"
+
+#: wizard.xml
+msgctxt "#30007"
+msgid "Save"
+msgstr "Save"
+
+#: information.xml
+msgctxt "#30008"
+msgid "What's New !"
+msgstr "What's New !"
+
+#: information.xml
+msgctxt "#30009"
+msgid "Close"
+msgstr "Close"
+
+#: calendar.py
+msgctxt "#30010"
+msgid "MON"
+msgstr "MON"
+
+#: calendar.py
+msgctxt "#30011"
+msgid "TUE"
+msgstr "TUE"
+
+#: calendar.py
+msgctxt "#30012"
+msgid "WED"
+msgstr "WED"
+
+#: calendar.py
+msgctxt "#30013"
+msgid "THU"
+msgstr "THU"
+
+#: calendar.py
+msgctxt "#30014"
+msgid "FRI"
+msgstr "FRI"
+
+#: calendar.py
+msgctxt "#30015"
+msgid "SAT"
+msgstr "SAT"
+
+#: calendar.py
+msgctxt "#30016"
+msgid "SUN"
+msgstr "SUN"
+
+#: calendar.py
+msgctxt "#30017"
+msgid "Loading"
+msgstr "Loading"
+
+#: calendar.py
+msgctxt "#30018"
+msgid "Populating calendar ..."
+msgstr "Populating calendar ..."
+
+#: calendar.py
+msgctxt "#30019"
+msgid "Would you like to clear cache?"
+msgstr "Would you like to clear cache?"
+
+#: calendar.py
+msgctxt "#30020"
+msgid "This will remove content of titles directory"
+msgstr "This will remove content of titles directory"
+
+#: nakamoritools.py
+msgctxt "#30021"
+msgid "Series Voting"
+msgstr "Series Voting"
+
+#: nakamoritools.py
+msgctxt "#30022"
+msgid "You Voted"
+msgstr "You Voted"
+
+#: nakamoritools.py
+msgctxt "#30023"
+msgid "Episode Voting"
+msgstr "Episode Voting"
+
+#: nakamoritools.py
+msgctxt "#30024"
+msgid "Watched Status Changed"
+msgstr "Watched Status Changed"
+
+#: nakamoritools.py
+msgctxt "#30025"
+msgid "Marked as"
+msgstr "Marked as"
+
+#: nakamoritools.py
+msgctxt "#30026"
+msgid "Enter search text"
+msgstr "Enter search text"
+
+#: wizard.xml
+msgctxt "#30027"
+msgid "OK"
+msgstr "OK"
+
+#: settings.xml
+msgctxt "#30028"
+msgid "Calendar"
+msgstr "Calendar"
+
+#: settings.xml
+msgctxt "#30029"
+msgid "Font"
+msgstr "Font"
+
+#: settings.xml
+msgctxt "#30030"
+msgid "Color"
+msgstr "Color"
+
+#: settings.xml
+msgctxt "#30031"
+msgid "Size"
+msgstr "Size"
+
+#: settings.xml
+msgctxt "#30032"
+msgid "Maintenance"
+msgstr "Maintenance"
+
+#: settings.xml
+msgctxt "#30033"
+msgid "Clear Cache"
+msgstr "Clear Cache"
+
+#: script/wizard.py
+msgctxt "#30034"
+msgid "Warning"
+msgstr "Warning"
+
+#: script/wizard.py
+msgctxt "#30035"
+msgid "Could not connect to Shoko Server"
+msgstr "Could not connect to Shoko Server"
+
+#: script/wizard.py
+msgctxt "#30036"
+msgid "Would you like to stop setup process and close this window?"
+msgstr "Would you like to stop setup process and close this window?"
+

@@ -35,10 +35,6 @@ class Wizard2(xbmcgui.WindowXML):
         self.apikey = ''
         # additional variables
         self.setup_ok = False
-        # self.getControl(IP_ADDRESS) = None
-        # self.getControl(PORT_NUMBER) = None
-        # self.getControl(LOGIN) = None
-        # self.getControl(PASSWORD) = None
         self._button_test = None
         self._button_save = None
         self._label_address = None
@@ -106,9 +102,9 @@ class Wizard2(xbmcgui.WindowXML):
                 self.close()
                 xbmc.executebuiltin('RunPlugin(plugin.video.nakamori)')
             else:
-                if xbmcgui.Dialog().yesno(nt.addon.getLocalizedString(30079),
-                                          nt.addon.getLocalizedString(30080),
-                                          nt.addon.getLocalizedString(30081)):
+                if xbmcgui.Dialog().yesno(ADDON.getLocalizedString(30034),
+                                          ADDON.getLocalizedString(30035),
+                                          ADDON.getLocalizedString(30036)):
                     self.setup_ok = False
                     self.setProperty('script.module.nakamori.running', 'false')
                     self.close()
@@ -121,32 +117,32 @@ class Wizard2(xbmcgui.WindowXML):
             nt.addon.setSetting(id='good_port', value=str(self.getControl(PORT_NUMBER).getText()))
             nt.addon.setSetting(id='ipaddress', value=str(self.getControl(IP_ADDRESS).getText()))
             nt.addon.setSetting(id='port', value=str(self.getControl(PORT_NUMBER).getText()))
-            self._label_address.setLabel(label="IP Address", textColor='0xff7aad5c', focusedColor='0xff7aad5c')
-            self._label_port.setLabel(label="Port", textColor='0xff7aad5c', focusedColor='0xff7aad5c')
+            self._label_address.setLabel(label=ADDON.getLocalizedString(30002), textColor='0xff7aad5c', focusedColor='0xff7aad5c')
+            self._label_port.setLabel(label=ADDON.getLocalizedString(30003), textColor='0xff7aad5c', focusedColor='0xff7aad5c')
             # populate info from edits
             nt.addon.setSetting(id="login", value=str(self.getControl(LOGIN).getText()))
             nt.addon.setSetting(id="password", value=str(self.getControl(PASSWORD).getText()))
             # check auth
             b, a = nt.valid_user()
             if b:
-                self._button_test.setLabel(label='OK', textColor='0xff7aad5c', focusedColor='0xff7aad5c')
-                self._label_login.setLabel(label="Login", textColor='0xff7aad5c', focusedColor='0xff7aad5c')
-                self._label_password.setLabel(label="Password", textColor='0xff7aad5c', focusedColor='0xff7aad5c')
-                self._button_save.setLabel(label='Save', textColor='0xAAFFFFFF', focusedColor='0xFFFFFFFF')
+                self._button_test.setLabel(label=ADDON.getLocalizedString(30027), textColor='0xff7aad5c', focusedColor='0xff7aad5c')
+                self._label_login.setLabel(label=ADDON.getLocalizedString(30004), textColor='0xff7aad5c', focusedColor='0xff7aad5c')
+                self._label_password.setLabel(label=ADDON.getLocalizedString(30005), textColor='0xff7aad5c', focusedColor='0xff7aad5c')
+                self._button_save.setLabel(label=ADDON.getLocalizedString(30007), textColor='0xAAFFFFFF', focusedColor='0xFFFFFFFF')
                 self._button_save.setEnabled(True)
                 self.setup_ok = True
                 nt.addon.setSetting(id='login', value='')
                 nt.addon.setSetting(id='password', value='')
                 nt.addon.setSetting(id='apikey', value=a)
             else:
-                self._button_test.setLabel(label='Test', textColor='0xFFDF1818', focusedColor='0xFFDF1818')
-                self._label_login.setLabel(label="Login", textColor='0xFFDF1818', focusedColor='0xFFDF1818')
-                self._label_password.setLabel(label="Password", textColor='0xFFDF1818', focusedColor='0xFFDF1818')
+                self._button_test.setLabel(label=ADDON.getLocalizedString(30006), textColor='0xFFDF1818', focusedColor='0xFFDF1818')
+                self._label_login.setLabel(label=ADDON.getLocalizedString(30004), textColor='0xFFDF1818', focusedColor='0xFFDF1818')
+                self._label_password.setLabel(label=ADDON.getLocalizedString(30005), textColor='0xFFDF1818', focusedColor='0xFFDF1818')
                 self._button_save.setEnabled(False)
                 self.setup_ok = False
         else:
-            self._label_address.setLabel(label="IP Address", textColor='0xFFDF1818', focusedColor='0xFFDF1818')
-            self._label_port.setLabel(label="Port", textColor='0xFFDF1818', focusedColor='0xFFDF1818')
+            self._label_address.setLabel(label=ADDON.getLocalizedString(30002), textColor='0xFFDF1818', focusedColor='0xFFDF1818')
+            self._label_port.setLabel(label=ADDON.getLocalizedString(30003), textColor='0xFFDF1818', focusedColor='0xFFDF1818')
             self._button_save.setEnabled(False)
             self.setup_ok = False
         xbmc.log('--- wizard.py = %s' % self.setup_ok, xbmc.LOGWARNING)

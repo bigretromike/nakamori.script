@@ -116,20 +116,20 @@ class Calendar2(xbmcgui.WindowXML):
         }
 
         self.day_of_week = {
-            0: 'MON',
-            1: 'TUE',
-            2: 'WED',
-            3: 'THU',
-            4: 'FRI',
-            5: 'SAT',
-            6: 'SUN'
+            0: ADDON.getLocalizedString(30010),
+            1: ADDON.getLocalizedString(30011),
+            2: ADDON.getLocalizedString(30012),
+            3: ADDON.getLocalizedString(30013),
+            4: ADDON.getLocalizedString(30014),
+            5: ADDON.getLocalizedString(30015),
+            6: ADDON.getLocalizedString(30016)
         }
 
         if self.day_count >= len(self.date_label):
             pass
         else:
             busy = xbmcgui.DialogProgress()
-            busy.create('Loading', 'loading ...')
+            busy.create(ADDON.getLocalizedString(30017), ADDON.getLocalizedString(30018))
             for gui in self.calendar_collection.values():
                 gui.reset()
 
@@ -250,7 +250,6 @@ class Calendar2(xbmcgui.WindowXML):
         series_listitem.setInfo('video', {'title': title, 'aired': air_date})
         self.calendar_collection[self.day_count].addItem(series_listitem)
         self.serie_processed += 1
-        # xbmc.log('+ %s' % title, xbmc.LOGERROR)
         return True
 
     def list_update_right(self):
@@ -280,7 +279,8 @@ class Calendar2(xbmcgui.WindowXML):
 
 def open_calendar(date=0, starting_item=0):
     url = "http://%s:%s/api/serie/soon?level=2&limit=0&offset=%s&d=%s" % (nt.addon.getSetting("ipaddress"),
-                                                                     nt.addon.getSetting("port"), starting_item, date)
+                                                                          nt.addon.getSetting("port"),
+                                                                          starting_item, date)
     body = nt.get_json(url)
     ui = Calendar2('calendar.xml', CWD, 'Default', '1080i', data=body, item_number=starting_item)
     ui.doModal()
@@ -289,7 +289,7 @@ def open_calendar(date=0, starting_item=0):
 
 def clear_cache():
     if os.path.exists(os.path.join(profileDir, 'titles')):
-        clear = xbmcgui.Dialog().yesno('Would you like to clear cache?', 'This will remove content of titles directory')
+        clear = xbmcgui.Dialog().yesno(ADDON.getLocalizedString(30019), ADDON.getLocalizedString(30020))
         if clear:
             files_to_delete = [os.path.join(path, file)
                                for (path, dirs, files) in os.walk(os.path.join(profileDir, 'titles'))

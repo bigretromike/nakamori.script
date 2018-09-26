@@ -958,6 +958,13 @@ def add_dir(name, url, mode, iconimage='DefaultTVShows.png', plot="", poster="De
     return ok
 
 
+def show_information():
+    file_flag = 'news.log'
+    if os.path.exists(os.path.join(home, file_flag)):
+        os.remove(os.path.join(home, file_flag))
+        xbmc.executebuiltin('RunScript(script.module.nakamori,?info=information)', True)
+
+
 # not sure if needed
 
 

@@ -35,10 +35,10 @@ class Wizard2(xbmcgui.WindowXML):
         self.apikey = ''
         # additional variables
         self.setup_ok = False
-        self._address = None
-        self._port = None
-        self._login = None
-        self._password = None
+        # self.getControl(IP_ADDRESS) = None
+        # self.getControl(PORT_NUMBER) = None
+        # self.getControl(LOGIN) = None
+        # self.getControl(PASSWORD) = None
         self._button_test = None
         self._button_save = None
         self._label_address = None
@@ -49,10 +49,11 @@ class Wizard2(xbmcgui.WindowXML):
     def onInit(self):
         self.setProperty('script.module.nakamori.running', 'true')
         # bind controls & set default
-        self._address = self.getControl(IP_ADDRESS)
-        self._port = self.getControl(PORT_NUMBER)
-        self._login = self.getControl(LOGIN)
-        self._password = self.getControl(PASSWORD)
+        # self.getControl(IP_ADDRESS) = self.getControl(IP_ADDRESS)
+        # self.getControl(PORT_NUMBER) = self.getControl(PORT_NUMBER)
+        # self.getControl(LOGIN) = self.getControl(LOGIN)
+        # self.getControl(PASSWORD) = self.getControl(PASSWORD)
+        # static
         self._button_test = self.getControl(TEST_BUTTON)
         self._button_save = self.getControl(SAVE_BUTTON)
         self._label_address = self.getControl(LABEL_IP_ADDRESS)
@@ -60,12 +61,12 @@ class Wizard2(xbmcgui.WindowXML):
         self._label_login = self.getControl(LABEL_LOGIN)
         self._label_password = self.getControl(LABEL_PASSWORD)
         # navigation
-        self._address.setNavigation(self._password, self._port, self._address, self._button_test)  # up, down, left, right
-        self._port.setNavigation(self._address, self._login, self._port, self._button_test)
-        self._login.setNavigation(self._port, self._password, self._login, self._button_test)
-        self._password.setNavigation(self._login, self._address, self._password, self._button_test)
-        self._button_test.setNavigation(self._button_save, self._button_save, self._login, self._button_test)
-        self._button_save.setNavigation(self._button_test, self._button_test, self._password, self._button_save)
+        self.getControl(IP_ADDRESS).setNavigation(self.getControl(PASSWORD), self.getControl(PORT_NUMBER), self.getControl(IP_ADDRESS), self._button_test)  # up, down, left, right
+        self.getControl(PORT_NUMBER).setNavigation(self.getControl(IP_ADDRESS), self.getControl(LOGIN), self.getControl(PORT_NUMBER), self._button_test)
+        self.getControl(LOGIN).setNavigation(self.getControl(PORT_NUMBER), self.getControl(PASSWORD), self.getControl(LOGIN), self._button_test)
+        self.getControl(PASSWORD).setNavigation(self.getControl(LOGIN), self.getControl(IP_ADDRESS), self.getControl(PASSWORD), self._button_test)
+        self._button_test.setNavigation(self._button_save, self._button_save, self.getControl(LOGIN), self._button_test)
+        self._button_save.setNavigation(self._button_test, self._button_test, self.getControl(PASSWORD), self._button_save)
         # get current settings
         self.ip = nt.addon.getSetting("ipaddress")
         self.port = nt.addon.getSetting("port")
@@ -73,15 +74,15 @@ class Wizard2(xbmcgui.WindowXML):
         self.password = nt.addon.getSetting("password")
         self.apikey = nt.addon.getSetting("apikey")
         # populate controls
-        self._address.setText(self.ip)
-        self._port.setText(self.port)
-        # self._password.setType(xbmcgui.INPUT_TYPE_PASSWORD, '')  # k18
-        self._login.setText(self.login)
-        self._password.setText(self.password)
+        # self.getControl(IP_ADDRESS).setText(self.ip)
+        # self.getControl(PORT_NUMBER).setText(self.port)
+        # self.getControl(PASSWORD).setType(xbmcgui.INPUT_TYPE_PASSWORD, '')  # k18
+        # self.getControl(LOGIN).setText(self.login)
+        # self.getControl(PASSWORD).setText(self.password)
         cansave = self.apikey != '' and nt.addon.getSetting('good_ip') == self.ip and nt.addon.getSetting('good_ip') != ''
         self._button_save.setEnabled(cansave)
         # set focus
-        # self.setFocus(self._address)
+        # self.setFocus(self.getControl(IP_ADDRESS))
 
     def onAction(self, action):
         if action == ACTION_PREVIOUS_MENU:
@@ -119,30 +120,17 @@ class Wizard2(xbmcgui.WindowXML):
 
     # custom functions
     def _test_connection(self):
-        # edits
-        # self._address = self.getControl(IP_ADDRESS).getText()
-        # self._port = self.getControl(PORT_NUMBER).getText()
-        # self._label_address = self.getControl(LABEL_IP_ADDRESS)
-        # self._label_port = self.getControl(LABEL_PORT_NUMBER)
-        # buttons
-        # self._button_save = self.getControl(SAVE_BUTTON)
-
-        if nt.get_server_status(ip=str(self._address), port=str(self._port)):
+        if nt.get_server_status(ip=str(self.getControl(IP_ADDRESS)), port=str(self.getControl(PORT_NUMBER))):
             # save good address + port
-            nt.addon.setSetting(id='good_ip', value=str(self._address))
-            nt.addon.setSetting(id='good_port', value=str(self._port))
-            nt.addon.setSetting(id='ipaddress', value=str(self._address))
-            nt.addon.setSetting(id='port', value=str(self._port))
+            nt.addon.setSetting(id='good_ip', value=str(self.getControl(IP_ADDRESS)))
+            nt.addon.setSetting(id='good_port', value=str(self.getControl(PORT_NUMBER)))
+            nt.addon.setSetting(id='ipaddress', value=str(self.getControl(IP_ADDRESS)))
+            nt.addon.setSetting(id='port', value=str(self.getControl(PORT_NUMBER)))
             self._label_address.setLabel(label="IP Address", textColor='0xff7aad5c', focusedColor='0xff7aad5c')
             self._label_port.setLabel(label="Port", textColor='0xff7aad5c', focusedColor='0xff7aad5c')
-            # self.text_login = self._login.getText()
-            # self.text_password = self._password.getText()
-            # self._label_login = self.getControl(LABEL_LOGIN)
-            # self._label_password = self.getControl(LABEL_PASSWORD)
-            # self._test_button = self.getControl(TEST_BUTTON)
             # populate info from edits
-            nt.addon.setSetting(id="login", value=str(self._login.getText()))
-            nt.addon.setSetting(id="password", value=str(self._password.getText()))
+            nt.addon.setSetting(id="login", value=str(self.getControl(LOGIN).getText()))
+            nt.addon.setSetting(id="password", value=str(self.getControl(PASSWORD).getText()))
             # check auth
             b, a = nt.valid_user()
             if b:

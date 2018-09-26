@@ -156,15 +156,17 @@ class Calendar2(xbmcgui.WindowXML):
             self.close()
         if action == ACTION_NAV_BACK:
             self.close()
-        if action == xbmcgui.ACTION_MOVE_RIGHT and self.getFocus().getId() != 2:
-            self.list_update_right()
-        if action == xbmcgui.ACTION_MOVE_LEFT and self.getFocus().getId() != 1:
-            self.list_update_left()
-        if action == xbmcgui.ACTION_MOVE_RIGHT and self.getFocus().getId() == 2:
-            xbmc.executebuiltin('RunScript(script.module.nakamori,?info=calendar&date=0&page=%s)'
-                                % self.serie_processed, True)
-        if action == xbmcgui.ACTION_MOVE_LEFT and self.getFocus().getId() == 1:
-            xbmc.executebuiltin('Action(Back)')
+        if action == xbmcgui.ACTION_MOVE_RIGHT:
+            if self.getFocus().getId() != 2:
+                self.list_update_right()
+            else:
+                xbmc.executebuiltin('RunScript(script.module.nakamori,?info=calendar&date=0&page=%s)'
+                                    % self.serie_processed, True)
+        if action == xbmcgui.ACTION_MOVE_LEFT:
+            if self.getFocus().getId() != 1:
+                self.list_update_left()
+            else:
+                xbmc.executebuiltin('Action(Back)')
 
     def onControl(self, control):
         pass

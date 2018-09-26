@@ -48,12 +48,7 @@ class Wizard2(xbmcgui.WindowXML):
 
     def onInit(self):
         self.setProperty('script.module.nakamori.running', 'true')
-        # bind controls & set default
-        # self.getControl(IP_ADDRESS) = self.getControl(IP_ADDRESS)
-        # self.getControl(PORT_NUMBER) = self.getControl(PORT_NUMBER)
-        # self.getControl(LOGIN) = self.getControl(LOGIN)
-        # self.getControl(PASSWORD) = self.getControl(PASSWORD)
-        # static
+        # static bind
         self._button_test = self.getControl(TEST_BUTTON)
         self._button_save = self.getControl(SAVE_BUTTON)
         self._label_address = self.getControl(LABEL_IP_ADDRESS)
@@ -74,15 +69,15 @@ class Wizard2(xbmcgui.WindowXML):
         self.password = nt.addon.getSetting("password")
         self.apikey = nt.addon.getSetting("apikey")
         # populate controls
-        # self.getControl(IP_ADDRESS).setText(self.ip)
-        # self.getControl(PORT_NUMBER).setText(self.port)
+        self.getControl(IP_ADDRESS).setText(self.ip)
+        self.getControl(PORT_NUMBER).setText(self.port)
         # self.getControl(PASSWORD).setType(xbmcgui.INPUT_TYPE_PASSWORD, '')  # k18
-        # self.getControl(LOGIN).setText(self.login)
-        # self.getControl(PASSWORD).setText(self.password)
+        self.getControl(LOGIN).setText(self.login)
+        self.getControl(PASSWORD).setText(self.password)
         cansave = self.apikey != '' and nt.addon.getSetting('good_ip') == self.ip and nt.addon.getSetting('good_ip') != ''
         self._button_save.setEnabled(cansave)
         # set focus
-        # self.setFocus(self.getControl(IP_ADDRESS))
+        self.setFocus(self.getControl(IP_ADDRESS))
 
     def onAction(self, action):
         if action == ACTION_PREVIOUS_MENU:

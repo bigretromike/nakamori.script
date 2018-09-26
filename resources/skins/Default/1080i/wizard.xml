@@ -51,7 +51,7 @@
 				<height>32</height>
 				<label>-</label>
 				<font>-</font>
-				<onclick>PreviousMenu</onclick>
+				<onclick>Back</onclick>
 				<texturefocus>close-fo.png</texturefocus>
 				<texturenofocus>close-nofo.png</texturenofocus>
 				<visible>system.getbool(input.enablemouse)</visible>

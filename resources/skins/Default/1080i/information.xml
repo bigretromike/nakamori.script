@@ -34,7 +34,7 @@
 			</control>
             <!-- box-close-x (if enablemouse)-->
 			<control type="button">
-				<description>close-wizard</description>
+				<description>close-information</description>
 				<posx>736</posx>
 				<posy>-32</posy>
 				<width>64</width>

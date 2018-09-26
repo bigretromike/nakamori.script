@@ -11,6 +11,7 @@ CWD = ADDON.getAddonInfo('path').decode('utf-8')
 ACTION_PREVIOUS_MENU = 10
 ACTION_NAV_BACK = 92
 
+CLOSE_BUTTON = 202
 CONTENT_TEXTBOX = 303
 
 
@@ -18,14 +19,15 @@ class Information(xbmcgui.WindowXMLDialog):
     def __init__(self, xmlFile, resourcePath, skin, skinRes):
         self.window_type = "window"
 
-    def onInit(self):       
+    def onInit(self):
+        _close = self.getControl(CLOSE_BUTTON)
         _textbox = self.getControl(CONTENT_TEXTBOX)
         tree = ET.parse(os.path.join(xbmcaddon.Addon(id='plugin.video.nakamori').getAddonInfo('path').decode('utf-8'),
                                      'addon.xml'))
         root = tree.getroot()
         news = root.findall(".//*[@point='xbmc.addon.metadata']/news")
         _textbox.setText(news[0].text)
-        self.setFocus(_textbox)
+        self.setFocus(_close)
 
     def onAction(self, action):
         if action == ACTION_PREVIOUS_MENU or action == ACTION_NAV_BACK:

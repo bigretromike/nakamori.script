@@ -115,12 +115,12 @@ class Wizard2(xbmcgui.WindowXML):
 
     # custom functions
     def _test_connection(self):
-        if nt.get_server_status(ip=str(self.getControl(IP_ADDRESS)), port=str(self.getControl(PORT_NUMBER))):
+        if nt.get_server_status(ip=str(self.getControl(IP_ADDRESS).getText()), port=str(self.getControl(PORT_NUMBER).getText())):
             # save good address + port
-            nt.addon.setSetting(id='good_ip', value=str(self.getControl(IP_ADDRESS)))
-            nt.addon.setSetting(id='good_port', value=str(self.getControl(PORT_NUMBER)))
-            nt.addon.setSetting(id='ipaddress', value=str(self.getControl(IP_ADDRESS)))
-            nt.addon.setSetting(id='port', value=str(self.getControl(PORT_NUMBER)))
+            nt.addon.setSetting(id='good_ip', value=str(self.getControl(IP_ADDRESS).getText()))
+            nt.addon.setSetting(id='good_port', value=str(self.getControl(PORT_NUMBER).getText()))
+            nt.addon.setSetting(id='ipaddress', value=str(self.getControl(IP_ADDRESS).getText()))
+            nt.addon.setSetting(id='port', value=str(self.getControl(PORT_NUMBER).getText()))
             self._label_address.setLabel(label="IP Address", textColor='0xff7aad5c', focusedColor='0xff7aad5c')
             self._label_port.setLabel(label="Port", textColor='0xff7aad5c', focusedColor='0xff7aad5c')
             # populate info from edits

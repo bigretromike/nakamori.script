@@ -172,18 +172,17 @@ msgctxt "#30033"
 msgid "Clear Cache"
 msgstr "Clear Cache"
 
-#: script/wizard.py
+#: wizard.py
 msgctxt "#30034"
 msgid "Warning"
 msgstr "Warning"
 
-#: script/wizard.py
+#: wizard.py
 msgctxt "#30035"
 msgid "Could not connect to Shoko Server"
 msgstr "Could not connect to Shoko Server"
 
-#: script/wizard.py
+#: wizard.py
 msgctxt "#30036"
 msgid "Would you like to stop setup process and close this window?"
 msgstr "Would you like to stop setup process and close this window?"
-

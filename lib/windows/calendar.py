@@ -167,6 +167,14 @@ class Calendar2(xbmcgui.WindowXML):
                 self.list_update_left()
             else:
                 xbmc.executebuiltin('Action(Back)')
+        if action == xbmcgui.ACTION_MOUSE_RIGHT_CLICK:
+            # dont force it on right click;
+            pass
+        if action == xbmcgui.ACTION_CONTEXT_MENU:
+            control_id = self.getFocus().getId()
+            aid = self.getControl(control_id).getSelectedItem().getProperty("aid")
+            if xbmcgui.Dialog().contextmenu(['aid = ' + str(aid)]) != -1:
+                xbmcgui.Dialog().ok('soon', 'comming soon')
 
     def onControl(self, control):
         pass
@@ -248,6 +256,7 @@ class Calendar2(xbmcgui.WindowXML):
         series_listitem.setArt({'thumb': fanart, 'poster': new_image_url, 'fanart': fanart})
         # series_listitem.setUniqueIDs({'anidb': aid}, "anidb")
         series_listitem.setInfo('video', {'title': title, 'aired': air_date})
+        series_listitem.setProperty('aid', str(aid))
         self.calendar_collection[self.day_count].addItem(series_listitem)
         self.serie_processed += 1
         return True

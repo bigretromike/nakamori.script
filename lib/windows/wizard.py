@@ -24,6 +24,20 @@ PASSWORD = 206
 CENTER_Y = 6
 CENTER_X = 2
 
+# resources
+RSC_IP = ADDON.getLocalizedString(30002)
+RSC_PORT = ADDON.getLocalizedString(30003)
+RSC_USERNAME = ADDON.getLocalizedString(30004)
+RSC_PASSWORD = ADDON.getLocalizedString(30005)
+RSC_TEST = ADDON.getLocalizedString(30027)
+RSC_SAVE = ADDON.getLocalizedString(30007)
+
+COLOR_RED = '0xFFDF1818'
+COLOR_RED_FOCUSED = '0xFFFF1010'
+COLOR_WHITE = '0xAAFFFFFF'
+COLOR_WHITE_FOCUSED = '0xFFFFFFFF'
+COLOR_GREEN = '0xFF18DD18'
+COLOR_GREEN_FOCUSED = '0xFF10FF10'
 
 class Wizard2(xbmcgui.WindowXML):
     def __init__(self, xmlFile, resourcePath, skin, skinRes):
@@ -70,8 +84,15 @@ class Wizard2(xbmcgui.WindowXML):
         # self.getControl(PASSWORD).setType(xbmcgui.INPUT_TYPE_PASSWORD, '')  # k18
         self.getControl(LOGIN).setText(self.login)
         self.getControl(PASSWORD).setText(self.password)
+
+        self._button_test.setLabel(label=RSC_TEST, textColor=COLOR_WHITE, focusedColor=COLOR_WHITE_FOCUSED)
+
         cansave = self.apikey != '' and nt.addon.getSetting('good_ip') == self.ip and nt.addon.getSetting('good_ip') != ''
         self._button_save.setEnabled(cansave)
+        if cansave:
+            self._button_save.setLabel(label=RSC_SAVE, textColor=COLOR_WHITE, focusedColor=COLOR_WHITE_FOCUSED)
+        else:
+            self._button_save.setLabel(label=RSC_SAVE, textColor=COLOR_RED, focusedColor=COLOR_RED_FOCUSED)
         # set focus
         self.setFocus(self.getControl(IP_ADDRESS))
 
@@ -117,32 +138,32 @@ class Wizard2(xbmcgui.WindowXML):
             nt.addon.setSetting(id='good_port', value=str(self.getControl(PORT_NUMBER).getText()))
             nt.addon.setSetting(id='ipaddress', value=str(self.getControl(IP_ADDRESS).getText()))
             nt.addon.setSetting(id='port', value=str(self.getControl(PORT_NUMBER).getText()))
-            self._label_address.setLabel(label=ADDON.getLocalizedString(30002), textColor='0xff7aad5c', focusedColor='0xff7aad5c')
-            self._label_port.setLabel(label=ADDON.getLocalizedString(30003), textColor='0xff7aad5c', focusedColor='0xff7aad5c')
+            self._label_address.setLabel(label=RSC_IP, textColor=COLOR_GREEN, focusedColor=COLOR_WHITE_FOCUSED)
+            self._label_port.setLabel(label=RSC_PORT, textColor=COLOR_GREEN, focusedColor=COLOR_WHITE_FOCUSED)
             # populate info from edits
             nt.addon.setSetting(id="login", value=str(self.getControl(LOGIN).getText()))
             nt.addon.setSetting(id="password", value=str(self.getControl(PASSWORD).getText()))
             # check auth
             b, a = nt.valid_user()
             if b:
-                self._button_test.setLabel(label=ADDON.getLocalizedString(30027), textColor='0xff7aad5c', focusedColor='0xff7aad5c')
-                self._label_login.setLabel(label=ADDON.getLocalizedString(30004), textColor='0xff7aad5c', focusedColor='0xff7aad5c')
-                self._label_password.setLabel(label=ADDON.getLocalizedString(30005), textColor='0xff7aad5c', focusedColor='0xff7aad5c')
-                self._button_save.setLabel(label=ADDON.getLocalizedString(30007), textColor='0xAAFFFFFF', focusedColor='0xFFFFFFFF')
+                self._button_test.setLabel(label=RSC_TEST, textColor=COLOR_GREEN, focusedColor=COLOR_WHITE_FOCUSED)
+                self._label_login.setLabel(label=RSC_USERNAME, textColor=COLOR_GREEN, focusedColor=COLOR_WHITE_FOCUSED)
+                self._label_password.setLabel(label=RSC_PASSWORD, textColor=COLOR_GREEN, focusedColor=COLOR_WHITE_FOCUSED)
+                self._button_save.setLabel(label=RSC_SAVE, textColor=COLOR_GREEN, focusedColor=COLOR_WHITE_FOCUSED)
                 self._button_save.setEnabled(True)
                 self.setup_ok = True
                 nt.addon.setSetting(id='login', value='')
                 nt.addon.setSetting(id='password', value='')
                 nt.addon.setSetting(id='apikey', value=a)
             else:
-                self._button_test.setLabel(label=ADDON.getLocalizedString(30006), textColor='0xFFDF1818', focusedColor='0xFFDF1818')
-                self._label_login.setLabel(label=ADDON.getLocalizedString(30004), textColor='0xFFDF1818', focusedColor='0xFFDF1818')
-                self._label_password.setLabel(label=ADDON.getLocalizedString(30005), textColor='0xFFDF1818', focusedColor='0xFFDF1818')
+                self._button_test.setLabel(label=RSC_TEST, textColor=COLOR_RED, focusedColor=COLOR_RED_FOCUSED)
+                self._label_login.setLabel(label=RSC_USERNAME, textColor=COLOR_RED, focusedColor=COLOR_RED_FOCUSED)
+                self._label_password.setLabel(label=RSC_PASSWORD, textColor=COLOR_RED, focusedColor=COLOR_RED_FOCUSED)
                 self._button_save.setEnabled(False)
                 self.setup_ok = False
         else:
-            self._label_address.setLabel(label=ADDON.getLocalizedString(30002), textColor='0xFFDF1818', focusedColor='0xFFDF1818')
-            self._label_port.setLabel(label=ADDON.getLocalizedString(30003), textColor='0xFFDF1818', focusedColor='0xFFDF1818')
+            self._label_address.setLabel(label=RSC_IP, textColor=COLOR_RED, focusedColor=COLOR_RED_FOCUSED)
+            self._label_port.setLabel(label=RSC_PORT, textColor=COLOR_RED, focusedColor=COLOR_RED_FOCUSED)
             self._button_save.setEnabled(False)
             self.setup_ok = False
         xbmc.log('--- wizard.py = %s' % self.setup_ok, xbmc.LOGWARNING)

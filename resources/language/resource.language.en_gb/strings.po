@@ -24,8 +24,8 @@ msgstr "Port"
 
 #: wizard.xml, wizard.py
 msgctxt "#30004"
-msgid "Login"
-msgstr "Login"
+msgid "Username"
+msgstr "Username"
 
 #: wizard.xml, wizard.py
 msgctxt "#30005"
@@ -44,8 +44,8 @@ msgstr "Save"
 
 #: information.xml
 msgctxt "#30008"
-msgid "What's New !"
-msgstr "What's New !"
+msgid "What's New!"
+msgstr "What's New!"
 
 #: information.xml
 msgctxt "#30009"

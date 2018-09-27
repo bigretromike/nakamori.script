@@ -173,7 +173,14 @@ class Calendar2(xbmcgui.WindowXML):
         if action == xbmcgui.ACTION_CONTEXT_MENU:
             control_id = self.getFocus().getId()
             aid = self.getControl(control_id).getSelectedItem().getProperty("aid")
-            if xbmcgui.Dialog().contextmenu(['aid = ' + str(aid)]) != -1:
+            content_menu = [
+                '- aid = ' + str(aid) + '-',
+                ADDON.getLocalizedString(30037),
+                ADDON.getLocalizedString(30038),
+                ADDON.getLocalizedString(30039),
+                ADDON.getLocalizedString(30040)
+            ]
+            if xbmcgui.Dialog().contextmenu(content_menu) != -1:
                 xbmcgui.Dialog().ok('soon', 'comming soon')
 
     def onControl(self, control):

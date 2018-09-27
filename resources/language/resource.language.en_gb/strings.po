@@ -186,3 +186,23 @@ msgstr "Could not connect to Shoko Server"
 msgctxt "#30036"
 msgid "Would you like to stop setup process and close this window?"
 msgstr "Would you like to stop setup process and close this window?"
+
+#: calendar.py
+msgctxt "#30037"
+msgid "Show info"
+msgstr "Show info"
+
+#: calendar.py
+msgctxt "#30038"
+msgid "Download missing info"
+msgstr "Download missing info"
+
+#: calendar.py
+msgctxt "#30039"
+msgid "Add to wishlist"
+msgstr "Add to wishlist"
+
+#: calendar.py
+msgctxt "#30040"
+msgid "Remove from wishlist"
+msgstr "Remove from wishlist"

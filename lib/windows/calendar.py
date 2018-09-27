@@ -182,6 +182,8 @@ class Calendar2(xbmcgui.WindowXML):
             ]
             if xbmcgui.Dialog().contextmenu(content_menu) != -1:
                 xbmcgui.Dialog().ok('soon', 'comming soon')
+        if action == xbmcgui.ACTION_SELECT_ITEM:
+            xbmcgui.Dialog().ok('soon', 'show soon')
 
     def onControl(self, control):
         pass

@@ -250,7 +250,7 @@ def mark_watch_status(params):
     if file_id != 0:
         sync_offset(file_id, 0)
 
-    if addon.getSetting('log_spam') == 'true':
+    if addon.getSetting('spamLog') == 'true':
         xbmc.log('file_d: ' + str(file_id), xbmc.LOGWARNING)
         xbmc.log('epid: ' + str(episode_id), xbmc.LOGWARNING)
         xbmc.log('anime_id: ' + str(anime_id), xbmc.LOGWARNING)
@@ -466,6 +466,8 @@ def get_json(url_in, direct=False):
                     cache.add_cache(url_in, json.dumps(body))
             else:
                 body = get_data(url_in, None, "json")
+            if str(body.get('code', '0')) != '200':
+                raise HTTPError(url_in, body.get('code', '0'), body.get('message', ''), None, None)
     except HTTPError as err:
         body = err.code
         return body

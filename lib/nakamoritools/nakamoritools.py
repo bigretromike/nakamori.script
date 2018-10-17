@@ -466,8 +466,9 @@ def get_json(url_in, direct=False):
                     cache.add_cache(url_in, json.dumps(body))
             else:
                 body = get_data(url_in, None, "json")
-            if str(body.get('code', '0')) != '200':
-                raise HTTPError(url_in, body.get('code', '0'), body.get('message', ''), None, None)
+            # this broke nakamori
+            #if str(body.get('code', '0')) != '200':
+            #    raise HTTPError(url_in, body.get('code', '0'), body.get('message', ''), None, None)
     except HTTPError as err:
         body = err.code
         return body

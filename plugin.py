@@ -6,7 +6,7 @@ import xbmcplugin
 
 import routing
 
-import nakamoritools as nt
+import nakamori_utils.nakamoritools as nt
 
 plugin = routing.Plugin(base_url='plugin://script.module.nakamori')
 

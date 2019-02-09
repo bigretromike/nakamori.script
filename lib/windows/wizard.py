@@ -4,7 +4,7 @@ import xbmcgui
 import xbmc
 import xbmcaddon
 
-import nakamoritools as nt
+import nakamori_utils.nakamoritools as nt
 
 ADDON = xbmcaddon.Addon(id='script.module.nakamori')
 CWD = ADDON.getAddonInfo('path').decode('utf-8')

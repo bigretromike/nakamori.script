@@ -8,7 +8,7 @@ import xbmcgui
 import xbmc
 import xbmcaddon
 
-import lib.nakamoritools as nt
+import nakamoritools as nt
 
 from PIL import ImageFont, ImageDraw, Image
 import textwrap

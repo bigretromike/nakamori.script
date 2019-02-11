@@ -5,6 +5,7 @@
         <import addon="script.module.pil"/>
         <import addon="xbmc.python" version="2.25.0" />
         <import addon="script.module.routing" version="0.1.0"/>
+        <import addon="script.module.nakamori-lib" version="3.0.9" />
     </requires>
 	<extension point="xbmc.python.script" library="default.py">
 		<provides>executable</provides>

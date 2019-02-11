@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 import sys
 
 import xbmc
@@ -6,24 +8,23 @@ import xbmcplugin
 
 import routing
 
-import nakamori_utils.nakamoritools as nt
+from nakamori_utils import nakamoritools as nt
 
 plugin = routing.Plugin(base_url='plugin://script.module.nakamori')
 
 
-class Main:
-    def __init__(self):
-        self.params = nt.parse_parameters(sys.argv[2])
-        if 'info' in self.params:
-            if self.params['info'] == "calendar":
+def main():
+        params = nt.parse_parameters(sys.argv[2])
+        if 'info' in params:
+            if params['info'] == "calendar":
                 xbmc.executebuiltin('RunScript(script.module.nakamori,?info=calendar)')
-            elif self.params['info'] == "wizard":
+            elif params['info'] == "wizard":
                 xbmc.executebuiltin('RunScript(script.module.nakamori,?info=wizard)')
-            elif self.params['info'] == "clearcache":
+            elif params['info'] == "clearcache":
                 xbmc.executebuiltin('RunScript(script.module.nakamori,?info=clearcache)')
-            elif self.params['info'] == "information":
+            elif params['info'] == "information":
                 xbmc.executebuiltin('RunScript(script.module.nakamori,?info=information)')
-            elif self.params['info'] == "settings":
+            elif params['info'] == "settings":
                 xbmc.executebuiltin('RunScript(script.module.nakamori,?info=settings)')
         else:
             plugin.run()
@@ -78,4 +79,4 @@ def settings():
 
 
 if __name__ == "__main__":
-    Main()
+    main()

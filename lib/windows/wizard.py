@@ -2,9 +2,9 @@
 
 import xbmcgui
 import xbmc
-import xbmcaddon
 
-import nakamori_utils.nakamoritools as nt
+from nakamori_utils import nakamoritools as nt
+from nakamori_utils.globalvars import *
 
 ADDON = xbmcaddon.Addon(id='script.module.nakamori')
 CWD = ADDON.getAddonInfo('path').decode('utf-8')
@@ -73,11 +73,11 @@ class Wizard2(xbmcgui.WindowXML):
         self._button_test.setNavigation(self._button_save, self._button_save, self.getControl(LOGIN), self._button_test)
         self._button_save.setNavigation(self._button_test, self._button_test, self.getControl(PASSWORD), self._button_save)
         # get current settings
-        self.ip = nt.addon.getSetting("ipaddress")
-        self.port = nt.addon.getSetting("port")
-        self.login = nt.addon.getSetting("login")
-        self.password = nt.addon.getSetting("password")
-        self.apikey = nt.addon.getSetting("apikey")
+        self.ip = plugin_addon.getSetting("ipaddress")
+        self.port = plugin_addon.getSetting("port")
+        self.login = plugin_addon.getSetting("login")
+        self.password = plugin_addon.getSetting("password")
+        self.apikey = plugin_addon.getSetting("apikey")
         # populate controls
         self.getControl(IP_ADDRESS).setText(self.ip)
         self.getControl(PORT_NUMBER).setText(self.port)
@@ -87,7 +87,7 @@ class Wizard2(xbmcgui.WindowXML):
 
         self._button_test.setLabel(label=RSC_TEST, textColor=COLOR_WHITE, focusedColor=COLOR_WHITE_FOCUSED)
 
-        cansave = self.apikey != '' and nt.addon.getSetting('good_ip') == self.ip and nt.addon.getSetting('good_ip') != ''
+        cansave = self.apikey != '' and plugin_addon.getSetting('good_ip') == self.ip and plugin_addon.getSetting('good_ip') != ''
         self._button_save.setEnabled(cansave)
         if cansave:
             self._button_save.setLabel(label=RSC_SAVE, textColor=COLOR_WHITE, focusedColor=COLOR_WHITE_FOCUSED)
@@ -99,8 +99,8 @@ class Wizard2(xbmcgui.WindowXML):
     def onAction(self, action):
         if action == ACTION_PREVIOUS_MENU:
             self.setProperty('script.module.nakamori.running', 'false')
-            if nt.addon.getSetting('apikey') != '':
-                nt.addon.setSetting('wizard', '1')
+            if plugin_addon.getSetting('apikey') != '':
+                plugin_addon.setSetting('wizard', '1')
             self.close()
         if action == ACTION_NAV_BACK:
             xbmc.log('click close X', xbmc.LOGWARNING)
@@ -118,7 +118,7 @@ class Wizard2(xbmcgui.WindowXML):
             pass
 
         if control == SAVE_BUTTON:
-            if nt.addon.getSetting("apikey") != "":
+            if plugin_addon.getSetting("apikey") != "":
                 self.setProperty('script.module.nakamori.running', 'false')
                 self.close()
                 xbmc.executebuiltin('RunPlugin(plugin.video.nakamori)')
@@ -134,15 +134,15 @@ class Wizard2(xbmcgui.WindowXML):
     def _test_connection(self):
         if nt.get_server_status(ip=str(self.getControl(IP_ADDRESS).getText()), port=str(self.getControl(PORT_NUMBER).getText())):
             # save good address + port
-            nt.addon.setSetting(id='good_ip', value=str(self.getControl(IP_ADDRESS).getText()))
-            nt.addon.setSetting(id='good_port', value=str(self.getControl(PORT_NUMBER).getText()))
-            nt.addon.setSetting(id='ipaddress', value=str(self.getControl(IP_ADDRESS).getText()))
-            nt.addon.setSetting(id='port', value=str(self.getControl(PORT_NUMBER).getText()))
+            plugin_addon.setSetting(id='good_ip', value=str(self.getControl(IP_ADDRESS).getText()))
+            plugin_addon.setSetting(id='good_port', value=str(self.getControl(PORT_NUMBER).getText()))
+            plugin_addon.setSetting(id='ipaddress', value=str(self.getControl(IP_ADDRESS).getText()))
+            plugin_addon.setSetting(id='port', value=str(self.getControl(PORT_NUMBER).getText()))
             self._label_address.setLabel(label=RSC_IP, textColor=COLOR_GREEN, focusedColor=COLOR_WHITE_FOCUSED)
             self._label_port.setLabel(label=RSC_PORT, textColor=COLOR_GREEN, focusedColor=COLOR_WHITE_FOCUSED)
             # populate info from edits
-            nt.addon.setSetting(id="login", value=str(self.getControl(LOGIN).getText()))
-            nt.addon.setSetting(id="password", value=str(self.getControl(PASSWORD).getText()))
+            plugin_addon.setSetting(id="login", value=str(self.getControl(LOGIN).getText()))
+            plugin_addon.setSetting(id="password", value=str(self.getControl(PASSWORD).getText()))
             # check auth
             b, a = nt.valid_user()
             if b:
@@ -152,9 +152,9 @@ class Wizard2(xbmcgui.WindowXML):
                 self._button_save.setLabel(label=RSC_SAVE, textColor=COLOR_GREEN, focusedColor=COLOR_WHITE_FOCUSED)
                 self._button_save.setEnabled(True)
                 self.setup_ok = True
-                nt.addon.setSetting(id='login', value='')
-                nt.addon.setSetting(id='password', value='')
-                nt.addon.setSetting(id='apikey', value=a)
+                plugin_addon.setSetting(id='login', value='')
+                plugin_addon.setSetting(id='password', value='')
+                plugin_addon.setSetting(id='apikey', value=a)
             else:
                 self._button_test.setLabel(label=RSC_TEST, textColor=COLOR_RED, focusedColor=COLOR_RED_FOCUSED)
                 self._label_login.setLabel(label=RSC_USERNAME, textColor=COLOR_RED, focusedColor=COLOR_RED_FOCUSED)
@@ -168,9 +168,9 @@ class Wizard2(xbmcgui.WindowXML):
             self.setup_ok = False
         xbmc.log('--- wizard.py = %s' % self.setup_ok, xbmc.LOGWARNING)
         if self.setup_ok:
-            nt.addon.setSetting(id='wizard', value="1")
+            plugin_addon.setSetting(id='wizard', value="1")
         else:
-            nt.addon.setSetting(id='wizard', value="0")
+            plugin_addon.setSetting(id='wizard', value="0")
 
 
 def open_wizard():

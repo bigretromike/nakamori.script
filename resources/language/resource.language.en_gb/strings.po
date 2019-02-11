@@ -169,8 +169,8 @@ msgstr "Maintenance"
 
 #: settings.xml
 msgctxt "#30033"
-msgid "Clear Cache"
-msgstr "Clear Cache"
+msgid "Clear cache"
+msgstr "Clear cache"
 
 #: wizard.py
 msgctxt "#30034"

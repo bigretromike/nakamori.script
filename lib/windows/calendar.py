@@ -6,9 +6,9 @@ import datetime
 
 import xbmcgui
 import xbmc
-import xbmcaddon
 
-import nakamori_utils.nakamoritools as nt
+from nakamori_utils import nakamoritools as nt
+from nakamori_utils.globalvars import *
 
 from PIL import ImageFont, ImageDraw, Image
 import textwrap
@@ -216,7 +216,7 @@ class Calendar2(xbmcgui.WindowXML):
         if len(series["art"]["thumb"]) > 0:
             fanart = series["art"]["thumb"][0]["url"]
             if fanart is not None and ":" not in fanart:
-                fanart = nt.server + fanart
+                fanart = server + fanart
         title = series["titles"][0]["Title"]  # support better format here, until then this is ok
         aid = series.get('aid', 0)
         is_movie = series.get('ismovie', 0)
@@ -296,9 +296,7 @@ class Calendar2(xbmcgui.WindowXML):
 
 
 def open_calendar(date=0, starting_item=0):
-    url = "http://%s:%s/api/serie/soon?level=2&limit=0&offset=%s&d=%s" % (nt.addon.getSetting("ipaddress"),
-                                                                          nt.addon.getSetting("port"),
-                                                                          starting_item, date)
+    url = "%s/api/serie/soon?level=2&limit=0&offset=%s&d=%s" % (server, starting_item, date)
     body = nt.get_json(url)
     ui = Calendar2('calendar.xml', CWD, 'Default', '1080i', data=body, item_number=starting_item)
     ui.doModal()

@@ -3,7 +3,7 @@ import sys
 import lib.windows.calendar as _calendar
 import lib.windows.information as _information
 import lib.windows.wizard as _wizard
-import nakamori_utils.nakamoritools as nt
+from nakamori_utils import nakamoritools as nt
 
 import xbmcgui
 from xbmcaddon import Addon

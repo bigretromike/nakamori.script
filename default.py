@@ -4,6 +4,7 @@ import lib.windows.calendar as _calendar
 import lib.windows.information as _information
 import lib.windows.wizard as _wizard
 from nakamori_utils import nakamoritools as nt
+from proxy.python_version_proxy import python_proxy as pyproxy
 
 import xbmcgui
 from xbmcaddon import Addon
@@ -13,7 +14,7 @@ _addon = Addon(id='script.module.nakamori')
 
 def main():
     if len(sys.argv) > 1:
-        params = nt.parse_parameters(sys.argv[1])
+        params = pyproxy.parse_parameters(sys.argv[1])
         if not params:
             pass
         else:

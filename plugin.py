@@ -9,12 +9,13 @@ import xbmcplugin
 import routing
 
 from nakamori_utils import nakamoritools as nt
+from proxy.python_version_proxy import python_proxy as pyproxy
 
 plugin = routing.Plugin(base_url='plugin://script.module.nakamori')
 
 
 def main():
-        params = nt.parse_parameters(sys.argv[2])
+        params = pyproxy.parse_parameters(sys.argv[2])
         if 'info' in params:
             if params['info'] == "calendar":
                 xbmc.executebuiltin('RunScript(script.module.nakamori,?info=calendar)')

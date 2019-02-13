@@ -9,7 +9,7 @@ msgstr ""
 
 #: wizard.xml
 msgctxt "#30001"
-msgid "Enter Shoko Server Credentialss"
+msgid "Enter Shoko Server Credentials"
 msgstr "Enter Shoko Server Credentials"
 
 #: wizard.xml, wizard.py

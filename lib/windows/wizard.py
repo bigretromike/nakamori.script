@@ -29,7 +29,7 @@ RSC_IP = ADDON.getLocalizedString(30002)
 RSC_PORT = ADDON.getLocalizedString(30003)
 RSC_USERNAME = ADDON.getLocalizedString(30004)
 RSC_PASSWORD = ADDON.getLocalizedString(30005)
-RSC_TEST = ADDON.getLocalizedString(30027)
+RSC_TEST = ADDON.getLocalizedString(30006)
 RSC_SAVE = ADDON.getLocalizedString(30007)
 
 COLOR_RED = '0xFFDF1818'

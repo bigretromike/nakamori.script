@@ -3,7 +3,6 @@ import sys
 import lib.windows.calendar as _calendar
 import lib.windows.information as _information
 import lib.windows.wizard as _wizard
-from nakamori_utils import nakamoritools as nt
 from proxy.python_version_proxy import python_proxy as pyproxy
 
 import xbmcgui

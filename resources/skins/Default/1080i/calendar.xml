@@ -71,17 +71,17 @@
                     <height>1010</height>
                     <visible>true</visible>
                     <orientation>vertical</orientation>
-                    <itemlayout height="270" width="250">
+                    <itemlayout height="335" width="250">
                         <control type="image">
                             <description>serie</description>
                             <top>0</top>
                             <width>250</width>
-                            <height>270</height>
+                            <height>335</height>
                             <texture>series-nofo.png</texture>
                         </control>
                         <control type="image">
                             <top>0</top>
-                            <left>3</left>
+                            <left>5</left>
                             <width>250</width>
                             <height>70</height>
                             <info>ListItem.Art(poster)</info>
@@ -89,26 +89,26 @@
                         </control>
                         <control type="image">
                             <top>70</top>
-                            <left>20</left>
-                            <width>210</width>
-                            <height>200</height>
+                            <left>10</left>
+                            <width>230</width>
+                            <height>265</height>
                             <info>ListItem.Art(fanart)</info>
-                            <aspectratio aligny="top">keep</aspectratio>
+                            <!-- <aspectratio aligny="top">keep</aspectratio> -->
                         </control>
                     </itemlayout>
-                    <focusedlayout height="270" width="250">
+                    <focusedlayout height="335" width="250">
                          <control type="image">
                             <description>serie</description>
                             <top>0</top>
                             <width>250</width>
-                            <height>270</height>
+                            <height>335</height>
                             <texture>series-nofo.png</texture>
                         </control>
                         <control type="image">
                             <description>serie-focus</description>
                             <top>0</top>
                             <width>250</width>
-                            <height>270</height>
+                            <height>335</height>
                             <texture>series-fo.png</texture>
                             <visible>Control.HasFocus(55)</visible>
                         </control>
@@ -122,20 +122,20 @@
                         </control>
                         <control type="image">
                             <top>70</top>
-                            <left>20</left>
-                            <width>210</width>
-                            <height>200</height>
+                            <left>10</left>
+                            <width>230</width>
+                            <height>265</height>
                             <info>ListItem.Art(fanart)</info>
-                            <aspectratio>keep</aspectratio>
+							<!-- <aspectratio aligny="top">keep</aspectratio> -->
                         </control>
                         <control type="image">
                             <top>70</top>
-                            <left>20</left>
-                            <width>210</width>
-                            <height>200</height>
+                            <left>10</left>
+                            <width>230</width>
+                            <height>265</height>
                             <bordertexture border="-2">grey.png</bordertexture>
                             <info>ListItem.Art(fanart)</info>
-                            <aspectratio>keep</aspectratio>
+							<!-- <aspectratio aligny="top">keep</aspectratio> -->
                             <visible>Control.HasFocus(55)</visible>
                         </control>
                     </focusedlayout>
@@ -184,17 +184,17 @@
                     <height>1010</height>
                     <visible>true</visible>
                     <orientation>vertical</orientation>
-                    <itemlayout height="270" width="250">
+                    <itemlayout height="335" width="250">
                         <control type="image">
                             <description>serie</description>
                             <top>0</top>
                             <width>250</width>
-                            <height>270</height>
+                            <height>335</height>
                             <texture>series-nofo.png</texture>
                         </control>
                         <control type="image">
                             <top>0</top>
-                            <left>3</left>
+                            <left>5</left>
                             <width>250</width>
                             <height>70</height>
                             <info>ListItem.Art(poster)</info>
@@ -202,26 +202,26 @@
                         </control>
                         <control type="image">
                             <top>70</top>
-                            <left>20</left>
-                            <width>210</width>
-                            <height>200</height>
+                            <left>10</left>
+                            <width>230</width>
+                            <height>265</height>
                             <info>ListItem.Art(fanart)</info>
-                            <aspectratio aligny="top">keep</aspectratio>
+                            <!-- <aspectratio aligny="top">keep</aspectratio> -->
                         </control>
                     </itemlayout>
-                    <focusedlayout height="270" width="250">
+                    <focusedlayout height="335" width="250">
                          <control type="image">
                             <description>serie</description>
                             <top>0</top>
                             <width>250</width>
-                            <height>270</height>
+                            <height>335</height>
                             <texture>series-nofo.png</texture>
                         </control>
                         <control type="image">
                             <description>serie-focus</description>
                             <top>0</top>
                             <width>250</width>
-                            <height>270</height>
+                            <height>335</height>
                             <texture>series-fo.png</texture>
                             <visible>Control.HasFocus(56)</visible>
                         </control>
@@ -235,20 +235,20 @@
                         </control>
                         <control type="image">
                             <top>70</top>
-                            <left>20</left>
-                            <width>210</width>
-                            <height>200</height>
+                            <left>10</left>
+                            <width>230</width>
+                            <height>265</height>
                             <info>ListItem.Art(fanart)</info>
-                            <aspectratio>keep</aspectratio>
+							<!-- <aspectratio aligny="top">keep</aspectratio> -->
                         </control>
                         <control type="image">
                             <top>70</top>
-                            <left>20</left>
-                            <width>210</width>
-                            <height>200</height>
+                            <left>10</left>
+                            <width>230</width>
+                            <height>265</height>
                             <bordertexture border="-2">grey.png</bordertexture>
                             <info>ListItem.Art(fanart)</info>
-                            <aspectratio>keep</aspectratio>
+							<!-- <aspectratio aligny="top">keep</aspectratio> -->
                             <visible>Control.HasFocus(56)</visible>
                         </control>
                     </focusedlayout>
@@ -297,17 +297,17 @@
                     <height>1010</height>
                     <visible>true</visible>
                     <orientation>vertical</orientation>
-                    <itemlayout height="270" width="250">
+                    <itemlayout height="335" width="250">
                         <control type="image">
                             <description>serie</description>
                             <top>0</top>
                             <width>250</width>
-                            <height>270</height>
+                            <height>335</height>
                             <texture>series-nofo.png</texture>
                         </control>
                         <control type="image">
                             <top>0</top>
-                            <left>3</left>
+                            <left>5</left>
                             <width>250</width>
                             <height>70</height>
                             <info>ListItem.Art(poster)</info>
@@ -315,26 +315,26 @@
                         </control>
                         <control type="image">
                             <top>70</top>
-                            <left>20</left>
-                            <width>210</width>
-                            <height>200</height>
+                            <left>10</left>
+                            <width>230</width>
+                            <height>265</height>
                             <info>ListItem.Art(fanart)</info>
-                            <aspectratio aligny="top">keep</aspectratio>
+                            <!-- <aspectratio aligny="top">keep</aspectratio> -->
                         </control>
                     </itemlayout>
-                    <focusedlayout height="270" width="250">
+                    <focusedlayout height="335" width="250">
                          <control type="image">
                             <description>serie</description>
                             <top>0</top>
                             <width>250</width>
-                            <height>270</height>
+                            <height>335</height>
                             <texture>series-nofo.png</texture>
                         </control>
                         <control type="image">
                             <description>serie-focus</description>
                             <top>0</top>
                             <width>250</width>
-                            <height>270</height>
+                            <height>335</height>
                             <texture>series-fo.png</texture>
                             <visible>Control.HasFocus(57)</visible>
                         </control>
@@ -348,20 +348,20 @@
                         </control>
                         <control type="image">
                             <top>70</top>
-                            <left>20</left>
-                            <width>210</width>
-                            <height>200</height>
+                            <left>10</left>
+                            <width>230</width>
+                            <height>265</height>
                             <info>ListItem.Art(fanart)</info>
-                            <aspectratio>keep</aspectratio>
+							<!-- <aspectratio aligny="top">keep</aspectratio> -->
                         </control>
                         <control type="image">
                             <top>70</top>
-                            <left>20</left>
-                            <width>210</width>
-                            <height>200</height>
+                            <left>10</left>
+                            <width>230</width>
+                            <height>265</height>
                             <bordertexture border="-2">grey.png</bordertexture>
                             <info>ListItem.Art(fanart)</info>
-                            <aspectratio>keep</aspectratio>
+							<!-- <aspectratio aligny="top">keep</aspectratio> -->
                             <visible>Control.HasFocus(57)</visible>
                         </control>
                     </focusedlayout>
@@ -378,7 +378,7 @@
 
                 <control type="image" id="48">
                     <description>up-image</description>
-                    <left>770</left>
+                    <left>760</left>
                     <top>40</top>
                     <width>250</width>
                     <height>50</height>
@@ -404,23 +404,23 @@
                     <label></label>
                 </control>
                 <control type="list" id="58">
-                    <left>770</left>
+                    <left>760</left>
                     <top>50</top>
                     <width>250</width>
                     <height>1010</height>
                     <visible>true</visible>
                     <orientation>vertical</orientation>
-                    <itemlayout height="270" width="250">
+                    <itemlayout height="335" width="250">
                         <control type="image">
                             <description>serie</description>
                             <top>0</top>
                             <width>250</width>
-                            <height>270</height>
+                            <height>335</height>
                             <texture>series-nofo.png</texture>
                         </control>
                         <control type="image">
                             <top>0</top>
-                            <left>3</left>
+                            <left>5</left>
                             <width>250</width>
                             <height>70</height>
                             <info>ListItem.Art(poster)</info>
@@ -428,26 +428,26 @@
                         </control>
                         <control type="image">
                             <top>70</top>
-                            <left>20</left>
-                            <width>210</width>
-                            <height>200</height>
+                            <left>10</left>
+                            <width>230</width>
+                            <height>265</height>
                             <info>ListItem.Art(fanart)</info>
-                            <aspectratio aligny="top">keep</aspectratio>
+                            <!-- <aspectratio aligny="top">keep</aspectratio> -->
                         </control>
                     </itemlayout>
-                    <focusedlayout height="270" width="250">
+                    <focusedlayout height="335" width="250">
                          <control type="image">
                             <description>serie</description>
                             <top>0</top>
                             <width>250</width>
-                            <height>270</height>
+                            <height>335</height>
                             <texture>series-nofo.png</texture>
                         </control>
                         <control type="image">
                             <description>serie-focus</description>
                             <top>0</top>
                             <width>250</width>
-                            <height>270</height>
+                            <height>335</height>
                             <texture>series-fo.png</texture>
                             <visible>Control.HasFocus(58)</visible>
                         </control>
@@ -461,20 +461,20 @@
                         </control>
                         <control type="image">
                             <top>70</top>
-                            <left>20</left>
-                            <width>210</width>
-                            <height>200</height>
+                            <left>10</left>
+                            <width>230</width>
+                            <height>265</height>
                             <info>ListItem.Art(fanart)</info>
-                            <aspectratio>keep</aspectratio>
+							<!-- <aspectratio aligny="top">keep</aspectratio> -->
                         </control>
                         <control type="image">
                             <top>70</top>
-                            <left>20</left>
-                            <width>210</width>
-                            <height>200</height>
+                            <left>10</left>
+                            <width>230</width>
+                            <height>265</height>
                             <bordertexture border="-2">grey.png</bordertexture>
                             <info>ListItem.Art(fanart)</info>
-                            <aspectratio>keep</aspectratio>
+							<!-- <aspectratio aligny="top">keep</aspectratio> -->
                             <visible>Control.HasFocus(58)</visible>
                         </control>
                     </focusedlayout>
@@ -517,23 +517,23 @@
                     <label></label>
                 </control>
                 <control type="list" id="59">
-                    <left>1020</left>
+                    <left>1010</left>
                     <top>50</top>
                     <width>250</width>
                     <height>1010</height>
                     <visible>true</visible>
                     <orientation>vertical</orientation>
-                    <itemlayout height="270" width="250">
+                    <itemlayout height="335" width="250">
                         <control type="image">
                             <description>serie</description>
                             <top>0</top>
                             <width>250</width>
-                            <height>270</height>
+                            <height>335</height>
                             <texture>series-nofo.png</texture>
                         </control>
                         <control type="image">
                             <top>0</top>
-                            <left>3</left>
+                            <left>5</left>
                             <width>250</width>
                             <height>70</height>
                             <info>ListItem.Art(poster)</info>
@@ -541,26 +541,26 @@
                         </control>
                         <control type="image">
                             <top>70</top>
-                            <left>20</left>
-                            <width>210</width>
-                            <height>200</height>
+                            <left>10</left>
+                            <width>230</width>
+                            <height>265</height>
                             <info>ListItem.Art(fanart)</info>
-                            <aspectratio aligny="top">keep</aspectratio>
+                            <!-- <aspectratio aligny="top">keep</aspectratio> -->
                         </control>
                     </itemlayout>
-                    <focusedlayout height="270" width="250">
+                    <focusedlayout height="335" width="250">
                          <control type="image">
                             <description>serie</description>
                             <top>0</top>
                             <width>250</width>
-                            <height>270</height>
+                            <height>335</height>
                             <texture>series-nofo.png</texture>
                         </control>
                         <control type="image">
                             <description>serie-focus</description>
                             <top>0</top>
                             <width>250</width>
-                            <height>270</height>
+                            <height>335</height>
                             <texture>series-fo.png</texture>
                             <visible>Control.HasFocus(59)</visible>
                         </control>
@@ -574,20 +574,20 @@
                         </control>
                         <control type="image">
                             <top>70</top>
-                            <left>20</left>
-                            <width>210</width>
-                            <height>200</height>
+                            <left>10</left>
+                            <width>230</width>
+                            <height>265</height>
                             <info>ListItem.Art(fanart)</info>
-                            <aspectratio>keep</aspectratio>
+							<!-- <aspectratio aligny="top">keep</aspectratio> -->
                         </control>
                         <control type="image">
                             <top>70</top>
-                            <left>20</left>
-                            <width>210</width>
-                            <height>200</height>
+                            <left>10</left>
+                            <width>230</width>
+                            <height>265</height>
                             <bordertexture border="-2">grey.png</bordertexture>
                             <info>ListItem.Art(fanart)</info>
-                            <aspectratio>keep</aspectratio>
+							<!-- <aspectratio aligny="top">keep</aspectratio> -->
                             <visible>Control.HasFocus(59)</visible>
                         </control>
                     </focusedlayout>
@@ -630,23 +630,23 @@
                     <label></label>
                 </control>
                 <control type="list" id="60">
-                    <left>1270</left>
+                    <left>1260</left>
                     <top>50</top>
                     <width>250</width>
                     <height>1010</height>
                     <visible>true</visible>
                     <orientation>vertical</orientation>
-                    <itemlayout height="270" width="250">
+                    <itemlayout height="335" width="250">
                         <control type="image">
                             <description>serie</description>
                             <top>0</top>
                             <width>250</width>
-                            <height>270</height>
+                            <height>335</height>
                             <texture>series-nofo.png</texture>
                         </control>
                         <control type="image">
                             <top>0</top>
-                            <left>3</left>
+                            <left>5</left>
                             <width>250</width>
                             <height>70</height>
                             <info>ListItem.Art(poster)</info>
@@ -654,26 +654,26 @@
                         </control>
                         <control type="image">
                             <top>70</top>
-                            <left>20</left>
-                            <width>210</width>
-                            <height>200</height>
+                            <left>10</left>
+                            <width>230</width>
+                            <height>265</height>
                             <info>ListItem.Art(fanart)</info>
-                            <aspectratio aligny="top">keep</aspectratio>
+                            <!-- <aspectratio aligny="top">keep</aspectratio> -->
                         </control>
                     </itemlayout>
-                    <focusedlayout height="270" width="250">
+                    <focusedlayout height="335" width="250">
                          <control type="image">
                             <description>serie</description>
                             <top>0</top>
                             <width>250</width>
-                            <height>270</height>
+                            <height>335</height>
                             <texture>series-nofo.png</texture>
                         </control>
                         <control type="image">
                             <description>serie-focus</description>
                             <top>0</top>
                             <width>250</width>
-                            <height>270</height>
+                            <height>335</height>
                             <texture>series-fo.png</texture>
                             <visible>Control.HasFocus(60)</visible>
                         </control>
@@ -687,20 +687,20 @@
                         </control>
                         <control type="image">
                             <top>70</top>
-                            <left>20</left>
-                            <width>210</width>
-                            <height>200</height>
+                            <left>10</left>
+                            <width>230</width>
+                            <height>265</height>
                             <info>ListItem.Art(fanart)</info>
-                            <aspectratio>keep</aspectratio>
+							<!-- <aspectratio aligny="top">keep</aspectratio> -->
                         </control>
                         <control type="image">
                             <top>70</top>
-                            <left>20</left>
-                            <width>210</width>
-                            <height>200</height>
+                            <left>10</left>
+                            <width>230</width>
+                            <height>265</height>
                             <bordertexture border="-2">grey.png</bordertexture>
                             <info>ListItem.Art(fanart)</info>
-                            <aspectratio>keep</aspectratio>
+							<!-- <aspectratio aligny="top">keep</aspectratio> -->
                             <visible>Control.HasFocus(60)</visible>
                         </control>
                     </focusedlayout>
@@ -744,23 +744,23 @@
                 </control>
                 <control type="list" id="61">
                     <onright>2</onright>
-                    <left>1520</left>
+                    <left>1510</left>
                     <top>50</top>
                     <width>250</width>
                     <height>1010</height>
                     <visible>true</visible>
                     <orientation>vertical</orientation>
-                    <itemlayout height="270" width="250">
+                    <itemlayout height="335" width="250">
                         <control type="image">
                             <description>serie</description>
                             <top>0</top>
                             <width>250</width>
-                            <height>270</height>
+                            <height>335</height>
                             <texture>series-nofo.png</texture>
                         </control>
                         <control type="image">
                             <top>0</top>
-                            <left>3</left>
+                            <left>5</left>
                             <width>250</width>
                             <height>70</height>
                             <info>ListItem.Art(poster)</info>
@@ -768,26 +768,26 @@
                         </control>
                         <control type="image">
                             <top>70</top>
-                            <left>20</left>
-                            <width>210</width>
-                            <height>200</height>
+                            <left>10</left>
+                            <width>230</width>
+                            <height>265</height>
                             <info>ListItem.Art(fanart)</info>
-                            <aspectratio aligny="top">keep</aspectratio>
+                            <!-- <aspectratio aligny="top">keep</aspectratio> -->
                         </control>
                     </itemlayout>
-                    <focusedlayout height="270" width="250">
+                    <focusedlayout height="335" width="250">
                          <control type="image">
                             <description>serie</description>
                             <top>0</top>
                             <width>250</width>
-                            <height>270</height>
+                            <height>335</height>
                             <texture>series-nofo.png</texture>
                         </control>
                         <control type="image">
                             <description>serie-focus</description>
                             <top>0</top>
                             <width>250</width>
-                            <height>270</height>
+                            <height>335</height>
                             <texture>series-fo.png</texture>
                             <visible>Control.HasFocus(61)</visible>
                         </control>
@@ -801,20 +801,20 @@
                         </control>
                         <control type="image">
                             <top>70</top>
-                            <left>20</left>
-                            <width>210</width>
-                            <height>200</height>
+                            <left>10</left>
+                            <width>230</width>
+                            <height>265</height>
                             <info>ListItem.Art(fanart)</info>
-                            <aspectratio>keep</aspectratio>
+							<!-- <aspectratio aligny="top">keep</aspectratio> -->
                         </control>
                         <control type="image">
                             <top>70</top>
-                            <left>20</left>
-                            <width>210</width>
-                            <height>200</height>
+                            <left>10</left>
+                            <width>230</width>
+                            <height>265</height>
                             <bordertexture border="-2">grey.png</bordertexture>
                             <info>ListItem.Art(fanart)</info>
-                            <aspectratio>keep</aspectratio>
+							<!-- <aspectratio aligny="top">keep</aspectratio> -->
                             <visible>Control.HasFocus(61)</visible>
                         </control>
                     </focusedlayout>

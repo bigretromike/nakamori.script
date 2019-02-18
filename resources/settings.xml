@@ -4,7 +4,7 @@
     <category label="30028">
         <setting label="30029" type="text" id="font" default="FiraMono-Bold.ttf"/>
         <setting label="30030" type="text" id="color" default="#ffffff"/>
-        <setting label="30031" type="number" id="size" default="18"/>
+        <setting label="30031" type="number" id="size" default="20"/>
     </category>
     <!-- maintenance -->
     <category label="30032">

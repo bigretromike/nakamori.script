@@ -154,23 +154,23 @@ class Calendar2(xbmcgui.WindowXML):
     def onAction(self, action):
         if action == ACTION_PREVIOUS_MENU:
             self.close()
-        if action == ACTION_NAV_BACK:
+        elif action == ACTION_NAV_BACK:
             self.close()
-        if action == xbmcgui.ACTION_MOVE_RIGHT:
+        elif action == xbmcgui.ACTION_MOVE_RIGHT:
             if self.getFocus().getId() != 2:
                 self.list_update_right()
             else:
                 xbmc.executebuiltin('RunScript(script.module.nakamori,?info=calendar&date=0&page=%s)'
                                     % self.serie_processed, True)
-        if action == xbmcgui.ACTION_MOVE_LEFT:
+        elif action == xbmcgui.ACTION_MOVE_LEFT:
             if self.getFocus().getId() != 1:
                 self.list_update_left()
             else:
                 xbmc.executebuiltin('Action(Back)')
-        if action == xbmcgui.ACTION_MOUSE_RIGHT_CLICK:
+        elif action == xbmcgui.ACTION_MOUSE_RIGHT_CLICK:
             # dont force it on right click;
             pass
-        if action == xbmcgui.ACTION_CONTEXT_MENU:
+        elif action == xbmcgui.ACTION_CONTEXT_MENU:
             control_id = self.getFocus().getId()
             aid = self.getControl(control_id).getSelectedItem().getProperty("aid")
             content_menu = [
@@ -182,8 +182,14 @@ class Calendar2(xbmcgui.WindowXML):
             ]
             if xbmcgui.Dialog().contextmenu(content_menu) != -1:
                 xbmcgui.Dialog().ok('soon', 'comming soon')
-        if action == xbmcgui.ACTION_SELECT_ITEM:
+        elif action == xbmcgui.ACTION_SELECT_ITEM:
             xbmcgui.Dialog().ok('soon', 'show soon')
+        elif action == xbmcgui.ACTION_MOUSE_LEFT_CLICK:
+            if self.getFocus().getId() == 1:
+                xbmc.executebuiltin('Action(Back)')
+            elif self.getFocus().getId() == 2:
+                xbmc.executebuiltin('RunScript(script.module.nakamori,?info=calendar&date=0&page=%s)'
+                                    % self.serie_processed, True)
 
     def onControl(self, control):
         pass

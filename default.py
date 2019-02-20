@@ -55,7 +55,7 @@ def root():
 
 def calendar(when, page):
     _calendar.open_calendar(date=when, starting_item=page)
-    return True
+    pass
 
 
 def wizard():

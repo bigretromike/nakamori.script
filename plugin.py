@@ -51,7 +51,7 @@ def root():
 @plugin.route('/calendar/<when>/<page>/')
 def calendar(when, page):
     xbmc.executebuiltin('RunScript(script.module.nakamori,?info=calendar&date=' + when + '&page=' + page + ')', True)
-    return True
+    pass
 
 
 @plugin.route('/wizard')

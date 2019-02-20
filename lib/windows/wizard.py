@@ -39,6 +39,7 @@ COLOR_WHITE_FOCUSED = '0xFFFFFFFF'
 COLOR_GREEN = '0xFF18DD18'
 COLOR_GREEN_FOCUSED = '0xFF10FF10'
 
+
 class Wizard2(xbmcgui.WindowXML):
     def __init__(self, xmlFile, resourcePath, skin, skinRes):
         self.window_type = "window"

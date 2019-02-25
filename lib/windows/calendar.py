@@ -148,7 +148,7 @@ class Calendar2(xbmcgui.WindowXML):
             busy.close()
             if _count == _size:
                 self.getControl(2).setVisible(False)
-                self.getControl(2).setEnable(False)
+                self.getControl(2).setEnabled(False)
             self.setFocus(self.getControl(901))
 
     def onAction(self, action):

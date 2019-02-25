@@ -5,7 +5,7 @@ import lib.windows.information as _information
 import lib.windows.wizard as _wizard
 from proxy.python_version_proxy import python_proxy as pyproxy
 
-import xbmcgui
+import xbmcgui, xbmc
 from xbmcaddon import Addon
 
 _addon = Addon(id='script.module.nakamori')
@@ -18,6 +18,8 @@ def main():
             pass
         else:
             if params['info'] == 'calendar':
+                # TODO please confirm this, because we didn't need it before. https://github.com/xbmc/xbmc/issues/15565
+                xbmc.sleep(1000)  # TODO HACK: kodi18 fix for not showing calendar at all from nakamori menu
                 _calendar.open_calendar(date=params.get('date', 0), starting_item=params.get('page', 0))
             elif params['info'] == 'wizard':
                 _wizard.open_wizard()

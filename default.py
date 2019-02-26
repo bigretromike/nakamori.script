@@ -15,22 +15,21 @@ def main():
     if len(sys.argv) > 1:
         params = pyproxy.parse_parameters(sys.argv[1])
         if not params:
-            pass
+            return
+        if params['info'] == 'calendar':
+            # TODO please confirm this, because we didn't need it before. https://github.com/xbmc/xbmc/issues/15565
+            xbmc.sleep(1000)  # TODO HACK: kodi18 fix for not showing calendar at all from nakamori menu
+            _calendar.open_calendar(date=params.get('date', 0), starting_item=params.get('page', 0))
+        elif params['info'] == 'wizard':
+            _wizard.open_wizard()
+        elif params['info'] == 'clearcache':
+            _calendar.clear_cache()
+        elif params['info'] == 'information':
+            _information.open_information()
+        elif params['info'] == 'settings':
+            _addon.openSettings()
         else:
-            if params['info'] == 'calendar':
-                # TODO please confirm this, because we didn't need it before. https://github.com/xbmc/xbmc/issues/15565
-                xbmc.sleep(1000)  # TODO HACK: kodi18 fix for not showing calendar at all from nakamori menu
-                _calendar.open_calendar(date=params.get('date', 0), starting_item=params.get('page', 0))
-            elif params['info'] == 'wizard':
-                _wizard.open_wizard()
-            elif params['info'] == 'clearcache':
-                _calendar.clear_cache()
-            elif params['info'] == 'information':
-                _information.open_information()
-            elif params['info'] == 'settings':
-                _addon.openSettings()
-            else:
-                root()
+            root()
     else:
         root()
             

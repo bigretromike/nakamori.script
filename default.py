@@ -1,11 +1,13 @@
 import sys
 
 import lib.windows.calendar as _calendar
+import lib.windows.cohesion as _cohesion
 import lib.windows.information as _information
 import lib.windows.wizard as _wizard
 from proxy.python_version_proxy import python_proxy as pyproxy
 
-import xbmcgui, xbmc
+import xbmc
+import xbmcgui
 from xbmcaddon import Addon
 
 _addon = Addon(id='script.module.nakamori')
@@ -28,6 +30,8 @@ def main():
             _information.open_information()
         elif params['info'] == 'settings':
             _addon.openSettings()
+        elif params['info'] == 'cohesion':
+            _cohesion.check_cohesion()
         else:
             root()
     else:
@@ -41,6 +45,7 @@ def root():
         ("Calendar (Add 14 Days)", (calendar, ['0', '14'])),
         ("Information", (information, [])),
         ("Clear-cache", (clearcache, [])),
+        ("Installation Integrity", (cohesion, [])),
         ("Settings", (settings, []))
     ]
 
@@ -56,27 +61,26 @@ def root():
 
 def calendar(when, page):
     _calendar.open_calendar(date=when, starting_item=page)
-    pass
 
 
 def wizard():
     _wizard.open_wizard()
-    pass
 
 
 def clearcache():
     _calendar.clear_cache()
-    pass
 
 
 def information():
     _information.open_information()
-    pass
 
 
 def settings():
     _addon.openSettings()
-    pass
+
+
+def cohesion():
+    _cohesion.check_cohesion()
 
 
 if __name__ == "__main__":

@@ -26,6 +26,8 @@ def main():
                 xbmc.executebuiltin('RunScript(script.module.nakamori,?info=information)')
             elif params['info'] == "settings":
                 xbmc.executebuiltin('RunScript(script.module.nakamori,?info=settings)')
+            elif params['info'] == "cohesion":
+                xbmc.executebuiltin('RunScript(script.module.nakamori,?info=cohesion)')
         else:
             plugin.run()
 
@@ -51,31 +53,31 @@ def root():
 @plugin.route('/calendar/<when>/<page>/')
 def calendar(when, page):
     xbmc.executebuiltin('RunScript(script.module.nakamori,?info=calendar&date=' + when + '&page=' + page + ')', True)
-    pass
 
 
 @plugin.route('/wizard')
 def wizard():
     xbmc.executebuiltin('RunScript(script.module.nakamori,?info=wizard)', True)
-    pass
 
 
 @plugin.route('/clearcache')
 def clearcache():
     xbmc.executebuiltin('RunScript(script.module.nakamori,?info=clearcache)', True)
-    pass
 
 
 @plugin.route('/information')
 def information():
     xbmc.executebuiltin('RunScript(script.module.nakamori,?info=information)', True)
-    pass
 
 
 @plugin.route('/settings')
 def settings():
     xbmc.executebuiltin('RunScript(script.module.nakamori,?info=settings)', True)
-    pass
+
+
+@plugin.route('/cohesion')
+def cohesion():
+    xbmc.executebuiltin('RunScript(script.module.nakamori,?info=cohesion)')
 
 
 if __name__ == "__main__":

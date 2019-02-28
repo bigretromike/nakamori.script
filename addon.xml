@@ -2,10 +2,10 @@
 <addon id="script.module.nakamori" name="Nakamori Script" version="3.1.0~beta" provider-name="BigRetroMike, da3dsoul">
     <requires>
         <import addon="resource.images.nakamori" version="3.0.0"/>
-        <import addon="script.module.pil"/>
-        <import addon="xbmc.python" version="2.25.0" />
+        <import addon="script.module.pil" version="1.1.7"/>
+        <import addon="xbmc.python" version="2.25.0"/>
         <import addon="script.module.routing" version="0.1.0"/>
-        <import addon="script.module.nakamori-lib" version="3.1.0~beta" />
+        <import addon="script.module.nakamori-lib" version="3.1.0~beta"/>
     </requires>
 	<extension point="xbmc.python.script" library="default.py">
 		<provides>executable</provides>

@@ -123,16 +123,6 @@ msgid "Episode Voting"
 msgstr "Episode Voting"
 
 #: nakamoritools.py
-msgctxt "#30024"
-msgid "Watched Status Changed"
-msgstr "Watched Status Changed"
-
-#: nakamoritools.py
-msgctxt "#30025"
-msgid "Marked as"
-msgstr "Marked as"
-
-#: nakamoritools.py
 msgctxt "#30026"
 msgid "Enter search text"
 msgstr "Enter search text"

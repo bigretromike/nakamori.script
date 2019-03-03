@@ -69,7 +69,7 @@ if not os.path.exists(os.path.join(profileDir, 'titles', color, font_ttf + '-' +
 
 class Calendar2(xbmcgui.WindowXML):
     def __init__(self, strXMLname, strFallbackPath, strDefaultName, forceFallback, data, item_number=0):
-        self.window_type = "window"
+        self.window_type = 'window'
         self.json_data = data
         self._start_item = 0
         try:
@@ -172,7 +172,7 @@ class Calendar2(xbmcgui.WindowXML):
             pass
         elif action == xbmcgui.ACTION_CONTEXT_MENU:
             control_id = self.getFocus().getId()
-            aid = self.getControl(control_id).getSelectedItem().getProperty("aid")
+            aid = self.getControl(control_id).getSelectedItem().getProperty('aid')
             content_menu = [
                 '- aid = ' + str(aid) + '-',
                 ADDON.getLocalizedString(30037),
@@ -219,11 +219,11 @@ class Calendar2(xbmcgui.WindowXML):
             self.date_label[self.day_count].setLabel(string_day)
 
         fanart = os.path.join(img, 'icons', 'new-search.jpg')
-        if len(series["art"]["thumb"]) > 0:
-            fanart = series["art"]["thumb"][0]["url"]
-            if fanart is not None and ":" not in fanart:
+        if len(series['art']['thumb']) > 0:
+            fanart = series['art']['thumb'][0]['url']
+            if fanart is not None and ':' not in fanart:
                 fanart = server + fanart
-        title = series["titles"][0]["Title"]  # support better format here, until then this is ok
+        title = series['titles'][0]['Title']  # support better format here, until then this is ok
         aid = series.get('aid', 0)
         is_movie = series.get('ismovie', 0)
         summary = series.get('summary', '')
@@ -233,7 +233,7 @@ class Calendar2(xbmcgui.WindowXML):
         new_image_url = os.path.join(profileDir, 'titles', color, font_ttf + '-' + font_size, str(aid) + '.png')
         if not os.path.exists(new_image_url):
             this_path = os.path.join(font_path, font_ttf)
-            font = ImageFont.truetype(this_path, int(font_size), encoding="unic")
+            font = ImageFont.truetype(this_path, int(font_size), encoding='unic')
             text_width, text_height = font.getsize(title)
             text_lenght_till_split = 30
             if text_width + 5 > 250:
@@ -269,7 +269,7 @@ class Calendar2(xbmcgui.WindowXML):
 
         series_listitem = xbmcgui.ListItem(label=title)
         series_listitem.setArt({'thumb': fanart, 'poster': new_image_url, 'fanart': fanart})
-        # series_listitem.setUniqueIDs({'anidb': aid}, "anidb")
+        # series_listitem.setUniqueIDs({'anidb': aid}, ')
         series_listitem.setInfo('video', {'title': title, 'aired': air_date})
         series_listitem.setProperty('aid', str(aid))
         self.calendar_collection[self.day_count].addItem(series_listitem)
@@ -302,7 +302,7 @@ class Calendar2(xbmcgui.WindowXML):
 
 
 def open_calendar(date=0, starting_item=0):
-    url = "%s/api/serie/soon?level=2&limit=0&offset=%s&d=%s" % (server, starting_item, date)
+    url = '%s/api/serie/soon?level=2&limit=0&offset=%s&d=%s' % (server, starting_item, date)
     body = nt.get_json(url)
     ui = Calendar2('calendar.xml', CWD, 'Default', '1080i', data=body, item_number=starting_item)
     ui.doModal()

@@ -40,13 +40,13 @@ def main():
 
 def root():
     items = [
-        ("Wizard", (wizard, [])),
-        ("Calendar", (calendar, ['0', '0'])),
-        ("Calendar (Add 14 Days)", (calendar, ['0', '14'])),
-        ("Information", (information, [])),
-        ("Clear-cache", (clearcache, [])),
-        ("Installation Integrity", (cohesion, [])),
-        ("Settings", (settings, []))
+        ('Wizard', (wizard, [])),
+        ('Calendar', (calendar, ['0', '0'])),
+        ('Calendar (Add 14 Days)', (calendar, ['0', '14'])),
+        ('Information', (information, [])),
+        ('Clear-cache', (clearcache, [])),
+        ('Installation Integrity', (cohesion, [])),
+        ('Settings', (settings, []))
     ]
 
     options = []
@@ -83,5 +83,5 @@ def cohesion():
     _cohesion.check_cohesion()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

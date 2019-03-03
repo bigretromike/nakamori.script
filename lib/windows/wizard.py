@@ -42,7 +42,7 @@ COLOR_GREEN_FOCUSED = '0xFF10FF10'
 
 class Wizard2(xbmcgui.WindowXML):
     def __init__(self, xmlFile, resourcePath, skin, skinRes):
-        self.window_type = "window"
+        self.window_type = 'window'
         self.ip = None
         self.port = None
         self.login = ''
@@ -74,11 +74,11 @@ class Wizard2(xbmcgui.WindowXML):
         self._button_test.setNavigation(self._button_save, self._button_save, self.getControl(LOGIN), self._button_test)
         self._button_save.setNavigation(self._button_test, self._button_test, self.getControl(PASSWORD), self._button_save)
         # get current settings
-        self.ip = plugin_addon.getSetting("ipaddress")
-        self.port = plugin_addon.getSetting("port")
-        self.login = plugin_addon.getSetting("login")
-        self.password = plugin_addon.getSetting("password")
-        self.apikey = plugin_addon.getSetting("apikey")
+        self.ip = plugin_addon.getSetting('ipaddress')
+        self.port = plugin_addon.getSetting('port')
+        self.login = plugin_addon.getSetting('login')
+        self.password = plugin_addon.getSetting('password')
+        self.apikey = plugin_addon.getSetting('apikey')
         # populate controls
         self.getControl(IP_ADDRESS).setText(self.ip)
         self.getControl(PORT_NUMBER).setText(self.port)
@@ -119,7 +119,7 @@ class Wizard2(xbmcgui.WindowXML):
             pass
 
         if control == SAVE_BUTTON:
-            if plugin_addon.getSetting("apikey") != "":
+            if plugin_addon.getSetting('apikey') != '':
                 self.setProperty('script.module.nakamori.running', 'false')
                 self.close()
                 xbmc.executebuiltin('RunPlugin(plugin.video.nakamori)')
@@ -142,8 +142,8 @@ class Wizard2(xbmcgui.WindowXML):
             self._label_address.setLabel(label=RSC_IP, textColor=COLOR_GREEN, focusedColor=COLOR_WHITE_FOCUSED)
             self._label_port.setLabel(label=RSC_PORT, textColor=COLOR_GREEN, focusedColor=COLOR_WHITE_FOCUSED)
             # populate info from edits
-            plugin_addon.setSetting(id="login", value=str(self.getControl(LOGIN).getText()))
-            plugin_addon.setSetting(id="password", value=str(self.getControl(PASSWORD).getText()))
+            plugin_addon.setSetting(id='login', value=str(self.getControl(LOGIN).getText()))
+            plugin_addon.setSetting(id='password', value=str(self.getControl(PASSWORD).getText()))
             # check auth
             b, a = nt.valid_user()
             if b:
@@ -169,9 +169,9 @@ class Wizard2(xbmcgui.WindowXML):
             self.setup_ok = False
         xbmc.log('--- wizard.py = %s' % self.setup_ok, xbmc.LOGWARNING)
         if self.setup_ok:
-            plugin_addon.setSetting(id='wizard', value="1")
+            plugin_addon.setSetting(id='wizard', value='1')
         else:
-            plugin_addon.setSetting(id='wizard', value="0")
+            plugin_addon.setSetting(id='wizard', value='0')
 
 
 def open_wizard():

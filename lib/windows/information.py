@@ -17,7 +17,7 @@ CONTENT_TEXTBOX = 303
 
 class Information(xbmcgui.WindowXMLDialog):
     def __init__(self, xmlFile, resourcePath, skin, skinRes):
-        self.window_type = "window"
+        self.window_type = 'window'
 
     def onInit(self):
         _close = self.getControl(CLOSE_BUTTON)
@@ -25,7 +25,7 @@ class Information(xbmcgui.WindowXMLDialog):
         tree = ET.parse(os.path.join(xbmcaddon.Addon(id='plugin.video.nakamori').getAddonInfo('path').decode('utf-8'),
                                      'addon.xml'))
         root = tree.getroot()
-        news = root.findall(".//*[@point='xbmc.addon.metadata']/news")
+        news = root.findall('.//*[@point='xbmc.addon.metadata']/news')
         _textbox.setText(news[0].text)
         self.setFocus(_close)
 

@@ -218,7 +218,7 @@ class Calendar2(xbmcgui.WindowXML):
             self.day_label[self.day_count].setLabel(self.day_of_week[name_of_day])
             self.date_label[self.day_count].setLabel(string_day)
 
-        fanart = os.path.join(img, 'icons', 'new-search.jpg')
+        fanart = os.path.join(img, 'icons', 'new-search.png')
         if len(series['art']['thumb']) > 0:
             fanart = series['art']['thumb'][0]['url']
             if fanart is not None and ':' not in fanart:

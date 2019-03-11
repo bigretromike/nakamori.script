@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
-import os
 import time
 import json
 import datetime
 
 import xbmcgui
-import xbmc
 
 from nakamori_utils import nakamoritools as nt
 from nakamori_utils.globalvars import *

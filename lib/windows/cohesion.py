@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
-import os
 import zlib
 
-import xbmc
 import xbmcgui
-import xbmcaddon
 
 from nakamori_utils.globalvars import *
 

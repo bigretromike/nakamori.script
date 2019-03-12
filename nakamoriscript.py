@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import debug
-import nakamori_player
 import xbmcgui
 
 import routing
 from error_handler import ErrorPriority, try_function, show_messages
+from nakamori_utils import kodi_utils
 
 from nakamori_utils.globalvars import *
 import lib.windows.calendar as _calendar
@@ -45,23 +45,24 @@ def calendar(when=0, page=1):
     _calendar.open_calendar(date=when, starting_item=page)
 
 
-@script.route('/wizard')
+@script.route('/dialog/wizard')
 def wizard():
     _wizard.open_wizard()
 
 
-@script.route('/clear_calendar_cache')
+@script.route('/calendar/clear_cache')
 def clearcache():
     _calendar.clear_cache()
 
 
-@script.route('/whats_new')
+@script.route('/dialog/whats_new')
 def whats_new():
     # TODO redo the what's new version checking and only display if it's new, thereby replacing the setting
     _information.open_information()
 
 
-@script.route('/settings')
+@script.route('/dialog/settings')
+@try_function(ErrorPriority.BLOCKING)
 def settings():
     plugin_addon.openSettings()
 
@@ -69,18 +70,6 @@ def settings():
 @script.route('/cohesion')
 def cohesion():
     _cohesion.check_cohesion()
-
-
-@script.route('/dialog/settings')
-@try_function(ErrorPriority.BLOCKING)
-def show_settings_dialog():
-    pass
-
-
-@script.route('/dialog/wizard')
-@try_function(ErrorPriority.BLOCKING)
-def show_wizard_dialog():
-    pass
 
 
 @script.route('/dialog/vote_series/<series_id>')
@@ -113,6 +102,7 @@ def set_episode_watched_status(ep_id, watched):
     from shoko_models.v2 import Episode
     ep = Episode(ep_id)
     ep.set_watched_status(watched)
+    kodi_utils.refresh()
 
 
 @script.route('/series/<series_id>/set_watched/<watched>')
@@ -121,6 +111,7 @@ def set_series_watched_status(series_id, watched):
     from shoko_models.v2 import Series
     series = Series(series_id)
     series.set_watched_status(watched)
+    kodi_utils.refresh()
 
 
 @script.route('/group/<group_id>/set_watched/<watched>')
@@ -128,6 +119,7 @@ def set_group_watched_status(group_id, watched):
     from shoko_models.v2 import Group
     group = Group(group_id)
     group.set_watched_status(watched)
+    kodi_utils.refresh()
 
 
 if __name__ == '__main__':

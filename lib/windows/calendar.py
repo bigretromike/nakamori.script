@@ -3,9 +3,9 @@ import time
 import json
 import datetime
 
+from proxy.python_version_proxy import python_proxy as pyproxy
 import xbmcgui
 
-from nakamori_utils import nakamoritools as nt
 from nakamori_utils.globalvars import *
 
 from PIL import ImageFont, ImageDraw, Image
@@ -301,7 +301,7 @@ class Calendar2(xbmcgui.WindowXML):
 
 def open_calendar(date=0, starting_item=0):
     url = '%s/api/serie/soon?level=2&limit=0&offset=%s&d=%s' % (server, starting_item, date)
-    body = nt.get_json(url)
+    body = pyproxy.get_json(url)
     ui = Calendar2('calendar.xml', CWD, 'Default', '1080i', data=body, item_number=starting_item)
     ui.doModal()
     del ui

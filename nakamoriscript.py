@@ -96,6 +96,22 @@ def vote_for_episode(ep_id, value):
     pass
 
 
+@script.route('/file/<file_id>/rescan')
+@try_function(ErrorPriority.BLOCKING)
+def rescan_file(file_id):
+    from shoko_models.v2 import File
+    f = File(file_id)
+    f.rescan()
+
+
+@script.route('/file/<file_id>/rehash')
+@try_function(ErrorPriority.BLOCKING)
+def rehash_file(file_id):
+    from shoko_models.v2 import File
+    f = File(file_id)
+    f.rehash()
+
+
 @script.route('/episode/<ep_id>/set_watched/<watched>')
 @try_function(ErrorPriority.HIGH, 'Error Setting Watched Status')
 def set_episode_watched_status(ep_id, watched):

@@ -6,6 +6,7 @@ import xbmcgui
 import routing
 from error_handler import ErrorPriority, try_function, show_messages
 from nakamori_utils import kodi_utils
+from proxy.python_version_proxy import python_proxy as pyproxy
 
 from nakamori_utils.globalvars import *
 import lib.windows.calendar as _calendar
@@ -84,16 +85,34 @@ def show_episode_vote_dialog(ep_id):
     pass
 
 
-@script.route('/series/<series_id>/vote/<value>')
+@script.route('/series/<series_id>/vote')
 @try_function(ErrorPriority.BLOCKING)
-def vote_for_series(series_id, value):
-    pass
+def vote_for_series(series_id):
+    from shoko_models.v2 import Series
+    vote_list = ['Don\'t Vote', '10', '9', '8', '7', '6', '5', '4', '3', '2', '1']
+    my_vote = xbmcgui.Dialog().select(plugin_addon.getLocalizedString(30023), vote_list)
+    if my_vote < 1:
+        return
+    my_vote = pyproxy.safe_int(vote_list[my_vote])
+    if my_vote < 1:
+        return
+    series = Series(series_id)
+    series.vote(my_vote)
 
 
-@script.route('/episode/<ep_id>/vote/<value>')
+@script.route('/episode/<ep_id>/vote')
 @try_function(ErrorPriority.BLOCKING)
-def vote_for_episode(ep_id, value):
-    pass
+def vote_for_episode(ep_id):
+    from shoko_models.v2 import Episode
+    vote_list = ['Don\'t Vote', '10', '9', '8', '7', '6', '5', '4', '3', '2', '1']
+    my_vote = xbmcgui.Dialog().select(plugin_addon.getLocalizedString(30023), vote_list)
+    if my_vote < 1:
+        return
+    my_vote = pyproxy.safe_int(vote_list[my_vote])
+    if my_vote < 1:
+        return
+    ep = Episode(ep_id)
+    ep.vote(my_vote)
 
 
 @script.route('/file/<file_id>/rescan')

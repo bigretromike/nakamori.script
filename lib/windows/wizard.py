@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import nakamori_utils.shoko_utils
 import xbmcgui
 
 from nakamori_utils import nakamoritools as nt
@@ -132,7 +132,7 @@ class Wizard2(xbmcgui.WindowXML):
 
     # custom functions
     def _test_connection(self):
-        if nt.get_server_status(ip=str(self.getControl(IP_ADDRESS).getText()), port=str(self.getControl(PORT_NUMBER).getText())):
+        if nakamori_utils.shoko_utils.get_server_status(ip=str(self.getControl(IP_ADDRESS).getText()), port=str(self.getControl(PORT_NUMBER).getText())):
             # save good address + port
             plugin_addon.setSetting(id='good_ip', value=str(self.getControl(IP_ADDRESS).getText()))
             plugin_addon.setSetting(id='good_port', value=str(self.getControl(PORT_NUMBER).getText()))

@@ -5,7 +5,7 @@ import xbmcgui
 
 import routing
 from error_handler import ErrorPriority, try_function, show_messages
-from nakamori_utils import kodi_utils
+from nakamori_utils import kodi_utils, shoko_utils
 from proxy.python_version_proxy import python_proxy as pyproxy
 
 from nakamori_utils.globalvars import *
@@ -17,6 +17,7 @@ import lib.windows.wizard as _wizard
 script = routing.Script(base_url=os.path.split(__file__)[-1])
 
 # TODO Now that we have routing.Script, we can use this
+# TODO Localize the menus
 
 
 @script.route('/')
@@ -36,7 +37,7 @@ def root():
     for item in items:
         options.append(item[0])
 
-    result = xbmcgui.Dialog().select('Nakamori Script', options)
+    result = xbmcgui.Dialog().contextmenu(options)
     if result >= 0:
         action, args = items[result][1]
         action(*args)
@@ -72,6 +73,29 @@ def whats_new():
 @try_function(ErrorPriority.BLOCKING)
 def settings():
     plugin_addon.openSettings()
+
+
+@script.route('/dialog/shoko')
+@try_function(ErrorPriority.BLOCKING)
+def shoko_menu():
+    # TODO add things
+    # Remove Missing
+    # Run Import
+    # Import Folders?
+    # various other actions
+    items = [
+        ('Run Import', (shoko_utils.run_import, [])),
+        ('Remove Missing Files', (shoko_utils.remove_missing_files, []))
+    ]
+
+    options = []
+    for item in items:
+        options.append(item[0])
+
+    result = xbmcgui.Dialog().contextmenu(options)
+    if result >= 0:
+        action, args = items[result][1]
+        action(*args)
 
 
 @script.route('/cohesion')

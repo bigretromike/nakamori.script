@@ -145,6 +145,15 @@ def vote_for_episode(ep_id):
     ep.vote(my_vote)
 
 
+@script.route('/ep/<ep_id>/file_list')
+@try_function(ErrorPriority.BLOCKING)
+def file_list(ep_id):
+    from shoko_models.v2 import Episode
+    ep = Episode(ep_id, build_full_object=True)
+    items = [(x.name, x.id) for x in ep]
+    kodi_utils.show_file_list(items)
+
+
 @script.route('/file/<file_id>/rescan')
 @try_function(ErrorPriority.BLOCKING)
 def rescan_file(file_id):

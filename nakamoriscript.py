@@ -22,7 +22,8 @@ script = routing.Script(base_url=os.path.split(__file__)[-1])
 @script.route('/')
 def root():
     items = [
-        ('Wizard', (wizard, [])),
+        ('Connection Wizard', (wizard_connection, [])),
+        ('Login Wizard', (wizard_login, [])),
         ('Calendar', (calendar, ['0', '0'])),
         ('Calendar (Add 14 Days)', (calendar, ['0', '14'])),
         ('Information', (whats_new, [])),
@@ -41,14 +42,19 @@ def root():
         action(*args)
 
 
-@script.route('/calendar/<when>/<page>/')
+@script.route('/calendar/<when>/<page>')
 def calendar(when=0, page=1):
     _calendar.open_calendar(date=when, starting_item=page)
 
 
-@script.route('/dialog/wizard')
-def wizard():
-    _wizard.open_wizard()
+@script.route('/dialog/wizard/connection')
+def wizard_connection():
+    _wizard.open_connection_wizard()
+
+
+@script.route('/dialog/wizard/login')
+def wizard_login():
+    _wizard.open_login_wizard()
 
 
 @script.route('/calendar/clear_cache')

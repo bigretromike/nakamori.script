@@ -174,8 +174,8 @@ msgstr "Could not connect to Shoko Server"
 
 #: wizard.py
 msgctxt "#30036"
-msgid "Would you like to stop setup process and close this window?"
-msgstr "Would you like to stop setup process and close this window?"
+msgid "The username or password is incorrect"
+msgstr "The username or password is incorrect"
 
 #: calendar.py
 msgctxt "#30037"

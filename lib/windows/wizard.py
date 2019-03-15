@@ -1,109 +1,98 @@
 # -*- coding: utf-8 -*-
-import nakamori_utils.shoko_utils
+import error_handler
 import xbmcgui
 
-from nakamori_utils import nakamoritools as nt
+from nakamori_utils import shoko_utils, kodi_utils
 from nakamori_utils.globalvars import *
+from proxy.python_version_proxy import python_proxy as pyproxy
 
 ADDON = xbmcaddon.Addon(id='script.module.nakamori')
-CWD = ADDON.getAddonInfo('path').decode('utf-8')
+CWD = pyproxy.decode(ADDON.getAddonInfo('path'))
 
-TEST_BUTTON = 201
-SAVE_BUTTON = 202
+MSG_HEADER = ADDON.getLocalizedString(30034)
+MSG_CONNECT = ADDON.getLocalizedString(30035)
+MSG_NOAUTH = ADDON.getLocalizedString(30036)
+
+OK_BUTTON = 201
 ACTION_PREVIOUS_MENU = 10
 ACTION_NAV_BACK = 92
 IP_ADDRESS = 203
 PORT_NUMBER = 204
 LOGIN = 205
+PASSWORD = 206
 LABEL_PASSWORD = 306
 LABEL_IP_ADDRESS = 303
 LABEL_PORT_NUMBER = 304
 LABEL_LOGIN = 305
-PASSWORD = 206
+
+# noinspection PyUnusedName
 CENTER_Y = 6
+# noinspection PyUnusedName
 CENTER_X = 2
 
 # resources
-RSC_IP = ADDON.getLocalizedString(30002)
-RSC_PORT = ADDON.getLocalizedString(30003)
-RSC_USERNAME = ADDON.getLocalizedString(30004)
-RSC_PASSWORD = ADDON.getLocalizedString(30005)
-RSC_TEST = ADDON.getLocalizedString(30006)
-RSC_SAVE = ADDON.getLocalizedString(30007)
-
-COLOR_RED = '0xFFDF1818'
-COLOR_RED_FOCUSED = '0xFFFF1010'
+RSC_OK = ADDON.getLocalizedString(30027)
 COLOR_WHITE = '0xAAFFFFFF'
-COLOR_WHITE_FOCUSED = '0xFFFFFFFF'
-COLOR_GREEN = '0xFF18DD18'
-COLOR_GREEN_FOCUSED = '0xFF10FF10'
 
 
-class Wizard2(xbmcgui.WindowXML):
-    def __init__(self, xmlFile, resourcePath, skin, skinRes):
+# noinspection PyUnusedFunction,PySameParameterValue
+class LoginWizard(xbmcgui.WindowXML):
+    def __init__(self, xml_file, resource_path, skin, skin_res):
+        xbmcgui.WindowXML.__init__(self, xml_file, resource_path, skin, skin_res, False)
         self.window_type = 'window'
-        self.ip = None
-        self.port = None
         self.login = ''
         self.password = ''
         self.apikey = ''
         # additional variables
-        self.setup_ok = False
-        self._button_test = None
-        self._button_save = None
-        self._label_address = None
-        self._label_port = None
+        self._button_ok = None
+        self._box_login = None
+        self._box_password = None
         self._label_login = None
         self._label_password = None
 
     def onInit(self):
         self.setProperty('script.module.nakamori.running', 'true')
         # static bind
-        self._button_test = self.getControl(TEST_BUTTON)
-        self._button_save = self.getControl(SAVE_BUTTON)
-        self._label_address = self.getControl(LABEL_IP_ADDRESS)
-        self._label_port = self.getControl(LABEL_PORT_NUMBER)
+        self._button_ok = self.getControl(OK_BUTTON)
         self._label_login = self.getControl(LABEL_LOGIN)
         self._label_password = self.getControl(LABEL_PASSWORD)
+        self._box_login = self.getControl(LOGIN)
+        self._box_password = self.getControl(PASSWORD)
         # navigation
-        self.getControl(IP_ADDRESS).setNavigation(self.getControl(PASSWORD), self.getControl(PORT_NUMBER), self.getControl(IP_ADDRESS), self._button_test)  # up, down, left, right
-        self.getControl(PORT_NUMBER).setNavigation(self.getControl(IP_ADDRESS), self.getControl(LOGIN), self.getControl(PORT_NUMBER), self._button_test)
-        self.getControl(LOGIN).setNavigation(self.getControl(PORT_NUMBER), self.getControl(PASSWORD), self.getControl(LOGIN), self._button_test)
-        self.getControl(PASSWORD).setNavigation(self.getControl(LOGIN), self.getControl(IP_ADDRESS), self.getControl(PASSWORD), self._button_test)
-        self._button_test.setNavigation(self._button_save, self._button_save, self.getControl(LOGIN), self._button_test)
-        self._button_save.setNavigation(self._button_test, self._button_test, self.getControl(PASSWORD), self._button_save)
+        # up, down, left, right
+        self._box_login.setNavigation(self._box_login, self._box_password, self._box_login, self._button_ok)
+        self._box_password.setNavigation(self._box_login, self._box_password, self._box_password, self._button_ok)
+        self._button_ok.setNavigation(self._button_ok, self._button_ok, self._box_login, self._button_ok)
         # get current settings
-        self.ip = plugin_addon.getSetting('ipaddress')
-        self.port = plugin_addon.getSetting('port')
         self.login = plugin_addon.getSetting('login')
         self.password = plugin_addon.getSetting('password')
         self.apikey = plugin_addon.getSetting('apikey')
+        # validate
+        if not isinstance(self._box_login, xbmcgui.ControlEdit):
+            return
+        if not isinstance(self._box_password, xbmcgui.ControlEdit):
+            return
+        if not isinstance(self._button_ok, xbmcgui.ControlButton):
+            return
+        if not isinstance(self._label_login, xbmcgui.ControlLabel):
+            return
+        if not isinstance(self._label_password, xbmcgui.ControlLabel):
+            return
+
         # populate controls
-        self.getControl(IP_ADDRESS).setText(self.ip)
-        self.getControl(PORT_NUMBER).setText(self.port)
-        # self.getControl(PASSWORD).setType(xbmcgui.INPUT_TYPE_PASSWORD, '')  # k18
-        self.getControl(LOGIN).setText(self.login)
-        self.getControl(PASSWORD).setText(self.password)
+        self._box_login.setText(self.login)
+        self._box_password.setText(self.password)
 
-        self._button_test.setLabel(label=RSC_TEST, textColor=COLOR_WHITE, focusedColor=COLOR_WHITE_FOCUSED)
+        self._button_ok.setLabel(label=RSC_OK, textColor=COLOR_WHITE, focusedColor=COLOR_WHITE)
 
-        cansave = self.apikey != '' and plugin_addon.getSetting('good_ip') == self.ip and plugin_addon.getSetting('good_ip') != ''
-        self._button_save.setEnabled(cansave)
-        if cansave:
-            self._button_save.setLabel(label=RSC_SAVE, textColor=COLOR_WHITE, focusedColor=COLOR_WHITE_FOCUSED)
-        else:
-            self._button_save.setLabel(label=RSC_SAVE, textColor=COLOR_RED, focusedColor=COLOR_RED_FOCUSED)
         # set focus
-        self.setFocus(self.getControl(IP_ADDRESS))
+        self.setFocus(self._box_login)
 
     def onAction(self, action):
         if action == ACTION_PREVIOUS_MENU:
             self.setProperty('script.module.nakamori.running', 'false')
-            if plugin_addon.getSetting('apikey') != '':
-                plugin_addon.setSetting('wizard', '1')
             self.close()
         if action == ACTION_NAV_BACK:
-            xbmc.log('click close X', xbmc.LOGWARNING)
             self.close()
 
     def onControl(self, control):
@@ -113,67 +102,109 @@ class Wizard2(xbmcgui.WindowXML):
         pass
 
     def onClick(self, control):
-        if control == TEST_BUTTON:
-            self._test_connection()
-            pass
-
-        if control == SAVE_BUTTON:
-            if plugin_addon.getSetting('apikey') != '':
-                self.setProperty('script.module.nakamori.running', 'false')
-                self.close()
-                xbmc.executebuiltin('RunPlugin(plugin.video.nakamori)')
-            else:
-                if xbmcgui.Dialog().yesno(ADDON.getLocalizedString(30034),
-                                          ADDON.getLocalizedString(30035),
-                                          ADDON.getLocalizedString(30036)):
-                    self.setup_ok = False
-                    self.setProperty('script.module.nakamori.running', 'false')
-                    self.close()
-
-    # custom functions
-    def _test_connection(self):
-        if nakamori_utils.shoko_utils.get_server_status(ip=str(self.getControl(IP_ADDRESS).getText()), port=str(self.getControl(PORT_NUMBER).getText())):
-            # save good address + port
-            plugin_addon.setSetting(id='good_ip', value=str(self.getControl(IP_ADDRESS).getText()))
-            plugin_addon.setSetting(id='good_port', value=str(self.getControl(PORT_NUMBER).getText()))
-            plugin_addon.setSetting(id='ipaddress', value=str(self.getControl(IP_ADDRESS).getText()))
-            plugin_addon.setSetting(id='port', value=str(self.getControl(PORT_NUMBER).getText()))
-            self._label_address.setLabel(label=RSC_IP, textColor=COLOR_GREEN, focusedColor=COLOR_WHITE_FOCUSED)
-            self._label_port.setLabel(label=RSC_PORT, textColor=COLOR_GREEN, focusedColor=COLOR_WHITE_FOCUSED)
+        if control == OK_BUTTON:
             # populate info from edits
-            plugin_addon.setSetting(id='login', value=str(self.getControl(LOGIN).getText()))
-            plugin_addon.setSetting(id='password', value=str(self.getControl(PASSWORD).getText()))
+            login = str(self._box_login.getText()).strip()
+            password = str(self._box_password.getText()).strip()
             # check auth
-            b, a = nt.valid_user()
-            if b:
-                self._button_test.setLabel(label=RSC_TEST, textColor=COLOR_GREEN, focusedColor=COLOR_WHITE_FOCUSED)
-                self._label_login.setLabel(label=RSC_USERNAME, textColor=COLOR_GREEN, focusedColor=COLOR_WHITE_FOCUSED)
-                self._label_password.setLabel(label=RSC_PASSWORD, textColor=COLOR_GREEN, focusedColor=COLOR_WHITE_FOCUSED)
-                self._button_save.setLabel(label=RSC_SAVE, textColor=COLOR_GREEN, focusedColor=COLOR_WHITE_FOCUSED)
-                self._button_save.setEnabled(True)
-                self.setup_ok = True
+            apikey = None
+            try:
+                apikey = shoko_utils.get_apikey(login, password)
+            except:
+                error_handler.exception(error_handler.ErrorPriority.NORMAL)
+            if apikey is not None:
+                plugin_addon.setSetting('apikey', apikey)
                 plugin_addon.setSetting(id='login', value='')
                 plugin_addon.setSetting(id='password', value='')
-                plugin_addon.setSetting(id='apikey', value=a)
+                if shoko_utils.can_user_connect():
+                    self.setProperty('script.module.nakamori.running', 'false')
+                    self.close()
+                    return
+
+            kodi_utils.message_box(MSG_HEADER, MSG_NOAUTH)
+
+
+# noinspection PyUnusedFunction,PySameParameterValue
+class ConnectionWizard(xbmcgui.WindowXML):
+    def __init__(self, xml_file, resource_path, skin, skin_res):
+        xbmcgui.WindowXML.__init__(self, xml_file, resource_path, skin, skin_res, False)
+        self.window_type = 'window'
+        self.ip = None
+        self.port = None
+        # additional variables
+        self.setup_ok = False
+        self._box_ip = None
+        self._box_port = None
+        self._button_ok = None
+        self._label_address = None
+        self._label_port = None
+
+    def onInit(self):
+        self.setProperty('script.module.nakamori.running', 'true')
+        # static bind
+        self._box_ip = self.getControl(IP_ADDRESS)
+        self._box_port = self.getControl(PORT_NUMBER)
+        self._button_ok = self.getControl(OK_BUTTON)
+        self._label_address = self.getControl(LABEL_IP_ADDRESS)
+        self._label_port = self.getControl(LABEL_PORT_NUMBER)
+        # validate, this also allows PyCharm to use intellisense
+        if not isinstance(self._box_ip, xbmcgui.ControlEdit):
+            return
+        if not isinstance(self._box_port, xbmcgui.ControlEdit):
+            return
+        if not isinstance(self._button_ok, xbmcgui.ControlButton):
+            return
+        if not isinstance(self._label_address, xbmcgui.ControlLabel):
+            return
+        if not isinstance(self._label_port, xbmcgui.ControlLabel):
+            return
+        # navigation
+        # up, down, left, right
+        self._box_ip.setNavigation(self._box_ip, self._box_port, self._box_ip, self._button_ok)
+        self._box_port.setNavigation(self._box_ip, self._box_port, self._box_port, self._button_ok)
+        self._button_ok.setNavigation(self._button_ok, self._button_ok, self._box_ip, self._button_ok)
+        # get current settings
+        self.ip = plugin_addon.getSetting('ipaddress')
+        self.port = plugin_addon.getSetting('port')
+        # populate controls
+        self._box_ip.setText(self.ip)
+        self._box_port.setText(self.port)
+
+        self._button_ok.setLabel(label=RSC_OK, textColor=COLOR_WHITE, focusedColor=COLOR_WHITE)
+        # set focus
+        self.setFocus(self.getControl(IP_ADDRESS))
+
+    def onAction(self, action):
+        if action == ACTION_PREVIOUS_MENU:
+            self.setProperty('script.module.nakamori.running', 'false')
+            self.close()
+        if action == ACTION_NAV_BACK:
+            self.close()
+
+    def onControl(self, control):
+        pass
+
+    def onFocus(self, control):
+        pass
+
+    def onClick(self, control):
+        if control == OK_BUTTON:
+            if shoko_utils.can_connect(ip=str(self._box_ip.getText()), port=str(self._box_port.getText())):
+                plugin_addon.setSetting(id='ipaddress', value=str(self._box_ip.getText()))
+                plugin_addon.setSetting(id='port', value=str(self._box_port.getText()))
+                self.close()
             else:
-                self._button_test.setLabel(label=RSC_TEST, textColor=COLOR_RED, focusedColor=COLOR_RED_FOCUSED)
-                self._label_login.setLabel(label=RSC_USERNAME, textColor=COLOR_RED, focusedColor=COLOR_RED_FOCUSED)
-                self._label_password.setLabel(label=RSC_PASSWORD, textColor=COLOR_RED, focusedColor=COLOR_RED_FOCUSED)
-                self._button_save.setEnabled(False)
-                self.setup_ok = False
-        else:
-            self._label_address.setLabel(label=RSC_IP, textColor=COLOR_RED, focusedColor=COLOR_RED_FOCUSED)
-            self._label_port.setLabel(label=RSC_PORT, textColor=COLOR_RED, focusedColor=COLOR_RED_FOCUSED)
-            self._button_save.setEnabled(False)
-            self.setup_ok = False
-        xbmc.log('--- wizard.py = %s' % self.setup_ok, xbmc.LOGWARNING)
-        if self.setup_ok:
-            plugin_addon.setSetting(id='wizard', value='1')
-        else:
-            plugin_addon.setSetting(id='wizard', value='0')
+                # show message
+                kodi_utils.message_box(MSG_HEADER, MSG_CONNECT)
 
 
-def open_wizard():
-    ui = Wizard2('wizard.xml', CWD, 'Default', '1080i')
+def open_connection_wizard():
+    ui = ConnectionWizard('connection_wizard.xml', CWD, 'default', '1080i')
+    ui.doModal()
+    del ui
+
+
+def open_login_wizard():
+    ui = LoginWizard('login_wizard.xml', CWD, 'default', '1080i')
     ui.doModal()
     del ui

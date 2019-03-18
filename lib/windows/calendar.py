@@ -3,11 +3,13 @@ import time
 import json
 import datetime
 
+from nakamori_utils import script_utils
 from proxy.python_version_proxy import python_proxy as pyproxy
 import xbmcgui
 
 from nakamori_utils.globalvars import *
 
+# noinspection PyUnresolvedReferences
 from PIL import ImageFont, ImageDraw, Image
 import textwrap
 
@@ -129,6 +131,7 @@ class Calendar2(xbmcgui.WindowXML):
             busy = xbmcgui.DialogProgress()
             busy.create(ADDON.getLocalizedString(30017), ADDON.getLocalizedString(30018))
             for gui in self.calendar_collection.values():
+                assert isinstance(gui, xbmcgui.ControlList)
                 gui.reset()
 
             _json = json.loads(self.json_data)
@@ -158,8 +161,7 @@ class Calendar2(xbmcgui.WindowXML):
             if self.getFocus().getId() != 2:
                 self.list_update_right()
             else:
-                xbmc.executebuiltin('RunScript(script.module.nakamori,?info=calendar&date=0&page=%s)'
-                                    % self.serie_processed, True)
+                xbmc.executebuiltin(script_utils.calendar(0, self.serie_processed), True)
         elif action == xbmcgui.ACTION_MOVE_LEFT:
             if self.getFocus().getId() != 1:
                 self.list_update_left()
@@ -170,7 +172,9 @@ class Calendar2(xbmcgui.WindowXML):
             pass
         elif action == xbmcgui.ACTION_CONTEXT_MENU:
             control_id = self.getFocus().getId()
-            aid = self.getControl(control_id).getSelectedItem().getProperty('aid')
+            con = self.getControl(control_id)
+            assert isinstance(con, xbmcgui.ControlList)
+            aid = con.getSelectedItem().getProperty('aid')
             content_menu = [
                 '- aid = ' + str(aid) + '-',
                 ADDON.getLocalizedString(30037),
@@ -186,8 +190,7 @@ class Calendar2(xbmcgui.WindowXML):
             if self.getFocus().getId() == 1:
                 xbmc.executebuiltin('Action(Back)')
             elif self.getFocus().getId() == 2:
-                xbmc.executebuiltin('RunScript(script.module.nakamori,?info=calendar&date=0&page=%s)'
-                                    % self.serie_processed, True)
+                xbmc.executebuiltin(script_utils.calendar(0, self.serie_processed), True)
 
     def onControl(self, control):
         pass

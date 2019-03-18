@@ -48,6 +48,11 @@ def calendar(when=0, page=1):
     _calendar.open_calendar(date=when, starting_item=page)
 
 
+@script.route('/arbiter/<path:arg>')
+def arbiter(arg):
+    xbmc.executebuiltin(pyproxy.unquote(pyproxy.unquote(arg)))
+
+
 @script.route('/dialog/wizard/connection')
 def wizard_connection():
     _wizard.open_connection_wizard()

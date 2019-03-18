@@ -43,6 +43,7 @@ class LoginWizard(xbmcgui.WindowXML):
         self.login = ''
         self.password = ''
         self.apikey = ''
+        self.cancelled = True
         # additional variables
         self._button_ok = None
         self._box_login = None
@@ -118,6 +119,7 @@ class LoginWizard(xbmcgui.WindowXML):
                 plugin_addon.setSetting(id='password', value='')
                 if shoko_utils.can_user_connect():
                     self.setProperty('script.module.nakamori.running', 'false')
+                    self.cancelled = False
                     self.close()
                     return
 
@@ -132,7 +134,7 @@ class ConnectionWizard(xbmcgui.WindowXML):
         self.ip = None
         self.port = None
         # additional variables
-        self.setup_ok = False
+        self.cancelled = True
         self._box_ip = None
         self._box_port = None
         self._button_ok = None
@@ -192,6 +194,7 @@ class ConnectionWizard(xbmcgui.WindowXML):
             if shoko_utils.can_connect(ip=str(self._box_ip.getText()), port=str(self._box_port.getText())):
                 plugin_addon.setSetting(id='ipaddress', value=str(self._box_ip.getText()))
                 plugin_addon.setSetting(id='port', value=str(self._box_port.getText()))
+                self.cancelled = False
                 self.close()
             else:
                 # show message
@@ -201,10 +204,10 @@ class ConnectionWizard(xbmcgui.WindowXML):
 def open_connection_wizard():
     ui = ConnectionWizard('connection_wizard.xml', CWD, 'default', '1080i')
     ui.doModal()
-    del ui
+    return not ui.cancelled
 
 
 def open_login_wizard():
     ui = LoginWizard('login_wizard.xml', CWD, 'default', '1080i')
     ui.doModal()
-    del ui
+    return not ui.cancelled

@@ -14,7 +14,7 @@ import lib.windows.cohesion as _cohesion
 import lib.windows.information as _information
 import lib.windows.wizard as _wizard
 
-script = routing.Script(base_url=os.path.split(__file__)[-1])
+script = routing.Script(base_url=os.path.split(__file__)[-1], convert_args=True)
 
 # TODO Now that we have routing.Script, we can use this
 # TODO Localize the menus
@@ -48,8 +48,9 @@ def calendar(when=0, page=1):
     _calendar.open_calendar(date=when, starting_item=page)
 
 
-@script.route('/arbiter/<path:arg>')
-def arbiter(arg):
+@script.route('/arbiter/<wait>/<path:arg>')
+def arbiter(wait, arg):
+    xbmc.sleep(wait)
     xbmc.executebuiltin(pyproxy.unquote(pyproxy.unquote(arg)))
 
 

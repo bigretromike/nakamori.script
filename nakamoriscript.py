@@ -49,7 +49,10 @@ def calendar(when=0, page=1):
 
 
 @script.route('/arbiter/<wait>/<path:arg>')
+@try_function(ErrorPriority.BLOCKING)
 def arbiter(wait, arg):
+    if wait is None or arg is None:
+        raise RuntimeError('Arbiter received no parameters')
     xbmc.sleep(wait)
     xbmc.executebuiltin(pyproxy.unquote(pyproxy.unquote(arg)))
 

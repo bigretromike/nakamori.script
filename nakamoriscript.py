@@ -122,6 +122,23 @@ def new_search(save):
             pyproxy.quote(pyproxy.quote(query)))
 
 
+@script.route('/search/remove/<path:query>')
+def remove_search_term(query):
+    search.remove_search_history(query)
+    refresh()
+
+
+@script.route('/search/clear')
+def clear_search():
+    search.remove_search_history()
+    refresh()
+
+
+@script.route('/refresh')
+def refresh():
+    kodi_utils.refresh()
+
+
 @script.route('/cohesion')
 def cohesion():
     _cohesion.check_cohesion()

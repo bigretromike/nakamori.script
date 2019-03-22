@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import debug
+import search
 import xbmcgui
 
 import routing
@@ -105,6 +106,20 @@ def shoko_menu():
     if result >= 0:
         action, args = items[result][1]
         action(*args)
+
+
+@script.route('/dialog/search/<save>')
+def new_search(save):
+    query = kodi_utils.search_box()
+
+    if save:
+        if search.check_in_database(query):
+            search.remove_search_history(query)
+        search.add_search_history(query)
+
+    # Apparently this is the only way that works if we want to RunPlugin with a path
+    arbiter(0, 'ActivateWindow(10025, "plugin://plugin.video.nakamori/menu/search/%s")' %
+            pyproxy.quote(pyproxy.quote(query)))
 
 
 @script.route('/cohesion')

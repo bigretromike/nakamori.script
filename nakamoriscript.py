@@ -54,7 +54,7 @@ def arbiter(wait, arg):
     if wait is None or arg is None:
         raise RuntimeError('Arbiter received no parameters')
     xbmc.sleep(wait)
-    xbmc.executebuiltin(pyproxy.unquote(pyproxy.unquote(arg)))
+    xbmc.executebuiltin(arg)
 
 
 @script.route('/dialog/wizard/connection')

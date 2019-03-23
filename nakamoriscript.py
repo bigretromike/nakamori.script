@@ -134,6 +134,16 @@ def clear_search():
     refresh()
 
 
+@script.route('/kodi/clear_image_cache')
+def clear_image_cache():
+    kodi_utils.clear_image_cache()
+
+
+@script.route('/kodi/clear_listitem_cache')
+def clear_listitem_cache():
+    kodi_utils.clear_listitem_cache()
+
+
 @script.route('/refresh')
 def refresh():
     kodi_utils.refresh()

@@ -247,6 +247,11 @@ def set_group_watched_status(group_id, watched):
     kodi_utils.refresh()
 
 
+@script.route('/menu/episode/move_to_item/<index>')
+def move_to_index(index):
+    kodi_utils.move_to_index(index)
+
+
 if __name__ == '__main__':
     debug.debug_init()
     try_function(ErrorPriority.BLOCKING)(script.run)()

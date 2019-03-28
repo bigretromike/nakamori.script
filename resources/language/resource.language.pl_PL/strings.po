@@ -1,0 +1,204 @@
+# Translators:
+# BigRetroMike, 2019
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Nakamori\n"
+"Last-Translator: BigRetroMike, 2019\n"
+"Language-Team: Polish (Poland) (https://www.transifex.com/nakamori/teams/97622/pl_PL/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pl_PL\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"X-Generator: POEditor.com\n"
+
+#: wizard.xml
+msgctxt "#30001"
+msgid "Enter Shoko Server Credentials"
+msgstr "Wprowadz dane logowania do serwera Shoko"
+
+#: wizard.xml, wizard.py
+msgctxt "#30002"
+msgid "IP Address"
+msgstr "Adres IP"
+
+#: wizard.xml, wizard.py
+msgctxt "#30003"
+msgid "Port"
+msgstr "Port"
+
+#: wizard.xml, wizard.py
+msgctxt "#30004"
+msgid "Username"
+msgstr "Login"
+
+#: wizard.xml, wizard.py
+msgctxt "#30005"
+msgid "Password"
+msgstr "Hasło"
+
+#: wizard.xml
+msgctxt "#30006"
+msgid "Test"
+msgstr "Testuj"
+
+#: wizard.xml
+msgctxt "#30007"
+msgid "Save"
+msgstr "Zapisz"
+
+#: information.xml
+msgctxt "#30008"
+msgid "What's New!"
+msgstr "Nowości!"
+
+#: information.xml
+msgctxt "#30009"
+msgid "Close"
+msgstr "Zamknij"
+
+#: calendar.py
+msgctxt "#30010"
+msgid "MON"
+msgstr "PON"
+
+#: calendar.py
+msgctxt "#30011"
+msgid "TUE"
+msgstr "WTO"
+
+#: calendar.py
+msgctxt "#30012"
+msgid "WED"
+msgstr "ŚRO"
+
+#: calendar.py
+msgctxt "#30013"
+msgid "THU"
+msgstr "CZW"
+
+#: calendar.py
+msgctxt "#30014"
+msgid "FRI"
+msgstr "PIĄ"
+
+#: calendar.py
+msgctxt "#30015"
+msgid "SAT"
+msgstr "SOB"
+
+#: calendar.py
+msgctxt "#30016"
+msgid "SUN"
+msgstr "NIE"
+
+#: calendar.py
+msgctxt "#30017"
+msgid "Loading"
+msgstr "Wczytywanie"
+
+#: calendar.py
+msgctxt "#30018"
+msgid "Populating calendar ..."
+msgstr "Wczytywanie kalendarza..."
+
+#: calendar.py
+msgctxt "#30019"
+msgid "Would you like to clear cache?"
+msgstr "Czy wyczyści pamięć podręczną?"
+
+#: calendar.py
+msgctxt "#30020"
+msgid "This will remove content of titles directory"
+msgstr "Czynność tak usunie zawartość katalogów z tytułami"
+
+#: nakamoritools.py
+msgctxt "#30021"
+msgid "Series Voting"
+msgstr "Oceń serię"
+
+#: nakamoritools.py
+msgctxt "#30022"
+msgid "You Voted"
+msgstr "Oceniono"
+
+#: nakamoritools.py
+msgctxt "#30023"
+msgid "Episode Voting"
+msgstr "Oceń odcinek"
+
+#: nakamoritools.py
+msgctxt "#30026"
+msgid "Enter search text"
+msgstr "Wprowadź tekst do wyszukania"
+
+#: wizard.xml
+msgctxt "#30027"
+msgid "OK"
+msgstr "OK"
+
+#: settings.xml
+msgctxt "#30028"
+msgid "Calendar"
+msgstr "Kalendarz"
+
+#: settings.xml
+msgctxt "#30029"
+msgid "Font"
+msgstr "Czcionka"
+
+#: settings.xml
+msgctxt "#30030"
+msgid "Color"
+msgstr "Kolor"
+
+#: settings.xml
+msgctxt "#30031"
+msgid "Size"
+msgstr "Wielkość"
+
+#: settings.xml
+msgctxt "#30032"
+msgid "Maintenance"
+msgstr "Konserwacja"
+
+#: settings.xml
+msgctxt "#30033"
+msgid "Clear cache"
+msgstr "Wyczyść pamięć podręczną"
+
+#: wizard.py
+msgctxt "#30034"
+msgid "Warning"
+msgstr "Ostrzeżenie"
+
+#: wizard.py
+msgctxt "#30035"
+msgid "Could not connect to Shoko Server"
+msgstr "Nie można nawiązać połączenia z serwerem Shoko"
+
+#: wizard.py
+msgctxt "#30036"
+msgid "The username or password is incorrect"
+msgstr "Login lub hasło są niepoprawne "
+
+#: calendar.py
+msgctxt "#30037"
+msgid "Show info"
+msgstr "Pokaż informację"
+
+#: calendar.py
+msgctxt "#30038"
+msgid "Download missing info"
+msgstr "Pobierz brakujące dane"
+
+#: calendar.py
+msgctxt "#30039"
+msgid "Add to wishlist"
+msgstr "Dodaj do listy pożądanych"
+
+#: calendar.py
+msgctxt "#30040"
+msgid "Remove from wishlist"
+msgstr "Usuń z listy pożądanych"

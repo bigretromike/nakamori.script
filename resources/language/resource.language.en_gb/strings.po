@@ -196,3 +196,7 @@ msgstr "Add to wishlist"
 msgctxt "#30040"
 msgid "Remove from wishlist"
 msgstr "Remove from wishlist"
+
+msgctxt "#30041"
+msgid "Enter Shoko Server Host"
+msgstr "Enter Shoko Server Host"

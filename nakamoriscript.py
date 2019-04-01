@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import debug
+import nakamori_player
 import search
 import xbmcgui
 
@@ -202,7 +203,8 @@ def file_list(ep_id):
     from shoko_models.v2 import Episode
     ep = Episode(ep_id, build_full_object=True)
     items = [(x.name, x.id) for x in ep]
-    kodi_utils.show_file_list(items)
+    selected_id = kodi_utils.show_file_list(items)
+    nakamori_player.play_video(selected_id, ep_id)
 
 
 @script.route('/file/<file_id>/rescan')

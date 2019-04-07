@@ -2,6 +2,7 @@
 from collections import defaultdict
 from distutils.version import LooseVersion
 
+import error_handler
 import xbmcgui
 
 from nakamori_utils.globalvars import *
@@ -95,7 +96,11 @@ def get_changelog_text():
 
 
 def open_information():
-    ui = Information('DialogTextViewer.xml', os.getcwd(), 'Default', '1080i')
-    ui.doModal()
-    del ui
+    try:
+        ui = Information('DialogTextViewer.xml', os.getcwd(), 'Default', '1080i')
+        ui.doModal()
+        del ui
+    except:
+        error_handler.exception(error_handler.ErrorPriority.HIGHEST)
     plugin_addon.setSetting('version', plugin_addon.getAddonInfo('version'))
+

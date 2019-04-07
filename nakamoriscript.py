@@ -6,7 +6,7 @@ import search
 import xbmcgui
 
 import routing
-from error_handler import ErrorPriority, try_function, show_messages
+from error_handler import spam, ErrorPriority, try_function, show_messages
 from nakamori_utils import kodi_utils, shoko_utils
 from proxy.python_version_proxy import python_proxy as pyproxy
 
@@ -53,6 +53,7 @@ def calendar(when=0, page=1):
 @script.route('/arbiter/<wait>/<path:arg>')
 @try_function(ErrorPriority.BLOCKING)
 def arbiter(wait, arg):
+    spam('arbiting', 'wait:', wait, 'arg:', arg)
     if wait is None or arg is None:
         raise RuntimeError('Arbiter received no parameters')
     xbmc.sleep(wait)

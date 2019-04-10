@@ -230,6 +230,10 @@ def set_episode_watched_status(ep_id, watched):
     from shoko_models.v2 import Episode
     ep = Episode(ep_id)
     ep.set_watched_status(watched)
+    if plugin_addon.getSetting('sync_to_library') is 'true':
+        playcount = '1' if watched else '0'
+        # lastplayed = 'string'
+        xbmc.executeJSONRPC('{ "jsonrpc": "2.0", "method": "VideoLibrary.SetEpisodeDetails", "params": {"playcount": ' + playcount + ' , "episodeid": ' + episode_id + '}, "id": 1 }')
     kodi_utils.refresh()
 
 

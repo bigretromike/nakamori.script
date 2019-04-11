@@ -83,7 +83,12 @@ class LoginWizard(xbmcgui.WindowXML):
         # populate controls
         self._box_login.setText(self.login)
         self._box_password.setText(self.password)
-        self._box_password.setType(xbmcgui.INPUT_PASSWORD, 'Enter password')
+        try:
+            # Supposedly Kodi 18 only
+            # It would be good to proxy this, but I don't care enough to, since there is no way in Kodi 17 from code
+            self._box_password.setType(xbmcgui.INPUT_PASSWORD, 'Enter password')
+        except:
+            pass
 
         self._button_ok.setLabel(label=RSC_OK, textColor=COLOR_WHITE, focusedColor=COLOR_WHITE)
 

@@ -83,7 +83,7 @@ class LoginWizard(xbmcgui.WindowXML):
         # populate controls
         self._box_login.setText(self.login)
         self._box_password.setText(self.password)
-        self._box_password.setType(xbmcgui.INPUT_PASSWORD)
+        self._box_password.setType(xbmcgui.INPUT_PASSWORD, 'Enter password')
 
         self._button_ok.setLabel(label=RSC_OK, textColor=COLOR_WHITE, focusedColor=COLOR_WHITE)
 

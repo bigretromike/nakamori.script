@@ -198,6 +198,14 @@ def vote_for_episode(ep_id):
     ep.vote(my_vote)
 
 
+@script.route('/tvshows/<vote_type>/vote')
+@try_function(ErrorPriority.BLOCKING)
+def vote_for_tvshows(vote_type):
+    from kodi_models import VideoLibraryItem
+    vl_item = VideoLibraryItem()
+    vl_item.vote(vote_type)
+
+
 @script.route('/ep/<ep_id>/file_list')
 @try_function(ErrorPriority.BLOCKING)
 def file_list(ep_id):

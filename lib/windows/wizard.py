@@ -86,7 +86,7 @@ class LoginWizard(xbmcgui.WindowXML):
         try:
             # Supposedly Kodi 18 only
             # It would be good to proxy this, but I don't care enough to, since there is no way in Kodi 17 from code
-            self._box_password.setType(xbmcgui.INPUT_PASSWORD, 'Enter password')
+            self._box_password.setType(xbmcgui.INPUT_TYPE_PASSWORD, 'Enter password')
         except:
             pass
 

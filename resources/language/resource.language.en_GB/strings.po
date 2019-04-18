@@ -122,6 +122,11 @@ msgctxt "#30023"
 msgid "Episode Voting"
 msgstr "Episode Voting"
 
+#: settings.xml
+msgctxt "#30024"
+msgid "Use animated titles in calendar"
+msgstr "Use animated titles in calendar"
+
 #: nakamoritools.py
 msgctxt "#30026"
 msgid "Enter search text"

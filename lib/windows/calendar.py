@@ -231,46 +231,82 @@ class Calendar2(xbmcgui.WindowXML):
         # TODO Window with information
         # TODO on image info about episode when shoko will have it
         # make image title because Kodi refuse to work with smaller/custom font
-        new_image_url = os.path.join(profileDir, 'titles', color, font_ttf + '-' + font_size, str(aid) + '.png')
+
+        is_nonstatic = True if ADDON.getSetting('gif_title') == "true" else False
+        if not is_nonstatic:
+            new_image_url = os.path.join(profileDir, 'titles', color, font_ttf + '-' + font_size, str(aid) + '.png')
+        else:
+            new_image_url = os.path.join(profileDir, 'titles', color, font_ttf + '-' + font_size, str(aid) + '.gif')
+
         if not os.path.exists(new_image_url):
-            this_path = os.path.join(font_path, font_ttf)
-            font = ImageFont.truetype(this_path, int(font_size), encoding='unic')
-            text_width, text_height = font.getsize(title)
-            text_lenght_till_split = 30
-            if text_width + 5 > 250:
-                char_width = text_width/float(len(title))
-                chars_width = 0
-                char_count = 0
-                while chars_width < 250:
-                    chars_width += char_width
-                    char_count += 1
-                chars_width -= char_width
-                char_count -= 1
-                text_lenght_till_split = char_count
-                xbmc.log('--> we found that text_lenght_till_split is not correct, so we calculate %s'
-                         % text_lenght_till_split, xbmc.LOGWARNING)
-            list_of_lines = textwrap.wrap(title, width=int(text_lenght_till_split))
-            three_line_support = 1
-            for line in list_of_lines[:3]:
-                temp_text_width, temp_text_height = font.getsize(line)
-                three_line_support += temp_text_height
-            if three_line_support < 70:
-                three_line_support = 70
-            image = Image.new('RGBA', (250, three_line_support), (0, 0, 0, 0))
-            draw = ImageDraw.Draw(image)
-            line_x = 3
-            if len(list_of_lines) > 1:
-                for line in reversed(list_of_lines):
+            if not is_nonstatic:
+                new_image_url = os.path.join(profileDir, 'titles', color, font_ttf + '-' + font_size, str(aid) + '.png')
+                this_path = os.path.join(font_path, font_ttf)
+                font = ImageFont.truetype(this_path, int(font_size), encoding='unic')
+                text_width, text_height = font.getsize(title)
+                text_lenght_till_split = 30
+                if text_width + 5 > 250:
+                    char_width = text_width/float(len(title))
+                    chars_width = 0
+                    char_count = 0
+                    while chars_width < 250:
+                        chars_width += char_width
+                        char_count += 1
+                    chars_width -= char_width
+                    char_count -= 1
+                    text_lenght_till_split = char_count
+                    xbmc.log('--> we found that text_lenght_till_split is not correct, so we calculate %s'
+                             % text_lenght_till_split, xbmc.LOGWARNING)
+                list_of_lines = textwrap.wrap(title, width=int(text_lenght_till_split))
+                three_line_support = 1
+                for line in list_of_lines[:3]:
                     temp_text_width, temp_text_height = font.getsize(line)
-                    three_line_support -= temp_text_height
-                    draw.text((line_x, three_line_support), line, font=font, fill=color)
+                    three_line_support += temp_text_height
+                if three_line_support < 70:
+                    three_line_support = 70
+                image = Image.new('RGBA', (250, three_line_support), (0, 0, 0, 0))
+                draw = ImageDraw.Draw(image)
+                line_x = 3
+                if len(list_of_lines) > 1:
+                    for line in reversed(list_of_lines):
+                        temp_text_width, temp_text_height = font.getsize(line)
+                        three_line_support -= temp_text_height
+                        draw.text((line_x, three_line_support), line, font=font, fill=color)
+                else:
+                    draw.text((line_x, 70 - text_height), title, font=font, fill=color)
+                image.save(new_image_url, 'PNG')
             else:
-                draw.text((line_x, 70 - text_height), title, font=font, fill=color)
-            image.save(new_image_url, 'PNG')
+                # GIF
+                new_image_url = os.path.join(profileDir, 'titles', color, font_ttf + '-' + font_size, str(aid) + '.gif')
+                this_path = os.path.join(font_path, font_ttf)  # get font path
+                font = ImageFont.truetype(this_path, int(font_size), encoding='unic')  # create font
+                test_title = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijlmnopqrstuvwxyz1234567890!@#$%^&*()_+-=,./'
+                test_width, test_height = font.getsize(test_title)  # get all characters specific to font
+                text_width, text_height = font.getsize(title)
+                frames = []
+                new_witdh = text_width
+                line_x = 10
+                top_margin = 5
+                bottom_maring = 5
+                image_height = test_height + top_margin + bottom_maring
+                # for now when you can pick which one, heigh need to be 70
+                both_types_need_static_heigh = 70 - image_height
+                while True:
+                    line_x -= 10
+                    image = Image.new('RGBA', (250, both_types_need_static_heigh + image_height), (36, 36, 36, 0))
+                    draw = ImageDraw.Draw(image)
+                    # -5 as margin
+                    draw.text((line_x, top_margin + both_types_need_static_heigh), title, font=font, fill=color)
+                    frames.append(image)
+                    new_witdh = new_witdh - 10
+                    if new_witdh < 250:
+                        break
+                frames[0].save(new_image_url, format='GIF', append_images=frames[1:], save_all=True, duration=500,
+                               loop=0)
 
         series_listitem = xbmcgui.ListItem(label=title)
         series_listitem.setArt({'thumb': fanart, 'poster': new_image_url, 'fanart': fanart})
-        # series_listitem.setUniqueIDs({'anidb': aid}, ')
+        # series_listitem.setUniqueIDs({'anidb': aid}')
         series_listitem.setInfo('video', {'title': title, 'aired': air_date})
         series_listitem.setProperty('aid', str(aid))
         self.calendar_collection[self.day_count].addItem(series_listitem)

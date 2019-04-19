@@ -29,6 +29,7 @@ def root():
         ('Login Wizard', (wizard_login, [])),
         ('Calendar', (calendar, ['0', '0'])),
         ('Calendar (Add 14 Days)', (calendar, ['0', '14'])),
+        ('Calendar 3rd party', (calendar_3rd, ['0', '0'])),
         ('Information', (whats_new, [])),
         ('Clear-cache', (clearcache, [])),
         ('Installation Integrity', (cohesion, [])),
@@ -48,6 +49,13 @@ def root():
 @script.route('/calendar/<when>/<page>')
 def calendar(when=0, page=1):
     _calendar.open_calendar(date=when, starting_item=page)
+
+
+@script.route('/calendar3/<when>/<page>')
+def calendar_3rd(when=0, page=1):
+    from lib.external_calendar import *
+    when3 = return_only_few(when)
+    _calendar.open_calendar(date=when3, starting_item=page)
 
 
 @script.route('/arbiter/<wait>/<path:arg>')

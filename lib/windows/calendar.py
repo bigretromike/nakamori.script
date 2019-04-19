@@ -13,7 +13,7 @@ from nakamori_utils.globalvars import *
 from PIL import ImageFont, ImageDraw, Image
 import textwrap
 
-ADDON = xbmcaddon.Addon()
+ADDON = xbmcaddon.Addon('script.module.nakamori')
 CWD = ADDON.getAddonInfo('path').decode('utf-8')
 
 ACTION_PREVIOUS_MENU = 10

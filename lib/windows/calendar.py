@@ -68,7 +68,7 @@ if not os.path.exists(os.path.join(profileDir, 'titles', color, font_ttf + '-' +
 
 
 class Calendar2(xbmcgui.WindowXML):
-    def __init__(self, strXMLname, strFallbackPath, strDefaultName, forceFallback, data, item_number=0):
+    def __init__(self, strXMLname, strFallbackPath, strDefaultName, forceFallback, data, item_number=0, fake_data=False):
         self.window_type = 'window'
         self.json_data = data
         self._start_item = 0
@@ -83,6 +83,7 @@ class Calendar2(xbmcgui.WindowXML):
         self.used_dates = []
         self.day_count = 0
         self.serie_processed = int(item_number)
+        self.fake_data = fake_data
 
     def onInit(self):
         self.calendar_collection = {
@@ -133,7 +134,6 @@ class Calendar2(xbmcgui.WindowXML):
             for gui in self.calendar_collection.values():
                 assert isinstance(gui, xbmcgui.ControlList)
                 gui.reset()
-
             _json = json.loads(self.json_data)
             _size = _json.get('size', 0)
             _count = 0
@@ -161,7 +161,10 @@ class Calendar2(xbmcgui.WindowXML):
             if self.getFocus().getId() != 2:
                 self.list_update_right()
             else:
-                xbmc.executebuiltin(script_utils.calendar(0, self.serie_processed), True)
+                if self.fake_data:
+                    xbmc.executebuiltin(script_utils.calendar3(0, self.serie_processed), True)
+                else:
+                    xbmc.executebuiltin(script_utils.calendar(0, self.serie_processed), True)
         elif action == xbmcgui.ACTION_MOVE_LEFT:
             if self.getFocus().getId() != 1:
                 self.list_update_left()
@@ -190,7 +193,10 @@ class Calendar2(xbmcgui.WindowXML):
             if self.getFocus().getId() == 1:
                 xbmc.executebuiltin('Action(Back)')
             elif self.getFocus().getId() == 2:
-                xbmc.executebuiltin(script_utils.calendar(0, self.serie_processed), True)
+                if self.fake_data:
+                    xbmc.executebuiltin(script_utils.calendar3(0, self.serie_processed), True)
+                else:
+                    xbmc.executebuiltin(script_utils.calendar(0, self.serie_processed), True)
 
     def onControl(self, control):
         pass
@@ -338,10 +344,14 @@ class Calendar2(xbmcgui.WindowXML):
             pass
 
 
-def open_calendar(date=0, starting_item=0):
-    url = '%s/api/serie/soon?level=2&limit=0&offset=%s&d=%s' % (server, starting_item, date)
-    body = pyproxy.get_json(url)
-    ui = Calendar2('calendar.xml', CWD, 'Default', '1080i', data=body, item_number=starting_item)
+def open_calendar(date=0, starting_item=0, json_respons=''):
+    fake_data = False if json_respons == '' else True
+    if not fake_data:
+        url = '%s/api/serie/soon?level=2&limit=0&offset=%s&d=%s' % (server, starting_item, date)
+        body = pyproxy.get_json(url)
+    else:
+        body = json_respons
+    ui = Calendar2('calendar.xml', CWD, 'Default', '1080i', data=body, item_number=starting_item, fake_data=fake_data)
     ui.doModal()
     del ui
 

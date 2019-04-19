@@ -53,9 +53,9 @@ def calendar(when=0, page=1):
 
 @script.route('/calendar3/<when>/<page>')
 def calendar_3rd(when=0, page=1):
-    from lib.external_calendar import *
-    when3 = return_only_few(when)
-    _calendar.open_calendar(date=when3, starting_item=page)
+    from lib.external_calendar import return_only_few
+    body = return_only_few(page)
+    _calendar.open_calendar(date=when, starting_item=page, json_respons=body)
 
 
 @script.route('/arbiter/<wait>/<path:arg>')

@@ -101,8 +101,8 @@
                             <left>10</left>
                             <width>50</width>
                             <height>25</height>
-<texture>grey.png</texture>
-<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                            <texture>grey.png</texture>
+                            <visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
                         </control>
                         <control type="label">
                             <top>370</top>
@@ -112,7 +112,7 @@
                             <font>font_flag</font>
                             <label></label>
                             <info>ListItem.Property(ep)</info>
-<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                            <visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
                         </control>
                         <!-- end info -->
                     </itemlayout>
@@ -252,8 +252,8 @@
                             <left>10</left>
                             <width>50</width>
                             <height>25</height>
-<texture>grey.png</texture>
-<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                            <texture>grey.png</texture>
+                            <visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
                         </control>
                         <control type="label">
                             <top>370</top>
@@ -263,7 +263,7 @@
                             <font>font_flag</font>
                             <label></label>
                             <info>ListItem.Property(ep)</info>
-<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                            <visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
                         </control>
                         <!-- end info -->
                     </itemlayout>
@@ -315,8 +315,8 @@
                             <left>10</left>
                             <width>50</width>
                             <height>25</height>
-<texture>grey.png</texture>
-<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                            <texture>grey.png</texture>
+                            <visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
                         </control>
                         <control type="label">
                             <top>370</top>
@@ -326,7 +326,7 @@
                             <font>font_flag</font>
                             <label></label>
                             <info>ListItem.Property(ep)</info>
-<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                            <visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
                         </control>
                         <!-- end info -->
                     </focusedlayout>
@@ -417,8 +417,8 @@
                             <left>10</left>
                             <width>50</width>
                             <height>25</height>
-<texture>grey.png</texture>
-<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                            <texture>grey.png</texture>
+                            <visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
                         </control>
                         <control type="label">
                             <top>370</top>
@@ -428,7 +428,7 @@
                             <font>font_flag</font>
                             <label></label>
                             <info>ListItem.Property(ep)</info>
-<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                            <visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
                         </control>
                         <!-- end info -->
                     </itemlayout>
@@ -471,7 +471,6 @@
                             <height>326</height>
                             <bordertexture border="-2">grey.png</bordertexture>
                             <info>ListItem.Art(fanart)</info>
-
                             <visible>Control.HasFocus(57)</visible>
                         </control>
                         <!-- info -->
@@ -480,8 +479,8 @@
                             <left>10</left>
                             <width>50</width>
                             <height>25</height>
-<texture>grey.png</texture>
-<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                            <texture>grey.png</texture>
+                            <visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
                         </control>
                         <control type="label">
                             <top>370</top>
@@ -491,7 +490,7 @@
                             <font>font_flag</font>
                             <label></label>
                             <info>ListItem.Property(ep)</info>
-<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                            <visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
                         </control>
                         <!-- end info -->
                     </focusedlayout>
@@ -570,8 +569,8 @@
                             <left>10</left>
                             <width>50</width>
                             <height>25</height>
-<texture>grey.png</texture>
-<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                            <texture>grey.png</texture>
+                            <visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
                         </control>
                         <control type="label">
                             <top>370</top>
@@ -581,7 +580,7 @@
                             <font>font_flag</font>
                             <label></label>
                             <info>ListItem.Property(ep)</info>
-<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                            <visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
                         </control>
                         <!-- end info -->
                     </itemlayout>
@@ -615,7 +614,6 @@
                             <width>230</width>
                             <height>326</height>
                             <info>ListItem.Art(fanart)</info>
-
                         </control>
                         <control type="image">
                             <top>73</top>
@@ -633,8 +631,8 @@
                             <left>10</left>
                             <width>50</width>
                             <height>25</height>
-<texture>grey.png</texture>
-<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                            <texture>grey.png</texture>
+                            <visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
                         </control>
                         <control type="label">
                             <top>370</top>
@@ -644,7 +642,7 @@
                             <font>font_flag</font>
                             <label></label>
                             <info>ListItem.Property(ep)</info>
-<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                            <visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
                         </control>
                         <!-- end info -->
                     </focusedlayout>
@@ -723,8 +721,8 @@
                             <left>10</left>
                             <width>50</width>
                             <height>25</height>
-<texture>grey.png</texture>
-<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                            <texture>grey.png</texture>
+                            <visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
                         </control>
                         <control type="label">
                             <top>370</top>
@@ -734,7 +732,7 @@
                             <font>font_flag</font>
                             <label></label>
                             <info>ListItem.Property(ep)</info>
-<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                            <visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
                         </control>
                         <!-- end info -->
                     </itemlayout>
@@ -768,7 +766,6 @@
                             <width>230</width>
                             <height>326</height>
                             <info>ListItem.Art(fanart)</info>
-
                         </control>
                         <control type="image">
                             <top>73</top>
@@ -786,8 +783,8 @@
                             <left>10</left>
                             <width>50</width>
                             <height>25</height>
-<texture>grey.png</texture>
-<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                            <texture>grey.png</texture>
+                            <visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
                         </control>
                         <control type="label">
                             <top>370</top>
@@ -797,7 +794,7 @@
                             <font>font_flag</font>
                             <label></label>
                             <info>ListItem.Property(ep)</info>
-<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                            <visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
                         </control>
                         <!-- end info -->
                     </focusedlayout>
@@ -876,8 +873,8 @@
                             <left>10</left>
                             <width>50</width>
                             <height>25</height>
-<texture>grey.png</texture>
-<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                            <texture>grey.png</texture>
+                            <visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
                         </control>
                         <control type="label">
                             <top>370</top>
@@ -887,7 +884,7 @@
                             <font>font_flag</font>
                             <label></label>
                             <info>ListItem.Property(ep)</info>
-<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                            <visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
                         </control>
                         <!-- end info -->
                     </itemlayout>
@@ -921,7 +918,6 @@
                             <width>230</width>
                             <height>326</height>
                             <info>ListItem.Art(fanart)</info>
-
                         </control>
                         <control type="image">
                             <top>73</top>
@@ -939,8 +935,8 @@
                             <left>10</left>
                             <width>50</width>
                             <height>25</height>
-<texture>grey.png</texture>
-<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                            <texture>grey.png</texture>
+                            <visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
                         </control>
                         <control type="label">
                             <top>370</top>
@@ -950,7 +946,7 @@
                             <font>font_flag</font>
                             <label></label>
                             <info>ListItem.Property(ep)</info>
-<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                            <visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
                         </control>
                         <!-- end info -->
                     </focusedlayout>

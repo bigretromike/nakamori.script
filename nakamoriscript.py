@@ -53,8 +53,12 @@ def calendar(when=0, page=1):
 
 @script.route('/calendar3/<when>/<page>')
 def calendar_3rd(when=0, page=1):
+    # when 20190131
+    if when == '0' and page == '0':
+        import datetime
+        when = datetime.datetime.now().strftime('%Y%m%d')
     from lib.external_calendar import return_only_few
-    body = return_only_few(page)
+    body = return_only_few(when=when, offset=page)
     _calendar.open_calendar(date=when, starting_item=page, json_respons=body)
 
 

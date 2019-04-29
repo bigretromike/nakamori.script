@@ -65,6 +65,8 @@ if not os.path.exists(os.path.join(profileDir, 'titles', color)):
     os.makedirs(os.path.join(profileDir, 'titles', color))
 if not os.path.exists(os.path.join(profileDir, 'titles', color, font_ttf + '-' + font_size)):
     os.makedirs(os.path.join(profileDir, 'titles', color, font_ttf + '-' + font_size))
+if not os.path.exists(os.path.join(profileDir, 'json')):
+    os.makedirs(os.path.join(profileDir, 'json'))
 
 
 class Calendar2(xbmcgui.WindowXML):
@@ -362,6 +364,15 @@ def clear_cache():
         if clear:
             files_to_delete = [os.path.join(path, file)
                                for (path, dirs, files) in os.walk(os.path.join(profileDir, 'titles'))
+                               for file in files]
+            for f in files_to_delete:
+                os.remove(f)
+                xbmc.log('clear-cache deleted: ' + str(f), xbmc.LOGINFO)
+    if os.path.exists(os.path.join(profileDir, 'json')):
+        clear = xbmcgui.Dialog().yesno(ADDON.getLocalizedString(30019), ADDON.getLocalizedString(30020))
+        if clear:
+            files_to_delete = [os.path.join(path, file)
+                               for (path, dirs, files) in os.walk(os.path.join(profileDir, 'json'))
                                for file in files]
             for f in files_to_delete:
                 os.remove(f)

@@ -95,6 +95,26 @@
                             <info>ListItem.Art(fanart)</info>
                             <!-- <aspectratio aligny="top">keep</aspectratio> -->
                         </control>
+                        <!-- info -->
+                        <control type="image">
+                            <top>370</top>
+                            <left>10</left>
+                            <width>50</width>
+                            <height>25</height>
+<texture>grey.png</texture>
+<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                        </control>
+                        <control type="label">
+                            <top>370</top>
+                            <left>15</left>
+                            <width>50</width>
+                            <height>25</height>
+                            <font>font_flag</font>
+                            <label></label>
+                            <info>ListItem.Property(ep)</info>
+<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                        </control>
+                        <!-- end info -->
                     </itemlayout>
                     <focusedlayout height="396" width="250">
                          <control type="image">
@@ -126,7 +146,6 @@
                             <width>230</width>
                             <height>326</height>
                             <info>ListItem.Art(fanart)</info>
-							<!-- <aspectratio aligny="top">keep</aspectratio> -->
                         </control>
                         <control type="image">
                             <top>73</top>
@@ -135,9 +154,28 @@
                             <height>326</height>
                             <bordertexture border="-2">grey.png</bordertexture>
                             <info>ListItem.Art(fanart)</info>
-							<!-- <aspectratio aligny="top">keep</aspectratio> -->
                             <visible>Control.HasFocus(55)</visible>
                         </control>
+                        <!-- info -->
+                        <control type="image">
+                            <top>370</top>
+                            <left>10</left>
+                            <width>50</width>
+                            <height>25</height>
+                            <texture>grey.png</texture>
+                            <visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                        </control>
+                        <control type="label">
+                            <top>370</top>
+                            <left>15</left>
+                            <width>50</width>
+                            <height>25</height>
+                            <font>font_flag</font>
+                            <label></label>
+                            <info>ListItem.Property(ep)</info>
+                            <visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                        </control>
+                        <!-- end info -->
                     </focusedlayout>
                 </control>
                 <control type="image" id="65">
@@ -208,6 +246,26 @@
                             <info>ListItem.Art(fanart)</info>
                             <!-- <aspectratio aligny="top">keep</aspectratio> -->
                         </control>
+                        <!-- info -->
+                        <control type="image">
+                            <top>370</top>
+                            <left>10</left>
+                            <width>50</width>
+                            <height>25</height>
+<texture>grey.png</texture>
+<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                        </control>
+                        <control type="label">
+                            <top>370</top>
+                            <left>15</left>
+                            <width>50</width>
+                            <height>25</height>
+                            <font>font_flag</font>
+                            <label></label>
+                            <info>ListItem.Property(ep)</info>
+<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                        </control>
+                        <!-- end info -->
                     </itemlayout>
                     <focusedlayout height="396" width="250">
                          <control type="image">
@@ -239,7 +297,7 @@
                             <width>230</width>
                             <height>326</height>
                             <info>ListItem.Art(fanart)</info>
-							<!-- <aspectratio aligny="top">keep</aspectratio> -->
+
                         </control>
                         <control type="image">
                             <top>73</top>
@@ -248,9 +306,29 @@
                             <height>326</height>
                             <bordertexture border="-2">grey.png</bordertexture>
                             <info>ListItem.Art(fanart)</info>
-							<!-- <aspectratio aligny="top">keep</aspectratio> -->
+
                             <visible>Control.HasFocus(56)</visible>
                         </control>
+                        <!-- info -->
+                        <control type="image">
+                            <top>370</top>
+                            <left>10</left>
+                            <width>50</width>
+                            <height>25</height>
+<texture>grey.png</texture>
+<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                        </control>
+                        <control type="label">
+                            <top>370</top>
+                            <left>15</left>
+                            <width>50</width>
+                            <height>25</height>
+                            <font>font_flag</font>
+                            <label></label>
+                            <info>ListItem.Property(ep)</info>
+<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                        </control>
+                        <!-- end info -->
                     </focusedlayout>
                 </control>
                 <control type="image" id="66">
@@ -333,6 +411,26 @@
                             <info>ListItem.Art(fanart)</info>
                             <!-- <aspectratio aligny="top">keep</aspectratio> -->
                         </control>
+                        <!-- info -->
+                        <control type="image">
+                            <top>370</top>
+                            <left>10</left>
+                            <width>50</width>
+                            <height>25</height>
+<texture>grey.png</texture>
+<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                        </control>
+                        <control type="label">
+                            <top>370</top>
+                            <left>15</left>
+                            <width>50</width>
+                            <height>25</height>
+                            <font>font_flag</font>
+                            <label></label>
+                            <info>ListItem.Property(ep)</info>
+<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                        </control>
+                        <!-- end info -->
                     </itemlayout>
                     <focusedlayout height="396" width="250">
                          <control type="image">
@@ -364,7 +462,7 @@
                             <width>230</width>
                             <height>326</height>
                             <info>ListItem.Art(fanart)</info>
-							<!-- <aspectratio aligny="top">keep</aspectratio> -->
+
                         </control>
                         <control type="image">
                             <top>73</top>
@@ -373,9 +471,29 @@
                             <height>326</height>
                             <bordertexture border="-2">grey.png</bordertexture>
                             <info>ListItem.Art(fanart)</info>
-							<!-- <aspectratio aligny="top">keep</aspectratio> -->
+
                             <visible>Control.HasFocus(57)</visible>
                         </control>
+                        <!-- info -->
+                        <control type="image">
+                            <top>370</top>
+                            <left>10</left>
+                            <width>50</width>
+                            <height>25</height>
+<texture>grey.png</texture>
+<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                        </control>
+                        <control type="label">
+                            <top>370</top>
+                            <left>15</left>
+                            <width>50</width>
+                            <height>25</height>
+                            <font>font_flag</font>
+                            <label></label>
+                            <info>ListItem.Property(ep)</info>
+<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                        </control>
+                        <!-- end info -->
                     </focusedlayout>
                 </control>
                 <control type="image" id="67">
@@ -446,6 +564,26 @@
                             <info>ListItem.Art(fanart)</info>
                             <!-- <aspectratio aligny="top">keep</aspectratio> -->
                         </control>
+                        <!-- info -->
+                        <control type="image">
+                            <top>370</top>
+                            <left>10</left>
+                            <width>50</width>
+                            <height>25</height>
+<texture>grey.png</texture>
+<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                        </control>
+                        <control type="label">
+                            <top>370</top>
+                            <left>15</left>
+                            <width>50</width>
+                            <height>25</height>
+                            <font>font_flag</font>
+                            <label></label>
+                            <info>ListItem.Property(ep)</info>
+<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                        </control>
+                        <!-- end info -->
                     </itemlayout>
                     <focusedlayout height="396" width="250">
                          <control type="image">
@@ -477,7 +615,7 @@
                             <width>230</width>
                             <height>326</height>
                             <info>ListItem.Art(fanart)</info>
-							<!-- <aspectratio aligny="top">keep</aspectratio> -->
+
                         </control>
                         <control type="image">
                             <top>73</top>
@@ -486,9 +624,29 @@
                             <height>326</height>
                             <bordertexture border="-2">grey.png</bordertexture>
                             <info>ListItem.Art(fanart)</info>
-							<!-- <aspectratio aligny="top">keep</aspectratio> -->
+
                             <visible>Control.HasFocus(58)</visible>
                         </control>
+                        <!-- info -->
+                        <control type="image">
+                            <top>370</top>
+                            <left>10</left>
+                            <width>50</width>
+                            <height>25</height>
+<texture>grey.png</texture>
+<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                        </control>
+                        <control type="label">
+                            <top>370</top>
+                            <left>15</left>
+                            <width>50</width>
+                            <height>25</height>
+                            <font>font_flag</font>
+                            <label></label>
+                            <info>ListItem.Property(ep)</info>
+<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                        </control>
+                        <!-- end info -->
                     </focusedlayout>
                 </control>
                 <control type="image" id="68">
@@ -559,6 +717,26 @@
                             <info>ListItem.Art(fanart)</info>
                             <!-- <aspectratio aligny="top">keep</aspectratio> -->
                         </control>
+                        <!-- info -->
+                        <control type="image">
+                            <top>370</top>
+                            <left>10</left>
+                            <width>50</width>
+                            <height>25</height>
+<texture>grey.png</texture>
+<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                        </control>
+                        <control type="label">
+                            <top>370</top>
+                            <left>15</left>
+                            <width>50</width>
+                            <height>25</height>
+                            <font>font_flag</font>
+                            <label></label>
+                            <info>ListItem.Property(ep)</info>
+<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                        </control>
+                        <!-- end info -->
                     </itemlayout>
                     <focusedlayout height="396" width="250">
                          <control type="image">
@@ -590,7 +768,7 @@
                             <width>230</width>
                             <height>326</height>
                             <info>ListItem.Art(fanart)</info>
-							<!-- <aspectratio aligny="top">keep</aspectratio> -->
+
                         </control>
                         <control type="image">
                             <top>73</top>
@@ -599,9 +777,29 @@
                             <height>326</height>
                             <bordertexture border="-2">grey.png</bordertexture>
                             <info>ListItem.Art(fanart)</info>
-							<!-- <aspectratio aligny="top">keep</aspectratio> -->
+
                             <visible>Control.HasFocus(59)</visible>
                         </control>
+                        <!-- info -->
+                        <control type="image">
+                            <top>370</top>
+                            <left>10</left>
+                            <width>50</width>
+                            <height>25</height>
+<texture>grey.png</texture>
+<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                        </control>
+                        <control type="label">
+                            <top>370</top>
+                            <left>15</left>
+                            <width>50</width>
+                            <height>25</height>
+                            <font>font_flag</font>
+                            <label></label>
+                            <info>ListItem.Property(ep)</info>
+<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                        </control>
+                        <!-- end info -->
                     </focusedlayout>
                 </control>
                 <control type="image" id="69">
@@ -672,6 +870,26 @@
                             <info>ListItem.Art(fanart)</info>
                             <!-- <aspectratio aligny="top">keep</aspectratio> -->
                         </control>
+                        <!-- info -->
+                        <control type="image">
+                            <top>370</top>
+                            <left>10</left>
+                            <width>50</width>
+                            <height>25</height>
+<texture>grey.png</texture>
+<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                        </control>
+                        <control type="label">
+                            <top>370</top>
+                            <left>15</left>
+                            <width>50</width>
+                            <height>25</height>
+                            <font>font_flag</font>
+                            <label></label>
+                            <info>ListItem.Property(ep)</info>
+<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                        </control>
+                        <!-- end info -->
                     </itemlayout>
                     <focusedlayout height="396" width="250">
                          <control type="image">
@@ -703,7 +921,7 @@
                             <width>230</width>
                             <height>326</height>
                             <info>ListItem.Art(fanart)</info>
-							<!-- <aspectratio aligny="top">keep</aspectratio> -->
+
                         </control>
                         <control type="image">
                             <top>73</top>
@@ -712,9 +930,29 @@
                             <height>326</height>
                             <bordertexture border="-2">grey.png</bordertexture>
                             <info>ListItem.Art(fanart)</info>
-							<!-- <aspectratio aligny="top">keep</aspectratio> -->
+
                             <visible>Control.HasFocus(60)</visible>
                         </control>
+                        <!-- info -->
+                        <control type="image">
+                            <top>370</top>
+                            <left>10</left>
+                            <width>50</width>
+                            <height>25</height>
+<texture>grey.png</texture>
+<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                        </control>
+                        <control type="label">
+                            <top>370</top>
+                            <left>15</left>
+                            <width>50</width>
+                            <height>25</height>
+                            <font>font_flag</font>
+                            <label></label>
+                            <info>ListItem.Property(ep)</info>
+<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                        </control>
+                        <!-- end info -->
                     </focusedlayout>
                 </control>
                 <control type="image" id="70">
@@ -786,6 +1024,26 @@
                             <info>ListItem.Art(fanart)</info>
                             <!-- <aspectratio aligny="top">keep</aspectratio> -->
                         </control>
+                        <!-- info -->
+                        <control type="image">
+                            <top>370</top>
+                            <left>10</left>
+                            <width>50</width>
+                            <height>25</height>
+<texture>grey.png</texture>
+<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                        </control>
+                        <control type="label">
+                            <top>370</top>
+                            <left>15</left>
+                            <width>50</width>
+                            <height>25</height>
+                            <font>font_flag</font>
+                            <label></label>
+                            <info>ListItem.Property(ep)</info>
+<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                        </control>
+                        <!-- end info -->
                     </itemlayout>
                     <focusedlayout height="396" width="250">
                          <control type="image">
@@ -817,7 +1075,7 @@
                             <width>230</width>
                             <height>326</height>
                             <info>ListItem.Art(fanart)</info>
-							<!-- <aspectratio aligny="top">keep</aspectratio> -->
+
                         </control>
                         <control type="image">
                             <top>73</top>
@@ -826,9 +1084,29 @@
                             <height>326</height>
                             <bordertexture border="-2">grey.png</bordertexture>
                             <info>ListItem.Art(fanart)</info>
-							<!-- <aspectratio aligny="top">keep</aspectratio> -->
+
                             <visible>Control.HasFocus(61)</visible>
                         </control>
+                        <!-- info -->
+                        <control type="image">
+                            <top>370</top>
+                            <left>10</left>
+                            <width>50</width>
+                            <height>25</height>
+<texture>grey.png</texture>
+<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                        </control>
+                        <control type="label">
+                            <top>370</top>
+                            <left>15</left>
+                            <width>50</width>
+                            <height>25</height>
+                            <font>font_flag</font>
+                            <label></label>
+                            <info>ListItem.Property(ep)</info>
+<visible>!String.IsEqual(ListItem.Property(ep),0)</visible>
+                        </control>
+                        <!-- end info -->
                     </focusedlayout>
                 </control>
                 <control type="image" id="71">

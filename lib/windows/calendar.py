@@ -2,6 +2,7 @@
 import time
 import json
 import datetime
+import re
 
 from nakamori_utils import script_utils
 from proxy.python_version_proxy import python_proxy as pyproxy
@@ -70,7 +71,7 @@ if not os.path.exists(os.path.join(profileDir, 'json')):
 
 
 class Calendar2(xbmcgui.WindowXML):
-    def __init__(self, strXMLname, strFallbackPath, strDefaultName, forceFallback, data, item_number=0, fake_data=False):
+    def __init__(self, strXMLname, strFallbackPath, strDefaultName, forceFallback, data, item_number=0, start_date=datetime.datetime.now().strftime('%Y%m%d'), fake_data=False):
         self.window_type = 'window'
         self.json_data = data
         self._start_item = 0
@@ -85,6 +86,7 @@ class Calendar2(xbmcgui.WindowXML):
         self.used_dates = []
         self.day_count = 0
         self.serie_processed = int(item_number)
+        self.last_processed_date = start_date
         self.fake_data = fake_data
 
     def onInit(self):
@@ -141,6 +143,7 @@ class Calendar2(xbmcgui.WindowXML):
             _count = 0
 
             if _size > 0:
+                # xbmc.log('---------> process_init: %s . %s %s and %s' % (_size, len(_json['series']), self.last_processed_date, self.serie_processed), xbmc.LOGNOTICE)
                 for series in _json['series']:
                     busy.update(_count/_size)
                     if self.process_series(series):
@@ -164,7 +167,11 @@ class Calendar2(xbmcgui.WindowXML):
                 self.list_update_right()
             else:
                 if self.fake_data:
-                    xbmc.executebuiltin(script_utils.calendar3(0, self.serie_processed), True)
+                    try:
+                        # xbmc.log('---------> I GET 1: self.last_processed_date: %s and %s' % (self.last_processed_date, self.serie_processed), xbmc.LOGNOTICE)
+                        xbmc.executebuiltin(script_utils.calendar3(self.last_processed_date, self.serie_processed), True)
+                    except Exception as exx:
+                        xbmc.log(str(exx), xbmc.LOGNOTICE)
                 else:
                     xbmc.executebuiltin(script_utils.calendar(0, self.serie_processed), True)
         elif action == xbmcgui.ACTION_MOVE_LEFT:
@@ -196,7 +203,11 @@ class Calendar2(xbmcgui.WindowXML):
                 xbmc.executebuiltin('Action(Back)')
             elif self.getFocus().getId() == 2:
                 if self.fake_data:
-                    xbmc.executebuiltin(script_utils.calendar3(0, self.serie_processed), True)
+                    try:
+                        # xbmc.log('---------> I GET 2: self.last_processed_date: %s and %s' % (self.last_processed_date, self.serie_processed), xbmc.LOGNOTICE)
+                        xbmc.executebuiltin(script_utils.calendar3(self.last_processed_date, self.serie_processed), True)
+                    except Exception as exx:
+                        xbmc.log(str(exx), xbmc.LOGNOTICE)
                 else:
                     xbmc.executebuiltin(script_utils.calendar(0, self.serie_processed), True)
 
@@ -226,6 +237,8 @@ class Calendar2(xbmcgui.WindowXML):
 
             self.day_label[self.day_count].setLabel(self.day_of_week[name_of_day])
             self.date_label[self.day_count].setLabel(string_day)
+            self.last_processed_date = day_date.strftime('%Y%m%d')
+            xbmc.log('---------> I SET self.last_processed_date: %s' % self.last_processed_date, xbmc.LOGNOTICE)
 
         fanart = os.path.join(img, 'icons', 'new-search.png')
         if len(series['art']['thumb']) > 0:
@@ -236,8 +249,13 @@ class Calendar2(xbmcgui.WindowXML):
         aid = series.get('aid', 0)
         is_movie = series.get('ismovie', 0)
         summary = series.get('summary', '')
+        ep = 0
+        if ' - ep' in title:
+            search = re.search(r'( \- ep )(\d*)', title)
+            ep = search.group(2)
+            title = title.replace(search.group(1) + ep, '')
+
         # TODO Window with information
-        # TODO on image info about episode when shoko will have it
         # make image title because Kodi refuse to work with smaller/custom font
 
         is_nonstatic = True if ADDON.getSetting('gif_title') == "true" else False
@@ -317,6 +335,7 @@ class Calendar2(xbmcgui.WindowXML):
         # series_listitem.setUniqueIDs({'anidb': aid}')
         series_listitem.setInfo('video', {'title': title, 'aired': air_date})
         series_listitem.setProperty('aid', str(aid))
+        series_listitem.setProperty('ep', str(ep))
         self.calendar_collection[self.day_count].addItem(series_listitem)
         self.serie_processed += 1
         return True

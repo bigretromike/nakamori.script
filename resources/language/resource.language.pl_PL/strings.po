@@ -128,6 +128,11 @@ msgctxt "#30023"
 msgid "Episode Voting"
 msgstr "Oceń odcinek"
 
+#: settings.xml
+msgctxt "#30024"
+msgid "Use animated titles in calendar"
+msgstr "Użyj animowanych tytułów w kalendarzu"
+
 #: nakamoritools.py
 msgctxt "#30026"
 msgid "Enter search text"
@@ -202,3 +207,7 @@ msgstr "Dodaj do listy pożądanych"
 msgctxt "#30040"
 msgid "Remove from wishlist"
 msgstr "Usuń z listy pożądanych"
+
+msgctxt "#30041"
+msgid "Enter Shoko Server Host"
+msgstr "Wprowadz host serwera Shoko"

@@ -1,0 +1,213 @@
+# Translators:
+# BigRetroMike, 2019
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Nakamori\n"
+"Last-Translator: BigRetroMike, 2019\n"
+"Language-Team: Chinese (China) (https://www.transifex.com/nakamori/teams/97622/zh_CN/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: POEditor.com\n"
+
+#: wizard.xml
+msgctxt "#30001"
+msgid "Enter Shoko Server Credentials"
+msgstr "输入Shoko服务器凭据"
+
+#: wizard.xml, wizard.py
+msgctxt "#30002"
+msgid "IP Address"
+msgstr "IP地址"
+
+#: wizard.xml, wizard.py
+msgctxt "#30003"
+msgid "Port"
+msgstr "端口"
+
+#: wizard.xml, wizard.py
+msgctxt "#30004"
+msgid "Username"
+msgstr "用户名"
+
+#: wizard.xml, wizard.py
+msgctxt "#30005"
+msgid "Password"
+msgstr "密码"
+
+#: wizard.xml
+msgctxt "#30006"
+msgid "Test"
+msgstr "测试"
+
+#: wizard.xml
+msgctxt "#30007"
+msgid "Save"
+msgstr "保存"
+
+#: information.xml
+msgctxt "#30008"
+msgid "What's New!"
+msgstr "更新日志"
+
+#: information.xml
+msgctxt "#30009"
+msgid "Close"
+msgstr "关闭"
+
+#: calendar.py
+msgctxt "#30010"
+msgid "MON"
+msgstr "周一"
+
+#: calendar.py
+msgctxt "#30011"
+msgid "TUE"
+msgstr "周二"
+
+#: calendar.py
+msgctxt "#30012"
+msgid "WED"
+msgstr "周三"
+
+#: calendar.py
+msgctxt "#30013"
+msgid "THU"
+msgstr "周四"
+
+#: calendar.py
+msgctxt "#30014"
+msgid "FRI"
+msgstr "周五"
+
+#: calendar.py
+msgctxt "#30015"
+msgid "SAT"
+msgstr "周六"
+
+#: calendar.py
+msgctxt "#30016"
+msgid "SUN"
+msgstr "周日"
+
+#: calendar.py
+msgctxt "#30017"
+msgid "Loading"
+msgstr "载入中"
+
+#: calendar.py
+msgctxt "#30018"
+msgid "Populating calendar ..."
+msgstr "生成日历中…"
+
+#: calendar.py
+msgctxt "#30019"
+msgid "Would you like to clear cache?"
+msgstr "你想要清除缓存吗？"
+
+#: calendar.py
+msgctxt "#30020"
+msgid "This will remove content of titles directory"
+msgstr "这将会删除标题文件夹中的内容。"
+
+#: nakamoritools.py
+msgctxt "#30021"
+msgid "Series Voting"
+msgstr "剧集评分"
+
+#: nakamoritools.py
+msgctxt "#30022"
+msgid "You Voted"
+msgstr "你已评分"
+
+#: nakamoritools.py
+msgctxt "#30023"
+msgid "Episode Voting"
+msgstr "分集评分"
+
+#: settings.xml
+msgctxt "#30024"
+msgid "Use animated titles in calendar"
+msgstr "在日历中使用动画标题"
+
+#: nakamoritools.py
+msgctxt "#30026"
+msgid "Enter search text"
+msgstr "输入搜索内容"
+
+#: wizard.xml
+msgctxt "#30027"
+msgid "OK"
+msgstr "好的"
+
+#: settings.xml
+msgctxt "#30028"
+msgid "Calendar"
+msgstr "日历"
+
+#: settings.xml
+msgctxt "#30029"
+msgid "Font"
+msgstr "字体"
+
+#: settings.xml
+msgctxt "#30030"
+msgid "Color"
+msgstr "颜色"
+
+#: settings.xml
+msgctxt "#30031"
+msgid "Size"
+msgstr "大小"
+
+#: settings.xml
+msgctxt "#30032"
+msgid "Maintenance"
+msgstr "维护"
+
+#: settings.xml
+msgctxt "#30033"
+msgid "Clear cache"
+msgstr "清除缓存"
+
+#: wizard.py
+msgctxt "#30034"
+msgid "Warning"
+msgstr "警告"
+
+#: wizard.py
+msgctxt "#30035"
+msgid "Could not connect to Shoko Server"
+msgstr "无法连接至Shoko服务器"
+
+#: wizard.py
+msgctxt "#30036"
+msgid "The username or password is incorrect"
+msgstr "用户名或摸门不正确"
+
+#: calendar.py
+msgctxt "#30037"
+msgid "Show info"
+msgstr "显示信息"
+
+#: calendar.py
+msgctxt "#30038"
+msgid "Download missing info"
+msgstr "下载遗失的信息"
+
+#: calendar.py
+msgctxt "#30039"
+msgid "Add to wishlist"
+msgstr "添加至愿望单"
+
+#: calendar.py
+msgctxt "#30040"
+msgid "Remove from wishlist"
+msgstr "从愿望单中移除"
+
+msgctxt "#30041"
+msgid "Enter Shoko Server Host"
+msgstr "输入Shoko服务器地址"

@@ -1,207 +1,213 @@
+# Translators:
+# BigRetroMike, 2019
+# 
 msgid ""
 msgstr ""
+"Project-Id-Version: Nakamori\n"
+"Last-Translator: BigRetroMike, 2019\n"
+"Language-Team: Russian (Russia) (https://www.transifex.com/nakamori/teams/97622/ru_RU/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ru_RU\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 "X-Generator: POEditor.com\n"
-"Project-Id-Version: Nakamori\n"
-"Language: en\n"
 
 #: wizard.xml
 msgctxt "#30001"
 msgid "Enter Shoko Server Credentials"
-msgstr "Введите учетные данные сервера Shoko" 
+msgstr "Введите учетные данные сервера Shoko"
 
 #: wizard.xml, wizard.py
 msgctxt "#30002"
 msgid "IP Address"
-msgstr "Айпи адрес" 
+msgstr "Айпи адрес"
 
 #: wizard.xml, wizard.py
 msgctxt "#30003"
 msgid "Port"
-msgstr "порт" 
+msgstr "порт"
 
 #: wizard.xml, wizard.py
 msgctxt "#30004"
 msgid "Username"
-msgstr "имя пользователя" 
+msgstr "имя пользователя"
 
 #: wizard.xml, wizard.py
 msgctxt "#30005"
 msgid "Password"
-msgstr "пароль" 
+msgstr "пароль"
 
 #: wizard.xml
 msgctxt "#30006"
 msgid "Test"
-msgstr "Тестовое задание" 
+msgstr "Тестовое задание"
 
 #: wizard.xml
 msgctxt "#30007"
 msgid "Save"
-msgstr "Сохранить" 
+msgstr "Сохранить"
 
 #: information.xml
 msgctxt "#30008"
 msgid "What's New!"
-msgstr "Что нового!" 
+msgstr "Что нового!"
 
 #: information.xml
 msgctxt "#30009"
 msgid "Close"
-msgstr "близко" 
+msgstr "близко"
 
 #: calendar.py
 msgctxt "#30010"
 msgid "MON"
-msgstr "пН" 
+msgstr "пН"
 
 #: calendar.py
 msgctxt "#30011"
 msgid "TUE"
-msgstr "вт" 
+msgstr "вт"
 
 #: calendar.py
 msgctxt "#30012"
 msgid "WED"
-msgstr "МЫ БЫ" 
+msgstr "МЫ БЫ"
 
 #: calendar.py
 msgctxt "#30013"
 msgid "THU"
-msgstr "ЧГ" 
+msgstr "ЧГ"
 
 #: calendar.py
 msgctxt "#30014"
 msgid "FRI"
-msgstr "FRI" 
+msgstr "FRI"
 
 #: calendar.py
 msgctxt "#30015"
 msgid "SAT"
-msgstr "СУББОТА" 
+msgstr "СУББОТА"
 
 #: calendar.py
 msgctxt "#30016"
 msgid "SUN"
-msgstr "СОЛНЦЕ" 
+msgstr "СОЛНЦЕ"
 
 #: calendar.py
 msgctxt "#30017"
 msgid "Loading"
-msgstr "загрузка" 
+msgstr "загрузка"
 
 #: calendar.py
 msgctxt "#30018"
 msgid "Populating calendar ..."
-msgstr "Заполнение календаря ..." 
+msgstr "Заполнение календаря ..."
 
 #: calendar.py
 msgctxt "#30019"
 msgid "Would you like to clear cache?"
-msgstr "Хотите очистить кеш?" 
+msgstr "Хотите очистить кеш?"
 
 #: calendar.py
 msgctxt "#30020"
 msgid "This will remove content of titles directory"
-msgstr "Это удалит содержимое каталога заголовков" 
+msgstr "Это удалит содержимое каталога заголовков"
 
 #: nakamoritools.py
 msgctxt "#30021"
 msgid "Series Voting"
-msgstr "Серия Голосование" 
+msgstr "Серия Голосование"
 
 #: nakamoritools.py
 msgctxt "#30022"
 msgid "You Voted"
-msgstr "Вы проголосовали" 
+msgstr "Вы проголосовали"
 
 #: nakamoritools.py
 msgctxt "#30023"
 msgid "Episode Voting"
-msgstr "Эпизод Голосование" 
+msgstr "Эпизод Голосование"
 
 #: settings.xml
 msgctxt "#30024"
 msgid "Use animated titles in calendar"
-msgstr "Используйте анимированные заголовки в календаре" 
+msgstr "Используйте анимированные заголовки в календаре"
 
 #: nakamoritools.py
 msgctxt "#30026"
 msgid "Enter search text"
-msgstr "Введите текст для поиска" 
+msgstr "Введите текст для поиска"
 
 #: wizard.xml
 msgctxt "#30027"
 msgid "OK"
-msgstr "Хорошо" 
+msgstr "Хорошо"
 
 #: settings.xml
 msgctxt "#30028"
 msgid "Calendar"
-msgstr "Календарь" 
+msgstr "Календарь"
 
 #: settings.xml
 msgctxt "#30029"
 msgid "Font"
-msgstr "Шрифт" 
+msgstr "Шрифт"
 
 #: settings.xml
 msgctxt "#30030"
 msgid "Color"
-msgstr "цвет" 
+msgstr "цвет"
 
 #: settings.xml
 msgctxt "#30031"
 msgid "Size"
-msgstr "Размер" 
+msgstr "Размер"
 
 #: settings.xml
 msgctxt "#30032"
 msgid "Maintenance"
-msgstr "техническое обслуживание" 
+msgstr "техническое обслуживание"
 
 #: settings.xml
 msgctxt "#30033"
 msgid "Clear cache"
-msgstr "Очистить кэш" 
+msgstr "Очистить кэш"
 
 #: wizard.py
 msgctxt "#30034"
 msgid "Warning"
-msgstr "Предупреждение" 
+msgstr "Предупреждение"
 
 #: wizard.py
 msgctxt "#30035"
 msgid "Could not connect to Shoko Server"
-msgstr "Не удалось подключиться к серверу Shoko" 
+msgstr "Не удалось подключиться к серверу Shoko"
 
 #: wizard.py
 msgctxt "#30036"
 msgid "The username or password is incorrect"
-msgstr "Неверное имя пользователя или пароль" 
+msgstr "Неверное имя пользователя или пароль"
 
 #: calendar.py
 msgctxt "#30037"
 msgid "Show info"
-msgstr "Показать информацию" 
+msgstr "Показать информацию"
 
 #: calendar.py
 msgctxt "#30038"
 msgid "Download missing info"
-msgstr "Скачать недостающую информацию" 
+msgstr "Скачать недостающую информацию"
 
 #: calendar.py
 msgctxt "#30039"
 msgid "Add to wishlist"
-msgstr "Добавить в список желаний" 
+msgstr "Добавить в список желаний"
 
 #: calendar.py
 msgctxt "#30040"
 msgid "Remove from wishlist"
-msgstr "Удалить из списка желаний" 
+msgstr "Удалить из списка желаний"
 
 msgctxt "#30041"
 msgid "Enter Shoko Server Host"
-msgstr "Войдите в хостинг сервера Shoko" 
+msgstr "Войдите в хостинг сервера Shoko"

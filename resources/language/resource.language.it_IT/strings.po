@@ -1,0 +1,207 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: Nakamori\n"
+"Language: en\n"
+
+#: wizard.xml
+msgctxt "#30001"
+msgid "Enter Shoko Server Credentials"
+msgstr "Inserisci le credenziali del server Shoko" 
+
+#: wizard.xml, wizard.py
+msgctxt "#30002"
+msgid "IP Address"
+msgstr "Indirizzo IP" 
+
+#: wizard.xml, wizard.py
+msgctxt "#30003"
+msgid "Port"
+msgstr "Porta" 
+
+#: wizard.xml, wizard.py
+msgctxt "#30004"
+msgid "Username"
+msgstr "Nome utente" 
+
+#: wizard.xml, wizard.py
+msgctxt "#30005"
+msgid "Password"
+msgstr "Parola d'ordine" 
+
+#: wizard.xml
+msgctxt "#30006"
+msgid "Test"
+msgstr "Test" 
+
+#: wizard.xml
+msgctxt "#30007"
+msgid "Save"
+msgstr "Salvare" 
+
+#: information.xml
+msgctxt "#30008"
+msgid "What's New!"
+msgstr "Cosa c'è di nuovo!" 
+
+#: information.xml
+msgctxt "#30009"
+msgid "Close"
+msgstr "Vicino" 
+
+#: calendar.py
+msgctxt "#30010"
+msgid "MON"
+msgstr "MON" 
+
+#: calendar.py
+msgctxt "#30011"
+msgid "TUE"
+msgstr "TUE" 
+
+#: calendar.py
+msgctxt "#30012"
+msgid "WED"
+msgstr "WED" 
+
+#: calendar.py
+msgctxt "#30013"
+msgid "THU"
+msgstr "GIO" 
+
+#: calendar.py
+msgctxt "#30014"
+msgid "FRI"
+msgstr "FRI" 
+
+#: calendar.py
+msgctxt "#30015"
+msgid "SAT"
+msgstr "SAT" 
+
+#: calendar.py
+msgctxt "#30016"
+msgid "SUN"
+msgstr "SOLE" 
+
+#: calendar.py
+msgctxt "#30017"
+msgid "Loading"
+msgstr "Caricamento in corso" 
+
+#: calendar.py
+msgctxt "#30018"
+msgid "Populating calendar ..."
+msgstr "Popolazione del calendario ..." 
+
+#: calendar.py
+msgctxt "#30019"
+msgid "Would you like to clear cache?"
+msgstr "Volete cancellare la cache?" 
+
+#: calendar.py
+msgctxt "#30020"
+msgid "This will remove content of titles directory"
+msgstr "Questo rimuoverà il contenuto della directory dei titoli" 
+
+#: nakamoritools.py
+msgctxt "#30021"
+msgid "Series Voting"
+msgstr "Voto di serie" 
+
+#: nakamoritools.py
+msgctxt "#30022"
+msgid "You Voted"
+msgstr "Hai votato" 
+
+#: nakamoritools.py
+msgctxt "#30023"
+msgid "Episode Voting"
+msgstr "Votazione degli episodi" 
+
+#: settings.xml
+msgctxt "#30024"
+msgid "Use animated titles in calendar"
+msgstr "Usa titoli animati nel calendario" 
+
+#: nakamoritools.py
+msgctxt "#30026"
+msgid "Enter search text"
+msgstr "Inserisci il testo di ricerca" 
+
+#: wizard.xml
+msgctxt "#30027"
+msgid "OK"
+msgstr "ok" 
+
+#: settings.xml
+msgctxt "#30028"
+msgid "Calendar"
+msgstr "Calendario" 
+
+#: settings.xml
+msgctxt "#30029"
+msgid "Font"
+msgstr "Font" 
+
+#: settings.xml
+msgctxt "#30030"
+msgid "Color"
+msgstr "Colore" 
+
+#: settings.xml
+msgctxt "#30031"
+msgid "Size"
+msgstr "Taglia" 
+
+#: settings.xml
+msgctxt "#30032"
+msgid "Maintenance"
+msgstr "Manutenzione" 
+
+#: settings.xml
+msgctxt "#30033"
+msgid "Clear cache"
+msgstr "Cancella cache" 
+
+#: wizard.py
+msgctxt "#30034"
+msgid "Warning"
+msgstr "avvertimento" 
+
+#: wizard.py
+msgctxt "#30035"
+msgid "Could not connect to Shoko Server"
+msgstr "Impossibile connettersi al server Shoko" 
+
+#: wizard.py
+msgctxt "#30036"
+msgid "The username or password is incorrect"
+msgstr "Il nome utente o password non sono corretti" 
+
+#: calendar.py
+msgctxt "#30037"
+msgid "Show info"
+msgstr "Mostra informazioni" 
+
+#: calendar.py
+msgctxt "#30038"
+msgid "Download missing info"
+msgstr "Scarica informazioni mancanti" 
+
+#: calendar.py
+msgctxt "#30039"
+msgid "Add to wishlist"
+msgstr "Aggiungi alla lista dei desideri" 
+
+#: calendar.py
+msgctxt "#30040"
+msgid "Remove from wishlist"
+msgstr "Rimuovi dalla lista dei desideri" 
+
+msgctxt "#30041"
+msgid "Enter Shoko Server Host"
+msgstr "Inserisci l'host del server Shoko" 

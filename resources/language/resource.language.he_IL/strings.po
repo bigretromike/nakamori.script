@@ -1,0 +1,207 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: Nakamori\n"
+"Language: en\n"
+
+#: wizard.xml
+msgctxt "#30001"
+msgid "Enter Shoko Server Credentials"
+msgstr "הזן אישורי שרת Shoko" 
+
+#: wizard.xml, wizard.py
+msgctxt "#30002"
+msgid "IP Address"
+msgstr "כתובת ה - IP" 
+
+#: wizard.xml, wizard.py
+msgctxt "#30003"
+msgid "Port"
+msgstr "נמל" 
+
+#: wizard.xml, wizard.py
+msgctxt "#30004"
+msgid "Username"
+msgstr "שם משתמש" 
+
+#: wizard.xml, wizard.py
+msgctxt "#30005"
+msgid "Password"
+msgstr "סיסמה" 
+
+#: wizard.xml
+msgctxt "#30006"
+msgid "Test"
+msgstr "מבחן" 
+
+#: wizard.xml
+msgctxt "#30007"
+msgid "Save"
+msgstr "להציל" 
+
+#: information.xml
+msgctxt "#30008"
+msgid "What's New!"
+msgstr "מה חדש!" 
+
+#: information.xml
+msgctxt "#30009"
+msgid "Close"
+msgstr "סגור" 
+
+#: calendar.py
+msgctxt "#30010"
+msgid "MON"
+msgstr "MON" 
+
+#: calendar.py
+msgctxt "#30011"
+msgid "TUE"
+msgstr "TUE" 
+
+#: calendar.py
+msgctxt "#30012"
+msgid "WED"
+msgstr "להתחתן" 
+
+#: calendar.py
+msgctxt "#30013"
+msgid "THU"
+msgstr "הו" 
+
+#: calendar.py
+msgctxt "#30014"
+msgid "FRI"
+msgstr "FRI" 
+
+#: calendar.py
+msgctxt "#30015"
+msgid "SAT"
+msgstr "ישבה" 
+
+#: calendar.py
+msgctxt "#30016"
+msgid "SUN"
+msgstr "שמש" 
+
+#: calendar.py
+msgctxt "#30017"
+msgid "Loading"
+msgstr "טעינה" 
+
+#: calendar.py
+msgctxt "#30018"
+msgid "Populating calendar ..."
+msgstr "מאכלס את היומן ..." 
+
+#: calendar.py
+msgctxt "#30019"
+msgid "Would you like to clear cache?"
+msgstr "האם ברצונך למחוק את הקובץ השמור?" 
+
+#: calendar.py
+msgctxt "#30020"
+msgid "This will remove content of titles directory"
+msgstr "פעולה זו תסיר תוכן של ספריית כותרות" 
+
+#: nakamoritools.py
+msgctxt "#30021"
+msgid "Series Voting"
+msgstr "סדרה הצבעה" 
+
+#: nakamoritools.py
+msgctxt "#30022"
+msgid "You Voted"
+msgstr "אתה הצבעת" 
+
+#: nakamoritools.py
+msgctxt "#30023"
+msgid "Episode Voting"
+msgstr "אפיזודה" 
+
+#: settings.xml
+msgctxt "#30024"
+msgid "Use animated titles in calendar"
+msgstr "השתמש כותרים מונפשים ביומן" 
+
+#: nakamoritools.py
+msgctxt "#30026"
+msgid "Enter search text"
+msgstr "הזן טקסט לחיפוש" 
+
+#: wizard.xml
+msgctxt "#30027"
+msgid "OK"
+msgstr "בסדר" 
+
+#: settings.xml
+msgctxt "#30028"
+msgid "Calendar"
+msgstr "לוח שנה" 
+
+#: settings.xml
+msgctxt "#30029"
+msgid "Font"
+msgstr "גופן" 
+
+#: settings.xml
+msgctxt "#30030"
+msgid "Color"
+msgstr "צבע" 
+
+#: settings.xml
+msgctxt "#30031"
+msgid "Size"
+msgstr "גודל" 
+
+#: settings.xml
+msgctxt "#30032"
+msgid "Maintenance"
+msgstr "תחזוקה" 
+
+#: settings.xml
+msgctxt "#30033"
+msgid "Clear cache"
+msgstr "נקה מטמון" 
+
+#: wizard.py
+msgctxt "#30034"
+msgid "Warning"
+msgstr "אזהרה" 
+
+#: wizard.py
+msgctxt "#30035"
+msgid "Could not connect to Shoko Server"
+msgstr "לא ניתן להתחבר לשרת Shoko" 
+
+#: wizard.py
+msgctxt "#30036"
+msgid "The username or password is incorrect"
+msgstr "שם המשתמש או הסיסמה שגויים" 
+
+#: calendar.py
+msgctxt "#30037"
+msgid "Show info"
+msgstr "הצג מידע" 
+
+#: calendar.py
+msgctxt "#30038"
+msgid "Download missing info"
+msgstr "הורד מידע חסר" 
+
+#: calendar.py
+msgctxt "#30039"
+msgid "Add to wishlist"
+msgstr "הוסף לרשימת משאלות" 
+
+#: calendar.py
+msgctxt "#30040"
+msgid "Remove from wishlist"
+msgstr "הסר משאלות" 
+
+msgctxt "#30041"
+msgid "Enter Shoko Server Host"
+msgstr "הזן מארח שרת Shoko" 

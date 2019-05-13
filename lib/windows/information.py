@@ -35,7 +35,7 @@ class Information(xbmcgui.WindowXMLDialog):
         _textbox.setText(changelog_text)
 
     def onAction(self, action):
-        if action == ACTION_PREVIOUS_MENU or action == ACTION_NAV_BACK or action:
+        if action == ACTION_PREVIOUS_MENU or action == ACTION_NAV_BACK:
             self.close()
 
     def onControl(self, control):

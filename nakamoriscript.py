@@ -29,7 +29,7 @@ def root():
         ('Login Wizard', (wizard_login, [])),
         ('Calendar', (calendar, ['0', '0'])),
         ('Calendar (Add 14 Days)', (calendar, ['0', '14'])),
-        ('Calendar 3rd party', (calendar_3rd, ['0', '0'])),
+        ('Calendar (External)', (calendar_3rd, ['0', '0'])),
         ('Information', (whats_new, [])),
         ('Clear-cache', (clearcache, [])),
         ('Installation Integrity', (cohesion, [])),

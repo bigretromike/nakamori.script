@@ -213,8 +213,8 @@ msgstr "Enter Shoko Server Host"
 
 #: nakamoriscript.py
 msgctxt "#30042"
-msgid "Connection Wizard"
-msgstr "Connection Wizard"
+msgid "Remove Missing Files"
+msgstr "Remove Missing Files"
 
 #: nakamoriscript.py
 msgctxt "#30043"
@@ -250,8 +250,3 @@ msgstr "Settings"
 msgctxt "#30049"
 msgid "Run Import"
 msgstr "Run Import"
-
-#: nakamoriscript.py
-msgctxt "#30050"
-msgid "Remove Missing Files"
-msgstr "Remove Missing Files"

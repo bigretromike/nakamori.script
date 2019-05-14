@@ -106,7 +106,7 @@ def shoko_menu():
     # various other actions
     items = [
         (script_addon.getLocalizedString(30049), (shoko_utils.run_import, [])),
-        (script_addon.getLocalizedString(30050), (shoko_utils.remove_missing_files, []))
+        (script_addon.getLocalizedString(30042), (shoko_utils.remove_missing_files, []))
     ]
 
     options = []

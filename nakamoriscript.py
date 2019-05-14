@@ -18,22 +18,19 @@ import lib.windows.wizard as _wizard
 
 script = routing.Script(base_url=os.path.split(__file__)[-1], convert_args=True)
 
-# TODO Now that we have routing.Script, we can use this
-# TODO Localize the menus
-
 
 @script.route('/')
 def root():
     items = [
-        ('Connection Wizard', (wizard_connection, [])),
-        ('Login Wizard', (wizard_login, [])),
-        ('Calendar', (calendar, ['0', '0'])),
-        ('Calendar (Add 14 Days)', (calendar, ['0', '14'])),
-        ('Calendar (External)', (calendar_3rd, ['0', '0'])),
-        ('Information', (whats_new, [])),
-        ('Clear-cache', (clearcache, [])),
-        ('Installation Integrity', (cohesion, [])),
-        ('Settings', (settings, []))
+        (script_addon.getLocalizedString(30025), (wizard_connection, [])),
+        (script_addon.getLocalizedString(30043), (wizard_login, [])),
+        (script_addon.getLocalizedString(30028), (calendar, ['0', '0'])),
+        (script_addon.getLocalizedString(30044), (calendar, ['0', '14'])),
+        (script_addon.getLocalizedString(30045), (calendar_3rd, ['0', '0'])),
+        (script_addon.getLocalizedString(30046), (whats_new, [])),
+        (script_addon.getLocalizedString(30033), (clearcache, [])),
+        (script_addon.getLocalizedString(30047), (cohesion, [])),
+        (script_addon.getLocalizedString(30048), (settings, []))
     ]
 
     options = []
@@ -58,7 +55,6 @@ def calendar_3rd(when='0', page='1'):
         import datetime
         when = datetime.datetime.now().strftime('%Y%m%d')
     from lib.external_calendar import return_only_few
-    # xbmc.log('---------> WHEN: %s' % when, xbmc.LOGNOTICE)
     body = return_only_few(when=when, offset=page)
     _calendar.open_calendar(date=when, starting_item=page, json_respons=body)
 

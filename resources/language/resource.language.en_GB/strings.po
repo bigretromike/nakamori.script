@@ -127,6 +127,11 @@ msgctxt "#30024"
 msgid "Use animated titles in calendar"
 msgstr "Use animated titles in calendar"
 
+#: nakamoriscript.py
+msgctxt "#30025"
+msgid "Connection Wizard"
+msgstr "Connection Wizard"
+
 #: nakamoritools.py
 msgctxt "#30026"
 msgid "Enter search text"
@@ -205,3 +210,38 @@ msgstr "Remove from wishlist"
 msgctxt "#30041"
 msgid "Enter Shoko Server Host"
 msgstr "Enter Shoko Server Host"
+
+#: nakamoriscript.py
+msgctxt "#30042"
+msgid "Connection Wizard"
+msgstr "Connection Wizard"
+
+#: nakamoriscript.py
+msgctxt "#30043"
+msgid "Login Wizard"
+msgstr "Login Wizard"
+
+#: nakamoriscript.py
+msgctxt "#30044"
+msgid "Calendar (Add 14 Days)"
+msgstr "Calendar (Add 14 Days)"
+
+#: nakamoriscript.py
+msgctxt "#30045"
+msgid "Calendar (External)"
+msgstr "Calendar (External)"
+
+#: nakamoriscript.py
+msgctxt "#30046"
+msgid "Information"
+msgstr "Information"
+
+#: nakamoriscript.py
+msgctxt "#30047"
+msgid "Installation Integrity"
+msgstr "Installation Integrity"
+
+#: nakamoriscript.py
+msgctxt "#30048"
+msgid "Settings"
+msgstr "Settings"

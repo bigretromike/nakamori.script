@@ -105,8 +105,8 @@ def shoko_menu():
     # Import Folders?
     # various other actions
     items = [
-        ('Run Import', (shoko_utils.run_import, [])),
-        ('Remove Missing Files', (shoko_utils.remove_missing_files, []))
+        (script_addon.getLocalizedString(30049), (shoko_utils.run_import, [])),
+        (script_addon.getLocalizedString(30050), (shoko_utils.remove_missing_files, []))
     ]
 
     options = []
@@ -129,8 +129,10 @@ def new_search(save):
         search.add_search_history(query)
 
     # Apparently this is the only way that works if we want to RunPlugin with a path
-    arbiter(0, 'ActivateWindow(10025, "plugin://plugin.video.nakamori/menu/search/%s")' %
-            pyproxy.quote(pyproxy.quote(query)))
+    win_id = xbmcgui.getCurrentWindowId()
+    # was 10025
+    arbiter(0, 'ActivateWindow(%d, "plugin://plugin.video.nakamori/menu/search/%s", "plugin://plugin.video.nakamori/menu/search/")' %
+            (win_id, pyproxy.quote(pyproxy.quote(query))))
 
 
 @script.route('/search/remove/<path:query>')
@@ -168,12 +170,14 @@ def cohesion():
 @script.route('/dialog/vote_series/<series_id>')
 @try_function(ErrorPriority.BLOCKING)
 def show_series_vote_dialog(series_id):
+    # TODO something ?
     pass
 
 
 @script.route('/dialog/vote_episode/<ep_id>')
 @try_function(ErrorPriority.BLOCKING)
 def show_episode_vote_dialog(ep_id):
+    # TODO something ?
     pass
 
 

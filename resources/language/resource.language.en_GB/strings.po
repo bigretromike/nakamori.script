@@ -245,3 +245,13 @@ msgstr "Installation Integrity"
 msgctxt "#30048"
 msgid "Settings"
 msgstr "Settings"
+
+#: nakamoriscript.py
+msgctxt "#30049"
+msgid "Run Import"
+msgstr "Run Import"
+
+#: nakamoriscript.py
+msgctxt "#30050"
+msgid "Remove Missing Files"
+msgstr "Remove Missing Files"

@@ -50,7 +50,6 @@ def calendar(when=0, page=1):
 
 @script.route('/calendar3/<when>/<page>')
 def calendar_3rd(when='0', page='1'):
-    # when 20190131
     if when == '0' and page == '0':
         import datetime
         when = datetime.datetime.now().strftime('%Y%m%d')
@@ -101,7 +100,6 @@ def settings():
 def shoko_menu():
     # TODO add things
     # Remove Missing
-    # Run Import
     # Import Folders?
     # various other actions
     items = [
@@ -117,22 +115,6 @@ def shoko_menu():
     if result >= 0:
         action, args = items[result][1]
         action(*args)
-
-
-@script.route('/dialog/search/<save>')
-def new_search(save):
-    query = kodi_utils.search_box()
-
-    if save:
-        if search.check_in_database(query):
-            search.remove_search_history(query)
-        search.add_search_history(query)
-
-    # Apparently this is the only way that works if we want to RunPlugin with a path
-    win_id = xbmcgui.getCurrentWindowId()
-    # was 10025
-    arbiter(0, 'ActivateWindow(%d, "plugin://plugin.video.nakamori/menu/search/%s", "plugin://plugin.video.nakamori/menu/search/")' %
-            (win_id, pyproxy.quote(pyproxy.quote(query))))
 
 
 @script.route('/search/remove/<path:query>')

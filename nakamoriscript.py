@@ -12,6 +12,7 @@ from proxy.python_version_proxy import python_proxy as pyproxy
 
 from nakamori_utils.globalvars import *
 import lib.windows.calendar as _calendar
+import lib.windows.ac_calendar as _ac_calendar
 import lib.windows.cohesion as _cohesion
 import lib.windows.information as _information
 import lib.windows.wizard as _wizard
@@ -30,7 +31,8 @@ def root():
         (script_addon.getLocalizedString(30046), (whats_new, [])),
         (script_addon.getLocalizedString(30033), (clearcache, [])),
         (script_addon.getLocalizedString(30047), (cohesion, [])),
-        (script_addon.getLocalizedString(30048), (settings, []))
+        (script_addon.getLocalizedString(30048), (settings, [])),
+        (script_addon.getLocalizedString(30028), (ac_calendar, ['0', '0']))
     ]
 
     options = []
@@ -46,6 +48,11 @@ def root():
 @script.route('/calendar/<when>/<page>')
 def calendar(when=0, page=1):
     _calendar.open_calendar(date=when, starting_item=page)
+
+
+@script.route('/ac_calendar/<when>/<page>')
+def ac_calendar(when=0, page=1):
+    _ac_calendar.open_calendar(date=when, starting_item=page)
 
 
 @script.route('/calendar3/<when>/<page>')

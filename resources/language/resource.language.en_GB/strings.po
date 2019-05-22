@@ -250,3 +250,18 @@ msgstr "Settings"
 msgctxt "#30049"
 msgid "Run Import"
 msgstr "Run Import"
+
+#: settings.xml
+msgctxt "#30050"
+msgid "Enable custom source"
+msgstr "Enable custom source"
+
+#: settings.xml
+msgctxt "#30051"
+msgid "Custom calendar url"
+msgstr "Custom calendar url"
+
+#: settings.xml
+msgctxt "#30052"
+msgid "Calendar type"
+msgstr "Calendar type"

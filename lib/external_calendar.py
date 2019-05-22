@@ -25,15 +25,13 @@ def pack_json(new_list):
     return fake_json
 
 
-def process_month(year, month, day, day_already_processed):
+def process_month(year, month, day, day_already_processed, url):
     y = os.path.join(x, '%s-%02d.json' % (year, month))
-    if not os.path.exists(y) and not download_external_source(year, month):
+    if not os.path.exists(y) and not download_external_source(url, year, month):
         return
     content = open(y, 'r').read()
     pre_body = json.loads(content)
     body = []
-    # xbmc.log('--------------- CALENDAR 2 --------------', xbmc.LOGNOTICE)
-    # xbmc.log('year %s %s month %s day %s, body_len %s' % (year, type(year), month, day, len(pre_body)), xbmc.LOGNOTICE)
 
     for pre in pre_body:
         if int(pre['air'][8:10]) >= day:
@@ -43,12 +41,10 @@ def process_month(year, month, day, day_already_processed):
                 day_already_processed.append(pre['air'])
             body.append(pre)
 
-    # xbmc.log('-------- %s' % len(pre_body), xbmc.LOGNOTICE)
-    # xbmc.log('-------- %s' % day_already_processed, xbmc.LOGNOTICE)
     return body
 
 
-def return_only_few(when, offset=0):
+def return_only_few(when, offset=0, url=''):
     offset = int(offset)
     when = str(when)
     if len(when) == 8:
@@ -61,9 +57,7 @@ def return_only_few(when, offset=0):
         day = 1
 
     day_already_processed = []
-    body = process_month(year, month, day, day_already_processed)
-
-    # xbmc.log('--------- !!!! offset %s %s' % (offset, type(offset)), xbmc.LOGNOTICE)
+    body = process_month(year, month, day, day_already_processed, url)
 
     if len(day_already_processed) < 7:
         # process next month
@@ -72,19 +66,18 @@ def return_only_few(when, offset=0):
         if month == 13:
             month = 1
             year += 1
-        body = body + process_month(year, month, day, day_already_processed)
-    # xbmc.log('--------- returning %s %s' % (body, type(body)), xbmc.LOGNOTICE)
+        body = body + process_month(year, month, day, day_already_processed, url)
     return json.dumps(pack_json(body))
 
 
-def download_external_source(year=datetime.datetime.now().year, month=datetime.datetime.now().month):
+def download_external_source(url, year=datetime.datetime.now().year, month=datetime.datetime.now().month):
     try:
         from urllib.request import urlopen
     except ImportError:
         from urllib2 import urlopen
 
-    url = 'https://raw.githubusercontent.com/bigretromike/anime-offline-calendar/master/%s-%02d.json' % (year, month)
-    # xbmc.log('--------------- %s %s %s --------------' % (url, year, month), xbmc.LOGNOTICE)
+    url = url % (year, month)
+
     content = urlopen(url).read().decode('utf-8')
     y = os.path.join(x, '%s-%02d-tmp.json' % (year, month))
     if os.path.exists(y):
@@ -92,8 +85,6 @@ def download_external_source(year=datetime.datetime.now().year, month=datetime.d
     open(y, 'wb').write(content.encode('utf-8'))
     try:
         response = json.loads(content)
-        # 'thumbs/65x100/214829.jpg-thumb.jpg 214829.jpg'
-        # https://img7.anidb.net/pics/anime/thumbs/65x100/207605.jpg-thumb.jpg
         series_list = []
         series_item = {}
         for dates in response.get('calendar'):

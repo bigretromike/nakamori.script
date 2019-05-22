@@ -28,12 +28,15 @@ def root():
         (script_addon.getLocalizedString(30043), (wizard_login, [])),
         (script_addon.getLocalizedString(30028), (calendar, ['0', '0'])),
         (script_addon.getLocalizedString(30044), (calendar, ['0', '14'])),
-        (script_addon.getLocalizedString(30045), (calendar_3rd, ['0', '0'])),
+        (script_addon.getLocalizedString(30028), (cr_calendar, ['0', '0', False])),
+        (script_addon.getLocalizedString(30045), (cr_calendar, ['0', '0', True])),
+        (script_addon.getLocalizedString(30028), (ac_calendar, ['0', '0', False])),
+        (script_addon.getLocalizedString(30045), (ac_calendar, ['0', '0', True])),
         (script_addon.getLocalizedString(30046), (whats_new, [])),
         (script_addon.getLocalizedString(30033), (clearcache, [])),
         (script_addon.getLocalizedString(30047), (cohesion, [])),
         (script_addon.getLocalizedString(30048), (settings, [])),
-        (script_addon.getLocalizedString(30028), (ac_calendar, ['0', '0'])),
+
     ]
 
     options = []
@@ -57,23 +60,29 @@ def series_info(id=0):
 
 
 @script.route('/calendar/<when>/<page>')
-def calendar(when=0, page=1):
-    _calendar.open_calendar(date=when, starting_item=page)
+def calendar(when=0, page=1, force_external=False):
+    if script_addon.getSetting('calendar_mode') == 'crunchyroll':
+        cr_calendar(when, page, force_external)
+    elif script_addon.getSetting('calendar_mode') == 'anichart':
+        ac_calendar(when, page, force_external)
+
+
+@script.route('/cr_calendar/<when>/<page>')
+def cr_calendar(when=0, page=0, force_external=False):
+    if script_addon.getSetting('custom_source') is 'true' or force_external:
+        if when == '0' and page == '0':
+            import datetime
+            when = datetime.datetime.now().strftime('%Y%m%d')
+        from lib.external_calendar import return_only_few
+        body = return_only_few(when=when, offset=page, url=str(script_addon.getSetting('custom_url')))
+        _calendar.open_calendar(date=when, starting_item=page, json_respons=body)
+    else:
+        _calendar.open_calendar(date=when, starting_item=page)
 
 
 @script.route('/ac_calendar/<when>/<page>')
-def ac_calendar(when=0, page=1):
+def ac_calendar(when=0, page=1, force_external=False):
     _ac_calendar.open_calendar(date=when, starting_item=page)
-
-
-@script.route('/calendar3/<when>/<page>')
-def calendar_3rd(when='0', page='1'):
-    if when == '0' and page == '0':
-        import datetime
-        when = datetime.datetime.now().strftime('%Y%m%d')
-    from lib.external_calendar import return_only_few
-    body = return_only_few(when=when, offset=page)
-    _calendar.open_calendar(date=when, starting_item=page, json_respons=body)
 
 
 @script.route('/arbiter/<wait>/<path:arg>')

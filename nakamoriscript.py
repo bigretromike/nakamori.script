@@ -34,8 +34,6 @@ def root():
         (script_addon.getLocalizedString(30047), (cohesion, [])),
         (script_addon.getLocalizedString(30048), (settings, [])),
         (script_addon.getLocalizedString(30028), (ac_calendar, ['0', '0'])),
-        (script_addon.getLocalizedString(30003), (series_info, ['10'])),
-        (script_addon.getLocalizedString(30003), (series_info, ['2138'])),
     ]
 
     options = []

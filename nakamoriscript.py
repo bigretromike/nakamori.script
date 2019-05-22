@@ -16,6 +16,7 @@ import lib.windows.ac_calendar as _ac_calendar
 import lib.windows.cohesion as _cohesion
 import lib.windows.information as _information
 import lib.windows.wizard as _wizard
+import lib.windows.series_info as _series_info
 
 script = routing.Script(base_url=os.path.split(__file__)[-1], convert_args=True)
 
@@ -32,7 +33,9 @@ def root():
         (script_addon.getLocalizedString(30033), (clearcache, [])),
         (script_addon.getLocalizedString(30047), (cohesion, [])),
         (script_addon.getLocalizedString(30048), (settings, [])),
-        (script_addon.getLocalizedString(30028), (ac_calendar, ['0', '0']))
+        (script_addon.getLocalizedString(30028), (ac_calendar, ['0', '0'])),
+        (script_addon.getLocalizedString(30003), (series_info, ['10'])),
+        (script_addon.getLocalizedString(30003), (series_info, ['2138'])),
     ]
 
     options = []
@@ -43,6 +46,11 @@ def root():
     if result >= 0:
         action, args = items[result][1]
         action(*args)
+
+
+@script.route('/seriesinfo/<aid>')
+def series_info(aid=0):
+    _series_info.open_seriesinfo(aid)
 
 
 @script.route('/calendar/<when>/<page>')

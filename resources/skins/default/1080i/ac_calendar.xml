@@ -48,25 +48,26 @@
                             <info>ListItem.Art(fanart)</info>
                         </control>
                         <!-- info -->
-                        <control type="label">
+                        <control type="textbox">
                             <top>17</top>
                             <left>202</left>
-                            <width>276</width>
+                            <width>258</width>
                             <height>76</height>
                             <font>font_flag</font>
                             <textcolor>black</textcolor>
-                            <label></label>
+                            <monofont>mono30</monofont>
+                            <shadowcolor>FFFFFFFF</shadowcolor>
+                            <align>left</align>
                             <info>ListItem.Property(title)</info>
                         </control>
-                        <control type="textbox">
+                        <control type="image">
                             <top>93</top>
                             <left>202</left>
                             <width>241</width>
                             <height>105</height>
-                            <font>robo16</font>
-                            <textcolor>black</textcolor>
                             <align>left</align>
-                            <info>ListItem.Plot</info>
+                            <aspectratio scalediffuse="false" align="left" aligny="top">keep</aspectratio>
+                            <info>ListItem.Art(poster)</info>
                         </control>
                         <control type="label">
                             <top>230</top>
@@ -96,25 +97,26 @@
                             <info>ListItem.Art(fanart)</info>
                         </control>
                         <!-- info -->
-                        <control type="label">
+                        <control type="textbox">
                             <top>17</top>
                             <left>202</left>
-                            <width>276</width>
+                            <width>258</width>
                             <height>76</height>
                             <font>font_flag</font>
                             <textcolor>black</textcolor>
-                            <label></label>
+                            <monofont>mono30</monofont>
+                            <shadowcolor>FFFFFFFF</shadowcolor>
+                            <align>left</align>
                             <info>ListItem.Property(title)</info>
                         </control>
-                        <control type="textbox">
+                         <control type="image">
                             <top>93</top>
                             <left>202</left>
                             <width>241</width>
                             <height>105</height>
-                            <font>robo16</font>
-                            <textcolor>black</textcolor>
                             <align>left</align>
-                            <info>ListItem.Plot</info>
+                             <aspectratio scalediffuse="false" align="left" aligny="top">keep</aspectratio>
+                            <info>ListItem.Art(poster)</info>
                         </control>
                         <control type="label">
                             <top>230</top>

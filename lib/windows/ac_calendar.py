@@ -31,9 +31,9 @@ font_path = os.path.join(xbmcaddon.Addon('script.module.nakamori').getAddonInfo(
 profileDir = ADDON.getAddonInfo('profile')
 profileDir = xbmc.translatePath(profileDir)
 
-color = ADDON.getSetting('color')
-font_ttf = ADDON.getSetting('font')
-font_size = ADDON.getSetting('size')
+color = ADDON.getSetting('ac_color')
+font_ttf = ADDON.getSetting('ac_font')
+font_size = ADDON.getSetting('ac_size')
 
 # create profile dirs
 if not os.path.exists(profileDir):
@@ -102,9 +102,7 @@ class Calendar2(xbmcgui.WindowXML):
                     else:
                         break
             busy.close()
-            #if _count == _size:
-            #    self.getControl(2).setVisible(False)
-            #    self.getControl(2).setEnabled(False)
+
             self.setFocus(self.getControl(901))
 
     def onAction(self, action):
@@ -118,7 +116,6 @@ class Calendar2(xbmcgui.WindowXML):
             else:
                 if self.fake_data:
                     try:
-                        # xbmc.log('---------> I GET 1: self.last_processed_date: %s and %s' % (self.last_processed_date, self.serie_processed), xbmc.LOGNOTICE)
                         xbmc.executebuiltin(script_utils.calendar3(self.last_processed_date, self.serie_processed), True)
                     except Exception as exx:
                         xbmc.log(str(exx), xbmc.LOGNOTICE)
@@ -130,13 +127,13 @@ class Calendar2(xbmcgui.WindowXML):
             else:
                 xbmc.executebuiltin('Action(Back)')
         elif action == xbmcgui.ACTION_MOUSE_RIGHT_CLICK:
-            # dont force it on right click;
             pass
         elif action == xbmcgui.ACTION_CONTEXT_MENU:
             control_id = self.getFocus().getId()
             con = self.getControl(control_id)
             assert isinstance(con, xbmcgui.ControlList)
             aid = con.getSelectedItem().getProperty('aid')
+            # TODO serie/fromaid?=id
             content_menu = [
                 '- aid = ' + str(aid) + '-',
                 ADDON.getLocalizedString(30037),
@@ -154,7 +151,6 @@ class Calendar2(xbmcgui.WindowXML):
             elif self.getFocus().getId() == 2:
                 if self.fake_data:
                     try:
-                        # xbmc.log('---------> I GET 2: self.last_processed_date: %s and %s' % (self.last_processed_date, self.serie_processed), xbmc.LOGNOTICE)
                         xbmc.executebuiltin(script_utils.calendar3(self.last_processed_date, self.serie_processed), True)
                     except Exception as exx:
                         xbmc.log(str(exx), xbmc.LOGNOTICE)
@@ -172,9 +168,7 @@ class Calendar2(xbmcgui.WindowXML):
         if air_date not in self.used_dates:
             self.used_dates.append(air_date)
             self.day_count += 1
-            xbmc.log('---------> I SET check %s > len(%s)' % (self.day_count, len(self.calendar_collection)), xbmc.LOGNOTICE)
             if self.serie_processed > 60:
-            #if self.day_count > len(self.calendar_collection):  # limit counter
                 return False
             air_date = series.get('air', '')
 
@@ -205,8 +199,62 @@ class Calendar2(xbmcgui.WindowXML):
             ep = search.group(2)
             title = title.replace(search.group(1) + ep, '')
 
+        # generate description image
+        new_image_url = os.path.join(profileDir, 'titles', color, font_ttf + '-' + font_size, str(aid) + '_d.png')
+        if not os.path.exists(new_image_url):
+            image_x = 241
+            image_y = 105
+            font_wide_mitigation = 6
+            this_path = os.path.join(font_path, font_ttf)
+            font = ImageFont.truetype(this_path, int(font_size), encoding='unic')
+            if len(summary) == 0:
+                summary = ' '
+            text_width, text_height = font.getsize(summary)
+            text_lenght_till_split = 30
+            if text_width + font_wide_mitigation > image_x:
+                char_width = text_width / float(len(summary))
+                chars_width = 0
+                char_count = 0
+                while chars_width < image_x - font_wide_mitigation:
+                    chars_width += char_width
+                    char_count += 1
+                chars_width -= char_width
+                char_count -= 1
+                text_lenght_till_split = char_count
+                xbmc.log('--> we found that text_lenght_till_split is not correct, so we calculate %s'
+                         % text_lenght_till_split, xbmc.LOGWARNING)
+
+            list_of_lines = textwrap.wrap(summary, width=int(text_lenght_till_split))
+            three_line_support = 1
+            processed_line = []
+            for line in list_of_lines:
+                temp_text_width, temp_text_height = font.getsize(line)
+                three_line_support += temp_text_height
+                processed_line.append(line)
+                if three_line_support > image_y:
+                    three_line_support -= temp_text_height
+                    del processed_line[-1]
+                    break
+
+            image = Image.new('RGBA', (image_x, image_y), (0, 0, 0, 0))
+            draw = ImageDraw.Draw(image)
+            line_x = 0
+            last_line = True
+            if len(processed_line) > 1:
+                for line in reversed(processed_line):
+                    if last_line:
+                        last_line = False
+                        if len(line) > 3:
+                            line = line[:-3] + '...'
+                    temp_text_width, temp_text_height = font.getsize(line)
+                    three_line_support -= temp_text_height
+                    draw.text((line_x, three_line_support), line, font=font, fill=color)
+            else:
+                draw.text((line_x, 70 - text_height), summary, font=font, fill=color)
+            image.save(new_image_url, 'PNG')
+
         series_listitem = xbmcgui.ListItem(label=title)
-        series_listitem.setArt({'thumb': fanart, 'fanart': fanart})
+        series_listitem.setArt({'thumb': fanart, 'fanart': fanart, 'poster': new_image_url})
         # series_listitem.setUniqueIDs({'anidb': aid}')
         series_listitem.setInfo('video', {'title': title, 'aired': air_date, 'plot': summary})
         series_listitem.setProperty('title', title)

@@ -7,6 +7,11 @@
         <setting label="30031" type="number" id="size" default="20"/>
         <setting label="30024" type="bool" id="gif_title" default="true"/>
     </category>
+    <category label="30028">
+        <setting label="30029" type="text" id="ac_font" default="Migu.ttf"/>
+        <setting label="30030" type="text" id="ac_color" default="#000000"/>
+        <setting label="30031" type="number" id="ac_size" default="14"/>
+    </category>
     <!-- maintenance -->
     <category label="30032">
         <setting label="30033" type="action" id="clearcache" action="RunPlugin(plugin://plugin.video.nakamori/?cmd=clear)" option="close"/>

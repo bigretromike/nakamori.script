@@ -40,17 +40,19 @@ font_size = ADDON.getSetting('ac_size')
 
 
 class SeriesInfo(xbmcgui.WindowXML):
-    def __init__(self, strXMLname, strFallbackPath, strDefaultName, forceFallback, aid):
+    def __init__(self, strXMLname, strFallbackPath, strDefaultName, forceFallback, id, aid):
         self.window_type = 'window'
         self.calendar_collection = {}
         self.aid = aid
+        self.id = id
 
     def onInit(self):
-
         busy = xbmcgui.DialogProgress()
         busy.create(ADDON.getLocalizedString(30017), ADDON.getLocalizedString(30018))
-
-        series = model.Series(self.aid, build_full_object=True, get_children=False)
+        use_aid = False
+        if self.aid > 0:
+            use_aid = True
+        series = model.Series(self.aid, build_full_object=True, get_children=False, use_aid=use_aid)
         li = series.get_listitem()
         container_id = 450
         self.getControl(container_id).reset()
@@ -92,7 +94,7 @@ class SeriesInfo(xbmcgui.WindowXML):
         pass
 
 
-def open_seriesinfo(aid=0):
-    ui = SeriesInfo('series_info.xml', CWD, 'Default', '1080i', aid=aid)
+def open_seriesinfo(id=0, aid=0):
+    ui = SeriesInfo('series_info.xml', CWD, 'Default', '1080i', id=id, aid=aid)
     ui.doModal()
     del ui

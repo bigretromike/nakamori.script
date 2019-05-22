@@ -48,9 +48,14 @@ def root():
         action(*args)
 
 
-@script.route('/seriesinfo/<aid>')
+@script.route('/seriesinfo/aid/<aid>')
 def series_info(aid=0):
-    _series_info.open_seriesinfo(aid)
+    _series_info.open_seriesinfo(aid=aid)
+
+
+@script.route('/seriesinfo/<aid>')
+def series_info(id=0):
+    _series_info.open_seriesinfo(id=id)
 
 
 @script.route('/calendar/<when>/<page>')

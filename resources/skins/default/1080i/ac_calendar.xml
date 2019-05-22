@@ -74,7 +74,7 @@
                             <left>202</left>
                             <width>244</width>
                             <height>44</height>
-                            <font>robo16</font>
+                            <font>font_flag</font>
                             <textcolor>black</textcolor>
                             <label></label>
                             <info>ListItem.Property(aired)</info>
@@ -123,7 +123,7 @@
                             <left>202</left>
                             <width>244</width>
                             <height>44</height>
-                            <font>robo16</font>
+                            <font>font_flag</font>
                             <textcolor>black</textcolor>
                             <label></label>
                             <info>ListItem.Property(aired)</info>

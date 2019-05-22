@@ -133,7 +133,11 @@ class Calendar2(xbmcgui.WindowXML):
             con = self.getControl(control_id)
             assert isinstance(con, xbmcgui.ControlList)
             aid = con.getSelectedItem().getProperty('aid')
-            # TODO serie/fromaid?=id
+            url = '%s/api/serie/fromaid?id=%s' % (server, aid)
+            body = json.loads(pyproxy.get_json(url))
+            if 'aid' not in body:
+                return
+
             content_menu = [
                 '- aid = ' + str(aid) + '-',
                 ADDON.getLocalizedString(30037),
@@ -141,8 +145,15 @@ class Calendar2(xbmcgui.WindowXML):
                 ADDON.getLocalizedString(30039),
                 ADDON.getLocalizedString(30040)
             ]
-            if xbmcgui.Dialog().contextmenu(content_menu) != -1:
-                xbmcgui.Dialog().ok('soon', 'comming soon')
+            my_pick = xbmcgui.Dialog().contextmenu(content_menu)
+            if my_pick != -1:
+                if my_pick <= 1:
+                    if body.get('id', -1) == -1:
+                        xbmc.executebuiltin(script_utils.series_info(aid=aid), True)
+                    else:
+                        xbmc.executebuiltin(script_utils.series_info(id=id), True)
+                elif my_pick > 1:
+                    xbmcgui.Dialog().ok('soon', 'comming soon')
         elif action == xbmcgui.ACTION_SELECT_ITEM:
             xbmcgui.Dialog().ok('soon', 'show soon')
         elif action == xbmcgui.ACTION_MOUSE_LEFT_CLICK:

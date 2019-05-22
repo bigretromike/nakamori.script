@@ -143,7 +143,6 @@ class Calendar2(xbmcgui.WindowXML):
             _count = 0
 
             if _size > 0:
-                # xbmc.log('---------> process_init: %s . %s %s and %s' % (_size, len(_json['series']), self.last_processed_date, self.serie_processed), xbmc.LOGNOTICE)
                 for series in _json['series']:
                     busy.update(_count/_size)
                     if self.process_series(series):
@@ -168,7 +167,6 @@ class Calendar2(xbmcgui.WindowXML):
             else:
                 if self.fake_data:
                     try:
-                        # xbmc.log('---------> I GET 1: self.last_processed_date: %s and %s' % (self.last_processed_date, self.serie_processed), xbmc.LOGNOTICE)
                         xbmc.executebuiltin(script_utils.calendar3(self.last_processed_date, self.serie_processed), True)
                     except Exception as exx:
                         xbmc.log(str(exx), xbmc.LOGNOTICE)
@@ -204,7 +202,6 @@ class Calendar2(xbmcgui.WindowXML):
             elif self.getFocus().getId() == 2:
                 if self.fake_data:
                     try:
-                        # xbmc.log('---------> I GET 2: self.last_processed_date: %s and %s' % (self.last_processed_date, self.serie_processed), xbmc.LOGNOTICE)
                         xbmc.executebuiltin(script_utils.calendar3(self.last_processed_date, self.serie_processed), True)
                     except Exception as exx:
                         xbmc.log(str(exx), xbmc.LOGNOTICE)
@@ -238,7 +235,6 @@ class Calendar2(xbmcgui.WindowXML):
             self.day_label[self.day_count].setLabel(self.day_of_week[name_of_day])
             self.date_label[self.day_count].setLabel(string_day)
             self.last_processed_date = day_date.strftime('%Y%m%d')
-            xbmc.log('---------> I SET self.last_processed_date: %s' % self.last_processed_date, xbmc.LOGNOTICE)
 
         fanart = os.path.join(img, 'icons', 'new-search.png')
         if len(series['art']['thumb']) > 0:
@@ -343,7 +339,6 @@ class Calendar2(xbmcgui.WindowXML):
     def list_update_right(self):
         try:
             if self.getFocus().getId > -1:
-                # position = self.getControl(self.getFocus().getId()).getSelectedPosition()  # absolute
                 _id = self.getFocus().getId()
                 position = xbmc.getInfoLabel('Container(%s).Position' % _id)
                 move_id = _id + 1
@@ -355,7 +350,6 @@ class Calendar2(xbmcgui.WindowXML):
     def list_update_left(self):
         try:
             if self.getFocus().getId > -1:
-                # position = self.getControl(self.getFocus().getId()).getSelectedPosition()  # absolute
                 _id = self.getFocus().getId()
                 position = xbmc.getInfoLabel('Container(%s).Position' % _id)
                 move_id = _id - 1

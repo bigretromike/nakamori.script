@@ -35,8 +35,7 @@ def root():
         (script_addon.getLocalizedString(30046), (whats_new, [])),
         (script_addon.getLocalizedString(30033), (clearcache, [])),
         (script_addon.getLocalizedString(30047), (cohesion, [])),
-        (script_addon.getLocalizedString(30048), (settings, [])),
-
+        (script_addon.getLocalizedString(30048), (settings, []))
     ]
 
     options = []

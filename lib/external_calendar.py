@@ -3,6 +3,7 @@ import datetime
 import json
 import os
 import re
+import error_handler as eh
 import xbmc
 import xbmcaddon
 
@@ -26,6 +27,7 @@ def pack_json(new_list):
 
 
 def process_month(year, month, day, day_already_processed, url):
+    eh.spam('process_month(year=%s, month=%s, day=%s, day_already_processed=%s, url=%s)' % (year, month, day, day_already_processed, url))
     y = os.path.join(x, '%s-%02d.json' % (year, month))
     if not os.path.exists(y) and not download_external_source(url, year, month):
         return
@@ -34,6 +36,7 @@ def process_month(year, month, day, day_already_processed, url):
     body = []
 
     for pre in pre_body:
+        eh.spam('process_month.pre item: %s' % pre)
         if int(pre['air'][8:10]) >= day:
             if pre['air'] not in day_already_processed:
                 if len(day_already_processed) > 7:
@@ -44,7 +47,7 @@ def process_month(year, month, day, day_already_processed, url):
     return body
 
 
-def return_only_few(when, offset=0, url=''):
+def return_only_few(when, offset=0, url='', day_limits=7):
     offset = int(offset)
     when = str(when)
     if len(when) == 8:
@@ -54,12 +57,12 @@ def return_only_few(when, offset=0, url=''):
     else:
         year = datetime.datetime.now().year
         month = datetime.datetime.now().month
-        day = 1
+        day = datetime.datetime.now().day
 
     day_already_processed = []
     body = process_month(year, month, day, day_already_processed, url)
 
-    if len(day_already_processed) < 7:
+    if len(day_already_processed) < day_limits:
         # process next month
         month += 1
         day = 0
@@ -71,6 +74,8 @@ def return_only_few(when, offset=0, url=''):
 
 
 def download_external_source(url, year=datetime.datetime.now().year, month=datetime.datetime.now().month):
+    # TODO we could refactore this to use Series objects ( :-) )
+    eh.spam('download_external_source(url=%s, year=%s, month=%s)' % (url, year, month))
     try:
         from urllib.request import urlopen
     except ImportError:
@@ -89,29 +94,36 @@ def download_external_source(url, year=datetime.datetime.now().year, month=datet
         series_item = {}
         for dates in response.get('calendar'):
             for series in response['calendar'][dates]:
-                number = re.search(r'65x100\/(.*)\.jpg-thumb', str(series['image'])).group(1)
-                x1 = 'thumbs/65x100/' + number + '.jpg-thumb.jpg'
-                x2 = number + '.jpg'
-                img = str(series['image']).replace(x1, x2)
-                # xbmc.log(str(series['image']) + 'x1' + str(x1) + 'x2' + str(2) + 'img' + img, xbmc.LOGNOTICE)
-                series_item['aid'] = series['aid']
-                series_item['air'] = dates
-                series_item['art'] = {'thumb': [{'index': 0, 'url': img}], 'banner': [], 'fanart': []}
-                series_item['id'] = -1
-                series_item['ismovie'] = 0
-                series_item['name'] = series['name']
-                series_item['rating'] = 0
-                series_item['roles'] = []
-                series_item['size'] = 0
-                series_item['summary'] = ''
-                series_item['tags'] = None
-                series_item['titles'] = [{'Language': 'x-jat', 'Title': series['name'], 'Type': 'main'}, {'Language': 'ja', 'Title': series['kanji'], 'Type': 'official'}]
-                series_item['type'] = 'serie'
-                series_item['votes'] = 0
-                series_item['year'] = year
-                # series['general']
-                series_list.append(series_item)
-                series_item = {}  # do this because shit get duplicate ?!
+                try:
+                    img = ''
+                    img_number = re.search(r'65x100\/(.*)\.jpg-thumb', str(series['image']))
+                    if img_number is not None:
+                        number = img_number.group(1)
+                        x1 = 'thumbs/65x100/' + number + '.jpg-thumb.jpg'
+                        x2 = number + '.jpg'
+                        img = str(series['image']).replace(x1, x2)
+                    # xbmc.log(str(series['image']) + 'x1' + str(x1) + 'x2' + str(2) + 'img' + img, xbmc.LOGNOTICE)
+                    series_item['aid'] = series['aid']
+                    series_item['air'] = dates
+                    series_item['date'] = dates
+                    series_item['art'] = {'thumb': [{'index': 0, 'url': img}], 'banner': [], 'fanart': []}
+                    series_item['id'] = -1
+                    series_item['ismovie'] = 0
+                    series_item['name'] = series['name']
+                    series_item['rating'] = 0
+                    series_item['roles'] = []
+                    series_item['size'] = 0
+                    series_item['summary'] = ''
+                    series_item['tags'] = None
+                    series_item['titles'] = [{'Language': 'x-jat', 'Title': series['name'], 'Type': 'main'}, {'Language': 'ja', 'Title': series['kanji'], 'Type': 'official'}]
+                    series_item['type'] = 'serie'
+                    series_item['votes'] = 0
+                    series_item['year'] = year
+                    # series['general']
+                    series_list.append(series_item)
+                    series_item = {}  # do this because shit get duplicate ?!
+                except Exception as e:
+                    eh.log('Error in download_external_source.series: %s' % e.message)
 
         z = os.path.join(x, '%s-%02d.json' % (year, month))
         if os.path.exists(z):

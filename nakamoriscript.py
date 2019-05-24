@@ -62,13 +62,13 @@ def series_info(id=0):
 def calendar(when=0, page=1, force_external=False):
     if script_addon.getSetting('calendar_mode') == 'crunchyroll':
         cr_calendar(when, page, force_external)
-    elif script_addon.getSetting('calendar_mode') == 'anichart':
+    else:
         ac_calendar(when, page, force_external)
 
 
 @script.route('/cr_calendar/<when>/<page>')
 def cr_calendar(when=0, page=0, force_external=False):
-    if script_addon.getSetting('custom_source') is 'true' or force_external:
+    if script_addon.getSetting('custom_source') == 'true' or force_external:
         if when == '0' and page == '0':
             import datetime
             when = datetime.datetime.now().strftime('%Y%m%d')
@@ -81,7 +81,15 @@ def cr_calendar(when=0, page=0, force_external=False):
 
 @script.route('/ac_calendar/<when>/<page>')
 def ac_calendar(when=0, page=1, force_external=False):
-    _ac_calendar.open_calendar(date=when, starting_item=page)
+    if script_addon.getSetting('custom_source') == 'true' or force_external:
+        if when == '0' and page == '0':
+            import datetime
+            when = datetime.datetime.now().strftime('%Y%m%d')
+        from lib.external_calendar import return_only_few
+        body = return_only_few(when=when, offset=page, url=str(script_addon.getSetting('custom_url')))
+        _ac_calendar.open_calendar(date=when, starting_item=page, json_respons=body)
+    else:
+        _ac_calendar.open_calendar(date=when, starting_item=page)
 
 
 @script.route('/arbiter/<wait>/<path:arg>')
@@ -119,6 +127,12 @@ def whats_new():
 @try_function(ErrorPriority.BLOCKING)
 def settings():
     plugin_addon.openSettings()
+
+
+@script.route('/dialog/script_settings')
+@try_function(ErrorPriority.BLOCKING)
+def settings():
+    script_addon.openSettings()
 
 
 @script.route('/dialog/shoko')
@@ -259,7 +273,7 @@ def set_episode_watched_status(ep_id, watched):
     from shoko_models.v2 import Episode
     ep = Episode(ep_id)
     ep.set_watched_status(watched)
-    if plugin_addon.getSetting('sync_to_library') is 'true':
+    if plugin_addon.getSetting('sync_to_library') == 'true':
         playcount = '1' if watched else '0'
         # lastplayed = 'string'
         xbmc.executeJSONRPC('{ "jsonrpc": "2.0", "method": "VideoLibrary.SetEpisodeDetails", "params": {"playcount": ' + playcount + ' , "episodeid": ' + episode_id + '}, "id": 1 }')

@@ -212,6 +212,7 @@ def vote_for_series(series_id):
     if plugin_addon.getSetting('suggest_series_vote') == 'true':
         if plugin_addon.getSetting('suggest_series_vote_all_eps') == 'true':
             if not series.did_you_rate_every_episode:
+                xbmcgui.Dialog().ok('You didn\'t rate all the episodes of this Series')
                 return
         suggest_rating = ' [ %s ]' % series.suggest_rating_based_on_episode_rating
 

@@ -207,14 +207,21 @@ def show_episode_vote_dialog(ep_id):
 @try_function(ErrorPriority.BLOCKING)
 def vote_for_series(series_id):
     from shoko_models.v2 import Series
-    vote_list = ['Don\'t Vote', '10', '9', '8', '7', '6', '5', '4', '3', '2', '1']
+    series = Series(series_id)
+    suggest_rating = ''
+    if plugin_addon.getSetting('suggest_series_vote') == 'true':
+        if plugin_addon.getSetting('suggest_series_vote_all_eps') == 'true':
+            if not series.did_you_rate_every_episode:
+                return
+        suggest_rating = ' [ %s ]' % series.suggest_rating_based_on_episode_rating
+
+    vote_list = ['Don\'t Vote' + suggest_rating, '10', '9', '8', '7', '6', '5', '4', '3', '2', '1']
     my_vote = xbmcgui.Dialog().select(plugin_addon.getLocalizedString(30023), vote_list)
     if my_vote < 1:
         return
     my_vote = pyproxy.safe_int(vote_list[my_vote])
     if my_vote < 1:
         return
-    series = Series(series_id)
     series.vote(my_vote)
 
 

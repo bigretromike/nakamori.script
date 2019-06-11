@@ -16,6 +16,7 @@ import lib.windows.ac_calendar as _ac_calendar
 import lib.windows.cohesion as _cohesion
 import lib.windows.information as _information
 import lib.windows.wizard as _wizard
+import lib.windows.series_info as _series_info
 
 script = routing.Script(base_url=os.path.split(__file__)[-1], convert_args=True)
 
@@ -27,12 +28,14 @@ def root():
         (script_addon.getLocalizedString(30043), (wizard_login, [])),
         (script_addon.getLocalizedString(30028), (calendar, ['0', '0'])),
         (script_addon.getLocalizedString(30044), (calendar, ['0', '14'])),
-        (script_addon.getLocalizedString(30045), (calendar_3rd, ['0', '0'])),
+        (script_addon.getLocalizedString(30028), (cr_calendar, ['0', '0', False])),
+        (script_addon.getLocalizedString(30045), (cr_calendar, ['0', '0', True])),
+        (script_addon.getLocalizedString(30028), (ac_calendar, ['0', '0', False])),
+        (script_addon.getLocalizedString(30045), (ac_calendar, ['0', '0', True])),
         (script_addon.getLocalizedString(30046), (whats_new, [])),
         (script_addon.getLocalizedString(30033), (clearcache, [])),
         (script_addon.getLocalizedString(30047), (cohesion, [])),
-        (script_addon.getLocalizedString(30048), (settings, [])),
-        (script_addon.getLocalizedString(30028), (ac_calendar, ['0', '0']))
+        (script_addon.getLocalizedString(30048), (settings, []))
     ]
 
     options = []
@@ -45,24 +48,48 @@ def root():
         action(*args)
 
 
-@script.route('/calendar/<when>/<page>')
-def calendar(when=0, page=1):
-    _calendar.open_calendar(date=when, starting_item=page)
+@script.route('/seriesinfo/aid/<aid>/')
+def series_info(aid=0):
+    _series_info.open_seriesinfo(aid=aid)
 
 
-@script.route('/ac_calendar/<when>/<page>')
-def ac_calendar(when=0, page=1):
-    _ac_calendar.open_calendar(date=when, starting_item=page)
+@script.route('/seriesinfo/<aid>/')
+def series_info(id=0):
+    _series_info.open_seriesinfo(id=id)
 
 
-@script.route('/calendar3/<when>/<page>')
-def calendar_3rd(when='0', page='1'):
-    if when == '0' and page == '0':
-        import datetime
-        when = datetime.datetime.now().strftime('%Y%m%d')
-    from lib.external_calendar import return_only_few
-    body = return_only_few(when=when, offset=page)
-    _calendar.open_calendar(date=when, starting_item=page, json_respons=body)
+@script.route('/calendar/<when>/<page>/')
+def calendar(when=0, page=1, force_external=False):
+    if script_addon.getSetting('calendar_mode') == 'crunchyroll':
+        cr_calendar(when, page, force_external)
+    else:
+        ac_calendar(when, page, force_external)
+
+
+@script.route('/cr_calendar/<when>/<page>/')
+def cr_calendar(when=0, page=0, force_external=False):
+    if script_addon.getSetting('custom_source') == 'true' or force_external:
+        if when == '0' and page == '0':
+            import datetime
+            when = datetime.datetime.now().strftime('%Y%m%d')
+        from lib.external_calendar import return_only_few
+        body = return_only_few(when=when, offset=page, url=str(script_addon.getSetting('custom_url')))
+        _calendar.open_calendar(date=when, starting_item=page, json_respons=body)
+    else:
+        _calendar.open_calendar(date=when, starting_item=page)
+
+
+@script.route('/ac_calendar/<when>/<page>/')
+def ac_calendar(when=0, page=1, force_external=False):
+    if script_addon.getSetting('custom_source') == 'true' or force_external:
+        if when == '0' and page == '0':
+            import datetime
+            when = datetime.datetime.now().strftime('%Y%m%d')
+        from lib.external_calendar import return_only_few
+        body = return_only_few(when=when, offset=page, url=str(script_addon.getSetting('custom_url')))
+        _ac_calendar.open_calendar(date=when, starting_item=page, json_respons=body)
+    else:
+        _ac_calendar.open_calendar(date=when, starting_item=page)
 
 
 @script.route('/arbiter/<wait>/<path:arg>')
@@ -100,6 +127,12 @@ def whats_new():
 @try_function(ErrorPriority.BLOCKING)
 def settings():
     plugin_addon.openSettings()
+
+
+@script.route('/dialog/script_settings')
+@try_function(ErrorPriority.BLOCKING)
+def settings():
+    script_addon.openSettings()
 
 
 @script.route('/dialog/shoko')
@@ -156,14 +189,14 @@ def cohesion():
     _cohesion.check_cohesion()
 
 
-@script.route('/dialog/vote_series/<series_id>')
+@script.route('/dialog/vote_series/<series_id>/')
 @try_function(ErrorPriority.BLOCKING)
 def show_series_vote_dialog(series_id):
     # TODO something ?
     pass
 
 
-@script.route('/dialog/vote_episode/<ep_id>')
+@script.route('/dialog/vote_episode/<ep_id>/')
 @try_function(ErrorPriority.BLOCKING)
 def show_episode_vote_dialog(ep_id):
     # TODO something ?
@@ -174,14 +207,22 @@ def show_episode_vote_dialog(ep_id):
 @try_function(ErrorPriority.BLOCKING)
 def vote_for_series(series_id):
     from shoko_models.v2 import Series
-    vote_list = ['Don\'t Vote', '10', '9', '8', '7', '6', '5', '4', '3', '2', '1']
+    series = Series(series_id)
+    suggest_rating = ''
+    if plugin_addon.getSetting('suggest_series_vote') == 'true':
+        if plugin_addon.getSetting('suggest_series_vote_all_eps') == 'true':
+            if not series.did_you_rate_every_episode:
+                xbmcgui.Dialog().ok('You didn\'t rate all the episodes of this Series')
+                return
+        suggest_rating = ' [ %s ]' % series.suggest_rating_based_on_episode_rating
+
+    vote_list = ['Don\'t Vote' + suggest_rating, '10', '9', '8', '7', '6', '5', '4', '3', '2', '1']
     my_vote = xbmcgui.Dialog().select(plugin_addon.getLocalizedString(30023), vote_list)
     if my_vote < 1:
         return
     my_vote = pyproxy.safe_int(vote_list[my_vote])
     if my_vote < 1:
         return
-    series = Series(series_id)
     series.vote(my_vote)
 
 
@@ -240,10 +281,10 @@ def set_episode_watched_status(ep_id, watched):
     from shoko_models.v2 import Episode
     ep = Episode(ep_id)
     ep.set_watched_status(watched)
-    if plugin_addon.getSetting('sync_to_library') is 'true':
+    if plugin_addon.getSetting('sync_to_library') == 'true':
         playcount = '1' if watched else '0'
         # lastplayed = 'string'
-        xbmc.executeJSONRPC('{ "jsonrpc": "2.0", "method": "VideoLibrary.SetEpisodeDetails", "params": {"playcount": ' + playcount + ' , "episodeid": ' + episode_id + '}, "id": 1 }')
+        xbmc.executeJSONRPC('{ "jsonrpc": "2.0", "method": "VideoLibrary.SetEpisodeDetails", "params": {"playcount": ' + playcount + ' , "episodeid": ' + ep_id + '}, "id": 1 }')
     kodi_utils.refresh()
 
 

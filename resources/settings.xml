@@ -2,10 +2,21 @@
 <settings>
     <!-- calendar settings -->
     <category label="30028">
+        <setting label="30052" type="select" id="calendar_mode" default="anichart" values="crunchyroll|anichart"/>
+        <setting label="30050" type="bool" id="custom_source" default="true"/>
+        <setting label="30051" type="text" id="custom_url" enable="eq(-1,true)" default="https://raw.githubusercontent.com/bigretromike/anime-offline-calendar/master/%s-%02d.json"/>
+
+    </category>
+    <category label="30028">
         <setting label="30029" type="text" id="font" default="FiraMono-Bold.ttf"/>
         <setting label="30030" type="text" id="color" default="#ffffff"/>
         <setting label="30031" type="number" id="size" default="20"/>
         <setting label="30024" type="bool" id="gif_title" default="true"/>
+    </category>
+    <category label="30028">
+        <setting label="30029" type="text" id="ac_font" default="Migu.ttf"/>
+        <setting label="30030" type="text" id="ac_color" default="#000000"/>
+        <setting label="30031" type="number" id="ac_size" default="14"/>
     </category>
     <!-- maintenance -->
     <category label="30032">

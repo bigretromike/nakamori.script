@@ -48,17 +48,17 @@ def root():
         action(*args)
 
 
-@script.route('/seriesinfo/aid/<aid>')
+@script.route('/seriesinfo/aid/<aid>/')
 def series_info(aid=0):
     _series_info.open_seriesinfo(aid=aid)
 
 
-@script.route('/seriesinfo/<aid>')
+@script.route('/seriesinfo/<aid>/')
 def series_info(id=0):
     _series_info.open_seriesinfo(id=id)
 
 
-@script.route('/calendar/<when>/<page>')
+@script.route('/calendar/<when>/<page>/')
 def calendar(when=0, page=1, force_external=False):
     if script_addon.getSetting('calendar_mode') == 'crunchyroll':
         cr_calendar(when, page, force_external)
@@ -66,7 +66,7 @@ def calendar(when=0, page=1, force_external=False):
         ac_calendar(when, page, force_external)
 
 
-@script.route('/cr_calendar/<when>/<page>')
+@script.route('/cr_calendar/<when>/<page>/')
 def cr_calendar(when=0, page=0, force_external=False):
     if script_addon.getSetting('custom_source') == 'true' or force_external:
         if when == '0' and page == '0':
@@ -79,7 +79,7 @@ def cr_calendar(when=0, page=0, force_external=False):
         _calendar.open_calendar(date=when, starting_item=page)
 
 
-@script.route('/ac_calendar/<when>/<page>')
+@script.route('/ac_calendar/<when>/<page>/')
 def ac_calendar(when=0, page=1, force_external=False):
     if script_addon.getSetting('custom_source') == 'true' or force_external:
         if when == '0' and page == '0':
@@ -189,14 +189,14 @@ def cohesion():
     _cohesion.check_cohesion()
 
 
-@script.route('/dialog/vote_series/<series_id>')
+@script.route('/dialog/vote_series/<series_id>/')
 @try_function(ErrorPriority.BLOCKING)
 def show_series_vote_dialog(series_id):
     # TODO something ?
     pass
 
 
-@script.route('/dialog/vote_episode/<ep_id>')
+@script.route('/dialog/vote_episode/<ep_id>/')
 @try_function(ErrorPriority.BLOCKING)
 def show_episode_vote_dialog(ep_id):
     # TODO something ?

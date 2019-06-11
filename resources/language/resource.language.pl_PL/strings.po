@@ -256,18 +256,3 @@ msgstr "Ustawienia"
 msgctxt "#30049"
 msgid "Run Import"
 msgstr "Uruchom importowanie"
-
-#: settings.xml
-msgctxt "#30050"
-msgid "Enable custom source"
-msgstr "Włącz możliwość ustawienia źródła danych"
-
-#: settings.xml
-msgctxt "#30051"
-msgid "Custom calendar url"
-msgstr "Adres źródła danych dla kalendarza"
-
-#: settings.xml
-msgctxt "#30052"
-msgid "Calendar type"
-msgstr "Rodzaj kalendarza"

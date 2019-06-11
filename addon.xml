@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.module.nakamori" name="Nakamori Script" version="3.3.0~beta5" provider-name="BigRetroMike, da3dsoul">
+<addon id="script.module.nakamori" name="Nakamori Script" version="3.3.0~beta6" provider-name="BigRetroMike, da3dsoul">
     <requires>
         <import addon="resource.images.nakamori" version="3.1.0"/>
         <import addon="script.module.nakamori-lib" version="3.3.0~beta8"/>

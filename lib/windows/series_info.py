@@ -1,13 +1,4 @@
 # -*- coding: utf-8 -*-
-import time
-import json
-import datetime
-import re
-
-from nakamori_utils import script_utils
-from nakamori_utils import model_utils
-from proxy.python_version_proxy import python_proxy as pyproxy
-from kodi_models import DirectoryListing, WatchedStatus, ListItem
 import shoko_models.v2 as model
 
 import xbmcgui

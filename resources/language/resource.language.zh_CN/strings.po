@@ -257,3 +257,18 @@ msgstr "设置"
 msgctxt "#30049"
 msgid "Run Import"
 msgstr "运行导入"
+
+#: settings.xml
+msgctxt "#30050"
+msgid "Enable custom source"
+msgstr "启用自定义源"
+
+#: settings.xml
+msgctxt "#30051"
+msgid "Custom calendar url"
+msgstr "自定义日历链接"
+
+#: settings.xml
+msgctxt "#30052"
+msgid "Calendar type"
+msgstr "日历类型"

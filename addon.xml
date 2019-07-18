@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.module.nakamori" name="Nakamori Script" version="3.3.0~beta6" provider-name="BigRetroMike, da3dsoul">
+<addon id="script.module.nakamori" name="Nakamori Script" version="3.3.0" provider-name="BigRetroMike, da3dsoul">
     <requires>
         <import addon="resource.images.nakamori" version="3.1.0"/>
-        <import addon="script.module.nakamori-lib" version="3.3.0~beta8"/>
-        <import addon="script.module.nakamoriplayer" version="3.1.0"/>
+        <import addon="script.module.nakamori-lib" version="3.3.0"/>
+        <import addon="script.module.nakamoriplayer" version="3.3.0"/>
         <import addon="script.module.pil" version="1.1.7"/>
         <import addon="script.module.pydevd-pycharm" optional="true"/>
         <import addon="xbmc.python" version="2.25.0"/>
@@ -20,7 +20,7 @@
         <website>https://shokunin.monogatari.pl/</website>
         <source>http://github.com/bigretromike/nakamori.script</source>
         <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
-        <news>3.2.0[CR]- added translation strings[CR]- fixed information window[CR]- moved out search listing</news>
+        <news>3.3.0[CR]- new AC like Calendar[CR]- suggest series rating[CR]- ability to change url to external calendar</news>
         <assets>
             <icon>resources/icon.png</icon>
             <fanart>resources/fanart.jpg</fanart>

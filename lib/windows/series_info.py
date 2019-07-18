@@ -2,12 +2,11 @@
 import shoko_models.v2 as model
 
 import xbmcgui
+import xbmcaddon
+import xbmc
+import os
 
 from nakamori_utils.globalvars import *
-
-# noinspection PyUnresolvedReferences
-from PIL import ImageFont, ImageDraw, Image
-import textwrap
 
 ADDON = xbmcaddon.Addon('script.module.nakamori')
 CWD = ADDON.getAddonInfo('path').decode('utf-8')

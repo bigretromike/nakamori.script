@@ -272,3 +272,8 @@ msgstr "自定义日历链接"
 msgctxt "#30052"
 msgid "Calendar type"
 msgstr "日历类型"
+
+#: nakamoriscript.py
+msgctxt "#30053"
+msgid "You didn't rate all the episodes for this Series"
+msgstr "你还没有为此剧集下的所有分集评分"

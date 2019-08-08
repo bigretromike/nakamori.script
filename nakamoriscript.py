@@ -275,6 +275,62 @@ def rehash_file(file_id):
     f.rehash()
 
 
+@script.route('/file/<file_id>/probe')
+@try_function(ErrorPriority.BLOCKING)
+def probe_file(file_id):
+    from shoko_models.v2 import File
+    f = File(file_id, build_full_object=True)
+    file_url = f.url_for_player
+    content = '"file":"' + file_url + '"'
+    url = 'http://%s:%s/api/probe/%s' % (plugin_addon.getSetting('ipEigakan'), plugin_addon.getSetting('portEigakan'), file_id)
+    busy = xbmcgui.DialogProgress()
+    # TODO lang fix
+    busy.create('Please wait', 'Probing')
+    data = pyproxy.post_json(url, content)
+    busy.close()
+    xbmcgui.Dialog().ok('probe results', '%s' % data)
+
+
+@script.route('/episode/<file_id>/probe')
+@try_function(ErrorPriority.BLOCKING)
+def probe_episode(ep_id):
+    from shoko_models.v2 import Episode
+    ep = Episode(ep_id, build_full_object=True)
+    items = [(x.name, x.id) for x in ep]
+    selected_id = kodi_utils.show_file_list(items)
+    file_id = self.get_file_with_id(selected_id)
+    if file_id > 0:
+        probe_file(file_id)
+
+
+@script.route('/file/<file_id>/transcode')
+@try_function(ErrorPriority.BLOCKING)
+def transcode_file(file_id):
+    from shoko_models.v2 import File
+    f = File(file_id, build_full_object=True)
+    file_url = f.url_for_player
+    content = '"file":"' + file_url + '"'
+    url = 'http://%s:%s/api/transcode/%s' % (plugin_addon.getSetting('ipEigakan'), plugin_addon.getSetting('portEigakan'), file_id)
+    busy = xbmcgui.DialogProgress()
+    # TODO lang fix
+    busy.create('Please wait', 'Probing')
+    data = pyproxy.post_json(url, content)
+    busy.close()
+    xbmcgui.Dialog().ok('transcode request send', '%s' % data)
+
+
+@script.route('/episode/<file_id>/transcode')
+@try_function(ErrorPriority.BLOCKING)
+def transcode_episode(ep_id):
+    from shoko_models.v2 import Episode
+    ep = Episode(ep_id, build_full_object=True)
+    items = [(x.name, x.id) for x in ep]
+    selected_id = kodi_utils.show_file_list(items)
+    file_id = self.get_file_with_id(selected_id)
+    if file_id > 0:
+        transcode_file(file_id)
+
+
 @script.route('/episode/<ep_id>/set_watched/<watched>')
 @try_function(ErrorPriority.HIGH, 'Error Setting Watched Status')
 def set_episode_watched_status(ep_id, watched):

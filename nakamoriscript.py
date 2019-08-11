@@ -361,7 +361,7 @@ def set_group_watched_status(group_id, watched):
     kodi_utils.refresh()
 
 
-@script.route('/menu/episode/move_to_item/<index>')
+@script.route('/menu/episode/move_to_item/<index>/')
 def move_to_index(index):
     kodi_utils.move_to_index(index)
 

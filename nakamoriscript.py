@@ -1,14 +1,17 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import debug
+import json
 import nakamori_player
 import search
 import xbmcgui
+import xbmc
 
 import routing
 from error_handler import spam, ErrorPriority, try_function, show_messages
-from nakamori_utils import kodi_utils, shoko_utils
+from nakamori_utils import kodi_utils, shoko_utils, eigakan_utils
 from proxy.python_version_proxy import python_proxy as pyproxy
+from proxy.python_version_proxy import http_error as http_error
 
 from nakamori_utils.globalvars import *
 import lib.windows.calendar as _calendar
@@ -19,7 +22,7 @@ import lib.windows.wizard as _wizard
 import lib.windows.series_info as _series_info
 
 script = routing.Script(base_url=os.path.split(__file__)[-1], convert_args=True)
-
+clientid = kodi_utils.get_device_id()
 
 @script.route('/')
 def root():
@@ -35,7 +38,8 @@ def root():
         (script_addon.getLocalizedString(30046), (whats_new, [])),
         (script_addon.getLocalizedString(30033), (clearcache, [])),
         (script_addon.getLocalizedString(30047), (cohesion, [])),
-        (script_addon.getLocalizedString(30048), (settings, []))
+        (script_addon.getLocalizedString(30048), (settings, [])),
+        ('detect eigakan', (eigakan_detect, []))
     ]
 
     options = []
@@ -276,19 +280,31 @@ def rehash_file(file_id):
 
 
 @script.route('/file/<file_id>/probe')
-@try_function(ErrorPriority.BLOCKING)
-def probe_file(file_id):
+def probe_file(file_id, second_try=True):
     from shoko_models.v2 import File
     f = File(file_id, build_full_object=True)
-    file_url = f.url_for_player
-    content = '"file":"' + file_url + '"'
-    url = 'http://%s:%s/api/probe/%s' % (plugin_addon.getSetting('ipEigakan'), plugin_addon.getSetting('portEigakan'), file_id)
-    busy = xbmcgui.DialogProgress()
-    # TODO lang fix
-    busy.create('Please wait', 'Probing')
-    data = pyproxy.post_json(url, content)
-    busy.close()
-    xbmcgui.Dialog().ok('probe results', '%s' % data)
+    content = '"file":"%s","remote":"%s"' % (f.url_for_player, f.remote_url_for_player )
+    url = 'http://%s:%s/api/probe/%s/%s' % (plugin_addon.getSetting('ipEigakan'), plugin_addon.getSetting('portEigakan'), clientid, file_id)
+
+    if kodi_utils.check_eigakan():
+        busy = xbmcgui.DialogProgress()
+        busy.create(plugin_addon.getLocalizedString(30160), plugin_addon.getLocalizedString(30177))
+        data = ''
+        try:
+            data = pyproxy.post_json(url, content)
+            busy.close()
+            xbmcgui.Dialog().ok(plugin_addon.getLocalizedString(30207), '%s' % data)
+        except http_error as err:
+            busy.close()
+            if err.code == 503:
+                kodi_utils.send_profile()
+                if not second_try:
+                    probe_file(file_id, second_try=True)
+        except:
+            busy.close()
+    else:
+        # TODO lang fix
+        xbmcgui.Dialog('Try later', 'Eigakan is offline')
 
 
 @script.route('/episode/<file_id>/probe')
@@ -308,15 +324,31 @@ def probe_episode(ep_id):
 def transcode_file(file_id):
     from shoko_models.v2 import File
     f = File(file_id, build_full_object=True)
-    file_url = f.url_for_player
-    content = '"file":"' + file_url + '"'
-    url = 'http://%s:%s/api/transcode/%s' % (plugin_addon.getSetting('ipEigakan'), plugin_addon.getSetting('portEigakan'), file_id)
+    content = '"file":"%s","remote":"%s"' % (f.url_for_player, f.remote_url_for_player)
+    audio_stream, subs_streams = eigakan_utils.probe_file(file_id, f.remote_url_for_player)
+    a_index, s_index, sub_type = eigakan_utils.pick_best_streams(audio_stream, subs_streams)
+    if int(a_index) > -1:
+        content += ',"audio":"%s"' % a_index
+    if int(s_index) > -1:
+        content += ',"subtitles":"%s"' % s_index
+    url = 'http://%s:%s/api/transcode/%s/%s' % (plugin_addon.getSetting('ipEigakan'), plugin_addon.getSetting('portEigakan'), clientid, file_id)
+
     busy = xbmcgui.DialogProgress()
-    # TODO lang fix
-    busy.create('Please wait', 'Probing')
-    data = pyproxy.post_json(url, content)
-    busy.close()
-    xbmcgui.Dialog().ok('transcode request send', '%s' % data)
+    busy.create(plugin_addon.getLocalizedString(30160), plugin_addon.getLocalizedString(30177))
+    try:
+        pyproxy.post_json(url, content, custom_timeout=0.1)
+        try_count = 5
+        xbmc.sleep(1000)
+        while True:
+            if busy.iscanceled():
+                break
+            if eigakan_utils.is_fileid_added_to_transcoder(file_id):
+                break
+            try_count += 1
+            busy.update(try_count)
+            xbmc.sleep(1000)
+    finally:
+        busy.close()
 
 
 @script.route('/episode/<file_id>/transcode')
@@ -364,6 +396,72 @@ def set_group_watched_status(group_id, watched):
 @script.route('/menu/episode/move_to_item/<index>/')
 def move_to_index(index):
     kodi_utils.move_to_index(index)
+
+
+@script.route('/eigakan/clear')
+def clear_eigakan_remote_profile():
+    plugin_addon.setSetting('eigakan_handshake', 'false')
+    kodi_utils.send_profile()
+
+
+@script.route('/eigakan/requirement')
+def eigakan_requirements():
+    try:
+        # if the addon if disabled (but installed) this will also raise error
+        import xbmcaddon
+        xbmcaddon.Addon('inputstream.adaptive').openSettings()
+    except Exception as ex:
+        # in this point we dont know if its installed but disabled or not installed
+        if not kodi_utils.is_addon_enabled():
+            if not kodi_utils.is_addon_installed():
+                xbmcgui.Dialog().ok(plugin_addon.getLocalizedString(30208), plugin_addon.getLocalizedString(30208))
+            else:
+                if xbmcgui.Dialog().yesno(plugin_addon.getLocalizedString(30209), plugin_addon.getLocalizedString(30209)):
+                    kodi_utils.enable_addon()
+
+
+@script.route('/eigakan/detect')
+def eigakan_detect():
+    import socket
+    import struct
+
+    # TODO LANG FIX
+    if xbmcgui.Dialog().yesno('Detect', 'Eigakan?'):
+        try:
+            MCAST_GRP = '224.1.1.1'
+            MCAST_PORT = 5007
+            IS_ALL_GROUPS = True
+
+            sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
+            sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+            if IS_ALL_GROUPS:
+                # on this port, receives ALL multicast groups
+                sock.bind(('', MCAST_PORT))
+            else:
+                # on this port, listen ONLY to MCAST_GRP
+                sock.bind((MCAST_GRP, MCAST_PORT))
+            mreq = struct.pack("4sl", socket.inet_aton(MCAST_GRP), socket.INADDR_ANY)
+
+            sock.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)
+
+            while True:
+                x, y = sock.recvfrom(10240)
+                if x.startswith('eigakanserver'):
+                    port = x.split('|')[1]
+                    version = x.split('|')[2]
+                    address, _port = y
+                    # TODO LANG FIX
+                    if xbmcgui.Dialog().yesno('Setup Eigakan as:', 'ip: %s port: %s' % (address, port), 'version: %s' % version):
+                        plugin_addon.setSetting('ipEigakan', str(address))
+                        plugin_addon.setSetting('portEigakan', str(port))
+                        break
+                    else:
+                        # TODO LANG FIX
+                        if xbmcgui.Dialog().yesno('Do you want to stop?', 'Stop scanning?'):
+                            break
+
+        except Exception as ex:
+            xbmc.log('E -------- %s --------' % ex, xbmc.LOGNOTICE)
 
 
 if __name__ == '__main__':

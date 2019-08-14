@@ -25,6 +25,7 @@ import lib.windows.series_info as _series_info
 script = routing.Script(base_url=os.path.split(__file__)[-1], convert_args=True)
 clientid = kodi_utils.get_device_id()
 
+@script.route('')
 @script.route('/')
 def root():
     items = [

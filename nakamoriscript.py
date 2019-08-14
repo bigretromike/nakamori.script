@@ -4,6 +4,7 @@ import debug
 import json
 import nakamori_player
 import search
+import favorite
 import xbmcgui
 import xbmc
 
@@ -467,6 +468,21 @@ def eigakan_detect():
 
         except Exception as ex:
             xbmc.log('E -------- %s --------' % ex, xbmc.LOGNOTICE)
+
+
+@script.route('/favorite/<sid>/add')
+def favorite_add(sid):
+    favorite.add_favorite(sid)
+
+@script.route('/favorite/<sid>/remove')
+def favorite_remove(sid):
+    favorite.remove_favorite(sid)
+    refresh()
+
+@script.route('/favorite/clear')
+def favorite_clear():
+    favorite.clear_favorite()
+    refresh()
 
 
 if __name__ == '__main__':

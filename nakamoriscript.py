@@ -304,7 +304,7 @@ def probe_file(file_id, second_try=True):
             busy.close()
     else:
         # TODO lang fix
-        xbmcgui.Dialog('Try later', 'Eigakan is offline')
+        xbmcgui.Dialog().ok('Try later', 'Eigakan is offline')
 
 
 @script.route('/episode/<file_id>/probe')
@@ -365,7 +365,7 @@ def transcode_episode(ep_id):
 
 @script.route('/episode/<ep_id>/set_watched/<watched>')
 @try_function(ErrorPriority.HIGH, 'Error Setting Watched Status')
-def set_episode_watched_status(ep_id, watched):
+def set_episode_watched_status(ep_id, watched, do_refresh=True):
     from shoko_models.v2 import Episode
     ep = Episode(ep_id)
     ep.set_watched_status(watched)
@@ -373,16 +373,18 @@ def set_episode_watched_status(ep_id, watched):
         playcount = '1' if watched else '0'
         # lastplayed = 'string'
         xbmc.executeJSONRPC('{ "jsonrpc": "2.0", "method": "VideoLibrary.SetEpisodeDetails", "params": {"playcount": ' + playcount + ' , "episodeid": ' + ep_id + '}, "id": 1 }')
-    kodi_utils.refresh()
+    if do_refresh:
+        kodi_utils.refresh()
 
 
 @script.route('/series/<series_id>/set_watched/<watched>')
 @try_function(ErrorPriority.HIGH, 'Error Setting Watched Status')
-def set_series_watched_status(series_id, watched):
+def set_series_watched_status(series_id, watched, do_refresh=True):
     from shoko_models.v2 import Series
     series = Series(series_id)
     series.set_watched_status(watched)
-    kodi_utils.refresh()
+    if do_refresh:
+        kodi_utils.refresh()
 
 
 @script.route('/group/<group_id>/set_watched/<watched>')
@@ -414,9 +416,12 @@ def eigakan_requirements():
         # in this point we dont know if its installed but disabled or not installed
         if not kodi_utils.is_addon_enabled():
             if not kodi_utils.is_addon_installed():
-                xbmcgui.Dialog().ok(plugin_addon.getLocalizedString(30208), plugin_addon.getLocalizedString(30208))
+                if xbmcgui.Dialog().yesno('inputstream.adaptive', plugin_addon.getLocalizedString(30210)):
+                    xbmc.executebuiltin('InstallAddon(inputstream.adaptive)')
+                else:
+                    xbmcgui.Dialog().ok('inputstream.adaptive', plugin_addon.getLocalizedString(30208))
             else:
-                if xbmcgui.Dialog().yesno(plugin_addon.getLocalizedString(30209), plugin_addon.getLocalizedString(30209)):
+                if xbmcgui.Dialog().yesno('inputstream.adaptive', plugin_addon.getLocalizedString(30209)):
                     kodi_utils.enable_addon()
 
 

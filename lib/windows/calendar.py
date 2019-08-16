@@ -2,6 +2,7 @@
 import time
 import json
 import datetime
+import _strptime  # fix for import lockis held by another thread.
 import re
 
 from nakamori_utils import script_utils

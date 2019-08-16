@@ -10,7 +10,7 @@ import xbmc
 
 import routing
 from error_handler import spam, ErrorPriority, try_function, show_messages
-from nakamori_utils import kodi_utils, shoko_utils, eigakan_utils
+from nakamori_utils import kodi_utils, shoko_utils, eigakan_utils, script_utils
 from proxy.python_version_proxy import python_proxy as pyproxy
 from proxy.python_version_proxy import http_error as http_error
 
@@ -22,12 +22,15 @@ import lib.windows.information as _information
 import lib.windows.wizard as _wizard
 import lib.windows.series_info as _series_info
 
+from setsuzoku import log_call, Category, Action, Event
+
 script = routing.Script(base_url=os.path.split(__file__)[-1], convert_args=True)
 clientid = kodi_utils.get_device_id()
 
 @script.route('')
 @script.route('/')
 def root():
+    script_utils.log_setsuzoku(Category.SCRIPT, Action.MENU, Event.MAIN)
     items = [
         (script_addon.getLocalizedString(30025), (wizard_connection, [])),
         (script_addon.getLocalizedString(30043), (wizard_login, [])),
@@ -40,8 +43,8 @@ def root():
         (script_addon.getLocalizedString(30046), (whats_new, [])),
         (script_addon.getLocalizedString(30033), (clearcache, [])),
         (script_addon.getLocalizedString(30047), (cohesion, [])),
-        (script_addon.getLocalizedString(30048), (settings, [])),
-        ('detect eigakan', (eigakan_detect, []))
+        (script_addon.getLocalizedString(30048), (script_settings, [])),
+        (script_addon.getLocalizedString(30057), (eigakan_detect, []))
     ]
 
     options = []
@@ -75,6 +78,7 @@ def calendar(when=0, page=1, force_external=False):
 @script.route('/cr_calendar/<when>/<page>/')
 def cr_calendar(when=0, page=0, force_external=False):
     if script_addon.getSetting('custom_source') == 'true' or force_external:
+        script_utils.log_setsuzoku(Category.CALENDAR, Action.TYPE2, Event.EXTERNAL)
         if when == '0' and page == '0':
             import datetime
             when = datetime.datetime.now().strftime('%Y%m%d')
@@ -82,12 +86,14 @@ def cr_calendar(when=0, page=0, force_external=False):
         body = return_only_few(when=when, offset=page, url=str(script_addon.getSetting('custom_url')))
         _calendar.open_calendar(date=when, starting_item=page, json_respons=body)
     else:
+        script_utils.log_setsuzoku(Category.CALENDAR, Action.TYPE2, Event.OPEN)
         _calendar.open_calendar(date=when, starting_item=page)
 
 
 @script.route('/ac_calendar/<when>/<page>/')
 def ac_calendar(when=0, page=1, force_external=False):
     if script_addon.getSetting('custom_source') == 'true' or force_external:
+        script_utils.log_setsuzoku(Category.CALENDAR, Action.TYPE1, Event.EXTERNAL)
         if when == '0' and page == '0':
             import datetime
             when = datetime.datetime.now().strftime('%Y%m%d')
@@ -95,6 +101,7 @@ def ac_calendar(when=0, page=1, force_external=False):
         body = return_only_few(when=when, offset=page, url=str(script_addon.getSetting('custom_url')))
         _ac_calendar.open_calendar(date=when, starting_item=page, json_respons=body)
     else:
+        script_utils.log_setsuzoku(Category.CALENDAR, Action.TYPE1, Event.OPEN)
         _ac_calendar.open_calendar(date=when, starting_item=page)
 
 
@@ -110,40 +117,47 @@ def arbiter(wait, arg):
 
 @script.route('/dialog/wizard/connection')
 def wizard_connection():
+    script_utils.log_setsuzoku(Category.MAINTENANCE, Action.CONNECTION, Event.WIZARD)
     _wizard.open_connection_wizard()
 
 
 @script.route('/dialog/wizard/login')
 def wizard_login():
+    script_utils.log_setsuzoku(Category.MAINTENANCE, Action.LOGIN, Event.WIZARD)
     _wizard.open_login_wizard()
 
 
 @script.route('/calendar/clear_cache')
 def clearcache():
+    script_utils.log_setsuzoku(Category.MAINTENANCE, Action.CALENDAR, Event.CLEAN)
     _calendar.clear_cache()
 
 
 @script.route('/dialog/whats_new')
 def whats_new():
     # TODO redo the what's new version checking and only display if it's new, thereby replacing the setting
+    script_utils.log_setsuzoku(Category.SCRIPT, Action.MENU, Event.INFORMATION)
     _information.open_information()
 
 
 @script.route('/dialog/settings')
 @try_function(ErrorPriority.BLOCKING)
 def settings():
+    script_utils.log_setsuzoku(Category.PLUGIN, Action.SETTINGS, Event.OPEN)
     plugin_addon.openSettings()
 
 
 @script.route('/dialog/script_settings')
 @try_function(ErrorPriority.BLOCKING)
-def settings():
+def script_settings():
+    script_utils.log_setsuzoku(Category.SCRIPT, Action.SETTINGS, Event.OPEN)
     script_addon.openSettings()
 
 
 @script.route('/dialog/shoko')
 @try_function(ErrorPriority.BLOCKING)
 def shoko_menu():
+    script_utils.log_setsuzoku(Category.SHOKO, Action.MENU, Event.MAIN)
     # TODO add things
     # Remove Missing
     # Import Folders?
@@ -192,6 +206,7 @@ def refresh():
 
 @script.route('/cohesion')
 def cohesion():
+    script_utils.log_setsuzoku(Category.MAINTENANCE, Action.SETTINGS, Event.CHECK)
     _cohesion.check_cohesion()
 
 
@@ -218,7 +233,7 @@ def vote_for_series(series_id):
     if plugin_addon.getSetting('suggest_series_vote') == 'true':
         if plugin_addon.getSetting('suggest_series_vote_all_eps') == 'true':
             if not series.did_you_rate_every_episode:
-                xbmcgui.Dialog().ok(script_addon.getLocalizedString(30053))
+                xbmcgui.Dialog().ok('',script_addon.getLocalizedString(30053))
                 return
         suggest_rating = ' [ %s ]' % series.suggest_rating_based_on_episode_rating
 
@@ -268,6 +283,7 @@ def file_list(ep_id):
 @script.route('/file/<file_id>/rescan')
 @try_function(ErrorPriority.BLOCKING)
 def rescan_file(file_id):
+    script_utils.log_setsuzoku(Category.SHOKO, Action.FILE, Event.RESCAN)
     from shoko_models.v2 import File
     f = File(file_id)
     f.rescan()
@@ -276,6 +292,7 @@ def rescan_file(file_id):
 @script.route('/file/<file_id>/rehash')
 @try_function(ErrorPriority.BLOCKING)
 def rehash_file(file_id):
+    script_utils.log_setsuzoku(Category.SHOKO, Action.FILE, Event.REHASH)
     from shoko_models.v2 import File
     f = File(file_id)
     f.rehash()
@@ -283,6 +300,7 @@ def rehash_file(file_id):
 
 @script.route('/file/<file_id>/probe')
 def probe_file(file_id, second_try=True):
+    script_utils.log_setsuzoku(Category.EIGAKAN, Action.FILE, Event.PROBE)
     from shoko_models.v2 import File
     f = File(file_id, build_full_object=True)
     content = '"file":"%s","remote":"%s"' % (f.url_for_player, f.remote_url_for_player )
@@ -291,7 +309,6 @@ def probe_file(file_id, second_try=True):
     if kodi_utils.check_eigakan():
         busy = xbmcgui.DialogProgress()
         busy.create(plugin_addon.getLocalizedString(30160), plugin_addon.getLocalizedString(30177))
-        data = ''
         try:
             data = pyproxy.post_json(url, content)
             busy.close()
@@ -305,13 +322,13 @@ def probe_file(file_id, second_try=True):
         except:
             busy.close()
     else:
-        # TODO lang fix
-        xbmcgui.Dialog().ok('Try later', 'Eigakan is offline')
+        xbmcgui.Dialog().ok(script_addon.getSetting(30055), script_addon.getSetting(30056))
 
 
 @script.route('/episode/<file_id>/probe')
 @try_function(ErrorPriority.BLOCKING)
 def probe_episode(ep_id):
+    script_utils.log_setsuzoku(Category.EIGAKAN, Action.EPISODE, Event.PROBE)
     from shoko_models.v2 import Episode
     ep = Episode(ep_id, build_full_object=True)
     items = [(x.name, x.id) for x in ep]
@@ -324,6 +341,7 @@ def probe_episode(ep_id):
 @script.route('/file/<file_id>/transcode')
 @try_function(ErrorPriority.BLOCKING)
 def transcode_file(file_id):
+    script_utils.log_setsuzoku(Category.EIGAKAN, Action.TRANSCODE, Event.ADD)
     from shoko_models.v2 import File
     f = File(file_id, build_full_object=True)
     content = '"file":"%s","remote":"%s"' % (f.url_for_player, f.remote_url_for_player)
@@ -399,17 +417,37 @@ def set_group_watched_status(group_id, watched):
 
 @script.route('/menu/episode/move_to_item/<index>/')
 def move_to_index(index):
+    _try = 0
+    while kodi_utils.is_dialog_active():
+        _try += 1
+        xbmc.sleep(100)
+        if _try > 20:
+            break
     kodi_utils.move_to_index(index)
+
+
+@script.route('/menu/move_to_item_and_enter/<index>/')
+def move_to_index(index):
+    _try = 0
+    while kodi_utils.is_dialog_active():
+        _try += 1
+        xbmc.sleep(100)
+        if _try > 20:
+            break
+    kodi_utils.move_to_index(index)
+    xbmc.executebuiltin('Action(Select)')
 
 
 @script.route('/eigakan/clear')
 def clear_eigakan_remote_profile():
+    script_utils.log_setsuzoku(Category.EIGAKAN, Action.PROFILE, Event.CLEAN)
     plugin_addon.setSetting('eigakan_handshake', 'false')
     kodi_utils.send_profile()
 
 
 @script.route('/eigakan/requirement')
 def eigakan_requirements():
+    script_utils.log_setsuzoku(Category.EIGAKAN, Action.SETTINGS, Event.CHECK)
     try:
         # if the addon if disabled (but installed) this will also raise error
         import xbmcaddon
@@ -429,6 +467,7 @@ def eigakan_requirements():
 
 @script.route('/eigakan/detect')
 def eigakan_detect():
+    script_utils.log_setsuzoku(Category.EIGAKAN, Action.CONNECTION, Event.WIZARD)
     import socket
     import struct
 
@@ -485,6 +524,9 @@ def favorite_clear():
     favorite.clear_favorite()
     refresh()
 
+@script.route('/log/<category>/<action>/<event>')
+def log_setsuzoku(category, action, event):
+    log_call(category, action, event)
 
 if __name__ == '__main__':
     debug.debug_init()

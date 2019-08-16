@@ -275,3 +275,18 @@ msgstr "You didn't rate all the episodes for this Series"
 msgctxt "#30054"
 msgid "URL type"
 msgstr "URL type"
+
+#: nakamoriscript.py
+msgctxt "#30055"
+msgid "Try later"
+msgstr "Try later"
+
+#: nakamoriscript.py
+msgctxt "#30056"
+msgid "Server is offline"
+msgstr "Server is offline"
+
+#: nakamoriscript.py
+msgctxt "#30057"
+msgid "Detect Eigakan"
+msgstr "Detect Eigakan"

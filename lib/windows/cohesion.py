@@ -12,7 +12,14 @@ def check_files(directory):
     list_of_error = []
     # plugin.py 0FF6B741
     crc_values = dict()
-    with open(os.path.join(directory, 'resources', 'hash.sfv'), 'rb') as fp:
+    hash_path = os.path.join(directory, 'resources', 'hash.sfv')
+
+    # check in case someone did manual installation
+    if not os.path.exists(hash_path):
+        list_of_error.append('hash.sfv')
+        return list_of_error
+
+    with open(hash_path, 'rb') as fp:
         for line in fp:
             x = line.split(' ')
             crc_values[x[0]] = x[1]
@@ -35,8 +42,10 @@ def check_if_installed(script_name):
 def check_cohesion():
     list_of_errors = dict()
     progress = xbmcgui.DialogProgress()
+    #TODO LANG FIX
     progress.create('Kodi', 'Getting files...')
 
+    # TODO LANG FIX
     progress.update(5, line1='Integrity check', line2='Checking plugin', line3='')
     list_of_errors['plugin'] = check_files(xbmc.translatePath(plugin_addon.getAddonInfo('path')))
     progress.update(20, line1='Integrity check', line2='Checking service', line3='')
@@ -49,6 +58,7 @@ def check_cohesion():
     if check_if_installed('script.module.nakamoriplayer'):
         list_of_errors['player'] = check_files(xbmc.translatePath(xbmcaddon.Addon('script.module.nakamoriplayer').getAddonInfo('path')))
 
+    # TODO LANG FIX
     progress.update(80, line1='Integrity check', line2='Checking plugin', line3='')
     progress.close()
 
@@ -56,6 +66,8 @@ def check_cohesion():
     for key in list_of_errors.keys():
         if len(list_of_errors[key]) > 0:
             error += len(list_of_errors[key])
+            # TODO LANG FIX
             xbmcgui.Dialog().ok('Error found in ' + key, str(list_of_errors[key]))
     if error == 0:
+        # TODO LANG FIX
         xbmcgui.Dialog().ok('Check complete', 'Your installation is correct')

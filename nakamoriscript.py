@@ -36,10 +36,10 @@ def root():
         (script_addon.getLocalizedString(30043), (wizard_login, [])),
         (script_addon.getLocalizedString(30028), (calendar, ['0', '0'])),
         (script_addon.getLocalizedString(30044), (calendar, ['0', '14'])),
-        (script_addon.getLocalizedString(30028), (cr_calendar, ['0', '0', False])),
-        (script_addon.getLocalizedString(30045), (cr_calendar, ['0', '0', True])),
-        (script_addon.getLocalizedString(30028), (ac_calendar, ['0', '0', False])),
-        (script_addon.getLocalizedString(30045), (ac_calendar, ['0', '0', True])),
+        (script_addon.getLocalizedString(30028) + ' CR', (cr_calendar, ['0', '0', False])),
+        (script_addon.getLocalizedString(30045) + ' CR', (cr_calendar, ['0', '0', True])),
+        (script_addon.getLocalizedString(30028) + ' AC', (ac_calendar, ['0', '0', False])),
+        (script_addon.getLocalizedString(30045) + ' AC', (ac_calendar, ['0', '0', True])),
         (script_addon.getLocalizedString(30046), (whats_new, [])),
         (script_addon.getLocalizedString(30033), (clearcache, [])),
         (script_addon.getLocalizedString(30047), (cohesion, [])),
@@ -235,7 +235,7 @@ def vote_for_series(series_id):
             if not series.did_you_rate_every_episode:
                 xbmcgui.Dialog().ok('',script_addon.getLocalizedString(30053))
                 return
-        suggest_rating = ' [ %s ]' % series.suggest_rating_based_on_episode_rating
+        suggest_rating = ' [ %s ]' % series.suggest_rating_based_on_episode_rating()
 
     vote_list = ['Don\'t Vote' + suggest_rating, '10', '9', '8', '7', '6', '5', '4', '3', '2', '1']
     my_vote = xbmcgui.Dialog().select(plugin_addon.getLocalizedString(30023), vote_list)

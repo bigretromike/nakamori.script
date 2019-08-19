@@ -27,6 +27,7 @@ from setsuzoku import log_call, Category, Action, Event
 script = routing.Script(base_url=os.path.split(__file__)[-1], convert_args=True)
 clientid = kodi_utils.get_device_id()
 
+
 @script.route('')
 @script.route('/')
 def root():
@@ -157,8 +158,8 @@ def script_settings():
 @script.route('/dialog/shoko')
 @try_function(ErrorPriority.BLOCKING)
 def shoko_menu():
+    # DEPRECATED --- use one in plugin
     script_utils.log_setsuzoku(Category.SHOKO, Action.MENU, Event.MAIN)
-    # TODO add things
     # Remove Missing
     # Import Folders?
     # various other actions
@@ -175,6 +176,27 @@ def shoko_menu():
     if result >= 0:
         action, args = items[result][1]
         action(*args)
+
+
+@script.route('/queue/<role>/<command>/')
+def command_queue(role, command):
+    from shoko_models.v2 import QueueGeneral, QueueImages, QueueHasher
+    q = None
+    if role == 'hasher':
+        q = QueueHasher()
+    elif role == 'images':
+        q = QueueImages()
+    else:
+        q = QueueGeneral()
+    if command == 'start':
+        q.start()
+    else:
+        q.stop()
+
+
+@script.route('/folder/<folderid>/scan/')
+def folder_scan(folderid):
+    shoko_utils.scan_folder(folderid)
 
 
 @script.route('/search/remove/<path:query>')
@@ -514,19 +536,85 @@ def eigakan_detect():
 def favorite_add(sid):
     favorite.add_favorite(sid)
 
+
 @script.route('/favorite/<sid>/remove')
 def favorite_remove(sid):
     favorite.remove_favorite(sid)
     refresh()
+
 
 @script.route('/favorite/clear')
 def favorite_clear():
     favorite.clear_favorite()
     refresh()
 
+
+@script.route('/bookmark/<sid>/add/')
+def bookmark_add(sid):
+    url = server + '/api/serie/bookmark/add?id=%s' % sid
+    pyproxy.get_json(url, True)
+
+
+@script.route('/bookmark/<sid>/remove/')
+def bookmark_remove(sid):
+    url = server + '/api/serie/bookmark/remove?id=%s' % sid
+    pyproxy.get_json(url, True)
+
+
 @script.route('/log/<category>/<action>/<event>')
 def log_setsuzoku(category, action, event):
     log_call(category, action, event)
+
+
+@script.route('/shoko/scandrop/')
+def shoko_scandrop():
+    shoko_utils.scan_dropfolder()
+
+
+@script.route('/shoko/statusupdate/')
+def shoko_statusupdate():
+    shoko_utils.stats_update()
+
+
+@script.route('/shoko/mediainfoupdate/')
+def shoko_mediainfoupdate():
+    shoko_utils.mediainfo_update()
+
+
+@script.route('/shoko/rescanunlinked/')
+def shoko_rescanunlinked():
+    shoko_utils.rescan_unlinked()
+
+
+@script.route('/shoko/rehashunlinked/')
+def shoko_rehashunlinked():
+    shoko_utils.rehash_unlinked()
+
+
+@script.route('/shoko/rescanmanuallinks/')
+def shoko_rescanmanuallinks():
+    shoko_utils.rescan_manuallinks()
+
+
+@script.route('/shoko/rehashmanuallinks/')
+def shoko_rehashmanuallinks():
+    shoko_utils.rehash_manuallinks()
+
+
+@script.route('/shoko/runimport/')
+def shoko_runimport():
+    shoko_utils.run_import()
+
+
+@script.route('/shoko/removemissing/')
+def shoko_removemissing():
+    shoko_utils.remove_missing_files()
+
+
+@script.route('/shoko/calendarrefresh/')
+def shoko_calendar_refresh():
+    shoko_utils.calendar_refresh()
+
 
 if __name__ == '__main__':
     debug.debug_init()

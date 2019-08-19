@@ -45,8 +45,7 @@
                             <left>0</left>
                             <width>185</width>
                             <height>265</height>
-                            <info>ListItem.Art(fanart)</info>
-                            <texture background="true">ListItem.Art(fanart)</texture>
+                            <texture background="true">$INFO[ListItem.Art(fanart)]</texture>
                         </control>
                         <!-- info -->
                         <control type="textbox">
@@ -68,8 +67,7 @@
                             <height>105</height>
                             <align>left</align>
                             <aspectratio scalediffuse="false" align="left" aligny="top">keep</aspectratio>
-                            <info>ListItem.Art(poster)</info>
-                            <texture>ListItem.Art(poster)</texture>
+                            <texture>$INFO[ListItem.Art(poster)]</texture>
                         </control>
                         <control type="label">
                             <top>230</top>
@@ -104,8 +102,7 @@
                             <left>0</left>
                             <width>185</width>
                             <height>265</height>
-                            <info>ListItem.Art(fanart)</info>
-                            <texture background="true">ListItem.Art(fanart)</texture>
+                            <texture background="true">$INFO[ListItem.Art(fanart)]</texture>
                         </control>
                         <!-- info -->
                         <control type="textbox">
@@ -127,8 +124,7 @@
                             <height>105</height>
                             <align>left</align>
                             <aspectratio scalediffuse="false" align="left" aligny="top">keep</aspectratio>
-                            <info>ListItem.Art(poster)</info>
-                            <texture>ListItem.Art(poster)</texture>
+                            <texture>$INFO[ListItem.Art(poster)]</texture>
                         </control>
                         <control type="label">
                             <top>230</top>

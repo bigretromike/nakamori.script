@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import datetime
+import time
 import json
 import os
 import re
@@ -10,9 +11,13 @@ import xbmcaddon
 ADDON = xbmcaddon.Addon('script.module.nakamori')
 x = xbmc.translatePath(ADDON.getAddonInfo('profile'))
 x = os.path.join(x, 'json')
+x = os.path.join(x, '%s' % ADDON.getSetting('url_type'))
 is_seasons = True
 if ADDON.getSetting('url_type') == 'calendar':
     is_seasons = False
+
+if not os.path.exists(x):
+    os.makedirs(x)
 
 
 def pack_json(new_list):
@@ -38,8 +43,15 @@ def process_month(year, month, day, day_already_processed, url):
         y = os.path.join(x, '%s-%02d.json' % (year, month))
     else:
         y = os.path.join(x, '%s-%02d.json' % (year, week))
+
+    if os.path.exists(y):
+        # more than 24h
+        if int(time.time()) - int(os.path.getmtime(y)) > 86400:
+            os.remove(y)
+
     if not os.path.exists(y) and not download_external_source(url, year, month, week):
         return
+
     content = open(y, 'r').read()
     pre_body = json.loads(content)
     body = []
@@ -115,11 +127,14 @@ def download_external_source(url, year=datetime.datetime.now().year, month=datet
                 try:
                     img = ''
                     img_number = re.search(r'65x100\/(.*)\.jpg-thumb', str(series['image']))
+                    if img_number is None:
+                        img_number = re.search(r'thumbs\/150\/(.*)\.jpg-thumb', str(series['image']))
                     if img_number is not None:
                         number = img_number.group(1)
                         x1 = 'thumbs/65x100/' + number + '.jpg-thumb.jpg'
                         x2 = number + '.jpg'
                         img = str(series['image']).replace(x1, x2)
+
                     series_item['aid'] = series['aid']
                     series_item['air'] = dates
                     series_item['date'] = dates

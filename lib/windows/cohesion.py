@@ -42,32 +42,28 @@ def check_if_installed(script_name):
 def check_cohesion():
     list_of_errors = dict()
     progress = xbmcgui.DialogProgress()
-    #TODO LANG FIX
-    progress.create('Kodi', 'Getting files...')
 
-    # TODO LANG FIX
-    progress.update(5, line1='Integrity check', line2='Checking plugin', line3='')
+    progress.create(script_addon.getLocalizedString(30058), script_addon.getLocalizedString(30059))
+
+    progress.update(5, line1=script_addon.getLocalizedString(30058), line2='plugin', line3='')
     list_of_errors['plugin'] = check_files(xbmc.translatePath(plugin_addon.getAddonInfo('path')))
-    progress.update(20, line1='Integrity check', line2='Checking service', line3='')
+    progress.update(20, line1=script_addon.getLocalizedString(30058), line2='service', line3='')
     list_of_errors['service'] = check_files(xbmc.translatePath(service_addon.getAddonInfo('path')))
-    progress.update(35, line1='Integrity check', line2='Checking script', line3='')
+    progress.update(35, line1=script_addon.getLocalizedString(30058), line2='script', line3='')
     list_of_errors['script'] = check_files(xbmc.translatePath(script_addon.getAddonInfo('path')))
-    progress.update(50, line1='Integrity check', line2='Checking script-lib', line3='')
+    progress.update(50, line1=script_addon.getLocalizedString(30058), line2='script-lib', line3='')
     list_of_errors['script-lib'] = check_files(xbmc.translatePath(xbmcaddon.Addon('script.module.nakamori-lib').getAddonInfo('path')))
-    progress.update(65, line1='Integrity check', line2='Checking player', line3='')
+    progress.update(65, line1=script_addon.getLocalizedString(30058), line2='player', line3='')
     if check_if_installed('script.module.nakamoriplayer'):
         list_of_errors['player'] = check_files(xbmc.translatePath(xbmcaddon.Addon('script.module.nakamoriplayer').getAddonInfo('path')))
 
-    # TODO LANG FIX
-    progress.update(80, line1='Integrity check', line2='Checking plugin', line3='')
+    progress.update(80, line1=script_addon.getLocalizedString(30058), line2='plugin', line3='')
     progress.close()
 
     error = 0
     for key in list_of_errors.keys():
         if len(list_of_errors[key]) > 0:
             error += len(list_of_errors[key])
-            # TODO LANG FIX
-            xbmcgui.Dialog().ok('Error found in ' + key, str(list_of_errors[key]))
+            xbmcgui.Dialog().ok(script_addon.getLocalizedString(30061) + key, str(list_of_errors[key]))
     if error == 0:
-        # TODO LANG FIX
-        xbmcgui.Dialog().ok('Check complete', 'Your installation is correct')
+        xbmcgui.Dialog().ok(script_addon.getLocalizedString(30062), script_addon.getLocalizedString(30060))

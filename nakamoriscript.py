@@ -493,8 +493,7 @@ def eigakan_detect():
     import socket
     import struct
 
-    # TODO LANG FIX
-    if xbmcgui.Dialog().yesno('Detect', 'Eigakan?'):
+    if xbmcgui.Dialog().yesno(script_addon.getLocalizedString(30064), script_addon.getLocalizedString(30063)):
         try:
             MCAST_GRP = '224.1.1.1'
             MCAST_PORT = 5007
@@ -518,14 +517,12 @@ def eigakan_detect():
                     port = x.split('|')[1]
                     version = x.split('|')[2]
                     address, _port = y
-                    # TODO LANG FIX
-                    if xbmcgui.Dialog().yesno('Setup Eigakan as:', 'ip: %s port: %s' % (address, port), 'version: %s' % version):
+                    if xbmcgui.Dialog().yesno(script_addon.getLocalizedString(30065), 'ip: %s port: %s' % (address, port), 'version: %s' % version):
                         plugin_addon.setSetting('ipEigakan', str(address))
                         plugin_addon.setSetting('portEigakan', str(port))
                         break
                     else:
-                        # TODO LANG FIX
-                        if xbmcgui.Dialog().yesno('Do you want to stop?', 'Stop scanning?'):
+                        if xbmcgui.Dialog().yesno(script_addon.getLocalizedString(30064), script_addon.getLocalizedString(30066)):
                             break
 
         except Exception as ex:

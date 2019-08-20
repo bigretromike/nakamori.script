@@ -133,6 +133,11 @@ msgctxt "#30024"
 msgid "Use animated titles in calendar"
 msgstr "Använd animerade titlar i kalendern"
 
+#: nakamoriscript.py
+msgctxt "#30025"
+msgid "Connection Wizard"
+msgstr "Anslutningsguiden"
+
 #: nakamoritools.py
 msgctxt "#30026"
 msgid "Enter search text"
@@ -213,131 +218,126 @@ msgid "Enter Shoko Server Host"
 msgstr "Ange Shoko Server Host"
 
 #: nakamoriscript.py
-msgctxt "#30025"
-msgid "Connection Wizard"
-msgstr "Anslutningsguiden" 
-
-#: nakamoriscript.py
 msgctxt "#30042"
 msgid "Remove Missing Files"
-msgstr "Ta bort saknade filer" 
+msgstr "Ta bort saknade filer"
 
 #: nakamoriscript.py
 msgctxt "#30043"
 msgid "Login Wizard"
-msgstr "Inloggningsguiden" 
+msgstr "Inloggningsguiden"
 
 #: nakamoriscript.py
 msgctxt "#30044"
 msgid "Calendar (Add 14 Days)"
-msgstr "Kalender (Lägg till 14 dagar)" 
+msgstr "Kalender (Lägg till 14 dagar)"
 
 #: nakamoriscript.py
 msgctxt "#30045"
 msgid "Calendar (External)"
-msgstr "Kalender (extern)" 
+msgstr "Kalender (extern)"
 
 #: nakamoriscript.py
 msgctxt "#30046"
 msgid "Information"
-msgstr "Information" 
+msgstr "Information"
 
 #: nakamoriscript.py
 msgctxt "#30047"
 msgid "Installation Integrity"
-msgstr "Installationsintegritet" 
+msgstr "Installationsintegritet"
 
 #: nakamoriscript.py
 msgctxt "#30048"
 msgid "Settings"
-msgstr "inställningar" 
+msgstr "inställningar"
 
 #: nakamoriscript.py
 msgctxt "#30049"
 msgid "Run Import"
-msgstr "Kör import" 
+msgstr "Kör import"
 
 #: settings.xml
 msgctxt "#30050"
 msgid "Enable custom source"
-msgstr "Aktivera anpassad källa" 
+msgstr "Aktivera anpassad källa"
 
 #: settings.xml
 msgctxt "#30051"
 msgid "Custom calendar url"
-msgstr "Anpassad kalender url" 
+msgstr "Anpassad kalender url"
 
 #: settings.xml
 msgctxt "#30052"
 msgid "Calendar type"
-msgstr "Kalendertyp" 
+msgstr "Kalendertyp"
 
 #: nakamoriscript.py
 msgctxt "#30053"
 msgid "You didn't rate all the episodes for this Series"
-msgstr "Du betygsatte inte alla avsnitt för den här serien" 
+msgstr "Du betygsatte inte alla avsnitt för den här serien"
 
 #: settings.xml
 msgctxt "#30054"
 msgid "URL type"
-msgstr "URL-typ" 
+msgstr "URL-typ"
 
 #: nakamoriscript.py
 msgctxt "#30055"
 msgid "Try later"
-msgstr "Försök senare" 
+msgstr "Försök senare"
 
 #: nakamoriscript.py
 msgctxt "#30056"
 msgid "Server is offline"
-msgstr "Servern är offline" 
+msgstr "Servern är offline"
 
 #: nakamoriscript.py
 msgctxt "#30057"
 msgid "Detect Eigakan"
-msgstr "Upptäck Eigakan" 
+msgstr "Upptäck Eigakan"
 
 #: cohesion.py
 msgctxt "#30058"
 msgid "Integrity check"
-msgstr "Integritetskontroll" 
+msgstr "Integritetskontroll"
 
 #: cohesion.py
 msgctxt "#30059"
 msgid "Checking files"
-msgstr "Kontrollerar filer" 
+msgstr "Kontrollerar filer"
 
 #: cohesion.py
 msgctxt "#30060"
 msgid "No errors found"
-msgstr "Inga fel hittades" 
+msgstr "Inga fel hittades"
 
 #: cohesion.py
 msgctxt "#30061"
 msgid "Error found in"
-msgstr "Felet hittades i" 
+msgstr "Felet hittades i"
 
 #: cohesion.py
 msgctxt "#30062"
 msgid "Check complete"
-msgstr "Kontrollera fullständigt" 
+msgstr "Kontrollera fullständigt"
 
 #: nakamoriscript.py
 msgctxt "#30063"
 msgid "Would you like to detect server?"
-msgstr "Vill du upptäcka servern?" 
+msgstr "Vill du upptäcka servern?"
 
 #: nakamoriscript.py
 msgctxt "#30064"
 msgid "Eigakan"
-msgstr "Eigakan" 
+msgstr "Eigakan"
 
 #: nakamoriscript.py
 msgctxt "#30065"
 msgid "Would you like to use those values?"
-msgstr "Vill du använda dessa värden?" 
+msgstr "Vill du använda dessa värden?"
 
 #: nakamoriscript.py
 msgctxt "#30066"
 msgid "Would you like to stop scanning?"
-msgstr "Vill du sluta skanna?" 
+msgstr "Vill du sluta skanna?"

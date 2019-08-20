@@ -211,3 +211,133 @@ msgstr "Eliminar de la lista de deseos"
 msgctxt "#30041"
 msgid "Enter Shoko Server Host"
 msgstr "Entre en el servidor del servidor Shoko"
+
+#: nakamoriscript.py
+msgctxt "#30025"
+msgid "Connection Wizard"
+msgstr "Asistente de conexión" 
+
+#: nakamoriscript.py
+msgctxt "#30042"
+msgid "Remove Missing Files"
+msgstr "Eliminar archivos faltantes" 
+
+#: nakamoriscript.py
+msgctxt "#30043"
+msgid "Login Wizard"
+msgstr "Asistente de inicio de sesión" 
+
+#: nakamoriscript.py
+msgctxt "#30044"
+msgid "Calendar (Add 14 Days)"
+msgstr "Calendario (Agregar 14 días)" 
+
+#: nakamoriscript.py
+msgctxt "#30045"
+msgid "Calendar (External)"
+msgstr "Calendario (externo)" 
+
+#: nakamoriscript.py
+msgctxt "#30046"
+msgid "Information"
+msgstr "Información" 
+
+#: nakamoriscript.py
+msgctxt "#30047"
+msgid "Installation Integrity"
+msgstr "Integridad de instalación" 
+
+#: nakamoriscript.py
+msgctxt "#30048"
+msgid "Settings"
+msgstr "Configuraciones" 
+
+#: nakamoriscript.py
+msgctxt "#30049"
+msgid "Run Import"
+msgstr "Ejecutar importación" 
+
+#: settings.xml
+msgctxt "#30050"
+msgid "Enable custom source"
+msgstr "Habilitar fuente personalizada" 
+
+#: settings.xml
+msgctxt "#30051"
+msgid "Custom calendar url"
+msgstr "URL de calendario personalizado" 
+
+#: settings.xml
+msgctxt "#30052"
+msgid "Calendar type"
+msgstr "Tipo de calendario" 
+
+#: nakamoriscript.py
+msgctxt "#30053"
+msgid "You didn't rate all the episodes for this Series"
+msgstr "No calificaste todos los episodios de esta serie" 
+
+#: settings.xml
+msgctxt "#30054"
+msgid "URL type"
+msgstr "Tipo de URL" 
+
+#: nakamoriscript.py
+msgctxt "#30055"
+msgid "Try later"
+msgstr "Intenta más tarde" 
+
+#: nakamoriscript.py
+msgctxt "#30056"
+msgid "Server is offline"
+msgstr "El servidor esta fuera de linea" 
+
+#: nakamoriscript.py
+msgctxt "#30057"
+msgid "Detect Eigakan"
+msgstr "Detectar Eigakan" 
+
+#: cohesion.py
+msgctxt "#30058"
+msgid "Integrity check"
+msgstr "Verificación de integridad" 
+
+#: cohesion.py
+msgctxt "#30059"
+msgid "Checking files"
+msgstr "Comprobando archivos" 
+
+#: cohesion.py
+msgctxt "#30060"
+msgid "No errors found"
+msgstr "No se encontraron errores" 
+
+#: cohesion.py
+msgctxt "#30061"
+msgid "Error found in"
+msgstr "Error encontrado en" 
+
+#: cohesion.py
+msgctxt "#30062"
+msgid "Check complete"
+msgstr "Cheque completo" 
+
+#: nakamoriscript.py
+msgctxt "#30063"
+msgid "Would you like to detect server?"
+msgstr "¿Te gustaría detectar el servidor?" 
+
+#: nakamoriscript.py
+msgctxt "#30064"
+msgid "Eigakan"
+msgstr "Eigakan" 
+
+#: nakamoriscript.py
+msgctxt "#30065"
+msgid "Would you like to use those values?"
+msgstr "¿Te gustaría usar esos valores?" 
+
+#: nakamoriscript.py
+msgctxt "#30066"
+msgid "Would you like to stop scanning?"
+msgstr "¿Quieres dejar de escanear?" 

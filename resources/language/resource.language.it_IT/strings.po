@@ -133,6 +133,11 @@ msgctxt "#30024"
 msgid "Use animated titles in calendar"
 msgstr "Usa titoli animati nel calendario"
 
+#: nakamoriscript.py
+msgctxt "#30025"
+msgid "Connection Wizard"
+msgstr "Procedura guidata di connessione"
+
 #: nakamoritools.py
 msgctxt "#30026"
 msgid "Enter search text"
@@ -213,131 +218,126 @@ msgid "Enter Shoko Server Host"
 msgstr "Inserisci l'host del server Shoko"
 
 #: nakamoriscript.py
-msgctxt "#30025"
-msgid "Connection Wizard"
-msgstr "Procedura guidata di connessione" 
-
-#: nakamoriscript.py
 msgctxt "#30042"
 msgid "Remove Missing Files"
-msgstr "Rimuovi i file mancanti" 
+msgstr "Rimuovi i file mancanti"
 
 #: nakamoriscript.py
 msgctxt "#30043"
 msgid "Login Wizard"
-msgstr "Procedura guidata di accesso" 
+msgstr "Procedura guidata di accesso"
 
 #: nakamoriscript.py
 msgctxt "#30044"
 msgid "Calendar (Add 14 Days)"
-msgstr "Calendario (Aggiungi 14 giorni)" 
+msgstr "Calendario (Aggiungi 14 giorni)"
 
 #: nakamoriscript.py
 msgctxt "#30045"
 msgid "Calendar (External)"
-msgstr "Calendario (esterno)" 
+msgstr "Calendario (esterno)"
 
 #: nakamoriscript.py
 msgctxt "#30046"
 msgid "Information"
-msgstr "Informazione" 
+msgstr "Informazione"
 
 #: nakamoriscript.py
 msgctxt "#30047"
 msgid "Installation Integrity"
-msgstr "Integrità dell'installazione" 
+msgstr "Integrità dell'installazione"
 
 #: nakamoriscript.py
 msgctxt "#30048"
 msgid "Settings"
-msgstr "impostazioni" 
+msgstr "impostazioni"
 
 #: nakamoriscript.py
 msgctxt "#30049"
 msgid "Run Import"
-msgstr "Esegui importazione" 
+msgstr "Esegui importazione"
 
 #: settings.xml
 msgctxt "#30050"
 msgid "Enable custom source"
-msgstr "Abilita fonte personalizzata" 
+msgstr "Abilita fonte personalizzata"
 
 #: settings.xml
 msgctxt "#30051"
 msgid "Custom calendar url"
-msgstr "URL del calendario personalizzato" 
+msgstr "URL del calendario personalizzato"
 
 #: settings.xml
 msgctxt "#30052"
 msgid "Calendar type"
-msgstr "Tipo di calendario" 
+msgstr "Tipo di calendario"
 
 #: nakamoriscript.py
 msgctxt "#30053"
 msgid "You didn't rate all the episodes for this Series"
-msgstr "Non hai valutato tutti gli episodi di questa serie" 
+msgstr "Non hai valutato tutti gli episodi di questa serie"
 
 #: settings.xml
 msgctxt "#30054"
 msgid "URL type"
-msgstr "Tipo di URL" 
+msgstr "Tipo di URL"
 
 #: nakamoriscript.py
 msgctxt "#30055"
 msgid "Try later"
-msgstr "Prova più tardi" 
+msgstr "Prova più tardi"
 
 #: nakamoriscript.py
 msgctxt "#30056"
 msgid "Server is offline"
-msgstr "Il server non è in linea" 
+msgstr "Il server non è in linea"
 
 #: nakamoriscript.py
 msgctxt "#30057"
 msgid "Detect Eigakan"
-msgstr "Rileva Eigakan" 
+msgstr "Rileva Eigakan"
 
 #: cohesion.py
 msgctxt "#30058"
 msgid "Integrity check"
-msgstr "Controllo di integrità" 
+msgstr "Controllo di integrità"
 
 #: cohesion.py
 msgctxt "#30059"
 msgid "Checking files"
-msgstr "Verifica dei file" 
+msgstr "Verifica dei file"
 
 #: cohesion.py
 msgctxt "#30060"
 msgid "No errors found"
-msgstr "Nessun errore trovato" 
+msgstr "Nessun errore trovato"
 
 #: cohesion.py
 msgctxt "#30061"
 msgid "Error found in"
-msgstr "Errore trovato in" 
+msgstr "Errore trovato in"
 
 #: cohesion.py
 msgctxt "#30062"
 msgid "Check complete"
-msgstr "Verifica completa" 
+msgstr "Verifica completa"
 
 #: nakamoriscript.py
 msgctxt "#30063"
 msgid "Would you like to detect server?"
-msgstr "Vuoi rilevare il server?" 
+msgstr "Vuoi rilevare il server?"
 
 #: nakamoriscript.py
 msgctxt "#30064"
 msgid "Eigakan"
-msgstr "eigakan" 
+msgstr "eigakan"
 
 #: nakamoriscript.py
 msgctxt "#30065"
 msgid "Would you like to use those values?"
-msgstr "Ti piacerebbe usare quei valori?" 
+msgstr "Ti piacerebbe usare quei valori?"
 
 #: nakamoriscript.py
 msgctxt "#30066"
 msgid "Would you like to stop scanning?"
-msgstr "Vuoi interrompere la scansione?" 
+msgstr "Vuoi interrompere la scansione?"

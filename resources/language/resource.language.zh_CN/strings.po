@@ -277,3 +277,68 @@ msgstr "日历类型"
 msgctxt "#30053"
 msgid "You didn't rate all the episodes for this Series"
 msgstr "你还没有为此剧集下的所有分集评分"
+
+#: settings.xml
+msgctxt "#30054"
+msgid "URL type"
+msgstr "URL 类型"
+
+#: nakamoriscript.py
+msgctxt "#30055"
+msgid "Try later"
+msgstr "稍后重试"
+
+#: nakamoriscript.py
+msgctxt "#30056"
+msgid "Server is offline"
+msgstr "服务器离线"
+
+#: nakamoriscript.py
+msgctxt "#30057"
+msgid "Detect Eigakan"
+msgstr "检测映画館"
+
+#: cohesion.py
+msgctxt "#30058"
+msgid "Integrity check"
+msgstr "完整性检测"
+
+#: cohesion.py
+msgctxt "#30059"
+msgid "Checking files"
+msgstr "检测文件中"
+
+#: cohesion.py
+msgctxt "#30060"
+msgid "No errors found"
+msgstr "没有发现问题"
+
+#: cohesion.py
+msgctxt "#30061"
+msgid "Error found in"
+msgstr "发现错误于"
+
+#: cohesion.py
+msgctxt "#30062"
+msgid "Check complete"
+msgstr "检测完毕"
+
+#: nakamoriscript.py
+msgctxt "#30063"
+msgid "Would you like to detect server?"
+msgstr "你想要探测服务器吗？"
+
+#: nakamoriscript.py
+msgctxt "#30064"
+msgid "Eigakan"
+msgstr "映画馆"
+
+#: nakamoriscript.py
+msgctxt "#30065"
+msgid "Would you like to use those values?"
+msgstr "你想要使用这些值吗？"
+
+#: nakamoriscript.py
+msgctxt "#30066"
+msgid "Would you like to stop scanning?"
+msgstr "你想要停止扫描吗？"

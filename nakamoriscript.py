@@ -255,12 +255,12 @@ def vote_for_series(series_id):
     if plugin_addon.getSetting('suggest_series_vote') == 'true':
         if plugin_addon.getSetting('suggest_series_vote_all_eps') == 'true':
             if not series.did_you_rate_every_episode:
-                xbmcgui.Dialog().ok('',script_addon.getLocalizedString(30053))
+                xbmcgui.Dialog().ok('', script_addon.getLocalizedString(30053))
                 return
         suggest_rating = ' [ %s ]' % series.suggest_rating_based_on_episode_rating()
 
     vote_list = ['Don\'t Vote' + suggest_rating, '10', '9', '8', '7', '6', '5', '4', '3', '2', '1']
-    my_vote = xbmcgui.Dialog().select(plugin_addon.getLocalizedString(30023), vote_list)
+    my_vote = xbmcgui.Dialog().select(script_addon.getLocalizedString(30021), vote_list)
     if my_vote < 1:
         return
     my_vote = pyproxy.safe_int(vote_list[my_vote])
@@ -274,7 +274,7 @@ def vote_for_series(series_id):
 def vote_for_episode(ep_id):
     from shoko_models.v2 import Episode
     vote_list = ['Don\'t Vote', '10', '9', '8', '7', '6', '5', '4', '3', '2', '1']
-    my_vote = xbmcgui.Dialog().select(plugin_addon.getLocalizedString(30023), vote_list)
+    my_vote = xbmcgui.Dialog().select(script_addon.getLocalizedString(30023), vote_list)
     if my_vote < 1:
         return
     my_vote = pyproxy.safe_int(vote_list[my_vote])

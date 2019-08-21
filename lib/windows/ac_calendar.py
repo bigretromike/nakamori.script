@@ -136,31 +136,35 @@ class Calendar2(xbmcgui.WindowXML):
         elif action == xbmcgui.ACTION_MOUSE_RIGHT_CLICK:
             pass
         elif action == xbmcgui.ACTION_CONTEXT_MENU:
-            control_id = self.getFocus().getId()
-            con = self.getControl(control_id)
-            assert isinstance(con, xbmcgui.ControlList)
-            aid = con.getSelectedItem().getProperty('aid')
-            url = '%s/api/serie/fromaid?id=%s' % (server, aid)
-            body = json.loads(pyproxy.get_json(url))
-            if 'aid' not in body:
-                return
+            try:
+                control_id = self.getFocus().getId()
+                con = self.getControl(control_id)
+                assert isinstance(con, xbmcgui.ControlList)
+                aid = con.getSelectedItem().getProperty('aid')
+                url = '%s/api/serie/fromaid?id=%s' % (server, aid)
+                body = json.loads(pyproxy.get_json(url))
+                if 'aid' not in body:
+                    return
 
-            content_menu = [
-                '- aid = ' + str(aid) + '-',
-                ADDON.getLocalizedString(30037),
-                ADDON.getLocalizedString(30038),
-                ADDON.getLocalizedString(30039),
-                ADDON.getLocalizedString(30040)
-            ]
-            my_pick = xbmcgui.Dialog().contextmenu(content_menu)
-            if my_pick != -1:
-                if my_pick <= 1:
-                    if body.get('id', -1) == -1:
-                        xbmc.executebuiltin(script_utils.series_info(aid=aid), True)
-                    else:
-                        xbmc.executebuiltin(script_utils.series_info(id=id), True)
-                elif my_pick > 1:
-                    xbmcgui.Dialog().ok('soon', 'comming soon')
+                content_menu = [
+                    '- aid = ' + str(aid) + '-',
+                    ADDON.getLocalizedString(30037),
+                    ADDON.getLocalizedString(30038),
+                    ADDON.getLocalizedString(30039),
+                    ADDON.getLocalizedString(30040)
+                ]
+                my_pick = xbmcgui.Dialog().contextmenu(content_menu)
+                if my_pick != -1:
+                    if my_pick <= 1:
+                        if body.get('id', -1) == -1:
+                            xbmc.executebuiltin(script_utils.series_info(aid=aid), True)
+                        else:
+                            xbmc.executebuiltin(script_utils.series_info(id=id), True)
+                    elif my_pick > 1:
+                        xbmcgui.Dialog().ok('soon', 'comming soon')
+            except:
+                # in case 404 for that series - thats possible !
+                pass
         elif action == xbmcgui.ACTION_SELECT_ITEM:
             xbmcgui.Dialog().ok('soon', 'show soon')
         elif action == xbmcgui.ACTION_MOUSE_LEFT_CLICK:

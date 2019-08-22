@@ -532,6 +532,7 @@ def eigakan_detect():
 @script.route('/favorite/<sid>/add')
 def favorite_add(sid):
     favorite.add_favorite(sid)
+    xbmc.executebuiltin('XBMC.Notification(%s, %s, 1000, %s)' % (plugin_addon.getLocalizedString(30212), sid, plugin_addon.getAddonInfo('icon')))
 
 
 @script.route('/favorite/<sid>/remove')
@@ -550,12 +551,14 @@ def favorite_clear():
 def bookmark_add(sid):
     url = server + '/api/serie/bookmark/add?id=%s' % sid
     pyproxy.get_json(url, True)
+    xbmc.executebuiltin('XBMC.Notification(%s, %s, 1000, %s)' % (plugin_addon.getLocalizedString(30216), sid, plugin_addon.getAddonInfo('icon')))
 
 
 @script.route('/bookmark/<sid>/remove/')
 def bookmark_remove(sid):
     url = server + '/api/serie/bookmark/remove?id=%s' % sid
     pyproxy.get_json(url, True)
+    refresh()
 
 
 @script.route('/log/<category>/<action>/<event>')

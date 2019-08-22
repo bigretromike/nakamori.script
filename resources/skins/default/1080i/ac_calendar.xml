@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window id="999">
     <defaultcontrol always="true">901</defaultcontrol>
-    <backgroundcolor>0x00000000</backgroundcolor>
+    <backgroundcolor>0xffffffff</backgroundcolor>
     <zorder>1</zorder>
     <coordinates>
         <posx>0</posx>
@@ -15,6 +15,7 @@
             <posy>0</posy>
             <width>1920</width>
             <height>1080</height>
+             <aspectratio scalediffuse="false" align="left" aligny="top">stretch</aspectratio>
             <texture>common/ac-bg.png</texture>
         </control>
 

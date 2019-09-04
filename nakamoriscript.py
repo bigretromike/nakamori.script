@@ -618,6 +618,21 @@ def shoko_calendar_refresh():
     shoko_utils.calendar_refresh()
 
 
+@script.route('/series/<sid>/playlist/')
+def series_playlist(sid):
+    playlist = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
+    playlist.clear()
+    index = 0
+    from shoko_models.v2 import Series
+    series = Series(int(sid), build_full_object=True, get_children=True)
+    for ep in series:
+        if not ep.watched and ep.episode_type.lower() == 'episode':
+            playlist.add(ep.get_plugin_url(party_mode=True), ep.get_listitem(), index)
+            index += 1
+    if index > 0:
+        nakamori_player.play(playlist)
+
+
 if __name__ == '__main__':
     debug.debug_init()
     try_function(ErrorPriority.BLOCKING)(script.run)()

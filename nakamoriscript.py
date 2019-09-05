@@ -630,7 +630,7 @@ def series_playlist(sid):
             playlist.add(ep.get_plugin_url(party_mode=True), ep.get_listitem(), index)
             index += 1
     if index > 0:
-        nakamori_player.play(playlist)
+        xbmc.Player().play(playlist)
 
 
 if __name__ == '__main__':

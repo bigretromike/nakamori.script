@@ -9,7 +9,7 @@ import os
 from nakamori_utils.globalvars import *
 
 ADDON = xbmcaddon.Addon('script.module.nakamori')
-CWD = ADDON.getAddonInfo('path').decode('utf-8')
+CWD = ADDON.getAddonInfo('path')  # .decode('utf-8')
 
 ACTION_PREVIOUS_MENU = 10
 ACTION_NAV_BACK = 92

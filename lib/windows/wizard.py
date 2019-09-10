@@ -38,7 +38,8 @@ COLOR_WHITE = '0xAAFFFFFF'
 # noinspection PyUnusedFunction,PySameParameterValue
 class LoginWizard(xbmcgui.WindowXML):
     def __init__(self, xml_file, resource_path, skin, skin_res):
-        xbmcgui.WindowXML.__init__(self, xml_file, resource_path, skin, skin_res, False)
+        # xbmcgui.WindowXML.__init__(self, xml_file, resource_path, skin, skin_res, False)
+        # xbmcgui.WindowXML.__init__(self)
         self.window_type = 'window'
         self.login = ''
         self.password = ''
@@ -135,7 +136,8 @@ class LoginWizard(xbmcgui.WindowXML):
 # noinspection PyUnusedFunction,PySameParameterValue
 class ConnectionWizard(xbmcgui.WindowXML):
     def __init__(self, xml_file, resource_path, skin, skin_res):
-        xbmcgui.WindowXML.__init__(self, xml_file, resource_path, skin, skin_res, False)
+        # xbmcgui.WindowXML.__init__(self, xml_file, resource_path, skin, skin_res, False)
+        # xbmcgui.WindowXML.__init__(self)
         self.window_type = 'window'
         self.ip = None
         self.port = None

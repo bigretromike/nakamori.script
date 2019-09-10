@@ -57,7 +57,7 @@ if not os.path.exists(os.path.join(profileDir, 'json')):
 
 class Calendar2(xbmcgui.WindowXML):
     def __init__(self, strXMLname, strFallbackPath, strDefaultName, forceFallback, data, item_number=0, start_date=datetime.datetime.now().strftime('%Y%m%d'), fake_data=False):
-        xbmcgui.WindowXML.__init__(self)
+        # xbmcgui.WindowXML.__init__(self)
         self.window_type = 'window'
         self.json_data = data
         self._start_item = 0
@@ -104,14 +104,12 @@ class Calendar2(xbmcgui.WindowXML):
 
             if _size > 0:
                 for series in _json['series']:
-                    busy.update(_count / _size)
+                    busy.update(int(_count / _size))
                     if self.process_series(series):
                         _count += 1
                         pass
                     else:
                         break
-            #if _count % 9 == 0:
-            #    self.scroll_down_refresh = True
 
             busy.close()
 

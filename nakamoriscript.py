@@ -155,6 +155,13 @@ def script_settings():
     script_addon.openSettings()
 
 
+@script.route('/dialog/service_settings')
+@try_function(ErrorPriority.BLOCKING)
+def settings():
+    script_utils.log_setsuzoku(Category.SERVICE, Action.SETTINGS, Event.OPEN)
+    service_addon.openSettings()
+
+
 @script.route('/dialog/shoko')
 @try_function(ErrorPriority.BLOCKING)
 def shoko_menu():

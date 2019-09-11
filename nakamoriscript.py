@@ -633,6 +633,33 @@ def series_playlist(sid):
         xbmc.Player().play(playlist)
 
 
+@script.route('/shoko/webui/install/')
+def webinstall():
+    webui_install('install')
+
+
+@script.route('/shoko/webui/stable/')
+def webupdate():
+    webui_install('update')
+
+
+@script.route('/shoko/webui/unstable/')
+def webunstable():
+    webui_install('unstable')
+
+
+def webui_install(command):
+    url = server
+    if command == 'install':
+        url += '/api/webui/install'
+    elif command == 'update':
+        url += '/api/webui/update/stable'
+    elif command == 'unstable':
+        url += '/api/webui/update/unstable'
+    pyproxy.get_json(url, True)
+    xbmc.executebuiltin('XBMC.Notification(%s, %s, 1000, %s)' % ('webui', command, plugin_addon.getAddonInfo('icon')))
+
+
 if __name__ == '__main__':
     debug.debug_init()
     try_function(ErrorPriority.BLOCKING)(script.run)()

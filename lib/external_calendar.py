@@ -125,15 +125,29 @@ def download_external_source(url, year=datetime.datetime.now().year, month=datet
         for dates in response.get('calendar'):
             for series in response['calendar'][dates]:
                 try:
+                    # xbmc.log('---- img: %s' % series['image'], xbmc.LOGNOTICE)
                     img = ''
+                    x1 = ''
+                    number = 0
                     img_number = re.search(r'65x100\/(.*)\.jpg-thumb', str(series['image']))
                     if img_number is None:
-                        img_number = re.search(r'thumbs\/150\/(.*)\.jpg-thumb', str(series['image']))
+                        if "images/150" in str(series['image']):
+                            # "images/150/221366.jpg-thumb.jpg"
+                            img_number = re.search(r'images\/150\/(.*)\.jpg-thumb', str(series['image']))
+                            number = img_number.group(1)
+                            x1 = 'images/65x100/' + number + '.jpg-thumb.jpg'
+                        elif "thumbs/150" in str(series['image']):
+                            img_number = re.search(r'thumbs\/150\/(.*)\.jpg-thumb', str(series['image']))
+                            number = img_number.group(1)
+                            x1 = 'thumbs/65x100/' + number + '.jpg-thumb.jpg'
                     if img_number is not None:
-                        number = img_number.group(1)
-                        x1 = 'thumbs/65x100/' + number + '.jpg-thumb.jpg'
+                        if number == 0:
+                            number = img_number.group(1)
+                        if x1 == '':
+                            x1 = 'thumbs/65x100/' + number + '.jpg-thumb.jpg'
                         x2 = number + '.jpg'
                         img = str(series['image']).replace(x1, x2)
+                        # xbmc.log('---- img-mod: %s' % img, xbmc.LOGNOTICE)
 
                     series_item['aid'] = series['aid']
                     series_item['air'] = dates

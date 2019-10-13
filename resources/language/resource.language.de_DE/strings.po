@@ -1,4 +1,5 @@
 # Translators:
+# Baine <baine@inbox.ru>, 2019
 # BigRetroMike, 2019
 # 
 msgid ""
@@ -26,7 +27,7 @@ msgstr "IP Adresse"
 #: wizard.xml, wizard.py
 msgctxt "#30003"
 msgid "Port"
-msgstr "Hafen"
+msgstr "Port"
 
 #: wizard.xml, wizard.py
 msgctxt "#30004"
@@ -41,12 +42,12 @@ msgstr "Passwort"
 #: wizard.xml
 msgctxt "#30006"
 msgid "Test"
-msgstr "Prüfung"
+msgstr "Überprüfen"
 
 #: wizard.xml
 msgctxt "#30007"
 msgid "Save"
-msgstr "sparen"
+msgstr "Speichern"
 
 #: information.xml
 msgctxt "#30008"
@@ -71,7 +72,7 @@ msgstr "DI"
 #: calendar.py
 msgctxt "#30012"
 msgid "WED"
-msgstr "HEIRATEN"
+msgstr "WED"
 
 #: calendar.py
 msgctxt "#30013"
@@ -91,7 +92,7 @@ msgstr "SAT"
 #: calendar.py
 msgctxt "#30016"
 msgid "SUN"
-msgstr "SONNE"
+msgstr "SUN"
 
 #: calendar.py
 msgctxt "#30017"
@@ -116,22 +117,27 @@ msgstr "Dadurch wird der Inhalt des Titelverzeichnisses entfernt"
 #: nakamoritools.py
 msgctxt "#30021"
 msgid "Series Voting"
-msgstr "Reihenabstimmung"
+msgstr "Serien-Abstimmung"
 
 #: nakamoritools.py
 msgctxt "#30022"
 msgid "You Voted"
-msgstr "Du hast gewählt"
+msgstr "Du hast abgestimmt"
 
 #: nakamoritools.py
 msgctxt "#30023"
 msgid "Episode Voting"
-msgstr "Episodenwahl"
+msgstr "Episoden Abstimmung"
 
 #: settings.xml
 msgctxt "#30024"
 msgid "Use animated titles in calendar"
 msgstr "Verwenden Sie animierte Titel im Kalender"
+
+#: nakamoriscript.py
+msgctxt "#30025"
+msgid "Connection Wizard"
+msgstr "Verbindungsassistent"
 
 #: nakamoritools.py
 msgctxt "#30026"
@@ -166,7 +172,7 @@ msgstr "Größe"
 #: settings.xml
 msgctxt "#30032"
 msgid "Maintenance"
-msgstr "Instandhaltung"
+msgstr "Wartung"
 
 #: settings.xml
 msgctxt "#30033"
@@ -211,3 +217,58 @@ msgstr "Von der Wunschliste entfernen"
 msgctxt "#30041"
 msgid "Enter Shoko Server Host"
 msgstr "Geben Sie den Shoko Server Host ein"
+
+#: nakamoriscript.py
+msgctxt "#30042"
+msgid "Remove Missing Files"
+msgstr "Fehlende Dateien entfernen"
+
+#: nakamoriscript.py
+msgctxt "#30043"
+msgid "Login Wizard"
+msgstr "Login-Assistent"
+
+#: nakamoriscript.py
+msgctxt "#30044"
+msgid "Calendar (Add 14 Days)"
+msgstr "Kalender (14 Tage hinzufügen)"
+
+#: nakamoriscript.py
+msgctxt "#30045"
+msgid "Calendar (External)"
+msgstr "Kalender (extern)"
+
+#: nakamoriscript.py
+msgctxt "#30046"
+msgid "Information"
+msgstr "Information"
+
+#: nakamoriscript.py
+msgctxt "#30047"
+msgid "Installation Integrity"
+msgstr "Installationsintegrität"
+
+#: nakamoriscript.py
+msgctxt "#30048"
+msgid "Settings"
+msgstr "die Einstellungen"
+
+#: nakamoriscript.py
+msgctxt "#30049"
+msgid "Run Import"
+msgstr "Führen Sie den Import aus"
+
+#: settings.xml
+msgctxt "#30050"
+msgid "Enable custom source"
+msgstr "Benutzerdefinierte Quelle aktivieren"
+
+#: settings.xml
+msgctxt "#30051"
+msgid "Custom calendar url"
+msgstr "Benutzerdefinierte Kalender-URL"
+
+#: settings.xml
+msgctxt "#30052"
+msgid "Calendar type"
+msgstr "Kalendertyp"

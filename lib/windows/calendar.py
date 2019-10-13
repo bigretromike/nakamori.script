@@ -2,23 +2,20 @@
 import time
 import json
 import datetime
-import _strptime  # fix for import lockis held by another thread.
 import re
 
+from nakamori_utils import script_utils
 from proxy.python_version_proxy import python_proxy as pyproxy
 import xbmcgui
 
 from nakamori_utils.globalvars import *
 
 # noinspection PyUnresolvedReferences
-try:  # python3 current workaround
-    from PIL import ImageFont, ImageDraw, Image
-except ImportError:
-    pass
+from PIL import ImageFont, ImageDraw, Image
 import textwrap
 
 ADDON = xbmcaddon.Addon('script.module.nakamori')
-CWD = ADDON.getAddonInfo('path')  # .decode('utf-8')
+CWD = ADDON.getAddonInfo('path').decode('utf-8')
 
 ACTION_PREVIOUS_MENU = 10
 ACTION_NAV_BACK = 92
@@ -75,7 +72,6 @@ if not os.path.exists(os.path.join(profileDir, 'json')):
 
 class Calendar2(xbmcgui.WindowXML):
     def __init__(self, strXMLname, strFallbackPath, strDefaultName, forceFallback, data, item_number=0, start_date=datetime.datetime.now().strftime('%Y%m%d'), fake_data=False):
-        # xbmcgui.WindowXML.__init__(self)
         self.window_type = 'window'
         self.json_data = data
         self._start_item = 0
@@ -92,7 +88,6 @@ class Calendar2(xbmcgui.WindowXML):
         self.serie_processed = int(item_number)
         self.last_processed_date = start_date
         self.fake_data = fake_data
-        self.action = 'run'
 
     def onInit(self):
         self.calendar_collection = {
@@ -149,7 +144,7 @@ class Calendar2(xbmcgui.WindowXML):
 
             if _size > 0:
                 for series in _json['series']:
-                    busy.update(int(_count/_size))
+                    busy.update(_count/_size)
                     if self.process_series(series):
                         _count += 1
                         pass
@@ -172,12 +167,11 @@ class Calendar2(xbmcgui.WindowXML):
             else:
                 if self.fake_data:
                     try:
-                        open_calendar(self.last_processed_date, self.serie_processed)
-                        self.action = 'next'
+                        xbmc.executebuiltin(script_utils.calendar3(self.last_processed_date, self.serie_processed), True)
                     except Exception as exx:
                         xbmc.log(str(exx), xbmc.LOGNOTICE)
                 else:
-                    open_calendar(0, self.serie_processed)
+                    xbmc.executebuiltin(script_utils.calendar(0, self.serie_processed), True)
         elif action == xbmcgui.ACTION_MOVE_LEFT:
             if self.getFocus().getId() != 1:
                 self.list_update_left()
@@ -200,19 +194,19 @@ class Calendar2(xbmcgui.WindowXML):
             ]
             if xbmcgui.Dialog().contextmenu(content_menu) != -1:
                 xbmcgui.Dialog().ok('soon', 'comming soon')
-        elif action == xbmcgui.ACTION_SELECT_ITEM or action == xbmcgui.ACTION_MOUSE_LEFT_CLICK:
+        elif action == xbmcgui.ACTION_SELECT_ITEM:
+            xbmcgui.Dialog().ok('soon', 'show soon')
+        elif action == xbmcgui.ACTION_MOUSE_LEFT_CLICK:
             if self.getFocus().getId() == 1:
                 xbmc.executebuiltin('Action(Back)')
             elif self.getFocus().getId() == 2:
                 if self.fake_data:
                     try:
-                        open_calendar(self.last_processed_date, self.serie_processed)
+                        xbmc.executebuiltin(script_utils.calendar3(self.last_processed_date, self.serie_processed), True)
                     except Exception as exx:
                         xbmc.log(str(exx), xbmc.LOGNOTICE)
                 else:
-                    open_calendar(0, self.serie_processed)
-            else:
-                xbmcgui.Dialog().ok('soon', 'show soon')
+                    xbmc.executebuiltin(script_utils.calendar(0, self.serie_processed), True)
 
     def onControl(self, control):
         pass

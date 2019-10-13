@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import datetime
-import time
 import json
 import os
 import re
@@ -8,16 +7,8 @@ import error_handler as eh
 import xbmc
 import xbmcaddon
 
-ADDON = xbmcaddon.Addon('script.module.nakamori')
-x = xbmc.translatePath(ADDON.getAddonInfo('profile'))
+x = xbmc.translatePath(xbmcaddon.Addon('script.module.nakamori').getAddonInfo('profile'))
 x = os.path.join(x, 'json')
-x = os.path.join(x, '%s' % ADDON.getSetting('url_type'))
-is_seasons = True
-if ADDON.getSetting('url_type') == 'calendar':
-    is_seasons = False
-
-if not os.path.exists(x):
-    os.makedirs(x)
 
 
 def pack_json(new_list):
@@ -37,21 +28,9 @@ def pack_json(new_list):
 
 def process_month(year, month, day, day_already_processed, url):
     eh.spam('process_month(year=%s, month=%s, day=%s, day_already_processed=%s, url=%s)' % (year, month, day, day_already_processed, url))
-    day_is = datetime.date(year, month, day)
-    week = day_is.isocalendar()[1]
-    if is_seasons:
-        y = os.path.join(x, '%s-%02d.json' % (year, month))
-    else:
-        y = os.path.join(x, '%s-%02d.json' % (year, week))
-
-    if os.path.exists(y):
-        # more than 24h
-        if int(time.time()) - int(os.path.getmtime(y)) > 86400:
-            os.remove(y)
-
-    if not os.path.exists(y) and not download_external_source(url, year, month, week):
+    y = os.path.join(x, '%s-%02d.json' % (year, month))
+    if not os.path.exists(y) and not download_external_source(url, year, month):
         return
-
     content = open(y, 'r').read()
     pre_body = json.loads(content)
     body = []
@@ -69,7 +48,6 @@ def process_month(year, month, day, day_already_processed, url):
 
 
 def return_only_few(when, offset=0, url='', day_limits=7):
-    # TODO do I need offset? should I use offset?
     offset = int(offset)
     when = str(when)
     if len(when) == 8:
@@ -87,7 +65,7 @@ def return_only_few(when, offset=0, url='', day_limits=7):
     if len(day_already_processed) < day_limits:
         # process next month
         month += 1
-        day = 1
+        day = 0
         if month == 13:
             month = 1
             year += 1
@@ -95,26 +73,18 @@ def return_only_few(when, offset=0, url='', day_limits=7):
     return json.dumps(pack_json(body))
 
 
-def download_external_source(url, year=datetime.datetime.now().year, month=datetime.datetime.now().month, week=datetime.datetime.now().isocalendar()[1]):
+def download_external_source(url, year=datetime.datetime.now().year, month=datetime.datetime.now().month):
     # TODO we could refactore this to use Series objects ( :-) )
-    eh.spam('download_external_source(url=%s, year=%s, month=%s, weekofyear=%s)' % (url, year, month, week))
+    eh.spam('download_external_source(url=%s, year=%s, month=%s)' % (url, year, month))
     try:
         from urllib.request import urlopen
     except ImportError:
-        # noinspection PyUnresolvedReferences,PyCompatibility
         from urllib2 import urlopen
 
-    if is_seasons:
-        y = os.path.join(x, '%s-%02d-tmp.json' % (year, month))
-        url = url % (year, month)
-        z = os.path.join(x, '%s-%02d.json' % (year, month))
-    else:
-        y = os.path.join(x, '%s-%02d-tmp.json' % (year, week))
-        url = url % (year, week)
-        z = os.path.join(x, '%s-%02d.json' % (year, week))
+    url = url % (year, month)
 
     content = urlopen(url).read().decode('utf-8')
-
+    y = os.path.join(x, '%s-%02d-tmp.json' % (year, month))
     if os.path.exists(y):
         os.remove(y)
     open(y, 'wb').write(content.encode('utf-8'))
@@ -125,30 +95,14 @@ def download_external_source(url, year=datetime.datetime.now().year, month=datet
         for dates in response.get('calendar'):
             for series in response['calendar'][dates]:
                 try:
-                    # xbmc.log('---- img: %s' % series['image'], xbmc.LOGNOTICE)
                     img = ''
-                    x1 = ''
-                    number = 0
                     img_number = re.search(r'65x100\/(.*)\.jpg-thumb', str(series['image']))
-                    if img_number is None:
-                        if "images/150" in str(series['image']):
-                            # "images/150/221366.jpg-thumb.jpg"
-                            img_number = re.search(r'images\/150\/(.*)\.jpg-thumb', str(series['image']))
-                            number = img_number.group(1)
-                            x1 = 'images/65x100/' + number + '.jpg-thumb.jpg'
-                        elif "thumbs/150" in str(series['image']):
-                            img_number = re.search(r'thumbs\/150\/(.*)\.jpg-thumb', str(series['image']))
-                            number = img_number.group(1)
-                            x1 = 'thumbs/65x100/' + number + '.jpg-thumb.jpg'
                     if img_number is not None:
-                        if number == 0:
-                            number = img_number.group(1)
-                        if x1 == '':
-                            x1 = 'thumbs/65x100/' + number + '.jpg-thumb.jpg'
+                        number = img_number.group(1)
+                        x1 = 'thumbs/65x100/' + number + '.jpg-thumb.jpg'
                         x2 = number + '.jpg'
                         img = str(series['image']).replace(x1, x2)
-                        # xbmc.log('---- img-mod: %s' % img, xbmc.LOGNOTICE)
-
+                    # xbmc.log(str(series['image']) + 'x1' + str(x1) + 'x2' + str(2) + 'img' + img, xbmc.LOGNOTICE)
                     series_item['aid'] = series['aid']
                     series_item['air'] = dates
                     series_item['date'] = dates
@@ -169,13 +123,15 @@ def download_external_source(url, year=datetime.datetime.now().year, month=datet
                     series_list.append(series_item)
                     series_item = {}  # do this because shit get duplicate ?!
                 except Exception as e:
-                    # noinspection PyUnresolvedReferences
                     eh.log('Error in download_external_source.series: %s' % e.message)
 
+        z = os.path.join(x, '%s-%02d.json' % (year, month))
         if os.path.exists(z):
             os.remove(z)
         series_list = sorted(series_list, key=lambda i: (i['air'], i['name']))
+        # xbmc.log(str(series_list), xbmc.LOGNOTICE)
         con = json.dumps(series_list)
+        # xbmc.log(str(con), xbmc.LOGNOTICE)
         open(z, 'wb').write(con.encode('utf-8'))
         # clean tmp
         os.remove(y)

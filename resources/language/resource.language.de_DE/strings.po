@@ -1,5 +1,4 @@
 # Translators:
-# Baine <baine@inbox.ru>, 2019
 # BigRetroMike, 2019
 # 
 msgid ""
@@ -27,7 +26,7 @@ msgstr "IP Adresse"
 #: wizard.xml, wizard.py
 msgctxt "#30003"
 msgid "Port"
-msgstr "Port"
+msgstr "Hafen"
 
 #: wizard.xml, wizard.py
 msgctxt "#30004"
@@ -42,12 +41,12 @@ msgstr "Passwort"
 #: wizard.xml
 msgctxt "#30006"
 msgid "Test"
-msgstr "Überprüfen"
+msgstr "Prüfung"
 
 #: wizard.xml
 msgctxt "#30007"
 msgid "Save"
-msgstr "Speichern"
+msgstr "sparen"
 
 #: information.xml
 msgctxt "#30008"
@@ -72,7 +71,7 @@ msgstr "DI"
 #: calendar.py
 msgctxt "#30012"
 msgid "WED"
-msgstr "WED"
+msgstr "HEIRATEN"
 
 #: calendar.py
 msgctxt "#30013"
@@ -92,7 +91,7 @@ msgstr "SAT"
 #: calendar.py
 msgctxt "#30016"
 msgid "SUN"
-msgstr "SUN"
+msgstr "SONNE"
 
 #: calendar.py
 msgctxt "#30017"
@@ -117,27 +116,22 @@ msgstr "Dadurch wird der Inhalt des Titelverzeichnisses entfernt"
 #: nakamoritools.py
 msgctxt "#30021"
 msgid "Series Voting"
-msgstr "Serien-Abstimmung"
+msgstr "Reihenabstimmung"
 
 #: nakamoritools.py
 msgctxt "#30022"
 msgid "You Voted"
-msgstr "Du hast abgestimmt"
+msgstr "Du hast gewählt"
 
 #: nakamoritools.py
 msgctxt "#30023"
 msgid "Episode Voting"
-msgstr "Episoden Abstimmung"
+msgstr "Episodenwahl"
 
 #: settings.xml
 msgctxt "#30024"
 msgid "Use animated titles in calendar"
 msgstr "Verwenden Sie animierte Titel im Kalender"
-
-#: nakamoriscript.py
-msgctxt "#30025"
-msgid "Connection Wizard"
-msgstr "Verbindungsassistent"
 
 #: nakamoritools.py
 msgctxt "#30026"
@@ -172,7 +166,7 @@ msgstr "Größe"
 #: settings.xml
 msgctxt "#30032"
 msgid "Maintenance"
-msgstr "Wartung"
+msgstr "Instandhaltung"
 
 #: settings.xml
 msgctxt "#30033"
@@ -217,128 +211,3 @@ msgstr "Von der Wunschliste entfernen"
 msgctxt "#30041"
 msgid "Enter Shoko Server Host"
 msgstr "Geben Sie den Shoko Server Host ein"
-
-#: nakamoriscript.py
-msgctxt "#30042"
-msgid "Remove Missing Files"
-msgstr "Fehlende Dateien entfernen"
-
-#: nakamoriscript.py
-msgctxt "#30043"
-msgid "Login Wizard"
-msgstr "Login-Assistent"
-
-#: nakamoriscript.py
-msgctxt "#30044"
-msgid "Calendar (Add 14 Days)"
-msgstr "Kalender (14 Tage hinzufügen)"
-
-#: nakamoriscript.py
-msgctxt "#30045"
-msgid "Calendar (External)"
-msgstr "Kalender (extern)"
-
-#: nakamoriscript.py
-msgctxt "#30046"
-msgid "Information"
-msgstr "Information"
-
-#: nakamoriscript.py
-msgctxt "#30047"
-msgid "Installation Integrity"
-msgstr "Installationsintegrität"
-
-#: nakamoriscript.py
-msgctxt "#30048"
-msgid "Settings"
-msgstr "die Einstellungen"
-
-#: nakamoriscript.py
-msgctxt "#30049"
-msgid "Run Import"
-msgstr "Führen Sie den Import aus"
-
-#: settings.xml
-msgctxt "#30050"
-msgid "Enable custom source"
-msgstr "Benutzerdefinierte Quelle aktivieren"
-
-#: settings.xml
-msgctxt "#30051"
-msgid "Custom calendar url"
-msgstr "Benutzerdefinierte Kalender-URL"
-
-#: settings.xml
-msgctxt "#30052"
-msgid "Calendar type"
-msgstr "Kalendertyp"
-
-#: nakamoriscript.py
-msgctxt "#30053"
-msgid "You didn't rate all the episodes for this Series"
-msgstr "Sie haben nicht alle Folgen dieser Serie bewertet"
-
-#: settings.xml
-msgctxt "#30054"
-msgid "URL type"
-msgstr "URL-Typ"
-
-#: nakamoriscript.py
-msgctxt "#30055"
-msgid "Try later"
-msgstr "Versuche es später"
-
-#: nakamoriscript.py
-msgctxt "#30056"
-msgid "Server is offline"
-msgstr "Server ist offline"
-
-#: nakamoriscript.py
-msgctxt "#30057"
-msgid "Detect Eigakan"
-msgstr "Ermittle Eigakan"
-
-#: cohesion.py
-msgctxt "#30058"
-msgid "Integrity check"
-msgstr "Integritätsprüfung"
-
-#: cohesion.py
-msgctxt "#30059"
-msgid "Checking files"
-msgstr "Dateien prüfen"
-
-#: cohesion.py
-msgctxt "#30060"
-msgid "No errors found"
-msgstr "Keine Fehler gefunden"
-
-#: cohesion.py
-msgctxt "#30061"
-msgid "Error found in"
-msgstr "Fehler gefunden in"
-
-#: cohesion.py
-msgctxt "#30062"
-msgid "Check complete"
-msgstr "Vollständig prüfen"
-
-#: nakamoriscript.py
-msgctxt "#30063"
-msgid "Would you like to detect server?"
-msgstr "Möchten Sie Server erkennen?"
-
-#: nakamoriscript.py
-msgctxt "#30064"
-msgid "Eigakan"
-msgstr "Eigakan"
-
-#: nakamoriscript.py
-msgctxt "#30065"
-msgid "Would you like to use those values?"
-msgstr "Möchten Sie diese Werte verwenden?"
-
-#: nakamoriscript.py
-msgctxt "#30066"
-msgid "Would you like to stop scanning?"
-msgstr "Möchten Sie den Scanvorgang beenden?"

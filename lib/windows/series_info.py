@@ -5,10 +5,6 @@ import xbmcgui
 
 from nakamori_utils.globalvars import *
 
-# noinspection PyUnresolvedReferences
-from PIL import ImageFont, ImageDraw, Image
-import textwrap
-
 ADDON = xbmcaddon.Addon('script.module.nakamori')
 CWD = ADDON.getAddonInfo('path').decode('utf-8')
 

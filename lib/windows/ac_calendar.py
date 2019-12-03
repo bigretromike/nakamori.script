@@ -3,11 +3,14 @@ import time
 import json
 import datetime
 import re
+import os
 
 from nakamori_utils import script_utils
 from nakamori_utils import model_utils
 from proxy.python_version_proxy import python_proxy as pyproxy
 import xbmcgui
+import xbmc
+import xbmcaddon
 
 from nakamori_utils.globalvars import *
 
@@ -284,7 +287,7 @@ class Calendar2(xbmcgui.WindowXML):
                 _id = self.getFocus().getId()
                 position = xbmc.getInfoLabel('Container(%s).Position' % _id)
                 move_id = _id + 1
-                if move_id <= SEVENTH_DAY:
+                if move_id <= FIRST_DAY:  # SEVENTH_DAY:
                     xbmc.executebuiltin('Control.SetFocus(' + str(move_id) + ',' + str(position) + ')')
         except (RuntimeError, SystemError):
             pass

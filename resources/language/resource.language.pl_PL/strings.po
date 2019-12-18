@@ -16,7 +16,7 @@ msgstr ""
 #: wizard.xml
 msgctxt "#30001"
 msgid "Enter Shoko Server Credentials"
-msgstr "Wprowadz dane logowania do serwera Shoko"
+msgstr "Wprowadź dane logowania dla serwera Shoko"
 
 #: wizard.xml, wizard.py
 msgctxt "#30002"

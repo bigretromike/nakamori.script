@@ -2,9 +2,6 @@
 import shoko_models.v2 as model
 
 import xbmcgui
-import xbmcaddon
-import xbmc
-import os
 
 from nakamori_utils.globalvars import *
 

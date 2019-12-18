@@ -4,8 +4,6 @@ from distutils.version import LooseVersion
 
 import error_handler
 import xbmcgui
-import xbmcaddon
-import os
 
 from nakamori_utils.globalvars import *
 

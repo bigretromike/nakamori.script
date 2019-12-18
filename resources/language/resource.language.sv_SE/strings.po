@@ -133,11 +133,6 @@ msgctxt "#30024"
 msgid "Use animated titles in calendar"
 msgstr "Använd animerade titlar i kalendern"
 
-#: nakamoriscript.py
-msgctxt "#30025"
-msgid "Connection Wizard"
-msgstr "Anslutningsguiden"
-
 #: nakamoritools.py
 msgctxt "#30026"
 msgid "Enter search text"

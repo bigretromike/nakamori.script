@@ -2,7 +2,6 @@
 import time
 import json
 import datetime
-import _strptime  # fix for import lockis held by another thread.
 import re
 import os
 
@@ -54,7 +53,6 @@ if not os.path.exists(os.path.join(profileDir, 'json')):
 
 class Calendar2(xbmcgui.WindowXML):
     def __init__(self, strXMLname, strFallbackPath, strDefaultName, forceFallback, data, item_number=0, start_date=datetime.datetime.now().strftime('%Y%m%d'), fake_data=False):
-        xbmcgui.WindowXML.__init__(self)
         self.window_type = 'window'
         self.json_data = data
         self._start_item = 0
@@ -70,53 +68,43 @@ class Calendar2(xbmcgui.WindowXML):
         self.last_processed_date = start_date
         self.fake_data = fake_data
 
-    def AddSeriesToCalendar(self):
-        busy = xbmcgui.DialogProgress()
-        busy.create(ADDON.getLocalizedString(30017), ADDON.getLocalizedString(30018))
-        #for gui in self.calendar_collection.values():
-        #    assert isinstance(gui, xbmcgui.ControlList)
-        #    gui.reset()
-        if self.json_data != '' and self.fake_data == True and len(self.used_dates) > 0:
-            try:
-                # xbmcgui.Dialog().ok('parm', '%s %s %s' % (len(self.used_dates), self.fake_data, len(self.json_data)))
-                from lib.external_calendar import return_only_few
-                last_date = datetime.datetime(*(time.strptime(self.last_processed_date, '%Y%m%d')[0:6]))
-                last_date = last_date + datetime.timedelta(days=1)
-                self.last_processed_date = last_date.strftime('%Y%m%d')
-                when = self.last_processed_date
-                page = self._start_item
-                body = return_only_few(when=when, offset=page, url=str(script_addon.getSetting('custom_url')))
-                self.json_data = body
-            except Exception as ex:
-                xbmcgui.Dialog().ok('error', str(ex))
-                self.json_data = ''
-
-        _size = 0
-        if self.json_data != '':
-            _json = json.loads(self.json_data)
-            _size = _json.get('size', 0)
-        _count = 0
-
-        if _size > 0:
-            for series in _json['series']:
-                busy.update(_count / _size)
-                if self.process_series(series):
-                    _count += 1
-                    pass
-                else:
-                    break
-        busy.close()
-
-
     def onInit(self):
         self.calendar_collection = {
             1: self.getControl(FIRST_DAY),
         }
 
+        self.day_of_week = {
+            0: ADDON.getLocalizedString(30010),
+            1: ADDON.getLocalizedString(30011),
+            2: ADDON.getLocalizedString(30012),
+            3: ADDON.getLocalizedString(30013),
+            4: ADDON.getLocalizedString(30014),
+            5: ADDON.getLocalizedString(30015),
+            6: ADDON.getLocalizedString(30016)
+
+        }
+
         if self.day_count >= 3:
             pass
         else:
-            self.AddSeriesToCalendar()
+            busy = xbmcgui.DialogProgress()
+            busy.create(ADDON.getLocalizedString(30017), ADDON.getLocalizedString(30018))
+            for gui in self.calendar_collection.values():
+                assert isinstance(gui, xbmcgui.ControlList)
+                gui.reset()
+            _json = json.loads(self.json_data)
+            _size = _json.get('size', 0)
+            _count = 0
+
+            if _size > 0:
+                for series in _json['series']:
+                    busy.update(_count/_size)
+                    if self.process_series(series):
+                        _count += 1
+                        pass
+                    else:
+                        break
+            busy.close()
 
             self.setFocus(self.getControl(901))
 
@@ -126,13 +114,21 @@ class Calendar2(xbmcgui.WindowXML):
         elif action == ACTION_NAV_BACK:
             self.close()
         elif action == xbmcgui.ACTION_MOVE_RIGHT:
-            self.list_update_right()
+            if self.getFocus().getId() != 2:
+                self.list_update_right()
+            else:
+                if self.fake_data:
+                    try:
+                        xbmc.executebuiltin(script_utils.calendar3(self.last_processed_date, self.serie_processed), True)
+                    except Exception as exx:
+                        xbmc.log(str(exx), xbmc.LOGNOTICE)
+                else:
+                    xbmc.executebuiltin(script_utils.calendar(0, self.serie_processed), True)
         elif action == xbmcgui.ACTION_MOVE_LEFT:
-            self.list_update_left()
-        elif action == xbmcgui.ACTION_MOVE_DOWN:
-            self.list_update_down()
-        elif action == xbmcgui.ACTION_MOVE_UP:
-            self.list_update_up()
+            if self.getFocus().getId() != 1:
+                self.list_update_left()
+            else:
+                xbmc.executebuiltin('Action(Back)')
         elif action == xbmcgui.ACTION_MOUSE_RIGHT_CLICK:
             pass
         elif action == xbmcgui.ACTION_CONTEXT_MENU:
@@ -169,11 +165,11 @@ class Calendar2(xbmcgui.WindowXML):
             elif self.getFocus().getId() == 2:
                 if self.fake_data:
                     try:
-                        xbmc.executebuiltin(script_utils.ac_calendar(self.last_processed_date, self.serie_processed), True)
+                        xbmc.executebuiltin(script_utils.calendar3(self.last_processed_date, self.serie_processed), True)
                     except Exception as exx:
                         xbmc.log(str(exx), xbmc.LOGNOTICE)
                 else:
-                    xbmc.executebuiltin(script_utils.ac_calendar(0, self.serie_processed), True)
+                    xbmc.executebuiltin(script_utils.calendar(0, self.serie_processed), True)
 
     def onControl(self, control):
         pass
@@ -285,44 +281,28 @@ class Calendar2(xbmcgui.WindowXML):
         return True
 
     def list_update_right(self):
-        pass
-
-    def list_update_left(self):
-        pass
-
-    def list_update_up(self):
-        pass
-
-    def list_update_down(self):
         try:
-            if self.getFocus().getId() > -1:
+            if self.getFocus().getId > -1:
+                # position = self.getControl(self.getFocus().getId()).getSelectedPosition()  # absolute
                 _id = self.getFocus().getId()
                 position = xbmc.getInfoLabel('Container(%s).Position' % _id)
-                row = xbmc.getInfoLabel('Container(%s).Row' % _id)
-                column = xbmc.getInfoLabel('Container(%s).Column' % _id)
-                currentpage = xbmc.getInfoLabel('Container(%s).CurrentPage' % _id)
-                numpages = xbmc.getInfoLabel('Container(%s).NumPages' % _id)
-                numitems = xbmc.getInfoLabel('Container(%s).NumItems' % _id)
-                numallitems = xbmc.getInfoLabel('Container(%s).NumAllItems' % _id)
+                move_id = _id + 1
+                if move_id <= FIRST_DAY:  # SEVENTH_DAY:
+                    xbmc.executebuiltin('Control.SetFocus(' + str(move_id) + ',' + str(position) + ')')
+        except (RuntimeError, SystemError):
+            pass
 
-                _position = self.calendar_collection[1].getSelectedPosition()  # absolute
-                _size = self.calendar_collection[1].size()
-                if _position + 3 >= _size:
-                #if currentpage == numpages:
-                    #xbmcgui.Dialog().ok('%s %s %s' % (position, row, column), '%s %s %s %s' %(currentpage, numpages, numitems, numallitems))
-                    self.AddSeriesToCalendar()
-
-                    #xbmc.executebuiltin('Control.SetFocus(' + str(_id) + ',' + str(position) + ')')
-                    self.calendar_collection[1].selectItem(_position)
-
-                    #try:
-                #    xbmc.executebuiltin('Control.SetFocus(' + str(_id) + ',' + str(int(position)+3) + ')')
-                #except Exception as ex:
-                #    xbmcgui.Dialog().ok('err', str(ex))
-
-                #xbmcgui.Dialog().ok('%s' % _id, '%s -> %s' % (_position, _size))
-        except Exception as ex:
-            xbmcgui.Dialog().ok('error', str(ex))
+    def list_update_left(self):
+        try:
+            if self.getFocus().getId > -1:
+                # position = self.getControl(self.getFocus().getId()).getSelectedPosition()  # absolute
+                _id = self.getFocus().getId()
+                position = xbmc.getInfoLabel('Container(%s).Position' % _id)
+                move_id = _id - 1
+                if move_id >= FIRST_DAY:
+                    xbmc.executebuiltin('Control.SetFocus(' + str(move_id) + ',' + str(position) + ')')
+        except (RuntimeError, SystemError):
+            pass
 
 
 def open_calendar(date=0, starting_item=0, json_respons=''):

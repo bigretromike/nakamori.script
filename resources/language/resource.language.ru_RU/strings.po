@@ -133,6 +133,11 @@ msgctxt "#30024"
 msgid "Use animated titles in calendar"
 msgstr "Используйте анимированные заголовки в календаре"
 
+#: nakamoriscript.py
+msgctxt "#30025"
+msgid "Connection Wizard"
+msgstr "Мастер подключения"
+
 #: nakamoritools.py
 msgctxt "#30026"
 msgid "Enter search text"
@@ -213,131 +218,56 @@ msgid "Enter Shoko Server Host"
 msgstr "Войдите в хостинг сервера Shoko"
 
 #: nakamoriscript.py
-msgctxt "#30025"
-msgid "Connection Wizard"
-msgstr "Мастер подключения" 
-
-#: nakamoriscript.py
 msgctxt "#30042"
 msgid "Remove Missing Files"
-msgstr "Удалить недостающие файлы" 
+msgstr "Удалить недостающие файлы"
 
 #: nakamoriscript.py
 msgctxt "#30043"
 msgid "Login Wizard"
-msgstr "Мастер входа" 
+msgstr "Мастер входа"
 
 #: nakamoriscript.py
 msgctxt "#30044"
 msgid "Calendar (Add 14 Days)"
-msgstr "Календарь (добавить 14 дней)" 
+msgstr "Календарь (добавить 14 дней)"
 
 #: nakamoriscript.py
 msgctxt "#30045"
 msgid "Calendar (External)"
-msgstr "Календарь (Внешний)" 
+msgstr "Календарь (Внешний)"
 
 #: nakamoriscript.py
 msgctxt "#30046"
 msgid "Information"
-msgstr "Информация" 
+msgstr "Информация"
 
 #: nakamoriscript.py
 msgctxt "#30047"
 msgid "Installation Integrity"
-msgstr "Целостность установки" 
+msgstr "Целостность установки"
 
 #: nakamoriscript.py
 msgctxt "#30048"
 msgid "Settings"
-msgstr "настройки" 
+msgstr "настройки"
 
 #: nakamoriscript.py
 msgctxt "#30049"
 msgid "Run Import"
-msgstr "Запустить импорт" 
+msgstr "Запустить импорт"
 
 #: settings.xml
 msgctxt "#30050"
 msgid "Enable custom source"
-msgstr "Включить пользовательский источник" 
+msgstr "Включить пользовательский источник"
 
 #: settings.xml
 msgctxt "#30051"
 msgid "Custom calendar url"
-msgstr "Пользовательский URL-адрес календаря" 
+msgstr "Пользовательский URL-адрес календаря"
 
 #: settings.xml
 msgctxt "#30052"
 msgid "Calendar type"
-msgstr "Тип календаря" 
-
-#: nakamoriscript.py
-msgctxt "#30053"
-msgid "You didn't rate all the episodes for this Series"
-msgstr "Вы не оценили все серии для этой серии" 
-
-#: settings.xml
-msgctxt "#30054"
-msgid "URL type"
-msgstr "Тип URL" 
-
-#: nakamoriscript.py
-msgctxt "#30055"
-msgid "Try later"
-msgstr "Попробуй позже" 
-
-#: nakamoriscript.py
-msgctxt "#30056"
-msgid "Server is offline"
-msgstr "Сервер не в сети" 
-
-#: nakamoriscript.py
-msgctxt "#30057"
-msgid "Detect Eigakan"
-msgstr "Обнаружить Эйгакан" 
-
-#: cohesion.py
-msgctxt "#30058"
-msgid "Integrity check"
-msgstr "Проверка целостности" 
-
-#: cohesion.py
-msgctxt "#30059"
-msgid "Checking files"
-msgstr "Проверка файлов" 
-
-#: cohesion.py
-msgctxt "#30060"
-msgid "No errors found"
-msgstr "Ошибки не найдены" 
-
-#: cohesion.py
-msgctxt "#30061"
-msgid "Error found in"
-msgstr "Ошибка найдена в" 
-
-#: cohesion.py
-msgctxt "#30062"
-msgid "Check complete"
-msgstr "Проверка завершена" 
-
-#: nakamoriscript.py
-msgctxt "#30063"
-msgid "Would you like to detect server?"
-msgstr "Хотите ли вы обнаружить сервер?" 
-
-#: nakamoriscript.py
-msgctxt "#30064"
-msgid "Eigakan"
-msgstr "Eigakan" 
-
-#: nakamoriscript.py
-msgctxt "#30065"
-msgid "Would you like to use those values?"
-msgstr "Хотите ли вы использовать эти значения?" 
-
-#: nakamoriscript.py
-msgctxt "#30066"
-msgid "Would you like to stop scanning?"
-msgstr "Вы хотите прекратить сканирование?" 
+msgstr "Тип календаря"

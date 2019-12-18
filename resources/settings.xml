@@ -5,7 +5,7 @@
         <setting label="30052" type="select" id="calendar_mode" default="anichart" values="crunchyroll|anichart"/>
         <setting label="30050" type="bool" id="custom_source" default="true"/>
         <setting label="30054" type="select" id="url_type" default="seasons" values="calendar|seasons"/>
-        <setting label="30051" type="text" id="custom_url" enable="eq(-2,true)" default="https://raw.githubusercontent.com/bigretromike/anime-offline-calendar/master/seasons/%s-%02d.json"/>
+        <setting label="30051" type="text" id="custom_url" enable="eq(-2,true)" default="https://raw.githubusercontent.com/bigretromike/anime-offline-calendar/master/%s-%02d.json"/>
 
     </category>
     <category label="30028">

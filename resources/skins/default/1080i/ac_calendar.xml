@@ -25,13 +25,13 @@
                 <defaultcontrol>55</defaultcontrol>
 
                 <control type="panel" id="55">
+                    <onleft>1</onleft>
                     <left>0</left>
                     <top>50</top>
                     <width>1900</width>
                     <height>1010</height>
                     <visible>true</visible>
                     <pagecontrol>60</pagecontrol>
-                    <preloaditems>2</preloaditems>
                     <itemlayout height="315" width="510"> <!-- + odstęp 50 -->
                         <control type="image">
                             <description>serie</description>
@@ -45,7 +45,7 @@
                             <left>0</left>
                             <width>185</width>
                             <height>265</height>
-                            <texture background="true">$INFO[ListItem.Art(fanart)]</texture>
+                            <info>ListItem.Art(fanart)</info>
                         </control>
                         <!-- info -->
                         <control type="textbox">
@@ -67,7 +67,7 @@
                             <height>105</height>
                             <align>left</align>
                             <aspectratio scalediffuse="false" align="left" aligny="top">keep</aspectratio>
-                            <texture>$INFO[ListItem.Art(poster)]</texture>
+                            <info>ListItem.Art(poster)</info>
                         </control>
                         <control type="label">
                             <top>230</top>
@@ -83,14 +83,6 @@
                     </itemlayout>
                     <focusedlayout height="315" width="510"> <!-- + odstęp 50 -->
                         <control type="image">
-                            <description>series-focus</description>
-                            <top>-1</top>
-                            <left>-1</left>
-                            <width>462</width>
-                            <height>267</height>
-                            <texture>common/series-focus.png</texture>
-                        </control>
-                        <control type="image">
                             <description>serie</description>
                             <top>0</top>
                             <width>460</width>
@@ -102,7 +94,7 @@
                             <left>0</left>
                             <width>185</width>
                             <height>265</height>
-                            <texture background="true">$INFO[ListItem.Art(fanart)]</texture>
+                            <info>ListItem.Art(fanart)</info>
                         </control>
                         <!-- info -->
                         <control type="textbox">
@@ -117,14 +109,14 @@
                             <align>left</align>
                             <info>ListItem.Property(title)</info>
                         </control>
-                        <control type="image">
+                         <control type="image">
                             <top>93</top>
                             <left>202</left>
                             <width>241</width>
                             <height>105</height>
                             <align>left</align>
-                            <aspectratio scalediffuse="false" align="left" aligny="top">keep</aspectratio>
-                            <texture>$INFO[ListItem.Art(poster)]</texture>
+                             <aspectratio scalediffuse="false" align="left" aligny="top">keep</aspectratio>
+                            <info>ListItem.Art(poster)</info>
                         </control>
                         <control type="label">
                             <top>230</top>
@@ -142,6 +134,7 @@
 
             </control>
         </control>
+
 
     </controls>
 </window>

@@ -265,3 +265,13 @@ msgstr "Custom calendar url"
 msgctxt "#30052"
 msgid "Calendar type"
 msgstr "Calendar type"
+
+#: nakamoriscript.py
+msgctxt "#30053"
+msgid "You didn't rate all the episodes for this Series"
+msgstr "You didn't rate all the episodes for this Series"
+
+#: settings.xml
+msgctxt "#30054"
+msgid "URL type"
+msgstr "URL type"

@@ -271,3 +271,8 @@ msgstr "Adres źródła danych dla kalendarza"
 msgctxt "#30052"
 msgid "Calendar type"
 msgstr "Rodzaj kalendarza"
+
+#: nakamoriscript.py
+msgctxt "#30053"
+msgid "You didn't rate all the episodes for this Series"
+msgstr "Nie oceniono wszystkich odcinków w tej serii"

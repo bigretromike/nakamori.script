@@ -133,6 +133,11 @@ msgctxt "#30024"
 msgid "Use animated titles in calendar"
 msgstr "Используйте анимированные заголовки в календаре"
 
+#: nakamoriscript.py
+msgctxt "#30025"
+msgid "Connection Wizard"
+msgstr "Мастер подключения"
+
 #: nakamoritools.py
 msgctxt "#30026"
 msgid "Enter search text"
@@ -211,3 +216,58 @@ msgstr "Удалить из списка желаний"
 msgctxt "#30041"
 msgid "Enter Shoko Server Host"
 msgstr "Войдите в хостинг сервера Shoko"
+
+#: nakamoriscript.py
+msgctxt "#30042"
+msgid "Remove Missing Files"
+msgstr "Удалить недостающие файлы"
+
+#: nakamoriscript.py
+msgctxt "#30043"
+msgid "Login Wizard"
+msgstr "Мастер входа"
+
+#: nakamoriscript.py
+msgctxt "#30044"
+msgid "Calendar (Add 14 Days)"
+msgstr "Календарь (добавить 14 дней)"
+
+#: nakamoriscript.py
+msgctxt "#30045"
+msgid "Calendar (External)"
+msgstr "Календарь (Внешний)"
+
+#: nakamoriscript.py
+msgctxt "#30046"
+msgid "Information"
+msgstr "Информация"
+
+#: nakamoriscript.py
+msgctxt "#30047"
+msgid "Installation Integrity"
+msgstr "Целостность установки"
+
+#: nakamoriscript.py
+msgctxt "#30048"
+msgid "Settings"
+msgstr "настройки"
+
+#: nakamoriscript.py
+msgctxt "#30049"
+msgid "Run Import"
+msgstr "Запустить импорт"
+
+#: settings.xml
+msgctxt "#30050"
+msgid "Enable custom source"
+msgstr "Включить пользовательский источник"
+
+#: settings.xml
+msgctxt "#30051"
+msgid "Custom calendar url"
+msgstr "Пользовательский URL-адрес календаря"
+
+#: settings.xml
+msgctxt "#30052"
+msgid "Calendar type"
+msgstr "Тип календаря"

@@ -211,3 +211,58 @@ msgstr "Ta bort från önskelistan"
 msgctxt "#30041"
 msgid "Enter Shoko Server Host"
 msgstr "Ange Shoko Server Host"
+
+#: nakamoriscript.py
+msgctxt "#30042"
+msgid "Remove Missing Files"
+msgstr "Ta bort saknade filer"
+
+#: nakamoriscript.py
+msgctxt "#30043"
+msgid "Login Wizard"
+msgstr "Inloggningsguiden"
+
+#: nakamoriscript.py
+msgctxt "#30044"
+msgid "Calendar (Add 14 Days)"
+msgstr "Kalender (Lägg till 14 dagar)"
+
+#: nakamoriscript.py
+msgctxt "#30045"
+msgid "Calendar (External)"
+msgstr "Kalender (extern)"
+
+#: nakamoriscript.py
+msgctxt "#30046"
+msgid "Information"
+msgstr "Information"
+
+#: nakamoriscript.py
+msgctxt "#30047"
+msgid "Installation Integrity"
+msgstr "Installationsintegritet"
+
+#: nakamoriscript.py
+msgctxt "#30048"
+msgid "Settings"
+msgstr "inställningar"
+
+#: nakamoriscript.py
+msgctxt "#30049"
+msgid "Run Import"
+msgstr "Kör import"
+
+#: settings.xml
+msgctxt "#30050"
+msgid "Enable custom source"
+msgstr "Aktivera anpassad källa"
+
+#: settings.xml
+msgctxt "#30051"
+msgid "Custom calendar url"
+msgstr "Anpassad kalender url"
+
+#: settings.xml
+msgctxt "#30052"
+msgid "Calendar type"
+msgstr "Kalendertyp"

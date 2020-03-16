@@ -3,7 +3,7 @@
     <requires>
         <import addon="xbmc.python" version="2.25.0"/>
         <import addon="script.module.routing-remix" version="0.2.4"/>
-        <import addon="resource.images.nakamori" version="3.6.0"/>
+        <import addon="resource.images.nakamori" version="3.2.0"/>
         <import addon="script.module.nakamori-lib" version="3.6.0"/>
         <import addon="script.module.nakamoriplayer" version="3.6.0"/>
         <import addon="script.module.pil" version="1.1.7"/>

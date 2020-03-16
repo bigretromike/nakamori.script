@@ -271,3 +271,73 @@ msgstr "Пользовательский URL-адрес календаря"
 msgctxt "#30052"
 msgid "Calendar type"
 msgstr "Тип календаря"
+
+#: nakamoriscript.py
+msgctxt "#30053"
+msgid "You didn't rate all the episodes for this Series"
+msgstr "Вы не оценили все серии для этой серии"
+
+#: settings.xml
+msgctxt "#30054"
+msgid "URL type"
+msgstr "Тип URL"
+
+#: nakamoriscript.py
+msgctxt "#30055"
+msgid "Try later"
+msgstr "Попробуй позже"
+
+#: nakamoriscript.py
+msgctxt "#30056"
+msgid "Server is offline"
+msgstr "Сервер не в сети"
+
+#: nakamoriscript.py
+msgctxt "#30057"
+msgid "Detect Eigakan"
+msgstr "Обнаружить Эйгакан"
+
+#: cohesion.py
+msgctxt "#30058"
+msgid "Integrity check"
+msgstr "Проверка целостности"
+
+#: cohesion.py
+msgctxt "#30059"
+msgid "Checking files"
+msgstr "Проверка файлов"
+
+#: cohesion.py
+msgctxt "#30060"
+msgid "No errors found"
+msgstr "Ошибки не найдены"
+
+#: cohesion.py
+msgctxt "#30061"
+msgid "Error found in"
+msgstr "Ошибка найдена в"
+
+#: cohesion.py
+msgctxt "#30062"
+msgid "Check complete"
+msgstr "Проверка завершена"
+
+#: nakamoriscript.py
+msgctxt "#30063"
+msgid "Would you like to detect server?"
+msgstr "Хотите ли вы обнаружить сервер?"
+
+#: nakamoriscript.py
+msgctxt "#30064"
+msgid "Eigakan"
+msgstr "Eigakan"
+
+#: nakamoriscript.py
+msgctxt "#30065"
+msgid "Would you like to use those values?"
+msgstr "Хотите ли вы использовать эти значения?"
+
+#: nakamoriscript.py
+msgctxt "#30066"
+msgid "Would you like to stop scanning?"
+msgstr "Вы хотите прекратить сканирование?"

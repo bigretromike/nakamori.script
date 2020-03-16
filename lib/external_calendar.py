@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import datetime
+import time
 import json
 import os
 import re
@@ -10,9 +11,13 @@ import xbmcaddon
 ADDON = xbmcaddon.Addon('script.module.nakamori')
 x = xbmc.translatePath(ADDON.getAddonInfo('profile'))
 x = os.path.join(x, 'json')
+x = os.path.join(x, '%s' % ADDON.getSetting('url_type'))
 is_seasons = True
 if ADDON.getSetting('url_type') == 'calendar':
     is_seasons = False
+
+if not os.path.exists(x):
+    os.makedirs(x)
 
 
 def pack_json(new_list):
@@ -38,8 +43,15 @@ def process_month(year, month, day, day_already_processed, url):
         y = os.path.join(x, '%s-%02d.json' % (year, month))
     else:
         y = os.path.join(x, '%s-%02d.json' % (year, week))
+
+    if os.path.exists(y):
+        # more than 24h
+        if int(time.time()) - int(os.path.getmtime(y)) > 86400:
+            os.remove(y)
+
     if not os.path.exists(y) and not download_external_source(url, year, month, week):
         return
+
     content = open(y, 'r').read()
     pre_body = json.loads(content)
     body = []
@@ -113,13 +125,30 @@ def download_external_source(url, year=datetime.datetime.now().year, month=datet
         for dates in response.get('calendar'):
             for series in response['calendar'][dates]:
                 try:
+                    # xbmc.log('---- img: %s' % series['image'], xbmc.LOGNOTICE)
                     img = ''
+                    x1 = ''
+                    number = 0
                     img_number = re.search(r'65x100\/(.*)\.jpg-thumb', str(series['image']))
+                    if img_number is None:
+                        if "images/150" in str(series['image']):
+                            # "images/150/221366.jpg-thumb.jpg"
+                            img_number = re.search(r'images\/150\/(.*)\.jpg-thumb', str(series['image']))
+                            number = img_number.group(1)
+                            x1 = 'images/65x100/' + number + '.jpg-thumb.jpg'
+                        elif "thumbs/150" in str(series['image']):
+                            img_number = re.search(r'thumbs\/150\/(.*)\.jpg-thumb', str(series['image']))
+                            number = img_number.group(1)
+                            x1 = 'thumbs/65x100/' + number + '.jpg-thumb.jpg'
                     if img_number is not None:
-                        number = img_number.group(1)
-                        x1 = 'thumbs/65x100/' + number + '.jpg-thumb.jpg'
+                        if number == 0:
+                            number = img_number.group(1)
+                        if x1 == '':
+                            x1 = 'thumbs/65x100/' + number + '.jpg-thumb.jpg'
                         x2 = number + '.jpg'
                         img = str(series['image']).replace(x1, x2)
+                        # xbmc.log('---- img-mod: %s' % img, xbmc.LOGNOTICE)
+
                     series_item['aid'] = series['aid']
                     series_item['air'] = dates
                     series_item['date'] = dates

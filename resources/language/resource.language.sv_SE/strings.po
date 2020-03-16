@@ -133,6 +133,11 @@ msgctxt "#30024"
 msgid "Use animated titles in calendar"
 msgstr "Använd animerade titlar i kalendern"
 
+#: nakamoriscript.py
+msgctxt "#30025"
+msgid "Connection Wizard"
+msgstr "Anslutningsguiden"
+
 #: nakamoritools.py
 msgctxt "#30026"
 msgid "Enter search text"
@@ -266,3 +271,73 @@ msgstr "Anpassad kalender url"
 msgctxt "#30052"
 msgid "Calendar type"
 msgstr "Kalendertyp"
+
+#: nakamoriscript.py
+msgctxt "#30053"
+msgid "You didn't rate all the episodes for this Series"
+msgstr "Du betygsatte inte alla avsnitt för den här serien"
+
+#: settings.xml
+msgctxt "#30054"
+msgid "URL type"
+msgstr "URL-typ"
+
+#: nakamoriscript.py
+msgctxt "#30055"
+msgid "Try later"
+msgstr "Försök senare"
+
+#: nakamoriscript.py
+msgctxt "#30056"
+msgid "Server is offline"
+msgstr "Servern är offline"
+
+#: nakamoriscript.py
+msgctxt "#30057"
+msgid "Detect Eigakan"
+msgstr "Upptäck Eigakan"
+
+#: cohesion.py
+msgctxt "#30058"
+msgid "Integrity check"
+msgstr "Integritetskontroll"
+
+#: cohesion.py
+msgctxt "#30059"
+msgid "Checking files"
+msgstr "Kontrollerar filer"
+
+#: cohesion.py
+msgctxt "#30060"
+msgid "No errors found"
+msgstr "Inga fel hittades"
+
+#: cohesion.py
+msgctxt "#30061"
+msgid "Error found in"
+msgstr "Felet hittades i"
+
+#: cohesion.py
+msgctxt "#30062"
+msgid "Check complete"
+msgstr "Kontrollera fullständigt"
+
+#: nakamoriscript.py
+msgctxt "#30063"
+msgid "Would you like to detect server?"
+msgstr "Vill du upptäcka servern?"
+
+#: nakamoriscript.py
+msgctxt "#30064"
+msgid "Eigakan"
+msgstr "Eigakan"
+
+#: nakamoriscript.py
+msgctxt "#30065"
+msgid "Would you like to use those values?"
+msgstr "Vill du använda dessa värden?"
+
+#: nakamoriscript.py
+msgctxt "#30066"
+msgid "Would you like to stop scanning?"
+msgstr "Vill du sluta skanna?"

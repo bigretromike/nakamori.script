@@ -4,13 +4,15 @@ from distutils.version import LooseVersion
 
 import error_handler
 import xbmcgui
+import xbmcaddon
+import os
 
 from nakamori_utils.globalvars import *
 
 from proxy.python_version_proxy import python_proxy as pyproxy
 
 ADDON = xbmcaddon.Addon(id='script.module.nakamori')
-CWD = ADDON.getAddonInfo('path').decode('utf-8')
+CWD = ADDON.getAddonInfo('path')  # .decode('utf-8')
 
 ACTION_PREVIOUS_MENU = 10
 ACTION_NAV_BACK = 92

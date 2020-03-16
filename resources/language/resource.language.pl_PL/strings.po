@@ -276,3 +276,68 @@ msgstr "Rodzaj kalendarza"
 msgctxt "#30053"
 msgid "You didn't rate all the episodes for this Series"
 msgstr "Nie oceniono wszystkich odcinków w tej serii"
+
+#: settings.xml
+msgctxt "#30054"
+msgid "URL type"
+msgstr "Typ źródła URL"
+
+#: nakamoriscript.py
+msgctxt "#30055"
+msgid "Try later"
+msgstr "Spróbuj później"
+
+#: nakamoriscript.py
+msgctxt "#30056"
+msgid "Server is offline"
+msgstr "Serwer jest offline"
+
+#: nakamoriscript.py
+msgctxt "#30057"
+msgid "Detect Eigakan"
+msgstr "Wykryj Eigakan"
+
+#: cohesion.py
+msgctxt "#30058"
+msgid "Integrity check"
+msgstr "Sprawdzanie spójności"
+
+#: cohesion.py
+msgctxt "#30059"
+msgid "Checking files"
+msgstr "Sprawdzanie plików"
+
+#: cohesion.py
+msgctxt "#30060"
+msgid "No errors found"
+msgstr "Nie wykryto błędów"
+
+#: cohesion.py
+msgctxt "#30061"
+msgid "Error found in"
+msgstr "Znaleziono błąd w"
+
+#: cohesion.py
+msgctxt "#30062"
+msgid "Check complete"
+msgstr "Sprawdzanie zakończone"
+
+#: nakamoriscript.py
+msgctxt "#30063"
+msgid "Would you like to detect server?"
+msgstr "Czy rozpocząć wyszukiwanie serwera?"
+
+#: nakamoriscript.py
+msgctxt "#30064"
+msgid "Eigakan"
+msgstr "Eigakan"
+
+#: nakamoriscript.py
+msgctxt "#30065"
+msgid "Would you like to use those values?"
+msgstr "Czy użyć znalezione wartości?"
+
+#: nakamoriscript.py
+msgctxt "#30066"
+msgid "Would you like to stop scanning?"
+msgstr "Czy zatrzymać skanowanie?"

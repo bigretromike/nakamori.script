@@ -271,3 +271,73 @@ msgstr "כתובת אתר לוח שנה מותאמת אישית"
 msgctxt "#30052"
 msgid "Calendar type"
 msgstr "סוג לוח השנה"
+
+#: nakamoriscript.py
+msgctxt "#30053"
+msgid "You didn't rate all the episodes for this Series"
+msgstr "לא דרגת את כל הפרקים לסדרה הזו"
+
+#: settings.xml
+msgctxt "#30054"
+msgid "URL type"
+msgstr "סוג כתובת אתר"
+
+#: nakamoriscript.py
+msgctxt "#30055"
+msgid "Try later"
+msgstr "נסה מאוחר יותר"
+
+#: nakamoriscript.py
+msgctxt "#30056"
+msgid "Server is offline"
+msgstr "השרת לא מקוון"
+
+#: nakamoriscript.py
+msgctxt "#30057"
+msgid "Detect Eigakan"
+msgstr "תגלה את אייגקן"
+
+#: cohesion.py
+msgctxt "#30058"
+msgid "Integrity check"
+msgstr "בדיקת יושרה"
+
+#: cohesion.py
+msgctxt "#30059"
+msgid "Checking files"
+msgstr "בודק קבצים"
+
+#: cohesion.py
+msgctxt "#30060"
+msgid "No errors found"
+msgstr "לא נמצאו שגיאות"
+
+#: cohesion.py
+msgctxt "#30061"
+msgid "Error found in"
+msgstr "נמצאה שגיאה ב-"
+
+#: cohesion.py
+msgctxt "#30062"
+msgid "Check complete"
+msgstr "הסימון שלם"
+
+#: nakamoriscript.py
+msgctxt "#30063"
+msgid "Would you like to detect server?"
+msgstr "האם תרצה לאתר שרת?"
+
+#: nakamoriscript.py
+msgctxt "#30064"
+msgid "Eigakan"
+msgstr "אייגקן"
+
+#: nakamoriscript.py
+msgctxt "#30065"
+msgid "Would you like to use those values?"
+msgstr "האם תרצה להשתמש בערכים האלה?"
+
+#: nakamoriscript.py
+msgctxt "#30066"
+msgid "Would you like to stop scanning?"
+msgstr "האם תרצה להפסיק לסרוק?"

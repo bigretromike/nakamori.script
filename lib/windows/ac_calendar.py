@@ -2,6 +2,7 @@
 import time
 import json
 import datetime
+import _strptime  # fix for import lockis held by another thread.
 import re
 import os
 
@@ -15,11 +16,14 @@ import xbmcaddon
 from nakamori_utils.globalvars import *
 
 # noinspection PyUnresolvedReferences
-from PIL import ImageFont, ImageDraw, Image
+try:
+    from PIL import ImageFont, ImageDraw, Image
+except ImportError:
+    pass
 import textwrap
 
 ADDON = xbmcaddon.Addon('script.module.nakamori')
-CWD = ADDON.getAddonInfo('path').decode('utf-8')
+CWD = ADDON.getAddonInfo('path')  # .decode('utf-8')
 
 ACTION_PREVIOUS_MENU = 10
 ACTION_NAV_BACK = 92
@@ -53,6 +57,7 @@ if not os.path.exists(os.path.join(profileDir, 'json')):
 
 class Calendar2(xbmcgui.WindowXML):
     def __init__(self, strXMLname, strFallbackPath, strDefaultName, forceFallback, data, item_number=0, start_date=datetime.datetime.now().strftime('%Y%m%d'), fake_data=False):
+        # xbmcgui.WindowXML.__init__(self)
         self.window_type = 'window'
         self.json_data = data
         self._start_item = 0
@@ -67,45 +72,56 @@ class Calendar2(xbmcgui.WindowXML):
         self.serie_processed = int(item_number)
         self.last_processed_date = start_date
         self.fake_data = fake_data
+        self.scroll_down_refresh = False
+        self.calendar_end = False
+
+    def AddSeriesToCalendar(self):
+        if not self.calendar_end:
+            busy = xbmcgui.DialogProgress()
+            busy.create(ADDON.getLocalizedString(30017), ADDON.getLocalizedString(30018))
+
+            if self.json_data != '' and self.fake_data and len(self.used_dates) > 0:
+                try:
+                    from lib.external_calendar import return_only_few
+                    last_date = datetime.datetime(*(time.strptime(self.last_processed_date, '%Y%m%d')[0:6]))
+                    last_date = last_date + datetime.timedelta(days=1)
+                    self.last_processed_date = last_date.strftime('%Y%m%d')
+                    when = self.last_processed_date
+                    page = self._start_item
+                    body = return_only_few(when=when, offset=page, url=str(script_addon.getSetting('custom_url')))
+                    self.json_data = body
+                except Exception as ex:
+                    xbmcgui.Dialog().ok('error', str(ex))
+                    self.json_data = ''
+                    self.calendar_end = True
+
+            _size = 0
+            _json = None
+            if self.json_data != '':
+                _json = json.loads(self.json_data)
+                _size = _json.get('size', 0)
+            _count = 0
+
+            if _size > 0:
+                for series in _json['series']:
+                    busy.update(int(_count / _size))
+                    if self.process_series(series):
+                        _count += 1
+                        pass
+                    else:
+                        break
+
+            busy.close()
 
     def onInit(self):
         self.calendar_collection = {
             1: self.getControl(FIRST_DAY),
         }
 
-        self.day_of_week = {
-            0: ADDON.getLocalizedString(30010),
-            1: ADDON.getLocalizedString(30011),
-            2: ADDON.getLocalizedString(30012),
-            3: ADDON.getLocalizedString(30013),
-            4: ADDON.getLocalizedString(30014),
-            5: ADDON.getLocalizedString(30015),
-            6: ADDON.getLocalizedString(30016)
-
-        }
-
         if self.day_count >= 3:
             pass
         else:
-            busy = xbmcgui.DialogProgress()
-            busy.create(ADDON.getLocalizedString(30017), ADDON.getLocalizedString(30018))
-            for gui in self.calendar_collection.values():
-                assert isinstance(gui, xbmcgui.ControlList)
-                gui.reset()
-            _json = json.loads(self.json_data)
-            _size = _json.get('size', 0)
-            _count = 0
-
-            if _size > 0:
-                for series in _json['series']:
-                    busy.update(_count/_size)
-                    if self.process_series(series):
-                        _count += 1
-                        pass
-                    else:
-                        break
-            busy.close()
-
+            self.AddSeriesToCalendar()
             self.setFocus(self.getControl(901))
 
     def onAction(self, action):
@@ -114,49 +130,45 @@ class Calendar2(xbmcgui.WindowXML):
         elif action == ACTION_NAV_BACK:
             self.close()
         elif action == xbmcgui.ACTION_MOVE_RIGHT:
-            if self.getFocus().getId() != 2:
-                self.list_update_right()
-            else:
-                if self.fake_data:
-                    try:
-                        xbmc.executebuiltin(script_utils.calendar3(self.last_processed_date, self.serie_processed), True)
-                    except Exception as exx:
-                        xbmc.log(str(exx), xbmc.LOGNOTICE)
-                else:
-                    xbmc.executebuiltin(script_utils.calendar(0, self.serie_processed), True)
+            self.list_update_right()
         elif action == xbmcgui.ACTION_MOVE_LEFT:
-            if self.getFocus().getId() != 1:
-                self.list_update_left()
-            else:
-                xbmc.executebuiltin('Action(Back)')
+            self.list_update_left()
+        elif action == xbmcgui.ACTION_MOVE_DOWN:
+            self.list_update_down()
+        elif action == xbmcgui.ACTION_MOVE_UP:
+            self.list_update_up()
         elif action == xbmcgui.ACTION_MOUSE_RIGHT_CLICK:
             pass
         elif action == xbmcgui.ACTION_CONTEXT_MENU:
-            control_id = self.getFocus().getId()
-            con = self.getControl(control_id)
-            assert isinstance(con, xbmcgui.ControlList)
-            aid = con.getSelectedItem().getProperty('aid')
-            url = '%s/api/serie/fromaid?id=%s' % (server, aid)
-            body = json.loads(pyproxy.get_json(url))
-            if 'aid' not in body:
-                return
+            try:
+                control_id = self.getFocus().getId()
+                con = self.getControl(control_id)
+                assert isinstance(con, xbmcgui.ControlList)
+                aid = con.getSelectedItem().getProperty('aid')
+                url = '%s/api/serie/fromaid?id=%s' % (server, aid)
+                body = json.loads(pyproxy.get_json(url))
+                if 'aid' not in body:
+                    return
 
-            content_menu = [
-                '- aid = ' + str(aid) + '-',
-                ADDON.getLocalizedString(30037),
-                ADDON.getLocalizedString(30038),
-                ADDON.getLocalizedString(30039),
-                ADDON.getLocalizedString(30040)
-            ]
-            my_pick = xbmcgui.Dialog().contextmenu(content_menu)
-            if my_pick != -1:
-                if my_pick <= 1:
-                    if body.get('id', -1) == -1:
-                        xbmc.executebuiltin(script_utils.series_info(aid=aid), True)
-                    else:
-                        xbmc.executebuiltin(script_utils.series_info(id=id), True)
-                elif my_pick > 1:
-                    xbmcgui.Dialog().ok('soon', 'comming soon')
+                content_menu = [
+                    '- aid = ' + str(aid) + '-',
+                    ADDON.getLocalizedString(30037),
+                    ADDON.getLocalizedString(30038),
+                    ADDON.getLocalizedString(30039),
+                    ADDON.getLocalizedString(30040)
+                ]
+                my_pick = xbmcgui.Dialog().contextmenu(content_menu)
+                if my_pick != -1:
+                    if my_pick <= 1:
+                        if body.get('id', -1) == -1:
+                            xbmc.executebuiltin(script_utils.series_info(aid=aid), True)
+                        else:
+                            xbmc.executebuiltin(script_utils.series_info(id=id), True)
+                    elif my_pick > 1:
+                        xbmcgui.Dialog().ok('soon', 'comming soon')
+            except:
+                # in case 404 for that series - thats possible !
+                pass
         elif action == xbmcgui.ACTION_SELECT_ITEM:
             xbmcgui.Dialog().ok('soon', 'show soon')
         elif action == xbmcgui.ACTION_MOUSE_LEFT_CLICK:
@@ -165,11 +177,22 @@ class Calendar2(xbmcgui.WindowXML):
             elif self.getFocus().getId() == 2:
                 if self.fake_data:
                     try:
-                        xbmc.executebuiltin(script_utils.calendar3(self.last_processed_date, self.serie_processed), True)
+                        xbmc.executebuiltin(script_utils.ac_calendar(self.last_processed_date, self.serie_processed), True)
                     except Exception as exx:
                         xbmc.log(str(exx), xbmc.LOGNOTICE)
                 else:
-                    xbmc.executebuiltin(script_utils.calendar(0, self.serie_processed), True)
+                    xbmc.executebuiltin(script_utils.ac_calendar(0, self.serie_processed), True)
+        elif action == xbmcgui.ACTION_SCROLL_DOWN or action == xbmcgui.ACTION_MOUSE_WHEEL_DOWN:
+            _id = self.getFocus().getId()
+            currentpage = xbmc.getInfoLabel('Container(%s).CurrentPage' % _id)
+            numpages = xbmc.getInfoLabel('Container(%s).NumPages' % _id)
+
+            if currentpage == numpages:
+                self.scroll_down_refresh = True
+
+            if self.scroll_down_refresh:
+                self.scroll_down_refresh = False
+                self.AddSeriesToCalendar()
 
     def onControl(self, control):
         pass
@@ -281,28 +304,34 @@ class Calendar2(xbmcgui.WindowXML):
         return True
 
     def list_update_right(self):
-        try:
-            if self.getFocus().getId > -1:
-                # position = self.getControl(self.getFocus().getId()).getSelectedPosition()  # absolute
-                _id = self.getFocus().getId()
-                position = xbmc.getInfoLabel('Container(%s).Position' % _id)
-                move_id = _id + 1
-                if move_id <= FIRST_DAY:  # SEVENTH_DAY:
-                    xbmc.executebuiltin('Control.SetFocus(' + str(move_id) + ',' + str(position) + ')')
-        except (RuntimeError, SystemError):
-            pass
+        pass
 
     def list_update_left(self):
+        pass
+
+    def list_update_up(self):
+        pass
+
+    def list_update_down(self):
         try:
-            if self.getFocus().getId > -1:
-                # position = self.getControl(self.getFocus().getId()).getSelectedPosition()  # absolute
+            if self.getFocus().getId() > -1:
                 _id = self.getFocus().getId()
                 position = xbmc.getInfoLabel('Container(%s).Position' % _id)
-                move_id = _id - 1
-                if move_id >= FIRST_DAY:
-                    xbmc.executebuiltin('Control.SetFocus(' + str(move_id) + ',' + str(position) + ')')
-        except (RuntimeError, SystemError):
-            pass
+                row = xbmc.getInfoLabel('Container(%s).Row' % _id)
+                column = xbmc.getInfoLabel('Container(%s).Column' % _id)
+                currentpage = xbmc.getInfoLabel('Container(%s).CurrentPage' % _id)
+                numpages = xbmc.getInfoLabel('Container(%s).NumPages' % _id)
+                numitems = xbmc.getInfoLabel('Container(%s).NumItems' % _id)
+                numallitems = xbmc.getInfoLabel('Container(%s).NumAllItems' % _id)
+
+                _position = self.calendar_collection[1].getSelectedPosition()  # absolute
+                _size = self.calendar_collection[1].size()
+                if _position + 3 >= _size:
+                    self.AddSeriesToCalendar()
+                    self.calendar_collection[1].selectItem(_position)
+
+        except Exception as ex:
+            xbmcgui.Dialog().ok('error', str(ex))
 
 
 def open_calendar(date=0, starting_item=0, json_respons=''):
